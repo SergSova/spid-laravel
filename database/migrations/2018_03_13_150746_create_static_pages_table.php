@@ -18,8 +18,8 @@ class CreateStaticPagesTable extends Migration
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('title');
-                $table->string('longtitle');
-                $table->text('description');
+                $table->text('longtitle')->nullable();
+                $table->text('description')->nullable();
                 $table->unsignedInteger('page_index')->default(0);
                 $table->string('menutitle')->nullable();
                 $table->boolean('published')->default(true);

@@ -78,4 +78,12 @@ class StaticPage extends Model
     {
         return $this->seo->seo_title ?? $this->clearTitle($this).' | '.config('app.name');
     }
+
+    public function merge($odj)
+    {
+        foreach ($odj as $key => $val) {
+            $this->$key = $val;
+        }
+        return $this;
+    }
 }

@@ -33,6 +33,7 @@ class SiteController extends Controller
         $prev = $model->getPrev();
 
         $modal = json_decode($model->description);
+
         $model->title = join('<br>', explode('/', $model->title));
         $model->modal_text = '<p>'.join('</p><p>', explode('/', $modal->modal_text)).'</p>';
         $model->modal_btn = $modal->modal_btn;
@@ -48,9 +49,7 @@ class SiteController extends Controller
         $prev = $model->getPrev();
 
         $modal = json_decode($model->description);
-        $model->modal_text = $modal->modal_text;
-        $model->modal_btn = $modal->modal_btn;
-        $model->wrong = $modal->wrong;
+        $model->merge($modal);
 
         return view($this->prefix.'slide-bubles')->with(compact('model', 'next', 'prev'));
     }
@@ -73,18 +72,20 @@ class SiteController extends Controller
 
     public function withWho()
     {
-        $model = StaticPage::find(5);
+        /** @var StaticPage $model */
+        $model = StaticPage::find(6);
         $next = $model->getNext();
         $prev = $model->getPrev();
 
         $model->title = join('<br>', explode('/', $model->title));
         $modal = json_decode($model->description);
+        $model->merge($modal);
         $model->modal_text = '<p>'.join('</p><p>', explode('/', $modal->modal_text)).'</p>';
-        $model->modal_btn = $modal->modal_btn;
-        $model->pop_title = $modal->pop_title;
-        $model->wrong = join('<br>', explode('/', $modal->wrong));
 
-        return view($this->prefix.'with-who')->with(compact('title', 'next', 'prev'));
+        $humans = json_decode($model->longtitle)??[];
+
+
+        return view($this->prefix.'with-who')->with(compact('model', 'humans', 'next', 'prev'));
     }
 
     public function bandit()
