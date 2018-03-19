@@ -110,7 +110,7 @@ class SiteController extends Controller
 
     public function faq()
     {
-        $model = StaticPage::find(1);
+        $model = StaticPage::find(11);
 
         return view($this->prefix.'faq')->with(compact('model'));
     }
