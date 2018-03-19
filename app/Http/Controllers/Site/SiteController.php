@@ -19,7 +19,7 @@ class SiteController extends Controller
     public function index()
     {
         /** @var StaticPage $model */
-        $model = StaticPage::find(2);
+        $model = StaticPage::find(1);
         $model->title = preg_replace('/(\w+)\s(\w+)/u', '$1 <div> $2 </div>', $model->title);
         $model->longtitle = '<span>'.join('</span><span>', explode('/', $model->longtitle)).'</span>';
 
@@ -28,7 +28,7 @@ class SiteController extends Controller
 
     public function aids()
     {
-        $model = StaticPage::find(3);
+        $model = StaticPage::find(2);
         $next = $model->getNext();
         $prev = $model->getPrev();
 
@@ -44,7 +44,7 @@ class SiteController extends Controller
 
     public function slideBubles()
     {
-        $model = StaticPage::find(4);
+        $model = StaticPage::find(3);
         $next = $model->getNext();
         $prev = $model->getPrev();
 
@@ -56,7 +56,7 @@ class SiteController extends Controller
 
     public function slideRocket()
     {
-        $model = StaticPage::find(5);
+        $model = StaticPage::find(4);
         $next = $model->getNext();
         $prev = $model->getPrev();
 
@@ -73,7 +73,7 @@ class SiteController extends Controller
     public function withWho()
     {
         /** @var StaticPage $model */
-        $model = StaticPage::find(6);
+        $model = StaticPage::find(5);
         $next = $model->getNext();
         $prev = $model->getPrev();
 

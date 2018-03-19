@@ -13,6 +13,7 @@ class IndexSeeder extends Seeder
     {
         DB::table('static_pages')->insert(
             [
+                'id'          => '1',
                 'title'       => 'Будь настойчивей',
                 'longtitle'   => 'Нет презерватива / нет / секса',
                 'description' => 'Скроль',

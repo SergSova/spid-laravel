@@ -13,6 +13,7 @@ class FaqSeeder extends Seeder
     {
         DB::table('static_pages')->insert(
             [
+                'id'       => '11',
                 'title'       => 'f.a.q.',
                 'longtitle'   => 'часто задеваемые вопросы',
                 'description' => '
@@ -23,7 +24,7 @@ class FaqSeeder extends Seeder
                         FAQ позволит Вам  найти ответы на вопросы самостоятельно, без необходимости в создании тикета и ожидания отклика со стороны службы поддержки. 
                     </div>
                 ',
-                'page_index'  => 1,
+                'page_index'  => 11,
                 'menutitle'   => '',
                 'published'   => 1,
                 'alias'       => 'faq',
