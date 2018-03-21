@@ -21,7 +21,7 @@
     <div class="container">
         <h1>{{$model->clearTitle($model)}}</h1>
 
-        <a href="{{ route('staticBlogView') }}">Редактировать заголовок блога</a>
+        <a href="{{ route('staticPageView',[$model->id, $model->alias]) }}">Редактировать заголовок блога</a>
 
         @forelse($model->posts as $post)
             <div class="row">

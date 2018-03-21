@@ -19,10 +19,7 @@ namespace App;
  */
 class Blog extends StaticPage {
 
-    public static function saved($callback)
-    {
-        dd($callback);
-    }
+
 	protected $table = 'static_pages';
 
 	public $posts=[];
@@ -32,6 +29,7 @@ class Blog extends StaticPage {
     {
         return $this->hasOne(Seo::class,'id','seo_id');
 	}
+
 
 //	public function posts() {
 //		return $this->belongsToMany( Post::class );

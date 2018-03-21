@@ -19,17 +19,19 @@ use http\Env\Request;
 class BlogController extends Controller
 {
 
-    public function editStatic(StaticPageRequest $request)
-    {
-        /** @var Blog $model */
-        $model = Blog::find(10);
-        if ($request->isMethod('post') && $model->fill($request->all())->save()) {
-            return redirect()->route('adminBlog');
-        }
-        $title = 'Редактирование Блога';
-
-        return view('admin.blog.form.blog_edit')->with(compact('model', 'title'));
-    }
+//    public function editStatic(StaticPageRequest $request)
+//    {
+//        /** @var Blog $model */
+//        $model = Blog::find(10);
+//        if ($request->isMethod('post') && $model->fill($request->all())->save()) {
+////            $model->saveSeo($request);
+//
+//            return redirect()->route('adminBlog');
+//        }
+//        $title = 'Редактирование Блога';
+//
+//        return view('admin.blog.form.blog_edit')->with(compact('model', 'title'));
+//    }
 
     public function index()
     {

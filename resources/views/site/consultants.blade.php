@@ -28,7 +28,7 @@ use App\StaticPage;
 
     <div class="preloader">
         <div class="preloader-inner">
-			<?php include 'assets/img/svg/consultants/preloader-inner.svg'?>
+            <?php include 'assets/img/svg/consultants/preloader-inner.svg'?>
         </div>
     </div>
 

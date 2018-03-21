@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        StaticPage::observe(StaticPageObserver::class);
+//        StaticPage::observe(StaticPageObserver::class);
         Schema::defaultStringLength(191);
     }
 

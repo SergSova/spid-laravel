@@ -40,6 +40,10 @@
 @endif
 
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    var next_page = '{{$model->getNext()['alias']}}';
+    var prev_page = '{{$model->getPrev()['alias']}}';
+</script>
 @yield('scripts')
 </body>
 </html>
