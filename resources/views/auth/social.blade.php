@@ -1,5 +1,7 @@
 @extends('site.layout')
 
+@section('title','Авторизация')
+
 @section('content')
     <div class="container">
         <div class="row">
@@ -17,16 +19,16 @@
                     <div class="panel-body">
                         <p class="lead text-center">Authenticate using your social network account from one of following providers</p>
                         <a href="{{ route('social.oauth', 'facebook') }}" class="btn btn-primary btn-block">
-                            Login with Facebook
+                            Facebook
                         </a>
                         <a href="{{ route('social.oauth', 'twitter') }}" class="btn btn-info btn-block">
-                            Login with Twitter
+                            Twitter
                         </a>
                         <a href="{{ route('social.oauth', 'google') }}" class="btn btn-danger btn-block">
-                            Login with Google
+                            Google
                         </a>
                         <a href="{{ route('social.oauth', 'github') }}" class="btn btn-default btn-block">
-                            Login with Github
+                            Github
                         </a>
                         <hr>
                         <a href="{{ route('login') }}" class="btn btn-default btn-block">

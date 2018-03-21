@@ -89,7 +89,7 @@ class SocialAuthController extends Controller
      */
     protected function sendSuccessResponse()
     {
-        return redirect()->intended('home');
+        return redirect()->intended('/home');
     }
 
     /**

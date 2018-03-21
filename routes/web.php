@@ -67,8 +67,10 @@ Route::group(
 	}
 );
 
-Route::get( 'register', 'Auth\RegisterController@register' )->name( 'register' );
-Route::get( 'login', 'Auth\LoginController@login' )->name( 'login' );
+Route::get( 'home', 'Site\SiteController@index' );
+Route::get( 'auth/register', 'Auth\RegisterController@register' )->name( 'register' );
+Route::get( 'auth/login', 'Auth\LoginController@login' )->name( 'login' );
+Route::get( 'logout', 'Auth\LoginController@logout' )->name( 'logout' );
 // Social Auth
 Route::get( 'auth/social', 'Auth\SocialAuthController@show' )->name( 'social.login' );
 Route::get( 'oauth/{driver}', 'Auth\SocialAuthController@redirectToProvider' )->name( 'social.oauth' );
