@@ -1,5 +1,9 @@
 @extends('admin.layout')
 
-@section('content')
-    <h1>Admin</h1>
-@endsection
+@section('title','Admin Panel')
+
+
+{{--@section('body')--}}
+    {{--<div class="container"> <h3>cg</h3></div>--}}
+{{--@endsection--}}
+

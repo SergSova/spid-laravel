@@ -137,8 +137,6 @@ class StaticPageController extends Controller {
 			$model->save();
 
 
-			if($_POST[''])
-
 			return redirect()->route( 'staticPage' );
 		}
 

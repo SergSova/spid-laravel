@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Observers\StaticPageObserver;
+use App\StaticPage;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        StaticPage::observe(StaticPageObserver::class);
         Schema::defaultStringLength(191);
     }
 

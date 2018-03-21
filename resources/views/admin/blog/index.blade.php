@@ -4,12 +4,14 @@
  * User: sergs
  * Date: 20.03.2018
  * Time: 14:13
+ */
+
+/**
  *
  * @var \App\Blog $model
  */
 
 ?>
-
 
 @extends('admin.layout')
 

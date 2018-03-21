@@ -32,7 +32,7 @@
 
                 <div class="test__preview-box">
                     <div class="text">
-                        {{$model->description}}
+                        {!! $model->description !!}
                         <button class="test__preview-box-btn">{{$model->test_btn}}</button>
                     </div>
                 </div>

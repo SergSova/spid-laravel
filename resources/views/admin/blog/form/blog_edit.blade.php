@@ -15,7 +15,7 @@
 
 @section('body')
     <div class="container">
-        <a href="{{route('admin-blog')}}" class="btn btn-sm btn-success mb-2">Назад</a>
+        <a href="{{route('adminBlog')}}" class="btn btn-sm btn-success mb-2">Назад</a>
         <h1>{{$title}}</h1>
 
         {!! Form::model($model,['url'=>route('editStaticBlog'),'method'=>'post','class'=>'']) !!}

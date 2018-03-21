@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \App\Seo $seo_model
+ * @var \App\StaticPage $model
  */
 ?>
 <div id="accordion">
@@ -15,32 +15,32 @@
         <div id="collapseSEO" class="collapse" aria-labelledby="headingSEO" data-parent="#accordion">
             <div class="card-body">
                 <div class="form-group">
-                    {{ Form::label('seo_title','SEO Title') }}
-                    {{ Form::text('seo_title', null,['class'=>'form-control']) }}
+                    {{ Form::label('Seo[seo_title]','SEO Title') }}
+                    {{ Form::text('Seo[seo_title]', $model->seo->seo_title ??null,['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('seo_keywords','SEO Keywords') }}
-                    {{ Form::text('seo_keywords', null,['class'=>'form-control']) }}
+                    {{ Form::label('Seo[seo_keywords]','SEO Keywords') }}
+                    {{ Form::text('Seo[seo_keywords]', $model->seo->seo_keywords ??null,['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('seo_description','SEO Description') }}
-                    {{ Form::textarea('seo_description', null,['class'=>'form-control']) }}
+                    {{ Form::label('Seo[seo_description]','SEO Description') }}
+                    {{ Form::textarea('Seo[seo_description]', $model->seo->seo_description ??null,['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('seo_text','SEO Text') }}
-                    {{ Form::textarea('seo_text', null,['class'=>'form-control']) }}
+                    {{ Form::label('Seo[seo_text]','SEO Text') }}
+                    {{ Form::textarea('Seo[seo_text]', $model->seo->seo_text ??null,['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('og_title','OG Title') }}
-                    {{ Form::text('og_title', null,['class'=>'form-control']) }}
+                    {{ Form::label('Seo[og_title]','OG Title') }}
+                    {{ Form::text('Seo[og_title]', $model->seo->og_title ??null,['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('og_description','OG Description') }}
-                    {{ Form::textarea('og_description', null,['class'=>'form-control']) }}
+                    {{ Form::label('Seo[og_description]','OG Description') }}
+                    {{ Form::textarea('Seo[og_description]', $model->seo->og_description ??null,['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('og_image','OG Image') }}
-                    {{ Form::text('og_image',null,['class'=>'form-control']) }}
+                    {{ Form::label('Seo[og_image]','OG Image') }}
+                    {{ Form::text('Seo[og_image]',$model->seo->og_image ??null,['class'=>'form-control']) }}
                 </div>
             </div>
         </div>

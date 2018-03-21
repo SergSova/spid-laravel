@@ -56,7 +56,7 @@ Route::group(
 
 
 		Route::group( [ 'prefix' => 'blog' ], function () {
-			Route::get( '/', 'Admin\BlogController@index' )->name( 'admin-blog' );
+			Route::get( '/', 'Admin\BlogController@index' )->name( 'adminBlog' );
 
 			Route::get( '/blog/edit-static', 'Admin\BlogController@editStatic' )->name( 'staticBlogView' );
 			Route::post( '/blog/edit-static', 'Admin\BlogController@editStatic' )->name( 'editStaticBlog' );

@@ -16,21 +16,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean published
  * @property string alias
  * @property int seo_id
- * @property Seo getSeo
+ * @property Seo seo
  * @property FaqAnswer[] questions
  */
 class StaticPage extends Model {
 	protected $fillable = [ 'title', 'longtitle', 'description', 'menutitle' ];
 
-	public static function saved( $callback ) {
-		parent::saved( $callback );
-	}
 
-	public function getQuestions() {
+    public function getQuestions() {
 		return FaqAnswer::orderBy( 'index' )->get();
 	}
 
-	public function getSeo() {
+	public function seo() {
 		return $this->hasOne( Seo::class );
 	}
 
