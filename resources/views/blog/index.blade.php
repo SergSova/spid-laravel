@@ -1,4 +1,4 @@
-@extends('site.template')
+@extends('site.layout')
 
 @section('title', 'Blog')
 
@@ -24,19 +24,12 @@
                 </div>
 
             </div>
-            <!--<span class="svg_anm"></span>-->
         </div>
     </div>
     <main>
         <div class="main-content">
             <div class="wrapper">
                 <div class="fixid-container">
-                    <!--<header class="header">
-                        <div class="header-overlay"></div>
-                        <div class="header-top"></div>
-                        <div class="header-bottom"></div>
-                    </header>-->
-
                     <header class="header">
                         <div class="logo-box">
                             <img src="assets/img/blog/header/logo-white.png" alt="">
@@ -51,65 +44,7 @@
 
                     <div class="content">
                         <div class="content-head">
-                            <!-- <div class="wrapper-breadcrumb-filter"> 
-                                <div class="bread-crumbs" id="breadcrumbs" itemscope=""
-                                     itemtype="http://schema.org/BreadcrumbList">
-                                    <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
-                                         class="button">
-                                        <a href="#" itemprop="item">
-                                            <span itemprop="name" class="label1">Prego</span>
-                                            <meta itemprop="position" content="1">
-                                        </a>
-                                    </div>
-                                    <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
-                                         class="button">
-                                        <span itemprop="name" class="label1">Блог</span>
-                                        <meta itemprop="position" content="2">
-                                    </div>
-                                </div>
-                                <div class="filter">
-                                    <div class="multifilter">
-                                        <a href="#!">
-                                            <img src="assets/img/blog/icon-filter/vse.png" alt="">
-                                            Все</a>
-                                    </div>
-                                    <div class="multifilter">
-                                        <a href="#!">
-                                            <img src="assets/img/blog/icon-filter/rekomen.png" alt="">
-                                            Рекомендуем <span>(23)</span></a>
-                                    </div>
-                                    <div class="multifilter">
-                                        <a href="#!">
-                                            <img src="assets/img/blog/icon-filter/sovet.png" alt="">
-                                            Советы<span>(8)</span></a>
-                                    </div>
-                                    <div class="multifilter">
-                                        <a href="#!">
-                                            <img src="assets/img/blog/icon-filter/histori.png" alt="">
-                                            История<span>(10)</span></a>
-                                    </div>
-                                    <div class="multifilter">
-                                        <a href="#!">
-                                            <img src="assets/img/blog/icon-filter/proizvot.png" alt="">
-                                            Производство<span>(16)</span></a>
-                                    </div>
-                                    <div class="multifilter">
-                                        <a href="#!">
-                                            <img src="assets/img/blog/icon-filter/remont.png" alt="">
-                                            Ремонт<span>(90)</span></a>
-                                    </div>
-                                </div>
-                            </div>-->
-
-                            <!--<div class="blog-title-h1" style="background-image: url(assets/img/blog/blog/blog-title.png);">
-                                <h1>Блог</h1>
-                                <h2>Как правильно выбрать обувь, тонкости подбора каблука, анализ обувных технологий и другие
-                                    полезные статьи об обуви.</h2>
-                            </div>-->
-
                             <h1 class="main-caption clip-fix">Блог</h1>
-
-
                         </div>
                         <div class="content-wrapper scroll-container" id="scroll">
                             <div class="blog-main">

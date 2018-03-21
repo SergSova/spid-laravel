@@ -19,7 +19,7 @@
             @foreach($models as $model)
                 <tr>
                     <td>{{ $model->page_index }}</td>
-                    <td>{{ strip_tags($model->title) }}</td>
+                    <td>{{ $model->clearTitle($model) }}</td>
                     <td><a href="/{{ $model->alias }}" target="_blank">{{ $model->alias }}</a></td>
                     <td><a href="{{ route('staticPageView',[$model->id,$model->alias]) }}">Edit</a></td>
                 </tr>

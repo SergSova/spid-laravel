@@ -82,7 +82,7 @@ class SiteController extends Controller
         $model->merge($modal);
         $model->modal_text = '<p>'.join('</p><p>', explode('/', $modal->modal_text)).'</p>';
 
-        $humans = json_decode($model->longtitle)??[];
+        $humans = json_decode($model->longtitle) ?? [];
 
 
         return view($this->prefix.'with-who')->with(compact('model', 'humans', 'next', 'prev'));
@@ -90,22 +90,52 @@ class SiteController extends Controller
 
     public function bandit()
     {
-        return view($this->prefix.'bandit')->with(compact('title'));
+        $model = StaticPage::find(6);
+        $next = $model->getNext();
+        $prev = $model->getPrev();
+
+        $modal = json_decode($model->description);
+        /** @var StaticPage $model */
+        $model->merge($modal);
+
+        $model->tumb_on_off = explode('/', $model->tumb_on_off);
+        $model->modal_text = '<p>'.join('</p><p>', explode('/', $model->modal_text)).'</p>';
+        $model->rotator4 = join('<br>', explode('/', $model->rotator4));
+
+        $model->title = join('<br>', explode('/', $model->title));
+
+        return view($this->prefix.'bandit')->with(compact('model', 'next', 'prev'));
     }
 
     public function condomsWhite()
     {
-        return view($this->prefix.'condoms-white')->with(compact('title'));
+        $model = StaticPage::find(7);
+
+        $modal = json_decode($model->description);
+        /** @var StaticPage $model */
+        $model->merge($modal);
+//        $model->title_arr = explode('/', $model->title);
+
+        return view($this->prefix.'condoms-white')->with(compact('model', 'next', 'prev'));
     }
 
     public function consultants()
     {
-        return view($this->prefix.'consultants')->with(compact('title'));
+        $model = StaticPage::find(8);
+        $modal = json_decode($model->description);
+        /** @var StaticPage $model */
+        $model->merge($modal);
+
+        return view($this->prefix.'consultants')->with(compact('model', 'next', 'prev'));
     }
 
     public function testPage()
     {
-        return view($this->prefix.'test-page')->with(compact('title'));
+	    $model = StaticPage::find(9);
+	    $modal = json_decode($model->description);
+	    /** @var StaticPage $model */
+	    $model->merge($modal);
+        return view($this->prefix.'test-page')->with(compact('model'));
     }
 
     public function faq()

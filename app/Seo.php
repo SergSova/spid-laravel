@@ -16,7 +16,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property string og_description
  * @property string og_image
  */
-class Seo extends Model
-{
-    protected $fillable = ['sd'];
+class Seo extends Model {
+	protected $fillable = [
+		'seo_title',
+		'seo_keywords',
+		'seo_description',
+		'seo_text',
+		'og_title',
+		'og_description',
+		'og_image',
+	];
 }

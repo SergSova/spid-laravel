@@ -1,5 +1,7 @@
 @extends('site.layout')
 
+@section('title',$model->getTitle())
+
 @section('styles')
     <link rel="stylesheet" href="assets/css/lib/jquery.mCustomScrollbar.css">
     <link rel="stylesheet" href="assets/css/faq_main.css">

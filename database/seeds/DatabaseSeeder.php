@@ -17,7 +17,12 @@ class DatabaseSeeder extends Seeder
         $this->call(SlideBublesSeeder::class);
         $this->call(SlideRocketSeeder::class);
         $this->call(WithWhoSeeder::class);
+        $this->call(BanditSeeder::class);
         $this->call(FaqSeeder::class);
+        $this->call(CondomsWhiteSeeder::class);
+        $this->call(ConsultantsSeeder::class);
+        $this->call(TestPageSeeder::class);
+        $this->call(BlogSeeder::class);
 
     }
 }

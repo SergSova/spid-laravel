@@ -96,7 +96,7 @@ class FaqSeeder extends Seeder
                     'id' => $answ[0],
                     'question' => $answ[1],
                     'answer' => $answ[2],
-                    'index' => $answ[2]
+                    'index' => $answ[3]
                 ]
             );
         }

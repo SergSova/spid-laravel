@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Post;
 use App\StaticPage;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -28,6 +29,7 @@ class RouteServiceProvider extends ServiceProvider
 
         parent::boot();
         Route::model('staticPage', StaticPage::class);
+        Route::model('post', Post::class);
     }
 
     /**

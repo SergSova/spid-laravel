@@ -1,4 +1,13 @@
+<?php
+
+/**
+ * @var \App\StaticPage $model
+ */
+
+?>
 @extends('site.layout')
+
+@section('title',$model->getTitle())
 
 @section('styles')
     <link rel="stylesheet" href="assets/css/reset.css">
