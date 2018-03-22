@@ -50,7 +50,7 @@
                             </div>
                         </div>
                     @endforeach
-
+{{--
                     <div class="faq-content__question">
                         <h4 class="faq-content__heading">Что такое эмоциональное насилие?
                             <div class="faq-content__icon"></div>
@@ -621,6 +621,7 @@
                             </div>
                         </div>
                     </div>
+                    --}}
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\StaticPage;
+use Illuminate\Contracts\View\View;
 
 /**
  * Created by PhpStorm.
@@ -143,5 +144,11 @@ class SiteController extends Controller
         $model = StaticPage::find(11);
 
         return view($this->prefix.'faq')->with(compact('model'));
+    }
+
+    public function map()
+    {
+        $model = StaticPage::find(12);
+        return view($this->prefix.'map')->with(compact('model'));
     }
 }

@@ -18,18 +18,20 @@ class CreatePostsTable extends Migration
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('title');
-                $table->text('longtitle')->nullable();
+                $table->dateTime('publishedOn')->nullable();
+                $table->string('mainImage')->nullable();
+                $table->boolean('isBlackTitle')->default(0);
+                $table->boolean('isVioletPostStyle')->default(0);
+                $table->text('content')->nullable();
                 $table->text('description')->nullable();
-                $table->text('main_image')->nullable();
-                $table->text('icon')->nullable();
-                $table->unsignedInteger('viewers')->nullable();
-                $table->unsignedInteger('page_index')->default(0);
-                $table->string('menutitle')->nullable();
-                $table->boolean('published')->default(true);
-                $table->string('alias')->unique();
-                $table->unsignedInteger('parent_id')->nullable();
-	            $table->foreign('parent_id')->references('id')->on('static_pages')
-	                  ->onDelete('cascade');
+                //slider - это JSON объект (path, alt, title)
+                $table->text('slider')->nullable();
+                $table->unsignedInteger('viewers')->default(0);
+                $table->unsignedInteger('followers')->default(0);
+                $table->string('author')->nullable();
+                $table->string('authorImage')->nullable();
+                $table->unsignedInteger('index')->default(0);
+
 
                 $table->unsignedInteger('seo_id')->nullable();
                 $table->foreign('seo_id')->references('id')->on('seos')

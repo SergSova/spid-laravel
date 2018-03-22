@@ -14,7 +14,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get( '/', 'Site\SiteController@index' );
+Route::get( '/', 'Site\SiteController@index');
 
 Route::group(
 	[],
@@ -28,6 +28,7 @@ Route::group(
 		Route::get( '/consultants', 'Site\SiteController@consultants' );
 		Route::get( '/aids-test', 'Site\SiteController@testPage' );
 		Route::get( '/faq', 'Site\SiteController@faq' );
+		Route::get( '/map', 'Site\SiteController@map' );
 	}
 );
 

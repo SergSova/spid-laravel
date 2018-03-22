@@ -30,8 +30,4 @@ class Blog extends StaticPage {
         return $this->hasOne(Seo::class,'id','seo_id');
 	}
 
-
-//	public function posts() {
-//		return $this->belongsToMany( Post::class );
-//	}
 }

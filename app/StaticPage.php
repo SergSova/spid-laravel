@@ -23,6 +23,7 @@ class StaticPage extends Model
 {
     protected $fillable = ['title', 'longtitle', 'description', 'menutitle'];
 
+
     public function saveSeo($request)
     {
         if ($Request_seo = $request->get('Seo')) {
@@ -104,7 +105,8 @@ class StaticPage extends Model
         return $this;
     }
 
-    public function saveCustomField($request, $name){
+    public function saveCustomField($request, $name)
+    {
         switch ($name) {
             case 'faq':
                 foreach ($request->only('Question') as $question) {
@@ -216,7 +218,8 @@ class StaticPage extends Model
 
     }
 
-    public function loadCustomField($name){
+    public function loadCustomField($name)
+    {
         $modal = json_decode($this->description);
         $this->merge($modal);
 
@@ -235,9 +238,6 @@ class StaticPage extends Model
             case 'consultants':
                 $this->consultants = $model->consultants ?? [];
                 break;
-//            case 'blog':
-//                return redirect(route('staticBlogView'));
-//                break;
         }
     }
 }

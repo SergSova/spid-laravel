@@ -89,7 +89,6 @@ class FaqSeeder extends Seeder
                 '2018-03-15 07:57:42',
             ],
         ];
-
         foreach ($arr as $answ) {
             DB::table('faq_answers')->insert(
                 [
