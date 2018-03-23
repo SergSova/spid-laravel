@@ -76,8 +76,9 @@ class StaticPage extends Model
         return $obj;
     }
 
-    public function clearTitle($model)
+    public function clearTitle($model=null)
     {
+        if (is_null($model))$model=$this;
         return $this->my_mb_ucfirst(preg_replace('/[\/-:]/', '', strip_tags($model->title)));
     }
 

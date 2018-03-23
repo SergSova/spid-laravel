@@ -1,16 +1,22 @@
+<?php
+
+/**
+ * @var \App\Blog $model
+ */
+?>
 @extends('site.layout',$model)
 
-@section('title', 'Blog')
+@section('title', $model->clearTitle())
 
 @section('styles')
     <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900&amp;subset=latin-ext"
           rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/lib/reset.css">
-    <link rel="stylesheet" href="assets/css/blog/header.css">
-    <link rel="stylesheet" href="assets/css/blog/footer.css">
-    <link rel="stylesheet" href="assets/css/blog/base.css">
-    <link rel="stylesheet" href="assets/css/blog/blog.css">
-    <link rel="stylesheet" href="assets/css/blog/media.css">
+    <link rel="stylesheet" href="/assets/css/lib/reset.css">
+    <link rel="stylesheet" href="/assets/css/blog/header.css">
+    <link rel="stylesheet" href="/assets/css/blog/footer.css">
+    <link rel="stylesheet" href="/assets/css/blog/base.css">
+    <link rel="stylesheet" href="/assets/css/blog/blog.css">
+    <link rel="stylesheet" href="/assets/css/blog/media.css">
 @endsection
 @section('body')
     <div id="p_prldr">
@@ -37,20 +43,21 @@
 
                         <div class="menu-box">
                             <img class="menu-box_img" src="assets/img/blog/header/menu-burger.png" alt="">
-
                             <strong class="menu-box_text">меню</strong>
                         </div>
                     </header>
 
                     <div class="content">
                         <div class="content-head">
-                            <h1 class="main-caption clip-fix">Блог</h1>
+                            <h1 class="main-caption clip-fix">{!! $model->title !!}</h1>
                         </div>
                         <div class="content-wrapper scroll-container" id="scroll">
                             <div class="blog-main">
                                 <section class="blog-large">
+                                    {{-- violet 5 3 1 --}}
+                                    {{-- count  8 7 6 --}}
                                     <div class="large-translate translate-block">
-                                        <article class="blog-news">
+                                        1<article class="blog-news">
                                             <div class="content-article">
                                                 <figure>
                                                     <div class="blog-image">
@@ -94,7 +101,7 @@
                                                 </figure>
                                             </div>
                                         </article>
-                                        <article class="blog-news">
+                                        4<article class="blog-news">
                                             <div class="content-article">
                                                 <figure>
                                                     <div class="blog-image">
@@ -138,7 +145,7 @@
                                                 </figure>
                                             </div>
                                         </article>
-                                        <article class="blog-news">
+                                        7<article class="blog-news">
                                             <div class="content-article">
                                                 <figure>
                                                     <div class="blog-image">
@@ -182,7 +189,7 @@
                                                 </figure>
                                             </div>
                                         </article>
-                                        <article class="blog-news">
+                                        10<article class="blog-news">
                                             <div class="content-article">
                                                 <figure>
                                                     <div class="blog-image">
@@ -226,7 +233,7 @@
                                                 </figure>
                                             </div>
                                         </article>
-                                        <article class="tilter">
+                                        13<article class="tilter">
                                             <div class="content-article">
                                                 <figure class="tilter__figure">
                                                     <div class="blog-image">
@@ -254,7 +261,7 @@
                                                 </figure>
                                             </div>
                                         </article>
-                                        <article class="blog-news">
+                                        16<article class="blog-news">
                                             <div class="content-article">
                                                 <figure>
                                                     <div class="blog-image">
@@ -298,7 +305,7 @@
                                                 </figure>
                                             </div>
                                         </article>
-                                        <article class="blog-news">
+                                        19<article class="blog-news">
                                             <div class="content-article">
                                                 <figure>
                                                     <div class="blog-image">
@@ -342,7 +349,7 @@
                                                 </figure>
                                             </div>
                                         </article>
-                                        <article class="video">
+                                        21<article class="video">
                                             <div class="content-article">
                                                 <figure>
                                                     <div class="blog-image">
@@ -388,171 +395,11 @@
                                                 </figure>
                                             </div>
                                         </article>
-                                        <article class="tilter">
-                                            <div class="content-article">
-                                                <figure class="tilter__figure">
-                                                    <div class="blog-image">
-                                                        <img src="assets/img/blog/blog/kvadrat2.png" alt="">
-                                                        <div class="tilter-deco"></div>
-                                                    </div>
-                                                    <figcaption>
-                                                        <div class="blog-news-content">
-                                                            <div class="blog-news">
-                                                                <div class="blog-news-category">
-                                                            <span>
-                                                                <img src="assets/img/blog/icon-filter/sovet.png" alt="">
-                                                            </span>
-                                                                </div>
-                                                                <div class="blog-title">
-                                                                    <h2>Интернет-магазин обуви Prego</h2>
-                                                                    <h3>Скидка 500 грн. на все сапоги!</h3>
-                                                                </div>
-                                                                <div class="bottom-link">
-                                                                    <a href="one-blog.html">Подробнее</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </figcaption>
-                                                </figure>
-                                            </div>
-                                        </article>
-                                        <article class="blog-news">
-                                            <div class="content-article">
-                                                <figure>
-                                                    <div class="blog-image">
-                                                        <img src="assets/img/blog/blog/6.png" alt="">
-                                                    </div>
-                                                    <figcaption>
-                                                        <div class="blog-news-content">
-                                                            <div class="blog-news">
-                                                                <div class="blog-news-category">
-                                                            <span>
-                                                                <img src="assets/img/blog/icon-filter/histori.png" alt="">
-                                                            </span>
-                                                                </div>
-                                                                <div class="blog-title">
-                                                                    <h3>Fashion</h3>
-                                                                    <h2>Fashion весна/лето 2017</h2>
-                                                                    <data>25 января 2018 года</data>
-                                                                </div>
-                                                                <p>Как ни странно, но обувь ручной работы – не такая уж
-                                                                    редкость. Ручное производство обуви все еще распространено,
-                                                                    особенно в Италии и Англии – странах, которые с давних
-                                                                    времен славились своими сапожниками. И речь идет не о
-                                                                    крохотных мастерских, работающих на постоянных клиентов.
-                                                                    Многие известные обувные бренды до сих пор предпочитают
-                                                                    доверять изготовление обуви не автоматам, а мастерам.</p>
-                                                                <div class="bottom-link">
-                                                                    <a href="one-blog.html">Подробнее</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="blog-social">
-                                                                <div class="blog-social-comments">
-                                                                    <span>0</span>
-                                                                </div>
-                                                                <div class="blog-social-right">
-                                                                    <span class="eya">1 323</span>
-                                                                    <span class="fab fa-facebook-f">216</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </figcaption>
-                                                </figure>
-                                            </div>
-                                        </article>
-                                        <article class="blog-news">
-                                            <div class="content-article">
-                                                <figure>
-                                                    <div class="blog-image">
-                                                        <img src="assets/img/blog/blog/7.png" alt="">
-                                                    </div>
-                                                    <figcaption>
-                                                        <div class="blog-news-content">
-                                                            <div class="blog-news">
-                                                                <div class="blog-news-category">
-                                                            <span>
-                                                                <img src="assets/img/blog/icon-filter/histori.png" alt="">
-                                                            </span>
-                                                                </div>
-                                                                <div class="blog-title">
-                                                                    <h3>Fashion</h3>
-                                                                    <h2>Fashion весна/лето 2017</h2>
-                                                                    <data>25 января 2018 года</data>
-                                                                </div>
-                                                                <p>Как ни странно, но обувь ручной работы – не такая уж
-                                                                    редкость. Ручное производство обуви все еще распространено,
-                                                                    особенно в Италии и Англии – странах, которые с давних
-                                                                    времен славились своими сапожниками. И речь идет не о
-                                                                    крохотных мастерских, работающих на постоянных клиентов.
-                                                                    Многие известные обувные бренды до сих пор предпочитают
-                                                                    доверять изготовление обуви не автоматам, а мастерам.</p>
-                                                                <div class="bottom-link">
-                                                                    <a href="one-blog.html">Подробнее</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="blog-social">
-                                                                <div class="blog-social-comments">
-                                                                    <span>0</span>
-                                                                </div>
-                                                                <div class="blog-social-right">
-                                                                    <span class="eya">1 323</span>
-                                                                    <span class="fab fa-facebook-f">216</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </figcaption>
-                                                </figure>
-                                            </div>
-                                        </article>
-                                        <article class="blog-news">
-                                            <div class="content-article">
-                                                <figure>
-                                                    <div class="blog-image">
-                                                        <img src="assets/img/blog/blog/8.png" alt="">
-                                                    </div>
-                                                    <figcaption>
-                                                        <div class="blog-news-content">
-                                                            <div class="blog-news">
-                                                                <div class="blog-news-category">
-                                                            <span>
-                                                                <img src="assets/img/blog/icon-filter/histori.png" alt="">
-                                                            </span>
-                                                                </div>
-                                                                <div class="blog-title">
-                                                                    <h3>Fashion</h3>
-                                                                    <h2>Fashion весна/лето 2017</h2>
-                                                                    <data>25 января 2018 года</data>
-                                                                </div>
-                                                                <p>Как ни странно, но обувь ручной работы – не такая уж
-                                                                    редкость. Ручное производство обуви все еще распространено,
-                                                                    особенно в Италии и Англии – странах, которые с давних
-                                                                    времен славились своими сапожниками. И речь идет не о
-                                                                    крохотных мастерских, работающих на постоянных клиентов.
-                                                                    Многие известные обувные бренды до сих пор предпочитают
-                                                                    доверять изготовление обуви не автоматам, а мастерам.</p>
-                                                                <div class="bottom-link">
-                                                                    <a href="one-blog.html">Подробнее</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="blog-social">
-                                                                <div class="blog-social-comments">
-                                                                    <span>0</span>
-                                                                </div>
-                                                                <div class="blog-social-right">
-                                                                    <span class="eya">1 323</span>
-                                                                    <span class="fab fa-facebook-f">216</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </figcaption>
-                                                </figure>
-                                            </div>
-                                        </article>
                                     </div>
                                 </section>
                                 <section class="blog-small">
                                     <div class="medium-translate translate-block">
-                                        <article class="blog-news">
+                                        2<article class="blog-news">
                                             <div class="content-article">
                                                 <figure>
                                                     <div class="blog-image">
@@ -596,7 +443,7 @@
                                                 </figure>
                                             </div>
                                         </article>
-                                        <article class="blog-news">
+                                        5<article class="blog-news">
                                             <div class="content-article">
                                                 <figure>
                                                     <div class="blog-image">
@@ -640,7 +487,7 @@
                                                 </figure>
                                             </div>
                                         </article>
-                                        <article class="tilter">
+                                        8<article class="tilter">
                                             <div class="content-article">
                                                 <figure class="tilter__figure">
                                                     <div class="blog-image">
@@ -668,7 +515,7 @@
                                                 </figure>
                                             </div>
                                         </article>
-                                        <article class="blog-news">
+                                        11<article class="blog-news">
                                             <div class="content-article">
                                                 <figure>
                                                     <div class="blog-image">
@@ -712,7 +559,7 @@
                                                 </figure>
                                             </div>
                                         </article>
-                                        <article class="blog-news">
+                                        14<article class="blog-news">
                                             <div class="content-article">
                                                 <figure>
                                                     <div class="blog-image">
@@ -756,7 +603,7 @@
                                                 </figure>
                                             </div>
                                         </article>
-                                        <article class="blog-news">
+                                        17<article class="blog-news">
                                             <div class="content-article">
                                                 <figure>
                                                     <div class="blog-image">
@@ -800,194 +647,11 @@
                                                 </figure>
                                             </div>
                                         </article>
-                                        <article class="blog-news">
+                                        20<article class="blog-news">
                                             <div class="content-article">
                                                 <figure>
                                                     <div class="blog-image">
                                                         <img src="assets/img/blog/blog/13.png" alt="">
-                                                    </div>
-                                                    <figcaption>
-                                                        <div class="blog-news-content">
-                                                            <div class="blog-news">
-                                                                <div class="blog-news-category">
-                                                            <span>
-                                                                <img src="assets/img/blog/icon-filter/histori.png" alt="">
-                                                            </span>
-                                                                </div>
-                                                                <div class="blog-title">
-                                                                    <h3>Fashion</h3>
-                                                                    <h2>Fashion весна/лето 2017</h2>
-                                                                    <data>25 января 2018 года</data>
-                                                                </div>
-                                                                <p>Как ни странно, но обувь ручной работы – не такая уж
-                                                                    редкость. Ручное производство обуви все еще распространено,
-                                                                    особенно в Италии и Англии – странах, которые с давних
-                                                                    времен славились своими сапожниками. И речь идет не о
-                                                                    крохотных мастерских, работающих на постоянных клиентов.
-                                                                    Многие известные обувные бренды до сих пор предпочитают
-                                                                    доверять изготовление обуви не автоматам, а мастерам.</p>
-                                                                <div class="bottom-link">
-                                                                    <a href="one-blog.html">Подробнее</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="blog-social">
-                                                                <div class="blog-social-comments">
-                                                                    <span>0</span>
-                                                                </div>
-                                                                <div class="blog-social-right">
-                                                                    <span class="eya">1 323</span>
-                                                                    <span class="fab fa-facebook-f">216</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </figcaption>
-                                                </figure>
-                                            </div>
-                                        </article>
-                                        <article class="video">
-                                            <div class="content-article">
-                                                <figure>
-                                                    <div class="blog-image">
-                                                        <div class="video-to-play">
-                                                            <div class="video-blog" data-video="HMUg5Vvs6g0"></div>
-                                                        </div>
-                                                    </div>
-                                                    <figcaption>
-                                                        <div class="blog-news-content">
-                                                            <div class="blog-news">
-                                                                <div class="blog-news-category">
-                                                            <span>
-                                                                <img src="assets/img/blog/icon-filter/histori.png" alt="">
-                                                            </span>
-                                                                </div>
-                                                                <div class="blog-title">
-                                                                    <h3>Fashion</h3>
-                                                                    <h2>Fashion весна/лето 2017</h2>
-                                                                    <data>25 января 2018 года</data>
-                                                                </div>
-                                                                <p>Вы можете без особых усилий, переходите по страницам сайта в
-                                                                    каталогам
-                                                                    мужской, женской Вы можете без особых усилий, переходите по
-                                                                    страницам
-                                                                    сайта в каталогам
-                                                                    мужской, женской Вы можете без особых усилий, переходите по
-                                                                    страницам
-                                                                    сайта в каталогам
-                                                                    мужской, женской Вы можете без особых усилий, переходите по
-                                                                    страницам
-                                                                    сайта в каталогам
-                                                                    мужской, женской</p>
-                                                                <div class="bottom-link">
-                                                                    <a href="one-blog.html">Подробнее</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="blog-social">
-                                                                <div class="blog-social-comments">
-                                                                    <span>0</span>
-                                                                </div>
-                                                                <div class="blog-social-right">
-                                                                    <span class="eya">1 323</span>
-                                                                    <span class="fab fa-facebook-f">216</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </figcaption>
-                                                </figure>
-                                            </div>
-                                        </article>
-                                        <article class="blog-news">
-                                            <div class="content-article">
-                                                <figure>
-                                                    <div class="blog-image">
-                                                        <img src="assets/img/blog/blog/14.png" alt="">
-                                                    </div>
-                                                    <figcaption>
-                                                        <div class="blog-news-content">
-                                                            <div class="blog-news">
-                                                                <div class="blog-news-category">
-                                                            <span>
-                                                                <img src="assets/img/blog/icon-filter/histori.png" alt="">
-                                                            </span>
-                                                                </div>
-                                                                <div class="blog-title">
-                                                                    <h3>Fashion</h3>
-                                                                    <h2>Fashion весна/лето 2017</h2>
-                                                                    <data>25 января 2018 года</data>
-                                                                </div>
-                                                                <p>Как ни странно, но обувь ручной работы – не такая уж
-                                                                    редкость. Ручное производство обуви все еще распространено,
-                                                                    особенно в Италии и Англии – странах, которые с давних
-                                                                    времен славились своими сапожниками. И речь идет не о
-                                                                    крохотных мастерских, работающих на постоянных клиентов.
-                                                                    Многие известные обувные бренды до сих пор предпочитают
-                                                                    доверять изготовление обуви не автоматам, а мастерам.</p>
-                                                                <div class="bottom-link">
-                                                                    <a href="one-blog.html">Подробнее</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="blog-social">
-                                                                <div class="blog-social-comments">
-                                                                    <span>0</span>
-                                                                </div>
-                                                                <div class="blog-social-right">
-                                                                    <span class="eya">1 323</span>
-                                                                    <span class="fab fa-facebook-f">216</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </figcaption>
-                                                </figure>
-                                            </div>
-                                        </article>
-                                        <article class="blog-news">
-                                            <div class="content-article">
-                                                <figure>
-                                                    <div class="blog-image">
-                                                        <img src="assets/img/blog/blog/21.png" alt="">
-                                                    </div>
-                                                    <figcaption>
-                                                        <div class="blog-news-content">
-                                                            <div class="blog-news">
-                                                                <div class="blog-news-category">
-                                                            <span>
-                                                                <img src="assets/img/blog/icon-filter/histori.png" alt="">
-                                                            </span>
-                                                                </div>
-                                                                <div class="blog-title">
-                                                                    <h3>Fashion</h3>
-                                                                    <h2>Fashion весна/лето 2017</h2>
-                                                                    <data>25 января 2018 года</data>
-                                                                </div>
-                                                                <p>Как ни странно, но обувь ручной работы – не такая уж
-                                                                    редкость. Ручное производство обуви все еще распространено,
-                                                                    особенно в Италии и Англии – странах, которые с давних
-                                                                    времен славились своими сапожниками. И речь идет не о
-                                                                    крохотных мастерских, работающих на постоянных клиентов.
-                                                                    Многие известные обувные бренды до сих пор предпочитают
-                                                                    доверять изготовление обуви не автоматам, а мастерам.</p>
-                                                                <div class="bottom-link">
-                                                                    <a href="one-blog.html">Подробнее</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="blog-social">
-                                                                <div class="blog-social-comments">
-                                                                    <span>0</span>
-                                                                </div>
-                                                                <div class="blog-social-right">
-                                                                    <span class="eya">1 323</span>
-                                                                    <span class="fab fa-facebook-f">216</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </figcaption>
-                                                </figure>
-                                            </div>
-                                        </article>
-                                        <article class="blog-news">
-                                            <div class="content-article">
-                                                <figure>
-                                                    <div class="blog-image">
-                                                        <img src="assets/img/blog/blog/15.png" alt="">
                                                     </div>
                                                     <figcaption>
                                                         <div class="blog-news-content">
@@ -1032,7 +696,7 @@
                             </div>
                             <aside class="blog-narrow">
                                 <div class="small-translate translate-block">
-                                    <article class="tilter">
+                                    3<article class="tilter">
                                         <div class="content-article">
                                             <figure class="tilter__figure">
                                                 <div class="blog-image">
@@ -1060,7 +724,7 @@
                                             </figure>
                                         </div>
                                     </article>
-                                    <article class="blog-news">
+                                    6<article class="blog-news">
                                         <div class="content-article">
                                             <figure>
                                                 <div class="blog-image">
@@ -1109,7 +773,7 @@
                                             </figure>
                                         </div>
                                     </article>
-                                    <article class="blog-news">
+                                    9<article class="blog-news">
                                         <div class="content-article">
                                             <figure>
                                                 <div class="blog-image">
@@ -1158,7 +822,7 @@
                                             </figure>
                                         </div>
                                     </article>
-                                    <article class="blog-news">
+                                    12<article class="blog-news">
                                         <div class="content-article">
                                             <figure>
                                                 <div class="blog-image">
@@ -1207,7 +871,7 @@
                                             </figure>
                                         </div>
                                     </article>
-                                    <article class="blog-news">
+                                    15<article class="blog-news">
                                         <div class="content-article">
                                             <figure>
                                                 <div class="blog-image">
@@ -1256,7 +920,7 @@
                                             </figure>
                                         </div>
                                     </article>
-                                    <article class="blog-news">
+                                    18<article class="blog-news">
                                         <div class="content-article">
                                             <figure>
                                                 <div class="blog-image">
@@ -1298,183 +962,6 @@
                                                             <div class="blog-social-right">
                                                                 <span class="eya">1 323</span>
                                                                 <span class="fab fa-facebook-f">216</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </article>
-                                    <article class="blog-news">
-                                        <div class="content-article">
-                                            <figure>
-                                                <div class="blog-image">
-                                                    <img src="assets/img/blog/blog/1.png" alt="">
-                                                </div>
-                                                <figcaption>
-                                                    <div class="blog-news-content">
-                                                        <div class="blog-news">
-                                                            <div class="blog-news-category">
-                                                            <span>
-                                                                <img src="assets/img/blog/icon-filter/histori.png" alt="">
-                                                            </span>
-                                                            </div>
-                                                            <div class="blog-title">
-                                                                <h3>Fashion</h3>
-                                                                <h2>Fashion весна/лето 2017</h2>
-                                                                <data>25 января 2018 года</data>
-                                                            </div>
-                                                            <p>Вы можете без особых усилий, переходите по страницам сайта в
-                                                                каталогам
-                                                                мужской, женской Вы можете без особых усилий, переходите по
-                                                                страницам
-                                                                сайта в каталогам
-                                                                мужской, женской Вы можете без особых усилий, переходите по
-                                                                страницам
-                                                                сайта в каталогам
-                                                                мужской, женской Вы можете без особых усилий, переходите по
-                                                                страницам
-                                                                сайта в каталогам
-                                                                мужской, женской</p>
-                                                            <div class="bottom-link">
-                                                                <a href="one-blog.html">Подробнее</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="blog-social">
-                                                            <div class="blog-social-comments">
-                                                                <span>0</span>
-                                                            </div>
-                                                            <div class="blog-social-right">
-                                                                <span class="eya">1 323</span>
-                                                                <span class="fab fa-facebook-f">216</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </article>
-                                    <article class="blog-news">
-                                        <div class="content-article">
-                                            <figure>
-                                                <div class="blog-image">
-                                                    <img src="assets/img/blog/blog/2%20(1).png" alt="">
-                                                </div>
-                                                <figcaption>
-                                                    <div class="blog-news-content">
-                                                        <div class="blog-news">
-                                                            <div class="blog-news-category">
-                                                            <span>
-                                                                <img src="assets/img/blog/icon-filter/histori.png" alt="">
-                                                            </span>
-                                                            </div>
-                                                            <div class="blog-title">
-                                                                <h3>Fashion</h3>
-                                                                <h2>Fashion весна/лето 2017</h2>
-                                                                <data>25 января 2018 года</data>
-                                                            </div>
-                                                            <p>Вы можете без особых усилий, переходите по страницам сайта в
-                                                                каталогам
-                                                                мужской, женской Вы можете без особых усилий, переходите по
-                                                                страницам
-                                                                сайта в каталогам
-                                                                мужской, женской Вы можете без особых усилий, переходите по
-                                                                страницам
-                                                                сайта в каталогам
-                                                                мужской, женской Вы можете без особых усилий, переходите по
-                                                                страницам
-                                                                сайта в каталогам
-                                                                мужской, женской</p>
-                                                            <div class="bottom-link">
-                                                                <a href="one-blog.html">Подробнее</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="blog-social">
-                                                            <div class="blog-social-comments">
-                                                                <span>0</span>
-                                                            </div>
-                                                            <div class="blog-social-right">
-                                                                <span class="eya">1 323</span>
-                                                                <span class="fab fa-facebook-f">216</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </article>
-                                    <article class="video">
-                                        <div class="content-article">
-                                            <figure>
-                                                <div class="blog-image">
-                                                    <div class="video-to-play">
-                                                        <div class="video-blog" data-video="swZwj98Yqo8"></div>
-                                                    </div>
-                                                </div>
-                                                <figcaption>
-                                                    <div class="blog-news-content">
-                                                        <div class="blog-news">
-                                                            <div class="blog-news-category">
-                                                            <span>
-                                                                <img src="assets/img/blog/icon-filter/histori.png" alt="">
-                                                            </span>
-                                                            </div>
-                                                            <div class="blog-title">
-                                                                <h3>Fashion</h3>
-                                                                <h2>Fashion весна/лето 2017</h2>
-                                                                <data>25 января 2018 года</data>
-                                                            </div>
-                                                            <p>Вы можете без особых усилий, переходите по страницам сайта в
-                                                                каталогам
-                                                                мужской, женской Вы можете без особых усилий, переходите по
-                                                                страницам
-                                                                сайта в каталогам
-                                                                мужской, женской Вы можете без особых усилий, переходите по
-                                                                страницам
-                                                                сайта в каталогам
-                                                                мужской, женской Вы можете без особых усилий, переходите по
-                                                                страницам
-                                                                сайта в каталогам
-                                                                мужской, женской</p>
-                                                            <div class="bottom-link">
-                                                                <a href="one-blog.html">Подробнее</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="blog-social">
-                                                            <div class="blog-social-comments">
-                                                                <span>0</span>
-                                                            </div>
-                                                            <div class="blog-social-right">
-                                                                <span class="eya">1 323</span>
-                                                                <span class="fab fa-facebook-f">216</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </article>
-                                    <article class="tilter">
-                                        <div class="content-article">
-                                            <figure class="tilter__figure">
-                                                <div class="blog-image">
-                                                    <img src="assets/img/blog/blog/prego-1.jpg" alt="">
-                                                    <div class="tilter-deco"></div>
-                                                </div>
-                                                <figcaption>
-                                                    <div class="blog-news-content">
-                                                        <div class="blog-news">
-                                                            <div class="blog-news-category">
-                                                            <span>
-                                                                <img src="assets/img/blog/icon-filter/sovet.png" alt="">
-                                                            </span>
-                                                            </div>
-                                                            <div class="blog-title">
-                                                                <h2>Интернет-магазин обуви Prego</h2>
-                                                                <h3>Скидка 500 грн. на все сапоги!</h3>
-                                                            </div>
-                                                            <div class="bottom-link">
-                                                                <a href="one-blog.html">Подробнее</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1487,10 +974,8 @@
                             <div class="ajax-blog"></div>
                         </div>
                         <div class="about-description">
-
                         </div>
                         <footer>
-
                         </footer>
                     </div>
 
@@ -1506,10 +991,10 @@
     </main>
 @endsection
 @section('scripts')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="assets/js/libs/vibrant.js"></script>
-    <script src="assets/js/libs/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/js/libs/anime.min.js"></script>
-    <script async="" src="assets/js/blog/animation.js"></script>
-    <script async="" src="assets/js/blog/scroll.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/assets/js/libs/vibrant.js"></script>
+    <script src="/assets/js/libs/imagesloaded.pkgd.min.js"></script>
+    <script src="/assets/js/libs/anime.min.js"></script>
+    <script src="/assets/js/blog/animation.js" async=""></script>
+    <script src="/assets/js/blog/scroll.js" async=""></script>
 @endsection

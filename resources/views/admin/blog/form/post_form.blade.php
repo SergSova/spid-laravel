@@ -7,13 +7,23 @@
 ?>
 
 <div class="form-group">
+    {{ Form::label('category_id', 'Категория') }}
+    {{ Form::select('category_id', $model->allCategory, $model->category_id,['class'=>'custom-select','placeholder'=>'Выберете категорию']) }}
+</div>
+
+<div class="form-group">
     {{ Form::label('title', 'Заголовок') }}
     {{ Form::text('title', null ,['class'=>'form-control']) }}
+    <small class="form-text text-muted">~ - символ разделения строк</small>
 </div>
 
 @include('admin.chanks.img_lfm',['id'=>'2','name'=>'mainImage','title'=>'Основная картинка'])
 
 <div class="form-row">
+    <div class="form-check col">
+        {{ Form::checkbox('isBig',1,false,['class'=>'form-check-input']) }}
+        {{ Form::label('isBig','Важная статья',['class'=>'form-check-label']) }}
+    </div>
     <div class="form-check col">
         {{ Form::checkbox('isBlackTitle',1,false,['class'=>'form-check-input']) }}
         {{ Form::label('isBlackTitle','Цвет заголовка черный',['class'=>'form-check-label']) }}
@@ -31,6 +41,7 @@
     {{ Form::label('description','Краткое описание') }}
     {{ Form::textarea('description',null, ['class'=>'form-control']) }}
 </div>
+
 <div class="form-group">
     {{ Form::label('author','Автор') }}
     {{ Form::text('author',null, ['class'=>'form-control']) }}
@@ -98,9 +109,19 @@
                         </div>
                     </div>
                 @endforelse
-                <div class="form-group add-photo btn btn-success">Добавить вопрос</div>
+                <div class="form-group add-photo btn btn-success">Добавить фото</div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-check col">
+        {{ Form::checkbox('published',1,true,['class'=>'form-check-input']) }}
+        {{ Form::label('published','Опубликовано',['class'=>'form-check-label']) }}
+    </div>
+    <div class="form-check col">
+        {{ Form::datetime('publishedOn',$model->publishedOn?? date('Y-m-d H:i:s'),['class'=>'form-control']) }}
     </div>
 </div>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Blog;
+use App\BlogCategory;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
@@ -35,6 +36,7 @@ class BlogController extends Controller
         $route = 'blog.store';
         $method = 'post';
         $model->slider = [];
+        $model->allCategory = BlogCategory::all()->flatMap(function ($el){return [$el->id=>$el->title];});
 
         return view('admin.blog.form.form_create')->with(compact('model', 'title', 'route', 'method'));
     }
@@ -49,6 +51,7 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $model = new Post();
+        $model->slug = str_slug($request->get('title'));
         if ($model->fill($request->all()) && $model->save()) {
             $model->slider = json_encode($request->get('Photo'));
             if ($model->save()) {
@@ -69,7 +72,7 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        //
+        return redirect(route('blog.index'));
     }
 
     /**
@@ -87,6 +90,8 @@ class BlogController extends Controller
         $route = 'blog.update';
         $method = 'PUT';
         $model->slider = json_decode($model->slider) ?? [];
+        $model->allCategory = BlogCategory::all()->flatMap(function ($el){return [$el->id=>$el->title];});
+
 
         return view('admin.blog.form.form_create')->with(compact('model', 'title', 'route', 'method'));
     }
@@ -103,6 +108,7 @@ class BlogController extends Controller
     {
         /** @var Post $model */
         $model = Post::find($id);
+        $model->slug = str_slug($request->get('title'));
         if ($model->fill($request->all()) && $model->save()) {
             $model->slider = json_encode($request->get('Photo'));
             if ($model->save()) {

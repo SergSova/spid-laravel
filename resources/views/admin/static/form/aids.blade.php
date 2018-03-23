@@ -1,6 +1,7 @@
 <div class="form-group">
-    {{ Form::label('title', 'Заголовок (строки разделять символом /)') }}
+    {{ Form::label('title', 'Заголовок') }}
     {{ Form::text('title', null ,['class'=>'form-control']) }}
+    <small class="form-text text-muted">/ - символ разделения строк</small>
 </div>
 <div class="form-group">
     {{ Form::label('modal_text','Текст подсказки') }}
