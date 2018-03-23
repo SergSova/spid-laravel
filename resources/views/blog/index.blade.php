@@ -1,4 +1,4 @@
-@extends('site.layout')
+@extends('site.layout',$model)
 
 @section('title', 'Blog')
 

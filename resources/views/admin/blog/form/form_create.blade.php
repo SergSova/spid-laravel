@@ -4,12 +4,12 @@
 
 @section('body')
     <div class="container">
-        <a href="{{route('admin-blog')}}" class="btn btn-sm btn-success mb-2">Назад</a>
+        <a href="{{route('blog.index')}}" class="btn btn-sm btn-success mb-2">Назад</a>
         <h1>{{$title}}</h1>
 
-        {!! Form::model($model,['url'=>route('postPageEdit',[$model->id]),'method'=>'post','class'=>'']) !!}
+        {!! Form::model($model,['url'=>route($route,[$model->id]),'method'=>$method,'class'=>'']) !!}
 
-        @include($form)
+        @include('admin.blog.form.post_form')
         @include('admin.seo_form')
 
         {{ Form::submit('Сохранить',['class'=>'btn btn-primary mb-2']) }}

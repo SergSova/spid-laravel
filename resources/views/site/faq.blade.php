@@ -629,6 +629,7 @@
 @endsection
 
 @section('scripts')
+    @parent
     <script src="assets/js/libs/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="assets/js/libs/wheel-indicator.js"></script>
     <script src="assets/js/faq_main.js"></script>

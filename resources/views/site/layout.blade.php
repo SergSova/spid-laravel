@@ -16,37 +16,16 @@
 </head>
 <body>
 
-{{--@include('site.menu')--}}
+@include('site.menu')
 
-@hasSection('body')
-    @yield('body')
-@else
-    <div class="flex-center position-ref full-height">
-        @if (Route::has('login'))
-            <div class="top-right links">
-                @auth
-                    <a href="{{ url('/home') }}">Home</a>
-                @else
-                    <a href="{{ route('login') }}">Login</a>
-                    <a href="{{ route('register') }}">Register</a>
-                @endauth
-            </div>
-        @endif
-
-        <div class="content">
-            @hasSection('content')
-                @yield('content')
-            @else
-                <h1>{{ config('app.name') }}</h1>
-            @endif
-        </div>
-    </div>
-@endif
+@yield('body')
 
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
+            @if(isset($model))
     var next_page = '{{$model->getNext()['alias']}}';
     var prev_page = '{{$model->getPrev()['alias']}}';
+    @endif
 </script>
 
 @yield('scripts')

@@ -94,6 +94,7 @@ use App\StaticPage;
 @endsection
 
 @section('scripts')
+    @parent
     <script src="assets/js/libs/wheel-indicator.js"></script>
     <script src="assets/js/consult_main.js"></script>
     <!-- BEGIN JIVOSITE CODE {literal} -->

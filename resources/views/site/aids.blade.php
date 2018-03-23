@@ -90,6 +90,7 @@
 @endsection
 
 @section('scripts')
+    @parent
     <script src="assets/js/columb.js"></script>
     <script>
         var modalVis = true;

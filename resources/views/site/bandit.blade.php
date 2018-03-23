@@ -214,6 +214,7 @@
 @endsection
 
 @section('scripts')
+    @parent
     <script src="assets/js/libs/detect.min.js"></script>
     <script src="assets/js/main22.js"></script>
     <script>

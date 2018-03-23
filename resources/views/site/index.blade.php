@@ -35,5 +35,6 @@
 @endsection
 
 @section('scripts')
+    @parent
     <script src="assets/js/madam.js"></script>
 @endsection

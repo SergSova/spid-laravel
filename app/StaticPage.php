@@ -60,19 +60,6 @@ class StaticPage extends Model
 
         return $obj;
     }
-
-    public function clearTitle($model)
-    {
-        return $this->my_mb_ucfirst(preg_replace('/[\/-:]/', '', strip_tags($model->title)));
-    }
-
-    protected function my_mb_ucfirst($str)
-    {
-        $fc = mb_strtoupper(mb_substr($str, 0, 1));
-
-        return $fc.mb_substr($str, 1);
-    }
-
     public function getPrev()
     {
         $obj = [
@@ -87,6 +74,18 @@ class StaticPage extends Model
         }
 
         return $obj;
+    }
+
+    public function clearTitle($model)
+    {
+        return $this->my_mb_ucfirst(preg_replace('/[\/-:]/', '', strip_tags($model->title)));
+    }
+
+    protected function my_mb_ucfirst($str)
+    {
+        $fc = mb_strtoupper(mb_substr($str, 0, 1));
+
+        return $fc.mb_substr($str, 1);
     }
 
     public function getTitle()

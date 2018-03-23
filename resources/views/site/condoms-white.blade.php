@@ -76,6 +76,8 @@
 @endsection
 
 @section('scripts')
+    @parent
+    <script src="assets/js/libs/jquery.touch.js"></script>
     <script src="assets/js/libs/wheel-indicator.js"></script>
     <script src="assets/js/main.js"></script>
 @endsection

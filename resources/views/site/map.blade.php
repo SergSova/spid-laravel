@@ -2,7 +2,7 @@
 
 @section('title','Карта')
 
-@section('style')
+@section('styles')
     <link rel="stylesheet" type="text/css" href="assets/css/main_map.css">
 @endsection
 
@@ -47,7 +47,8 @@
 @endsection
 
 @section('scripts')
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeVHz95lv107f7pYWNL-FetK5BU1s7ps8&callback=initMap" async defer></script>
+    @parent
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeVHz95lv107f7pYWNL-FetK5BU1s7ps8&callback=initMap" async defer></script>
     <script type="text/javascript">
         var ADRESSES = [
             {

@@ -9,32 +9,72 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use stdClass;
 
 /**
  * Class Post
+ *
  * @package App
- * @property int id
- * @property string title
- * @property string longtitle
- * @property string description
- * @property string main_image
- * @property string icon
- * @property int viewers
- * @property int page_index
- * @property string menutitle
- * @property int seo_id
+ * @property int     $id
+ * @property string  $title
+ * @property string  $publishedOn
+ * @property string  $mainImage
+ * @property boolean $isBlackTitle
+ * @property boolean $isVioletPostStyle
+ * @property string  $content
+ * @property string  $description
+ * @property string  $slider
+ * @property int     $viewers
+ * @property int     $followers
+ * @property string  $author
+ * @property string  $authorImage
+ * @property int     $index
+ * @property string  $slug
+ * @property int     $seo_id
  */
-class Post extends Model {
-	protected $fillable = [
-		'id',
-		'title',
-		'longtitle',
-		'description',
-		'main_image',
-		'icon',
-		'viewers',
-		'page_index',
-		'menutitle',
-		'seo_id',
-	];
+class Post extends Model
+{
+
+    protected $fillable
+        = [
+            'title',
+            'mainImage',
+            'isBlackTitle',
+            'isVioletPostStyle',
+            'content',
+            'description',
+            'author',
+            'authorImage',
+            'index',
+        ];
+
+    public function nav($direction)
+    {
+        $obj = new stdClass();
+        $obj->title = '';
+        $obj->alias = '';
+        $index = $this->index + ($direction == 'next' ? 1 : -1);
+        $mod = self::where(['page_index' => $index])->first();
+        if ($mod) {
+            $obj->title = $this->clearTitle($mod);
+            $obj->alias = $mod->alias;
+        }
+
+        return $obj;
+    }
+
+    public function prev()
+    {
+        return $this->nav('prev');
+    }
+
+    public function next()
+    {
+        return $this->nav('next');
+    }
+
+    public function seo()
+    {
+        return $this->hasOne(Seo::class, 'id', 'seo_id');
+    }
 }

@@ -1,38 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Chepur
- * Date: 14.03.2018
- * Time: 12:00
- */
 
 namespace App\Http\Controllers\Admin;
 
-
 use App\Blog;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StaticPageRequest;
-use App\Seo;
-use App\StaticPage;
-use http\Env\Request;
+use App\Post;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class BlogController extends Controller
 {
-
-//    public function editStatic(StaticPageRequest $request)
-//    {
-//        /** @var Blog $model */
-//        $model = Blog::find(10);
-//        if ($request->isMethod('post') && $model->fill($request->all())->save()) {
-////            $model->saveSeo($request);
-//
-//            return redirect()->route('adminBlog');
-//        }
-//        $title = 'Редактирование Блога';
-//
-//        return view('admin.blog.form.blog_edit')->with(compact('model', 'title'));
-//    }
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $model = Blog::find(10);
@@ -41,20 +24,104 @@ class BlogController extends Controller
     }
 
     /**
-     * @param \http\Env\Request $request
-     * @param \App\Post         $post
+     * Show the form for creating a new resource.
      *
-     * @return mixed
+     * @return \Illuminate\Http\Response
      */
-    public function editPost(Request $request, $post)
+    public function create()
     {
+        $model = new Post();
+        $title = 'Создание статьи';
+        $route = 'blog.store';
+        $method = 'post';
+        $model->slider = [];
 
-        if ($request->isMethod('post') && $post->fill($request->all())->save()) {
-            return redirect()->route('adminBlog');
+        return view('admin.blog.form.form_create')->with(compact('model', 'title', 'route', 'method'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $model = new Post();
+        if ($model->fill($request->all()) && $model->save()) {
+            $model->slider = json_encode($request->get('Photo'));
+            if ($model->save()) {
+                return redirect(route('blog.index'));
+            }
         }
 
-        $model = $post;
+        return redirect(route('blog.create'))->withInput($request->input());
 
-        return view('admin.blog.form.form_layout')->with(compact('model'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        /** @var Post $model */
+        $model = Post::find($id);
+        $title = 'Редактирование статьи "'.$model->title.'"';
+        $route = 'blog.update';
+        $method = 'PUT';
+        $model->slider = json_decode($model->slider) ?? [];
+
+        return view('admin.blog.form.form_create')->with(compact('model', 'title', 'route', 'method'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int                      $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        /** @var Post $model */
+        $model = Post::find($id);
+        if ($model->fill($request->all()) && $model->save()) {
+            $model->slider = json_encode($request->get('Photo'));
+            if ($model->save()) {
+                return redirect(route('blog.index'));
+            }
+        }
+
+        return redirect(route('blog.edit', $id))->withInput($request->input());
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        return Post::destroy($id);
     }
 }

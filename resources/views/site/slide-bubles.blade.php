@@ -89,6 +89,7 @@
 @endsection
 
 @section('scripts')
+    @parent
     <script src="assets/js/libs/pixi.js"></script>
     <script src="assets/js/libs/bump.js"></script>
     <script src="assets/js/libs/tweenMax.js"></script>

@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ConsultantsSeeder::class);
         $this->call(TestPageSeeder::class);
         $this->call(BlogSeeder::class);
+        $this->call(BlogCategorySeeder::class);
+        $this->call(BlogPostsSeeder::class);
         $this->call(FaqSeeder::class);
         $this->call(MapSeeder::class);
 

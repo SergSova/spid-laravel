@@ -151,4 +151,9 @@ class SiteController extends Controller
         $model = StaticPage::find(12);
         return view($this->prefix.'map')->with(compact('model'));
     }
+    public function about()
+    {
+        $model = StaticPage::find(13);
+        return view($this->prefix.'about')->with(compact('model'));
+    }
 }

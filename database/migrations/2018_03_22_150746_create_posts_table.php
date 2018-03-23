@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('title');
+                $table->boolean('published')->default(1);
                 $table->dateTime('publishedOn')->nullable();
                 $table->string('mainImage')->nullable();
                 $table->boolean('isBlackTitle')->default(0);
@@ -31,7 +32,7 @@ class CreatePostsTable extends Migration
                 $table->string('author')->nullable();
                 $table->string('authorImage')->nullable();
                 $table->unsignedInteger('index')->default(0);
-
+                $table->string('slug');
 
                 $table->unsignedInteger('seo_id')->nullable();
                 $table->foreign('seo_id')->references('id')->on('seos')

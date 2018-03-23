@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Observers\StaticPageObserver;
 use App\StaticPage;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,6 +19,12 @@ class AppServiceProvider extends ServiceProvider
     {
 //        StaticPage::observe(StaticPageObserver::class);
         Schema::defaultStringLength(191);
+        Gate::define('admin',function ($user){
+            return $user->viewer;
+        });
+        Gate::define('superAdmin',function ($user){
+            return $user->admin;
+        });
     }
 
     /**

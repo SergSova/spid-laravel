@@ -10,11 +10,14 @@ namespace App\Http\Controllers\Site;
 
 
 use App\Http\Controllers\Controller;
+use App\StaticPage;
 
 class BlogController extends Controller
 {
     public function index()
     {
-        return view('blog.index');
+        $model = StaticPage::find(10);
+
+        return view('blog.index')->with(compact('model'));
     }
 }

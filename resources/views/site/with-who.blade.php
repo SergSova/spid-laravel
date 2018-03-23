@@ -91,6 +91,7 @@
 @endsection
 
 @section('scripts')
+    @parent
     <script src="assets/js/main22.js"></script>
     <script src="assets/js/with-who.js"></script>
 @endsection
