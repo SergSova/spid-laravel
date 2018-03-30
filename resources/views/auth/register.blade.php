@@ -11,41 +11,39 @@
     <nav class="navbar" role="navigation">
         <ul class="nav navbar-nav">
             <li class="active">
-                <a href="{{ url('auth/login') }}">Вход</a>
+                <a href="{{ route('login') }}">@lang('auth.sign_in')</a>
             </li>
         </ul>
     </nav>
-    {{--Ошибки--}}
-    @if ($errors->has())
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="alert alert-danger" role="alert">
-                    <button class="close" aria-label="Close" data-dismiss="alert" type="button">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li> {{{ $error }}}</li>
-                        @endforeach
-                    </ul>
-                </div>
+
+    @if(count($errors->all()))
+        <div class="container">
+            <div class="alert alert-danger" role="alert">
+                @foreach ($errors->all() as $message)
+                    <p>{{$message}}</p>
+                @endforeach
             </div>
         </div>
     @endif
-    <form role="form" method="post" action="{{ url('auth/register') }}">
+
+    <form role="form" method="post" action="{{ route("register") }}">
         {!! csrf_field() !!}
+        <div class="form-group">
+            <label for="name">@lang('auth.name')</label>
+            <input type="text" class="form-control" id="name" placeholder="@lang('auth.name')" name='name'>
+        </div>
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" class="form-control" id="email" placeholder="Email" name='email'>
         </div>
         <div class="form-group">
-            <label for="password">Пароль</label>
-            <input type="password" class="form-control" id="password" placeholder="Пароль" name="password">
+            <label for="password">@lang('auth.pass')</label>
+            <input type="password" class="form-control" id="password" placeholder="@lang('auth.pass')" name="password">
         </div>
         <div class="form-group">
-            <label for="confirm_password">Повторите пароль</label>
-            <input type="password" class="form-control" id="confirm_password" placeholder="Повторите пароль" name="password_confirmation">
+            <label for="confirm_password">@lang('auth.confirm')</label>
+            <input type="password" class="form-control" id="confirm_password" placeholder="@lang('auth.confirm')" name="password_confirmation">
         </div>
-        <button type="submit" class="btn btn-default">Отправить</button>
+        <button type="submit" class="btn btn-default">@lang('auth.sign_up')</button>
     </form>
 </div>

@@ -3,7 +3,7 @@
  * @var \App\StaticPage $model
  */
 ?>
-<div id="accordion">
+<div id="accordionSEO">
     <div class="card">
         <div class="card-header" id="headingSEO">
             <h5 class="mb-0">
@@ -12,7 +12,7 @@
                 </a>
             </h5>
         </div>
-        <div id="collapseSEO" class="collapse" aria-labelledby="headingSEO" data-parent="#accordion">
+        <div id="collapseSEO" class="collapse" aria-labelledby="headingSEO" data-parent="#accordionSEO">
             <div class="card-body">
                 <div class="form-group">
                     {{ Form::label('Seo[seo_title]','SEO Title') }}
@@ -38,10 +38,12 @@
                     {{ Form::label('Seo[og_description]','OG Description') }}
                     {{ Form::textarea('Seo[og_description]', $model->seo->og_description ??null,['class'=>'form-control']) }}
                 </div>
-                <div class="form-group">
-                    {{ Form::label('Seo[og_image]','OG Image') }}
-                    {{ Form::text('Seo[og_image]',$model->seo->og_image ??null,['class'=>'form-control']) }}
-                </div>
+                @include('admin.chanks.img_lfm',[
+                'id'=>'og_image',
+                'name'=>"Seo[og_image]",
+                'title'=>'OG Image',
+                'value'=>$model->seo->og_description ??null
+                ])
             </div>
         </div>
     </div>

@@ -9,6 +9,10 @@
 * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 @font-face {
@@ -65,20 +69,53 @@
 
 .map-overlay:after {
     bottom: 0;
-    background: url('../img/noiz.png') no-repeat;
+    background: url('../img/map/noiz.png') no-repeat;
     background-size: cover;
     opacity: .28;
     z-index: 12;
 }
 
 .burger {
-    background: url(../img/burger.png);
     position: absolute;
     right: 2%;
     top: 4%;
     height: 50px;
     width: 52px;
     z-index: 50;
+}
+
+.burger-item {
+    display: block;
+    width: 100%;
+    position: absolute;
+    transition: all .5s;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.burger-item_top {
+    background: url(../img/burger-top.png);
+    height: 24px;
+}
+
+.burger-item_center {
+    background: url(../img/burger-center.png);
+    height: 18px;
+    top: 24.5px;
+}
+
+.burger-item_bottom {
+    background: url(../img/burger-bottom.png);
+    height: 13px;
+    top: 42.7px;
+}
+
+.burger:hover .burger-item_top {
+    transform: translateY(-10px);
+}
+
+.burger:hover .burger-item_bottom {
+    transform: translateY(10px);
 }
 
 .game-icons {
@@ -114,7 +151,7 @@
     top: 13%;
 }
 
-.clip-fix {
+.map-clip-fix, .marker-info:after {
     background-image: -webkit-linear-gradient( 315deg, rgb(0,244,184) 0%, rgb(57,184,203) 7%, rgb(121,56,228) 15%, rgb(230,228,98) 24%, rgb(171,208,55) 32%, rgb(195,227,93) 40%, rgb(108,229,228) 47%, rgb(48,221,220) 54%, rgb(126,11,214) 62%, rgb(218,41,101) 70%, rgb(0,244,184) 84%, rgb(57,184,203) 94%, rgb(121,56,228) 100%);
     background-image: -moz-linear-gradient( 315deg, rgb(0,244,184) 0%, rgb(57,184,203) 7%, rgb(121,56,228) 15%, rgb(230,228,98) 24%, rgb(171,208,55) 32%, rgb(195,227,93) 40%, rgb(108,229,228) 47%, rgb(48,221,220) 54%, rgb(126,11,214) 62%, rgb(218,41,101) 70%, rgb(0,244,184) 84%, rgb(57,184,203) 94%, rgb(121,56,228) 100%);
     background-image: -o-linear-gradient( 315deg, rgb(0,244,184) 0%, rgb(57,184,203) 7%, rgb(121,56,228) 15%, rgb(230,228,98) 24%, rgb(171,208,55) 32%, rgb(195,227,93) 40%, rgb(108,229,228) 47%, rgb(48,221,220) 54%, rgb(126,11,214) 62%, rgb(218,41,101) 70%, rgb(0,244,184) 84%, rgb(57,184,203) 94%, rgb(121,56,228) 100%);
@@ -138,7 +175,7 @@
     display: inline-block;
     text-transform: uppercase;
     font-size: 100px;
-    line-height: 0.7;
+    line-height: 1;
 }
 
 @-webkit-keyframes stripes-fix {
@@ -178,7 +215,7 @@
 }
 
 .map-toggle {
-    margin-top: 2.8125vw;
+    margin-top: 2vw;
 }
 
 .map-toggle__link {
@@ -186,7 +223,7 @@
     width: 100%;
     background: rgba(0, 0, 0, .7);
     color: #727272;
-    font: 15px 'Montserrat';
+    font: 2vmin 'Montserrat';
     text-transform: uppercase;
     text-decoration: none;
     padding: 16px 0;
@@ -220,21 +257,28 @@
     position: absolute;
     z-index: 30;
     transform: translate(-50%, calc(-100% - 56px));
-    transition: opacity 1s;
     z-index: 25;
 }
 
+.marker-info.anim {
+    transition: opacity 1s;
+}
+
 .marker-info:after {
-    content: '';
+    content: 'place';
+    text-transform: none;
+    font: 75px 'Material Icons';
     position: absolute;
     top: 100%;
     left: 50%;
-    width: 56px;
-    height: 80px;
-    background: url('../img/activeMarker.png');
-    background-size: cover;
-    transform: translate(-51%, -30%);
+    /*background: url('../img/activeMarker.png');
+    background-size: cover;*/
+    transition: transform .5s;
+    transform-origin: bottom;
+    transform: translate(-50%, -16%) scale(1.2);
     opacity: 1;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .hide {
@@ -242,8 +286,10 @@
     opacity: 0;
 }
 
-.marker-info.moveEnd:after {
-    opacity: 1;
+.hide:after {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translate(-50%, -16%) scale(1);
 }
 
 .marker-info__title {
@@ -271,12 +317,12 @@
 }
 
 .marker-info__btn_1 {
-    background: url('../img/icon1.png');
+    background: url('../img/map/icon1.png');
     background-size: cover;
 }
 
 .marker-info__btn_2 {
-    background: url('../img/icon2.png');
+    background: url('../img/map/icon2.png');
     background-size: cover;
 }
 
@@ -292,7 +338,7 @@
 }
 
 .marker-info__copyright {
-    left: 70%;
+    right: 10.7%;
     top: 90%;
     position: absolute;
     z-index: 28;
@@ -303,3 +349,256 @@
 .gm-style-iw {
     background: #000!important;
 }
+
+@media all and (max-width: 767px) {
+    .main-caption,
+    .marker-info__copyright {
+        display: none;
+    }   
+
+    .title {
+        left: 0;
+        right: 0;
+        top: initial;
+        bottom: 0;
+        z-index: 30;
+    }
+
+    .map-toggle {
+        margin-top: 0;
+        display: flex;
+    }
+
+    .map-toggle__link {
+        background: rgba(0, 0, 0, .9);
+    }
+
+    .marker-info__btn {
+        height: 38px;
+        width: 38px;
+    }
+
+    .marker-info__title {
+        font-size: 8.4px;
+    }
+
+    .marker-info__content {
+        font-size: 7.8px;
+    }
+
+    .marker-info {
+        width: 240px;
+    }
+
+    .marker-info__content p {
+        margin-top: 15px;
+    }
+}
+
+/*---------------------navigate-box styles ----------------------------------*/
+    .content-section {
+        position: relative;
+        height: 100%;
+        margin: 0 auto;
+        z-index: 6;
+        pointer-events: none;
+    }
+
+    @media(min-width: 1280px) {
+        .content-section {
+            width: 75.26%;
+        }
+    }
+
+    /*mobile, ------------------ ipads*/
+        @media(min-width: 1366px) and (max-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape),
+        (min-width: 1366px) and (max-width: 1366px) and (-o-min-device-pixel-ratio: 2/1) and (orientation: landscape),
+        (min-width: 1366px) and (max-width: 1366px) and (min-resolution: 192dpi) and (orientation: landscape),
+        (min-width: 1112px) and (max-width: 1112px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape),
+        (min-width: 1112px) and (max-width: 1112px) and (-o-min-device-pixel-ratio: 2/1) and (orientation: landscape),
+        (min-width: 1112px) and (max-width: 1112px) and (min-resolution: 192dpi) and (orientation: landscape),
+        (min-width: 320px) and (max-width: 1024px) and (orientation: landscape) {
+            .content {
+                overflow: auto;
+            }
+
+            .content-section {
+                width: 90.652%;
+            }
+        }
+    /*mobile, ------------------ ipads*/
+
+    .navigate-box {
+        position: absolute;
+        width: 100%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 1;
+
+    }
+
+    .navigate-box__left,
+    .navigate-box__right {
+        /* background-color: red; */
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        z-index: 10;
+    }
+
+    .navigate-box__left:hover,
+    .navigate-box__right:hover {
+        cursor: pointer;
+    }
+
+    .navigate-box__left {
+        left: -4.5vw;
+        pointer-events: auto;
+        transform: translateX(-100%);
+    }
+
+    .navigate-box__right {
+        right: -8.5vw;
+        transform: translateX(100%);
+        pointer-events: auto;
+    }
+
+    .navigate-box__left-wrap,
+    .navigate-box__right-wrap {
+        height: 100%;
+        /* transform: rotate(-45deg); */
+    }
+
+    .navigate-box__right-wrap {
+        transform: rotate(-180deg);
+    }
+
+    .navigate-box__left-wrap:before,
+    .navigate-box__right-wrap:before {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: #222325;
+        opacity: 0;
+        transition: 0.3s;
+    }
+
+    .navigate-box__left:hover .navigate-box__left-wrap:before,
+    .navigate-box__right:hover .navigate-box__right-wrap:before {
+        opacity: 0.5;
+    }
+
+    .navigate-box__line {
+        position: absolute;
+        left: 0%;
+        top: 50%;
+        width: 25px;
+        height: 2px;
+        background-color: white;
+    }
+
+    .navigate-box__left-wrap .navigate-box__line,
+    .navigate-box__right-wrap .navigate-box__line {
+        transform-origin: 100% 50%;
+        transform: rotate(-135deg);
+        margin-left: -5px;
+    }
+
+    .navigate-box__right-wrap .navigate-box__line {
+        transform-origin: 100% 50%;
+        transform: rotate(-135deg);
+        margin-left: -7px;
+        margin-top: -3px;
+    }
+
+    .navigate-box__left-wrap .navigate-box__line + .navigate-box__line,
+    .navigate-box__right-wrap .navigate-box__line + .navigate-box__line {
+        transform: rotate(90deg);
+        transform: rotate(135deg);
+    }
+
+
+    .navigate-box__text {
+        position: absolute;
+        bottom: 0;
+        transform: translateY(115%);
+        color: white;
+        font-size: 8px;
+        left: 8px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.5s;
+    }
+
+    .navigate-box__left:hover .navigate-box__text,
+    .navigate-box__right:hover .navigate-box__text {
+        opacity: 1;
+    }
+/*---------------------navigate-box styles ----------------------------------*/
+
+/*---------------------menu styles ----------------------------------*/
+    .menu-box {
+        position: absolute;
+        z-index: 1;
+        text-align: center;
+        pointer-events: auto;
+    }
+
+    .menu-box:hover {
+        cursor: pointer;
+    }
+
+    .menu-box_text {
+        display: block;
+    }
+
+    @media(min-width: 320px) and (max-width: 1366px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1.3020833333333333),
+    (min-width: 320px) and (max-width: 1366px) and (orientation: landscape) and (-o-min-device-pixel-ratio: 125/96),
+    (min-width: 320px) and (max-width: 1366px) and (orientation: landscape) and (min-resolution: 125dpi),
+    (min-width: 320px) and (orientation: landscape) and (max-width: 1279px) {
+        .menu-box {
+            width: 3.831vw;
+            top: 5.291vw;
+            right: 0;
+        }
+
+        .menu-box_text {
+            display: none;
+        }
+    }
+
+    @media(min-width: 1280px) and (-webkit-max-device-pixel-ratio: 1.1979166666666667), (min-width: 1280px) and (-o-max-device-pixel-ratio: 115/96), (min-width: 1280px) and (max-resolution: 115dpi), (min-width: 1368px) and (-webkit-min-device-pixel-ratio: 1.3020833333333333), (min-width: 1368px) and (-o-min-device-pixel-ratio: 125/96), (min-width: 1368px) and (min-resolution: 125dpi) {
+        .menu-box {
+            right: -8.093vw;
+            -webkit-transform: translateX(100%);
+            -moz-transform: translateX(100%);
+                -ms-transform: translateX(100%);
+                -o-transform: translateX(100%);
+                    transform: translateX(100%);
+            top: 5.107vh;
+        }
+
+        .menu-box_img {
+            margin-bottom: 10px;
+        }
+
+        .menu-box_text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: uppercase;
+            color: white;
+        }
+    }
+
+    @media(min-width: 1280px) and (-webkit-max-device-pixel-ratio: 1.1979166666666667) and (max-width: 1919px), (min-width: 1280px) and (-o-max-device-pixel-ratio: 115/96) and (max-width: 1919px), (min-width: 1280px) and (max-resolution: 115dpi) and (max-width: 1919px), (min-width: 1368px) and (-webkit-min-device-pixel-ratio: 1.3020833333333333), (min-width: 1368px) and (-o-min-device-pixel-ratio: 125/96), (min-width: 1368px) and (min-resolution: 125dpi) {
+        .menu-box {
+            right: -5vw;
+        }
+    }
+/*---------------------menu styles ----------------------------------*/

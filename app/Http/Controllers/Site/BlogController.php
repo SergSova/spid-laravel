@@ -12,13 +12,18 @@ namespace App\Http\Controllers\Site;
 use App\Blog;
 use App\Http\Controllers\Controller;
 use App\Post;
+use Illuminate\Database\Eloquent\Collection;
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index($category = null)
     {
         $model = Blog::find(10);
+        /** @var Collection $allPosts */
         $allPosts = Post::where('published', 1)->orderBy('publishedOn', 'desc')->get();
+        if ($category) {
+            $allPosts = $allPosts->where('category_id', $category->id);
+        }
         $big = $allPosts->filter(
             function ($post, $key) {
                 return $post->isBig;
@@ -26,40 +31,70 @@ class BlogController extends Controller
         );
         $violets = $allPosts->filter(
             function ($post, $key) {
-                return $post->isVioletPostStyle;
+                return $post->isVioletPostStyle && !$post->isBig;
             }
         );
         $otherPosts = $allPosts->filter(
             function ($post, $key) {
-                return !$post->isVioletPostStyle&&!$post->isBig;
+                return !$post->isVioletPostStyle && !$post->isBig;
             }
         );
 
         $posts = collect();
-        $count = count($allPosts);
-        for ($i = 1; $i <= $count; $i++) {
-            if (count($violets)) {
-                if ($i == 3) {
-                    $posts->push($violets->shift());
-                } elseif (($i - 3) % 5 == 0) {
-                    $posts->push($violets->shift());
-                } elseif (($i == 1 || ($i-1) % 3 == 0) && count($big)) {
-                    $posts->push($big->shift());
-                } else {
-                    $posts->push($otherPosts->shift());
-                }
+        $count = $allPosts->count();
+        /*for ($i = 1; $i <= $count; $i++) {
+
+        }*/
+
+        $i=1;
+        while ($otherPosts->count()||$big->count()||$violets->count()){
+            if (($i == 3 || ($i - 3) % 5 == 0) && $violets->count()) {
+                $posts->push($violets->shift());
+            } elseif (($i == 1 || ($i - 1) % 3 == 0) && $big->count()) {
+                $posts->push($big->shift());
+            } elseif ($otherPosts->count()) {
+                $posts->push($otherPosts->shift());
             } else {
-                if (($i == 1 || ($i-1) % 3 == 0) && count($big)) {
-                    $posts->push($big->shift());
-                } else {
-                    $posts->push($otherPosts->shift());
-                }
+                $i++;
+                continue;
+            }
+            $i++;
+        }
+
+
+        for ($i = 1; $i <= $count; $i++) {
+            if (count($posts)) {
+                $arr[0][] = $posts->shift();
+            }
+            if (count($posts)) {
+                $arr[1][] = $posts->shift();
+            }
+            if (count($posts)) {
+                $arr[2][] = $posts->shift();
             }
         }
 
-//        dd($big, $otherPosts,$posts);
+        if (isset($arr[2]) && is_array($arr[2]) && count($arr[2]) == count($arr[0])) {
+            array_push($arr[0], array_pop($arr[2]));
+        }
 
-//        return view('blog.index')->with(compact('model','posts'));
-        return view('blog.test')->with(compact('model', 'posts'));
+        return view('blog.index')->with(compact('model', 'posts', 'arr'));
+//        return view('blog.test')->with(compact('model', 'posts'));
     }
+
+
+    public function view($category, $model)
+    {
+        /** @var Post $model */
+        $model->viewers += 1;
+        $model->save();
+
+        $next = Post::where('id', '<>', $model->id)->limit(1)->first();
+        $prev = Post::where('id', '<>', $model->id)->where('id', '<>', $next->id)->limit(1)->first();
+
+        $morePosts = Post::where('id', '<>', $model->id)->get();
+
+        return view('blog.one_post')->with(compact('model', 'category', 'next', 'prev', 'morePosts'));
+    }
+
 }

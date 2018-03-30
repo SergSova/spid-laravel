@@ -1,253 +1,238 @@
-document.addEventListener('DOMContentLoaded', function() {
+// function BufferLoader(context, urlList, callback) {
+// 	this.context = context;
+// 	this.urlList = urlList;
+// 	this.onload = callback;
+// 	this.bufferList = new Array();
+// 	this.loadCount = 0;
+// }
+
+// BufferLoader.prototype.loadBuffer = function(url, index) {
+// 	// Load buffer asynchronously
+// 	var request = new XMLHttpRequest();
+// 	request.open("GET", url, true);
+// 	request.responseType = "arraybuffer";
+
+// 	var loader = this;
+
+// 	request.onload = function() {
+// 		// Asynchronously decode the audio file data in request.response
+// 		loader.context.decodeAudioData(
+// 		request.response,
+// 		function(buffer) {
+// 			if (!buffer) {
+// 			alert('error decoding file data: ' + url);
+// 			return;
+// 			}
+// 			loader.bufferList[index] = buffer;
+// 			if (++loader.loadCount == loader.urlList.length)
+// 			loader.onload(loader.bufferList);
+// 		},
+// 		function(error) {
+// 			console.error('decodeAudioData error', error);
+// 		}
+// 		);
+// 	}
+
+// 	request.onerror = function() {
+// 		alert('BufferLoader: XHR error');
+// 	}
+
+// 	request.send();
+// }
+
+// BufferLoader.prototype.load = function() {
+// 	for (var i = 0; i < this.urlList.length; ++i)
+// 	this.loadBuffer(this.urlList[i], i);
+// }
+
+// var context;
+// var bufferLoader;
+// var gainNode;
+// var source1;
+// var BUFFERS;
+// var currentVolume;
+// var testStart;
+
+// function init() {
+//   // Fix up prefixing
+//   window.AudioContext = window.AudioContext || window.webkitAudioContext;
+//   context = new AudioContext();
+
+//   bufferLoader = new BufferLoader(
+//     context,
+//     [
+//       'assets/video/noise-audio.mp3',
+//     ],
+//     finishedLoading
+//     );
+
+//   bufferLoader.load();
+// }
+
+// function finishedLoading(bufferList) {
+// 	BUFFERS = bufferList;
+//   // Create two sources and play them both together.
+//   source1 = context.createBufferSource();
+//   source1.buffer = bufferList[0];
+
+//   source1.connect(context.destination);
+//   source1.start(0);
+//   gainNode = context.createGain();
+// // Connect the source to the gain node.
+//   source1.connect(gainNode);
+// // Connect the gain node to the destination.
+//   gainNode.connect(context.destination);
+//   source1.loop = true;
+// }
+
+// function play() {
+// 	if (!context.createGain)
+// 	  context.createGain = context.createGainNode;
+// 	gainNode = context.createGain();
+// 	source1 = context.createBufferSource();
+// 	source1.buffer = BUFFERS[0];
+  
+// 	// Connect source to a gain node
+// 	source1.connect(gainNode);
+// 	// Connect gain node to destination
+// 	gainNode.connect(context.destination);
+// 	// Start playback in a loop
+// 	source1.loop = true;
+// 	if (!source1.start) source1.start = source1.noteOn;
+// 	source1.start(0);
+// 	source1 = source1;
+
+// 	gainNode.gain.value = currentVolume;
+// };
+
+// var video;
+// var container = document.getElementById('container');
+// var firstPlay = true;
+
+// if(!Utils.isAndroid) {
+//     var options = {
+//         id: 'video',
+//         //audio: './medias/sound.mp3',
+//         bufferAudio: false,
+//         autoplay: true,
+//         xhr: false,
+//         loop: true
+//     };
+
+//     video = new CanvasVideo({
+//         src: './assets/video/1.mp4',
+//         mime: 'video/mp4'
+//     }, options);
+//     container.appendChild(video.element);
+
+//     // document.addEventListener('touchend', function(e){
+//     //     document.getElementById('playButton').style.display = 'none';
+//     // });
+
+// } else {
+//     Utils.displayInfoBar();
+//     video = document.createElement('video');
+//     var s = document.createElement('source');
+//     s.src = './assets/video/1.mp4';
+//     s.mime = 'video/mp4';
+//     video.appendChild(s);
+//     video.loop = true;
+//     video.id = 'video';
+//     container.appendChild(video);
+
+//     //document.getElementById('playButton').style.display = 'block';
+
+//     document.addEventListener('touchend', function(e){
+
+//         //document.getElementById('playButton').style.display = 'none';
+//         video.play();
+//     });
+// }
+
+// if (!Utils.isMobile) {
+//     // center on desktop
+//     document.getElementById('container').className = 'center';
+// } else {
+//     // fullscreen on mobile
+//     window.addEventListener('resize', resize);
+//     resize();
+// }
+
+// function playVideo(e) {
+//     document.removeEventListener('touchend', playVideo);
+//     //document.getElementById('playButton').style.display = 'block';
+//     video.play();
+// }
+
+// video.addEventListener('timeupdate', onTimeUpdate);
+// video.addEventListener('canplaythrough', onCanPlayThrough);
+// //video.addEventListener('playing', onPlaying);
+// // video.addEventListener('play', onPlaying);
+// // video.addEventListener('waiting', onWaiting);
+
+// function onTimeUpdate(e) {
+// 	video.play()
+//     document.getElementById('interface').innerHTML = Utils.timeCode(video.currentTime);
+// }
+
+// function onCanPlayThrough(e) {
+//     if(video.needTouchDevice) {
+//         //document.getElementById('playButton').style.display = 'block';
+//         document.addEventListener('touchend', playVideo);
+//     }
+//     showLoader(false);
+// }
+
+// function onPlaying(e) {
+//     //document.getElementById('playButton').style.display = 'none';
+//     showLoader(false);
+// }
+
+// function onWaiting(e) {
+//     showLoader(true);
+// }
+
+// function resize(e) {
+//     var size = Utils.cover(579, 326);
+//     video.width = size.width;
+//     video.height = size.height;
+// }
+
+// function showLoader(boo) {
+//     if(boo) document.getElementById('loader').style.display = 'block';
+//     else document.getElementById('loader').style.display = 'none';
+// }
+
+$(window).on('load', function() {
+    $('.preloader').delay(1000).fadeOut(300, function() {
+        var scroll_up = 0;
+
+        $(window).on('scrollUp', function(e) {
+    
+            scroll_up += 1;
+    
+            if (scroll_up > 1) {
+                location.assign('/map');
+            }
+    
+        });
+    });
+
+    $('.preloader svg').delay(1000).fadeOut(300);
+});
+
+window.addEventListener('load', function() {
+	//init();
 	var toggles, current_toggle, previous_toggle;
 	var video = document.querySelector('.test-default-tv_iframe'),
 		testAudio = document.querySelector('.test-noize-audio'),
-		testStart = false,
 		videoIsPlay = false,
 		currentVolume = 0.5,
 		prevVolume = currentVolume,
 		currentIdGlobal = 0;
 	video.volume = 0;
-	document.querySelector('.test-noize-audio').volume = 0.5;
-	var QUESTIONS = [
-		{
-			id: 0,
-			label: "Ваш пол",
-			user: true,
-			vars: [
-				{
-					k: 'М',
-					v: 'ММ'
-				},
-				{
-					k: 'Ж',
-					v: 'ЖЖ'
-				},
-				{
-					k: 'Трансгендер <div class="test-in">(человек, чья гендерная идентичность не совпадает с биологическим полом)</div>',
-					v: 'Трансгендер (человек, чья гендерная идентичность не совпадает с биологическим полом)'
-				}
-			]
-		},
-		{
-			id: 1,
-			label: "Ваш возраст",
-			user: true,
-			vars: [
-				{
-					k: 'до 14',
-					v: 'до 14'
-				},
-				{
-					k: '14-18',
-					v: '14-18'
-				},
-				{
-					k: '19-24',
-					v: '19-24'
-				},
-				{
-					k: '25 и старше',
-					v: '25 и старше'
-				}
-			]
-		},
-		{
-			id: 2,
-			label: "Сколько сексуальных партнеров у вас было за последние 6  месяцев?",
-			vars: [
-				{
-					k: '1',
-					v: 'M'
-				},
-				{
-					k: '2',
-					v: 'C'
-				},
-				{
-					k: '3 или больше',
-					v: 'B'
-				},
-				{
-					k: 'Ни одного',
-					v: '0'
-				}
-			]
-		},
-		{
-			id: 3,
-			label: "Что вы употребляете перед сексом?",
-			vars: [
-				{
-					k: 'Алкоголь',
-					v: 'C'
-				},
-				{
-					k: 'Наркотики',
-					v: 'B',
-					hint: "любые наркотики включая метамфетамин (фен), экстази или марихуану"
-				},
-				{
-					k: 'Ни то, ни другое',
-					v: '0'
-				}
-			]
-		},
-		{
-			id: 4,
-			label: "Как вы употребляете наркотик?",
-			vars: [
-				{
-					k: "При помощи шприца",
-					v: "B"
-				},
-				{
-					k: "Курю",
-					v: "M"
-				},
-				{
-					k: "Глотаю",
-					v: "C"
-				},
-				{
-					k: "Нюхаю",
-					v: "C"
-				},
-				{
-					k: "Не употребляю наркотики",
-					v: "0"
-				}
-			]
-		},
-		{
-			id: 5,
-			label: "Был ли у вас секс без презерватива? <span>(можете отметить несколько вариантов)</span>",
-			multi: true,
-			vars: [
-				{
-					k: "Оральный секс без презерватива",
-					v: "M"
-				},
-				{
-					k: "Вагинальный секс без презерватива",
-					v: "B"
-				},
-				{
-					k: "Анальный секс без презерватива ",
-					v: "B"
-				},
-				{
-					k: "Секс без презерватива со случайным партнером",
-					v: "B"
-				},
-				{
-					k: "Групповой секс без презерватива",
-					v: "B"
-				},
-				{
-					k: "Не было",
-					v: "0",
-					uncheckAll: true
-				}
-			]
-		},
-		{
-			id: 6,
-			label: "Можете ли вы по внешнему виду определить есть ли у человека ВИЧ?",
-			vars: [
-				{
-					k: "Да",
-					v: "B"
-				},
-				{
-					k: "Нет",
-					v: "0"
-				}
-			]
-		},
-		{
-			id: 7,
-			label: "Употреблял ли кто-то из ваших сексуальных партнеров наркотики?",
-			vars: [
-				{
-					k: "Да",
-					v: "B"
-				},
-				{
-					k: "Нет",
-					v: "M"
-				},
-				{
-					k: "Не знаю",
-					v: "C"
-				},
-				{
-					k: "Нет сексуальных партнеров",
-					v: "0"
-				}
-			]
-		},
-		{
-			id: 8,
-			label: "Сможете ли вы отказаться от секса со случайным партнером если нет презерватива?",
-			vars: [
-				{
-					k: "Смогу отказаться",
-					v: "0"
-				},
-				{
-					k: "Не смогу отказаться ",
-					v: "B"
-				}
-			]
-		},
-		{
-			id: 9,
-			label: "Был ли у вас секс с ВИЧ-инфицированным партнером?",
-			vars: [
-				{
-					k: "Да",
-					v: "B"
-				},
-				{
-					k: "Нет",
-					v: "0"
-				},
-				{
-					k: "Не знаю",
-					v: "B"
-				}
-			]
-		},
-		{
-			id: 10,
-			label: "Были ли у вас заболевания передающиеся половым путем?",
-			vars: [
-				{
-					k: "Да",
-					v: "B"
-				},
-				{
-					k: "Нет",
-					v: "0"
-				}
-			]
-		},
-		{
-			id: 11,
-			label: "Тестировались ли вы на ВИЧ?",
-			vars: [
-				{
-					k: "Да",
-					v: "0"
-				},
-				{
-					k: "Нет",
-					v: "B"
-				}
-			]
-		},
-	];
+	testStart = false;
+	testAudio.volume = 0;
 
 	var videos = [
 		'noise.mp4',
@@ -517,7 +502,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			video.onloadeddata = function() {
 				if (testStart) {
-					document.querySelector('.test-noize-audio').volume = 0;
+					//gainNode.gain.value = 0;
+					testAudio.volume = 0;
 				}
 			};
 
@@ -529,8 +515,13 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 
 			function ss() {
+				document.querySelector('.test-noize-audio').muted = false;
 				document.querySelector('.test-noize-audio').volume = currentVolume;
 				video.volume = currentVolume;
+
+				// if (gainNode) {
+				// 	gainNode.gain.value = currentVolume;
+				// }
 
 				var promiseAudio = document.querySelector('.test-noize-audio').play();
 				if (promiseAudio !== undefined) {
@@ -545,10 +536,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				if (testStart) {
 					video.src = 'assets/video/' + videos[th.currentId];
+				
 				} else {
 					video.src = 'assets/video/' + videos[0];
 				}
-				
+
 				var promise = video.play();
 				if (promise !== undefined) {
 					promise.catch(error => {
@@ -595,7 +587,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			videos.splice(0, 1);
 			video.src = 'assets/video/' + videos[currentIdGlobal];
 			testStart = true;
-			document.querySelector('.test-noize-audio').volume = 0;
+			//if (gainNode) gainNode.gain.value = 0;
+			testAudio.volume = 0;
 			videoIsPlay = true;
 		}, 500);
 
@@ -613,27 +606,27 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	});
 
-	var scroll_array = [current_position], current_position;
+	// var scroll_array = [current_position], current_position;
 
-	$(window).on('scrollDown', function(e) {
+	// // $(window).on('scrollDown', function(e) {
 
-			scroll_array.push(current_position);
+	// // 		scroll_array.push(current_position);
 
-			if (scroll_array.length > 1) {
-					location.assign('/blog');
-			}
+	// // 		if (scroll_array.length > 1) {
+	// // 				location.assign('/blog');
+	// // 		}
 
-	});
+	// // });
 
-	$(window).on('scrollUp', function() {
+	// // $(window).on('scrollUp', function() {
 
-			scroll_array.pop(current_position);
+	// // 		scroll_array.pop(current_position);
 
-			if (scroll_array.length == 0) {
-					location.assign('/consultants');
-			}
+	// // 		if (scroll_array.length == 0) {
+	// // 				location.assign('/consultants');
+	// // 		}
 
-	});
+	// // });
 
 	new Test();
 
@@ -658,6 +651,10 @@ document.addEventListener('DOMContentLoaded', function() {
 			currentVolume = val;
 
 			if (!videoIsPlay) {
+				//testAudio.volume = val;
+				//gainNode.gain.value = val;
+				//console.log( gainNode )
+				//if (gainNode) gainNode.gain.value = val;
 				testAudio.volume = val;
 			}
 
@@ -686,7 +683,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     $('.sound').click(function() {
 	  if (!$(this).hasClass('sound-mute')) {
-	  	testAudio.volume = 0;
+		testAudio.volume = 0;
+		//gainNode.gain.value = 0;
 	  	video.volume = 0;
 	  	prevVolume = currentVolume;
 	  	currentVolume = 0;
@@ -697,11 +695,75 @@ document.addEventListener('DOMContentLoaded', function() {
 	  	currentVolume = prevVolume;
 
 	  	if (!videoIsPlay) {
-	  		testAudio.volume = currentVolume;
+			  //testAudio.frequency.value = currentVolume;
+			  //gainNode.gain.value = currentVolume;
+			  testAudio.volume = currentVolume;
 	  	}
 	  	
 	  	video.volume = currentVolume;
 		  $element.val(currentVolume).change();
 	  }
 	});
+
+	$('.preloader').delay(1000).fadeOut(300, function() {
+        var scroll_up = 0;
+
+        $(window).on('scrollUp', function(e) {
+    
+            scroll_up += 1;
+    
+            if (scroll_up > 1) {
+                location.assign('/map');
+            }
+    
+        });
+    });
+
+	$('.preloader svg').delay(1000).fadeOut(300);
+	
+	/*----------------- onhover logo dragstore  -----------------*/
+		$('.js-hover').hover(function() {
+			var _this = this,
+				images = _this.getAttribute('data').split(','),
+				counter = 0;
+
+			this.setAttribute('data-src', this.src);
+			_this.timer = setInterval(function(){
+				if(counter > images.length) {
+					counter = 0;
+				}
+				if (images[counter] != undefined) {
+					_this.src = images[counter];
+				} else {
+					_this.src = _this.getAttribute('data-src');
+				}
+
+				counter++;
+			}, 100);
+
+		}, function() {
+			this.src = this.getAttribute('data-src');
+			clearInterval(this.timer);
+		});
+	/*----------------- end onhover logo dragstore  -----------------*/
+
+	if (prev_page.length) {
+		$('.navigate-box__left').on('click', function() {
+			location.assign('/' + prev_page);
+		});
+	}
+
+	if (!prev_page.length) {
+		$('.navigate-box__left').css('display', 'none');
+	}
+
+	if (next_page.length) {
+		$('.navigate-box__right').on('click', function() {
+			location.assign('/' + next_page);
+		});
+	}
+
+	if (!next_page.length) {
+		$('.navigate-box__right').css('display', 'none');
+	}
 });

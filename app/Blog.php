@@ -28,7 +28,7 @@ class Blog extends StaticPage
      */
     public function posts()
     {
-        return Post::where(['published' => 1])->orderBy('index')->get();
+        return Post::orderBy('publishedOn','desc')->withTrashed()->get();
     }
 
     protected $fillable = ['title', 'longtitle', 'description', 'menutitle'];

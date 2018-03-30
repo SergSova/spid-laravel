@@ -27,7 +27,7 @@ function createObj() {
     head = document.querySelector('.scroll-container').offsetTop,
     k1 = document.querySelector('.content').clientHeight;
 
-    scrollSubstitute.height(k1);
+  scrollSubstitute.height(k1);
 
   function getSmall() {
     dascr = parseInt($('.about-description').css('padding-top')) * 2;
@@ -36,9 +36,10 @@ function createObj() {
       biggest = index == 0 ? $(this).height() - w_h2 : biggest > $(this).height() - w_h2 ? biggest : $(this).height() - w_h2;
     })
     $('.translate-block').each(function (index) {
-      koef[index] = (($(this).height() - w_h2 ) / biggest);
+      koef[index] = (($(this).height() - w_h2) / biggest);
     })
   }
+
   getSmall();
 
   if (elem.addEventListener) {
@@ -54,7 +55,7 @@ function createObj() {
   }
 
   function onWheel(e) {
-    $('.scroll-substitute').css({'pointer-events' : 'auto'})
+    $('.scroll-substitute').css({'pointer-events': 'auto'})
   }
 
   wraper.onscroll = function () {
@@ -75,7 +76,7 @@ function createObj() {
 
     perc = (Math.floor(scrollTop) - contAnim) * 0.4
     if (stopTrill) {
-      $('.scroll-substitute').css({'pointer-events' : 'none'});
+      $('.scroll-substitute').css({'pointer-events': 'none'});
       canScroll = true;
       window.cancelAnimationFrame(canAnim);
       return;
@@ -93,7 +94,7 @@ function createObj() {
     if (scrollTop > head && scrollDown || scrollTop > head && !scrollDown || !scrollDown && posBlock > 0) {
       for (i = 0; i < bl.length; i++) {
         tr = posBlock * (1 - koef[i]);
-        if ( koef[i] != 0) {
+        if (koef[i] != 0) {
           // console.log(tr);
           bl[i].style.webkitTransform = 'translate3d(0,' + tr + 'px, 0 )';
           bl[i].style.MozTransform = 'translate3d(0,' + tr + 'px, 0 )';
@@ -134,52 +135,57 @@ var player = [];
 var videoDiv = document.querySelectorAll('.video-blog')
 
 function onYouTubeIframeAPIReady() {
-  for (var i = 0; i < videoDiv.length; i++) {
-    videoDiv[i].id = 'video' + i
-    video = videoDiv[i].getAttribute('data-video');
-    player['video' + i] = new YT.Player(videoDiv[i], {
-      height: '360',
-      width: '640',
-      videoId: videoDiv[i].getAttribute('data-video'),
-      playerVars: {
-        'showinfo': 0,
-        'color': 'white',
-        'cc_load_policy': 1,
-        'disablekb': 1,
-        'enablejsapi': 1,
-        'loop': 1,
-        'modestbranding': 1,
-        'rel': 0,
-        'fs': 0
-      },
-      events: {
-        'onReady': function (event) {
-          $('.video-to-play').hover(function () {
-            ids = $(this).find('.video-blog').attr('id');
-            player[ids].playVideo();
-          }).mouseleave(function (event) {
-            ids = $(this).find('.video-blog').attr('id');
-            player[ids].pauseVideo();
-          })
-          createObj()
+  if (videoDiv.length) {
+    for (var i = 0; i < videoDiv.length; i++) {
+      videoDiv[i].id = 'video' + i
+      video = videoDiv[i].getAttribute('data-video');
+      player['video' + i] = new YT.Player(videoDiv[i], {
+        height: '360',
+        width: '640',
+        videoId: videoDiv[i].getAttribute('data-video'),
+        playerVars: {
+          'showinfo': 0,
+          'color': 'white',
+          'cc_load_policy': 1,
+          'disablekb': 1,
+          'enablejsapi': 1,
+          'loop': 1,
+          'modestbranding': 1,
+          'rel': 0,
+          'fs': 0
         },
-      }
-    });
+        events: {
+          'onReady': function (event) {
+            $('.video-to-play').hover(function () {
+              ids = $(this).find('.video-blog').attr('id');
+              player[ids].playVideo();
+            }).mouseleave(function (event) {
+              ids = $(this).find('.video-blog').attr('id');
+              player[ids].pauseVideo();
+            })
+            createObj()
+          },
+        }
+      });
+    }
+  }else {
+    createObj()
   }
 }
+
 function buttonToTop() {
-    var aaa2 = $('.wrap-top-top').offset().top;
-    var aaa3 = $('footer').offset().top;
-    if ($(this).scrollTop() > 2500) {
-        $('.wrap-top-top').css({'opacity': 1, 'height': 'auto', 'width': 'auto'})
-    } else {
-        $('.wrap-top-top').css({'opacity': 0, 'height': '0', 'width': '0'});
-    }
-    if (aaa2 >= aaa3) {
-        $('.wrap-top-top').addClass('top-top_1')
-    } else {
-        $('.wrap-top-top').removeClass('top-top_1')
-    }
+  var aaa2 = $('.wrap-top-top').offset().top;
+  var aaa3 = $('footer').offset().top;
+  if ($(this).scrollTop() > 2500) {
+    $('.wrap-top-top').css({'opacity': 1, 'height': 'auto', 'width': 'auto'})
+  } else {
+    $('.wrap-top-top').css({'opacity': 0, 'height': '0', 'width': '0'});
+  }
+  if (aaa2 >= aaa3) {
+    $('.wrap-top-top').addClass('top-top_1')
+  } else {
+    $('.wrap-top-top').removeClass('top-top_1')
+  }
 }
 
 

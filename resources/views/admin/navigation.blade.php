@@ -22,6 +22,15 @@
             <li class="nav-item">
                 <a href="{{route('blog.index')}}" class="nav-link">Блог</a>
             </li>
+            <li class="nav-item">
+                <a href="{{route('blog-category.index')}}" class="nav-link">Категории блога</a>
+            </li>
+            <li class="nav-item ">
+                <form action="{{route('logout')}}" method="post">
+                    {{ csrf_field() }}
+                    <input type="submit" class="nav-link" value="Выйти"/>
+                </form>
+            </li>
         </ul>
     </nav>
 </div>

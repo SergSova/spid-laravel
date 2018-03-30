@@ -48,7 +48,7 @@ return [
     'images_folder_name' => 'assets/img',
     'files_folder_name'  => 'files',
 
-    'shared_folder_name' => 'blog',
+    'shared_folder_name' => '',
     'thumb_folder_name'  => 'thumbs',
 
     /*

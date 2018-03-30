@@ -6,7 +6,6 @@ $(window).on('load', function () {
 });
 
 
-
 $(document).ready(function () {
     $('.blog-news').hover(function () {
         $(this).find('.blog-image').addClass('hover');
@@ -60,7 +59,6 @@ $(document).ready(function () {
         }
     });
 });
-
 /****************************** munu ***************************/
 $(document).on('scroll', function(e) {
     var scrlT = $(this).scrollTop();
@@ -670,7 +668,20 @@ $(document).ready(function () {
     $('.wrap-top-top').click(function () {
         $('body,html').animate({scrollTop: 0}, 800);
     });
-})
+
+    $('.category-popup-btn__box').on('click', function() {
+        $('.category-popup__box').show(500);
+        $('.category-popup__content').addClass('opened');
+    });
+
+    $('.category-popup__btn-close').on('click', function() {
+        $('.category-popup__content').removeClass('opened');
+
+        setTimeout(function() {
+            $('.category-popup__box').hide(500);
+        }, 500);
+    });
+});
 
 //**** end scroll top ****//
 //

@@ -60,6 +60,7 @@ class StaticPage extends Model
 
         return $obj;
     }
+
     public function getPrev()
     {
         $obj = [
@@ -76,9 +77,12 @@ class StaticPage extends Model
         return $obj;
     }
 
-    public function clearTitle($model=null)
+    public function clearTitle($model = null)
     {
-        if (is_null($model))$model=$this;
+        if (is_null($model)) {
+            $model = $this;
+        }
+
         return $this->my_mb_ucfirst(preg_replace('/[\/-:]/', '', strip_tags($model->title)));
     }
 
@@ -128,7 +132,8 @@ class StaticPage extends Model
                         'modal_text'   => $_POST['modal_text'],
                         'modal_btn'    => $_POST['modal_btn'],
                         'modal_bottom' => $_POST['modal_bottom'],
-                    ]
+                    ],
+                    JSON_UNESCAPED_UNICODE
                 );
                 break;
             case 'slide-bubles':
@@ -137,7 +142,8 @@ class StaticPage extends Model
                         'modal_text' => $_POST['modal_text'],
                         'modal_btn'  => $_POST['modal_btn'],
                         'wrong'      => $_POST['wrong'],
-                    ]
+                    ],
+                    JSON_UNESCAPED_UNICODE
                 );
                 break;
             case 'slide-rocket':
@@ -147,7 +153,8 @@ class StaticPage extends Model
                         'modal_btn'   => $_POST['modal_btn'],
                         'text_bottom' => $_POST['text_bottom'],
                         'wrong'       => $_POST['wrong'],
-                    ]
+                    ],
+                    JSON_UNESCAPED_UNICODE
                 );
                 break;
             case 'with-who':
@@ -162,7 +169,8 @@ class StaticPage extends Model
                         'chk_4'      => $_POST['chk_4'],
                         'chk_5'      => $_POST['chk_5'],
                         'chk_6'      => $_POST['chk_6'],
-                    ]
+                    ],
+                    JSON_UNESCAPED_UNICODE
                 );
                 $humans = $request->only('Human')['Human'];
                 $this->longtitle = json_encode($humans);
@@ -178,17 +186,21 @@ class StaticPage extends Model
                         'rotator2'    => $_POST['rotator2'],
                         'rotator3'    => $_POST['rotator3'],
                         'rotator4'    => $_POST['rotator4'],
-                    ]
+                    ],
+                    JSON_UNESCAPED_UNICODE
                 );
                 break;
             case 'condoms-white':
+                $tabs = $_POST['Tab'];
                 $this->description = json_encode(
                     [
-                        'Tabs' => $_POST['Tab'],
-                    ]
+                        'Tabs' => $tabs ?? [],
+                    ],
+                    JSON_UNESCAPED_UNICODE
                 );
                 break;
             case 'consultants':
+                $list = $_POST['list'];
                 $this->description = json_encode(
                     [
                         'description'  => $_POST['description'],
@@ -200,17 +212,47 @@ class StaticPage extends Model
                         'consHeader_5' => $_POST['consHeader_5'],
                         'consHeader_6' => $_POST['consHeader_6'],
                         'consHeader_7' => $_POST['consHeader_7'],
-                        'list'         => $_POST['list'],
-                    ]
+                        'list'         => $list ?? [],
+                    ],
+                    JSON_UNESCAPED_UNICODE
                 );
                 break;
             case 'aids-test':
+                $quest = $_POST['Quest'];
+                $answer = $_POST['Answer'];
+//                dd($quest);
                 $this->description = json_encode(
                     [
                         'description'   => $_POST['description'],
                         'test_btn'      => $_POST['test_btn'],
                         'test_btn_next' => $_POST['test_btn_next'],
+                        'Quest'         => $quest ?? [],
+                        'Answer'        => $answer ?? [],
+                    ],
+                    JSON_UNESCAPED_UNICODE
+                );
+                break;
+            case 'about':
+                $slider = $_POST['Photo'];
+                $this->description = json_encode(
+                    [
+                        'desc_title'  => $_POST['desc_title'],
+                        'supported'   => $_POST['supported'],
+                        'description' => $_POST['description'],
+                        'slider'      => $slider ?? [],
+                    ],
+                    JSON_UNESCAPED_UNICODE
+                );
+                break;
+            case 'map':
+                $city = $_POST['City'];
+
+                $this->description = json_encode(
+                    [
+                        'City' => $city ?? [],
                     ]
+                    ,
+                    JSON_UNESCAPED_UNICODE
                 );
                 break;
         }
@@ -237,6 +279,16 @@ class StaticPage extends Model
                 break;
             case 'consultants':
                 $this->consultants = $model->consultants ?? [];
+                break;
+            case 'about':
+                $this->slider = $this->slider ?? [];
+                break;
+            case 'aids-test':
+                $this->Quest = $this->Quest ?? [];
+                $this->Answer = $this->Answer ?? [];
+                break;
+            case 'map':
+                $this->City = $this->City ?? [];
                 break;
         }
     }

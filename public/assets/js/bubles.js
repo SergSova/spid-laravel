@@ -278,16 +278,16 @@ DrugStore.prototype._createCircles = function() {
         step = 0.1;
     [
         {name: 'bloger', offsetX: 8, offsetY: 51, mobileCoef: 0, widthPersent: 8, text: 'стать модным\nблогером', textOffset: 1},
-        {name: 'boots', offsetX: 25, offsetY: 11, mobileCoef: 4, widthPersent: 13, text: 'фирменные\nкросы', textOffset: 0.91},
-        {name: 'car', offsetX: 59, offsetY: 30, mobileCoef: 4, widthPersent: 14, text: 'крутую тачку', textOffset: 0.83},
+        {name: 'boots', offsetX: 25, offsetY: 11, mobileCoef: 2, widthPersent: 13, text: 'фирменные\nкросы', textOffset: 0.91},
+        {name: 'car', offsetX: 59, offsetY: 30, mobileCoef: 2, widthPersent: 14, text: 'крутую тачку', textOffset: 0.83},
         {name: 'figure', offsetX: 6, offsetY: 21, mobileCoef: 2, widthPersent: 12, text: 'стать\nстройной', textOffset: 0.83},
         {name: 'figureMan', offsetX: 19, offsetY: 33, mobileCoef: 1, widthPersent: 10, text: 'подкачаться\nи стать крутым', textOffset: 0.86},
-        {name: 'flat', offsetX: 72, offsetY: 40, mobileCoef: 5, widthPersent: 13, text: 'жить отдельно\nот родителей', textOffset: 0.97},
+        {name: 'flat', offsetX: 72, offsetY: 40, mobileCoef: 3, widthPersent: 13, text: 'жить отдельно\nот родителей', textOffset: 0.97},
         {name: 'friends', offsetX: 39, offsetY: 37, mobileCoef: 0, widthPersent: 9, text: 'много друзей', textOffset: 0.89},
-        {name: 'love2', offsetX: 51, offsetY: 64, mobileCoef: 4, widthPersent: 11, text: 'найти\nвторую половинку', textOffset: 1},
+        {name: 'love2', offsetX: 51, offsetY: 64, mobileCoef: 2, widthPersent: 11, text: 'найти\nвторую половинку', textOffset: 1},
         {name: 'wedding', offsetX: 40, offsetY: 66, mobileCoef: 0, widthPersent: 9, text: 'выйти замуж\nи родить детей', textOffset: 0.85},
         {name: 'mobile', offsetX: 65, offsetY: 62, mobileCoef: 0, widthPersent: 9, text: 'модный\nсмартфон', textOffset: 0.84},
-        {name: 'parashut', offsetX: 23, offsetY: 58, mobileCoef: 5, widthPersent: 14, text: 'экстрим', textOffset: 0.84},
+        {name: 'parashut', offsetX: 23, offsetY: 58, mobileCoef: 3, widthPersent: 14, text: 'экстрим', textOffset: 0.84},
         {name: 'star', offsetX: 57, offsetY: 3, mobileCoef: 2, widthPersent: 11, text: 'стать звездой', textOffset: 0.91},
         {name: 'travel', offsetX: 71, offsetY: 11, mobileCoef: 2, widthPersent: 10, text: 'путешествовать\nпо миру', textOffset: 0.93},
         {name: 'visa', offsetX: 82, offsetY: 19, mobileCoef: 1, widthPersent: 10, text: 'иметь банковскую карту\nс безлимом', textOffset: 0.83}

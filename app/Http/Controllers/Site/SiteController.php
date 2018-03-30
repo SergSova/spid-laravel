@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\StaticPage;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Created by PhpStorm.
@@ -149,11 +150,19 @@ class SiteController extends Controller
     public function map()
     {
         $model = StaticPage::find(12);
+        $modal = json_decode($model->description);
+        /** @var StaticPage $model */
+        $model->merge($modal);
         return view($this->prefix.'map')->with(compact('model'));
     }
     public function about()
     {
         $model = StaticPage::find(13);
+        $modal = json_decode($model->description);
+        /** @var StaticPage $model */
+        $model->merge($modal);
+
+
         return view($this->prefix.'about')->with(compact('model'));
     }
 }

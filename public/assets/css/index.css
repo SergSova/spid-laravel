@@ -5,7 +5,7 @@ html, body {
 }
 .texts-wrap {
     position: absolute;
-    top: 88vh;
+    bottom: 4vh;
     width: 100%;
     text-align: center;
     height: 60px;
@@ -565,5 +565,17 @@ html, body {
     100% {
         height: 0;
         bottom: -100%;
+    }
+}
+
+@media screen and (max-width: 788px) {
+    #canvas {
+       width: 100vw!important;
+       height: 100vh!important;
+    }
+    .texts-wrap {
+        top:auto;
+        bottom:9vh;
+        z-index: 1000;
     }
 }

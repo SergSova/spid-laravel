@@ -2,6 +2,15 @@
 
 @section('title','Авторизация')
 
+
+@section('styles')
+    <link rel="stylesheet" href="{{asset('assets/css/blog/reset.css')}}">
+    <style>
+        .container{
+            color: white;
+        }
+    </style>
+@endsection
 @section('body')
     <div class="container">
         <div class="row">

@@ -21,8 +21,11 @@ class CreatePostsTable extends Migration
                 $table->boolean('published')->default(1);
                 $table->dateTime('publishedOn')->nullable();
                 $table->string('mainImage')->nullable();
+                $table->string('mainVideo')->nullable();
                 $table->boolean('isBlackTitle')->default(0);
                 $table->boolean('isVioletPostStyle')->default(0);
+                $table->boolean('isBig')->default(0);
+                $table->boolean('isVideo')->default(0);
                 $table->text('content')->nullable();
                 $table->text('description')->nullable();
                 //slider - это JSON объект (path, alt, title)
@@ -34,9 +37,15 @@ class CreatePostsTable extends Migration
                 $table->unsignedInteger('index')->default(0);
                 $table->string('slug');
 
+                $table->unsignedInteger('category_id')->nullable();
+                $table->foreign('category_id')->references('id')->on('blog_categories')
+                    ->onDelete('cascade');
+
                 $table->unsignedInteger('seo_id')->nullable();
                 $table->foreign('seo_id')->references('id')->on('seos')
                     ->onDelete('cascade');
+
+                $table->softDeletes();
                 $table->timestamps();
             }
         );

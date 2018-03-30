@@ -6,9 +6,9 @@ use App\Blog;
 use App\BlogCategory;
 use App\Http\Controllers\Controller;
 use App\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Session;
 
 class BlogController extends Controller
 {
@@ -24,6 +24,25 @@ class BlogController extends Controller
         return view('admin.blog.index')->with(compact('model'));
     }
 
+    public function pub(Request $request, $post)
+    {
+
+        /** @var Post $post */
+        if ($post) {
+            $post->published = !$post->published;
+            if ($post->published) {
+                $post->publishedOn = Carbon::now()->toDateTimeString();
+                Session::flash('flash_message', 'Статья "'.$post->title.'" опубликованна');
+            } else {
+                $post->publishedOn = null;
+                Session::flash('flash_message', 'Статья "'.$post->title.'" снята с публикации');
+            }
+            $post->save();
+        }
+
+        return redirect(route('blog.index'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +55,11 @@ class BlogController extends Controller
         $route = 'blog.store';
         $method = 'post';
         $model->slider = [];
-        $model->allCategory = BlogCategory::all()->flatMap(function ($el){return [$el->id=>$el->title];});
+        $model->allCategory = BlogCategory::all()->flatMap(
+            function ($el) {
+                return [$el->title => $el->id];
+            }
+        )->flip();
 
         return view('admin.blog.form.form_create')->with(compact('model', 'title', 'route', 'method'));
     }
@@ -55,6 +78,8 @@ class BlogController extends Controller
         if ($model->fill($request->all()) && $model->save()) {
             $model->slider = json_encode($request->get('Photo'));
             if ($model->save()) {
+                Session::flash('flash_message', 'Статья "'.$model->title.'" создана');
+
                 return redirect(route('blog.index'));
             }
         }
@@ -89,8 +114,11 @@ class BlogController extends Controller
         $title = 'Редактирование статьи "'.$model->title.'"';
         $route = 'blog.update';
         $method = 'PUT';
-        $model->slider = json_decode($model->slider) ?? [];
-        $model->allCategory = BlogCategory::all()->flatMap(function ($el){return [$el->id=>$el->title];});
+        $model->allCategory = BlogCategory::all()->flatMap(
+            function ($el) {
+                return [$el->title => $el->id];
+            }
+        )->flip();
 
 
         return view('admin.blog.form.form_create')->with(compact('model', 'title', 'route', 'method'));
@@ -112,6 +140,8 @@ class BlogController extends Controller
         if ($model->fill($request->all()) && $model->save()) {
             $model->slider = json_encode($request->get('Photo'));
             if ($model->save()) {
+                Session::flash('flash_message', 'Статья "'.$model->title.'" обновлена');
+
                 return redirect(route('blog.index'));
             }
         }
@@ -128,6 +158,31 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        return Post::destroy($id);
+        Session::flash('flash_message', 'Статья "'.$id.'" помечена на удаление');
+        /** @var Post $post */
+        $post = Post::find($id);
+        $post->published = false;
+        $post->publishedOn = null;
+        $post->save();
+        Post::destroy($id);
+
+        return redirect(route('blog.index'));
+    }
+
+    public function removeAll($id = null)
+    {
+        if ($id) {
+            Session::flash('flash_message', 'Статья "'.$id.'" удалена');
+            Post::withTrashed()->where('id', $id)->forceDelete();
+        } else {
+
+            Post::withTrashed()->get()->each(
+                function ($item) {
+                    Session::flash('flash_message', 'Статья "'.$item->id.'" удалена');
+                    $item->forceDelete();
+                }
+            );
+        }
+        return redirect(route('blog.index'));
     }
 }

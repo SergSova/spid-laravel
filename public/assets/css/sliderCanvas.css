@@ -147,13 +147,14 @@ h1 {
         padding: 6px 40px;
         margin: 0 10px;
     }
-    .rocket-btn-wrap {
+    
+    /*.rocket-btn-wrap {
         left: 28%;
         width: 350px;
         text-align: center;
         font-size: 11px;
         bottom: 10px;
-    }
+    }*/
 
     .slider-controls {
         bottom: 10px;

@@ -7,5 +7,13 @@
  */
 
 ?>
+<a href="{{route('social.login')}}">@lang('site.back')</a>
+<form action="{{route('login')}}" method="post">
+    {!! csrf_field() !!}
+    <input type="text" name="email" placeholder="E-mail">
+    <input type="password" name="password" placeholder="Password">
+    <button>@lang('auth.sign_in')</button>
+</form>
 
-{{Form::}}
+<a href="{{route('register')}}">@lang('auth.sign_up')</a>
+<a href="{{route('password.request')}}">@lang('auth.forgot')</a>

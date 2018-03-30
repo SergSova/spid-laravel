@@ -3,8 +3,9 @@
     {{ Form::text('title', null ,['class'=>'form-control']) }}
 </div>
 <div class="form-group">
-    {{ Form::label('longtitle','Текст ответа (строки разделять символом /)') }}
+    {{ Form::label('longtitle','Текст ответа') }}
     {{ Form::text('longtitle',null, ['class'=>'form-control']) }}
+    <small class="form-text text-muted">/ - символ разделения строк</small>
 </div>
 <div class="form-group">
     {{ Form::label('description','Текст подсказки') }}

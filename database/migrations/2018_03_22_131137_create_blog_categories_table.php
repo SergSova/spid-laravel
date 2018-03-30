@@ -17,6 +17,8 @@ class CreateBlogCategoriesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('icon');
+            $table->string('slug');
+            $table->boolean('isMain');
             $table->timestamps();
         });
     }

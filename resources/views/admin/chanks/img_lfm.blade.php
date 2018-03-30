@@ -1,16 +1,21 @@
-<div class="form-group">
-    <img id="holder{{$id}}" style="margin-top:15px;max-height:100px;" src="{{ $model->{$name} }}">
+<?php
+
+$isVideo = $isVideo ?? false;
+?>
+<div class="form-group {{$subClass??''}}">
     <div class="input-group">
-   <span class="input-group-btn">
-     <a id="lfm{{$id}}" data-input="thumb{{$name}}" data-preview="holder{{$id}}" class="btn btn-primary">
-       <i class="fa fa-picture-o"></i> {{$title}}
-     </a>
-   </span>
-        <input id="thumb{{$name}}" class="form-control" type="text" name="{{$name}}" value="{{ $model->{$name} }}">
+        <span class="input-group-btn">
+          <a id="lfm{{$id}}" data-input="thumb{{$id}}" data-preview="holder{{$id}}" class="btn btn-primary">
+            <i class="fa fa-picture-o"></i> {{$title}}
+          </a>
+        </span>
+        <input id="thumb{{$id}}" class="form-control" type="text" name="{{$name}}" value="{{ $value??$model->{$name} }}">
     </div>
+    <img id="holder{{$id}}" class="col-2 img-thumbnail" style="margin-top:15px;max-height:100px;" src="{{ $value??$model->{$name} }}">
 </div>
 @section('scripts')
     @parent
+    <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
     <script>
         $('#lfm{{$id}}').filemanager('image');
     </script>

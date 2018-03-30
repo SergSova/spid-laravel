@@ -1,6 +1,17 @@
-<div class="wrap menu" hidden>
+<div class="burger">
+    <span class="burger-item burger-item_top"></span>
+    <span class="burger-item burger-item_center"></span>
+    <span class="burger-item burger-item_bottom"></span>
+</div>
+
+<div class="wrap menu">
     <div class="menu-overlay-wrap">
-    <div class="menu-overlay"><span></span></div>
+        <div class="menu-overlay"><span></span></div>
+        <div class="menu-overlay"><span></span></div>
+        <div class="menu-overlay"><span></span></div>
+        <div class="menu-overlay"><span></span></div>
+        <div class="menu-overlay"><span></span></div>
+        <div class="menu-overlay"><span></span></div>
         <div class="menu-overlay"><span></span></div>
         <div class="menu-overlay"><span></span></div>
         <div class="menu-overlay"><span></span></div>
@@ -20,7 +31,7 @@
     </div>
     <div class="menu-clip-fix"></div>
     <div class="logo-box">
-        <img src="assets/img/menu/logo.png" alt="">
+        <img class="js-hover" src="{{asset('assets/img/drug-store/drug-store-logo1.svg')}}" alt="" data="{{asset('assets/img/drug-store/drug-store-logo2.svg')}},{{asset('assets/img/drug-store/drug-store-logo3.svg')}},{{asset('assets/img/drug-store/drug-store-logo4.svg')}}" data-src="{{asset('assets/img/drug-store/drug-store-logo1.svg')}}">
     </div>
     <div class="top-btns">
         <button class="top-btn top-btn_search">поиск</button>
@@ -38,6 +49,9 @@
                 <li class="nav__item"><a class="nav__link" href="/blog">блог</a></li>
                 <li class="nav__item"><a class="nav__link" href="/faq">f.a.q</a></li>
                 <li class="nav__item"><a class="nav__link" href="/map">карта</a></li>
+                <li class="nav__item"><a class="nav__link" href="{{route('setlocale','uk')}}">UA</a></li>
+                <li class="nav__item"><a class="nav__link" href="{{route('setlocale','ru')}}">RU</a></li>
+                <li class="nav__item"><a class="nav__link" href="{{route('setlocale','en')}}">EN</a></li>
             </ul>
         </nav>
     </div>
@@ -47,18 +61,18 @@
 @section('scripts')
     @parent
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('.menu-box').on('click', function() {
+        $(document).ready(function () {
+            $('.burger').on('click', function () {
                 $('body').addClass('menu-open');
             })
 
-            $('.top-btn_close').on('click', function() {
+            $('.top-btn_close').on('click', function () {
                 $('body').removeClass('menu-open');
             })
         })
     </script>
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var canvas = document.getElementById('miki'),
                 ctx = canvas.getContext('2d'),
                 container = document.querySelector('.wrap'),
@@ -81,8 +95,8 @@
                 th.dots = [];
                 th.bg = new Image();
                 th.mikiMask = new Image(imageW, imageH);
-                th.mikiMask.src = 'assets/img/menu/bg3.png';
-                th.bg.src = 'assets/img/menu/bg5.jpg';
+                th.mikiMask.src = '/assets/img/menu/bg3.png';
+                th.bg.src = '/assets/img/menu/bg5.jpg';
                 th.animId;
                 th.nav = document.getElementById('nav');
                 th.link = th.nav.querySelector('.nav__link');
@@ -90,25 +104,25 @@
                 th.links = Array.prototype.slice.call(th.nav.querySelector('.nav__list').children);
                 th.linkOverlaysWrap = document.querySelector('.menu-overlay-wrap');
                 th.linkOverlays = th.linkOverlaysWrap.children;
-        
-                window.addEventListener('scroll', function(e) {
+
+                window.addEventListener('scroll', function (e) {
                     e.preventDefault()
                 });
 
-                document.addEventListener('touchmove', function(event){
+                document.addEventListener('touchmove', function (event) {
                     event.preventDefault();
                 });
 
-                window.addEventListener('load', function() {
+                window.addEventListener('load', function () {
                     th.setup();
-                });    
+                });
             }
 
-            Miki.prototype.update = function() {
+            Miki.prototype.update = function () {
                 var th = this;
 
                 for (var i = 0; i < th.dots.length; i++) {
-                    var theta = Math.atan2( th.dots[i].y - mouse.y, th.dots[i].x - mouse.x),
+                    var theta = Math.atan2(th.dots[i].y - mouse.y, th.dots[i].x - mouse.x),
                         distance = 3 * th.mouseRadius / Math.sqrt((mouse.x - th.dots[i].x) * (mouse.x - th.dots[i].x) + (mouse.y - th.dots[i].y) * (mouse.y - th.dots[i].y));
                     th.dots[i].x += Math.cos(theta) * distance + (th.dots[i].originalX - th.dots[i].x) * 0.05;
                     th.dots[i].y += Math.sin(theta) * distance + (th.dots[i].originalY - th.dots[i].y) * 0.05;
@@ -128,18 +142,18 @@
                 }
             }
 
-            
-            Miki.prototype.setPos = function() {
+
+            Miki.prototype.setPos = function () {
                 var imageData = ctx.getImageData(0, 0, wW * 2, wH * 2);
                 var data = imageData.data;
                 var s = 0;
                 var th = this;
-                
+
                 for (var i = 0; i < imageData.height; i += density) {
                     for (var j = 0; j < imageData.width; j += density) {
-                        
-                        var color = data[((j * ( imageData.width * 4)) + (i * 4)) - 1];
-                    
+
+                        var color = data[((j * (imageData.width * 4)) + (i * 4)) - 1];
+
                         if (color == 255) {
                             th.dots.push(th.createDot(ctx, i + mikiLeft, j + mikiTop));
                         }
@@ -147,17 +161,17 @@
                 }
             }
 
-            Miki.prototype.createDot = function(ctx, i, j) {
+            Miki.prototype.createDot = function (ctx, i, j) {
                 return {
                     x: i,
                     y: j,
                     originalX: i,
                     originalY: j,
-                    setPosition: function(x, y) {
+                    setPosition: function (x, y) {
                         this.x = x;
                         this.y = y;
                     },
-                    draw: function() {
+                    draw: function () {
                         ctx.beginPath();
                         ctx.fillStyle = '#0E0E10';
                         //ctx.arc(this.x, this.y, 8, 2 * Math.PI, false);
@@ -167,7 +181,7 @@
                 }
             }
 
-            Miki.prototype.setup = function() {
+            Miki.prototype.setup = function () {
                 var th = this;
 
                 function mousemoveHandler(e) {
@@ -194,17 +208,17 @@
 
                 function mouseoutHandler(e) {
                     var item = e.fromElement.closest('.nav__item'),
-                        index = th.links.indexOf(item) * 2;   
+                        index = th.links.indexOf(item) * 2;
 
                     if (th.linkOverlays[index]) {
                         th.linkOverlays[index].linkOverlaysFlag = false;
                     }
-                    
+
                     clearTimeout(timeoutID);
                 }
 
                 function mouseoverHandler(e) {
-                    timeoutID = setTimeout(function() {
+                    timeoutID = setTimeout(function () {
                         if (e.target.className.indexOf('nav__link') > -1) {
                             var item = e.target.closest('.nav__item'),
                                 index = th.links.indexOf(item) * 2;
@@ -225,8 +239,8 @@
                                 if (th.linkOverlays[index].linkOverlaysFlag) {
                                     requestAnimationFrame(s);
                                 }
-                                
-                                if ( Math.abs(bapX % 136) !== 0 ) {
+
+                                if (Math.abs(bapX % 136) !== 0) {
                                     if (!th.linkOverlays[index].linkOverlaysFlag) {
                                         requestAnimationFrame(s);
                                     }
@@ -262,12 +276,12 @@
 
                 function calcMetrics() {
                     LEFT = container.getBoundingClientRect().left,
-                    TOP = container.getBoundingClientRect().top,
-                    wH = container.clientHeight,
-                    wW = container.clientWidth,
-                    mikiLeft = wW * 0.45,
-                    mikiTop = wH * 0.23,
-                    th.navTop = th.nav.getBoundingClientRect().top + th.link.clientHeight * 0.48;
+                        TOP = container.getBoundingClientRect().top,
+                        wH = container.clientHeight,
+                        wW = container.clientWidth,
+                        mikiLeft = wW * 0.45,
+                        mikiTop = wH * 0.23,
+                        th.navTop = th.nav.getBoundingClientRect().top + th.link.clientHeight * 0.48;
                     th.dotsRadius = (th.link.clientHeight - 20) / 4;
                     th.dotsOffset = th.link.clientHeight / 2;
                     th.menuDotsWidth = Math.round(window.innerWidth * 0.18) - 9;
@@ -309,7 +323,7 @@
                         density = 10;
                         imageH = 175;
                         mikiLeft = (wW / 2),
-                        mikiTop = (wH / 2) - (imageH / 2) + 20;
+                            mikiTop = (wH / 2) - (imageH / 2) + 20;
                         th.mouseRadius = 40;
                     }
 
@@ -322,7 +336,7 @@
                         th.mouseRadius = 30;
                     }
 
-                    if (( th.bg.width < wW ) || ( th.bg.height < wH )) {
+                    if ((th.bg.width < wW) || (th.bg.height < wH)) {
                         th.bg.width = wW;
                         th.bg.height = wH;
                     }
@@ -348,7 +362,7 @@
                 init();
             }
 
-            Miki.prototype.createMenuDots = function() {
+            Miki.prototype.createMenuDots = function () {
                 var th = this,
                     index = 1,
                     coef = 0;
@@ -370,7 +384,7 @@
                 }
             }
 
-            Miki.prototype.render = function() {
+            Miki.prototype.render = function () {
                 var th = this;
                 ctx.globalCompositeOperation = 'xor';
 

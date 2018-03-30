@@ -1,12 +1,12 @@
 <div class="form-group">
     {{ Form::label('title', 'Заголовок') }}
     {{ Form::text('title', null ,['class'=>'form-control']) }}
-    <small class="form-text text-muted">Символ / для переноса строки</small>
+    <small class="form-text text-muted">/ - символ разделения строк</small>
 </div>
 <div class="form-group">
     {{ Form::label('modal_text','Текст подсказки') }}
     {{ Form::text('modal_text',null, ['class'=>'form-control']) }}
-    <small class="form-text text-muted">Символ / для переноса строки</small>
+    <small class="form-text text-muted">/ - символ разделения строк</small>
 </div>
 <div class="form-group">
     {{ Form::label('modal_btn','Текст кнопки') }}
@@ -55,18 +55,15 @@
             <div class="card-body">
                 @forelse($model->humans as $key=>$human)
                     <div class="form-row human-wrap">
-                        <div class="col form-group ">
+                        <div class="col-lg-2 form-group ">
                             {{ Form::label("Human[$key][title]",'Имя') }}
                             {{ Form::text("Human[$key][title]", $human->title,['class'=>'form-control']) }}
                         </div>
-                        <div class="col form-group">
+                        <div class="col-lg-2 form-group">
                             {{ Form::label("Human[$key][illness]",'Заболевание') }}
                             {{ Form::text("Human[$key][illness]",$human->illness,['class'=>'form-control']) }}
                         </div>
-                        <div class="col-lg-7 form-group">
-                            {{ Form::label("Human[$key][images]",'Картинка') }}
-                            {{ Form::text("Human[$key][images]",$human->images,['class'=>'form-control']) }}
-                        </div>
+                        @include('admin.chanks.img_lfm',['id'=>'humanImage'.$key,'name'=>"Human[$key][images]",'title'=>'Картинка','value'=>$human->images])
                     </div>
                 @empty
                     <div class="form-row human-wrap">
@@ -76,12 +73,12 @@
                         <div class="col form-group ">
                             {{ Form::text('Human[0][illness]',null,['class'=>'form-control','placeholder'=>'Заболевание']) }}
                         </div>
-                        <div class="col form-group">
-                            {{ Form::text("Human[0][images]",null,['class'=>'form-control','placeholder'=>'Картинка']) }}
-                        </div>
+                        @include('admin.chanks.img_lfm',['id'=>'humanImage0','name'=>"Human[0][images]",'title'=>'Картинка'])
                     </div>
                 @endforelse
-                {{--<div class="form-group add-human btn btn-success">Добавить человека</div>--}}
+                @if(isset($model->humans)&& count($model->humans)<=6)
+                    <div class="form-group add-human btn btn-success">Добавить человека</div>
+                @endif
             </div>
         </div>
     </div>

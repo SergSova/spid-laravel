@@ -58,6 +58,7 @@
 </div>
 
 @section('scripts')
+    @parent
     <script>
         $(function () {
             $('.add-question').on('click', function () {

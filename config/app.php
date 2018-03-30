@@ -78,7 +78,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale'  => 'ru',
+    'locales' => ['en', 'ru', 'uk'],
 
     /*
     |--------------------------------------------------------------------------
@@ -231,8 +232,8 @@ return [
         'View'         => Illuminate\Support\Facades\View::class,
         'Form'         => Collective\Html\FormFacade::class,
         'Html'         => Collective\Html\HtmlFacade::class,
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'Image' => Intervention\Image\Facades\Image::class,
+        'Socialite'    => Laravel\Socialite\Facades\Socialite::class,
+        'Image'        => Intervention\Image\Facades\Image::class,
     ],
 
 ];

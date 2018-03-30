@@ -9,7 +9,6 @@
 @endsection
 
 @section('body')
-    <canvas class="can" style="position: absolute;top:0;left:0; width: 500px;height: 400px"></canvas>
     <div class="modal modal-band">
         <div class="modal__inner">
             <div class="modal__icons">
@@ -186,7 +185,10 @@
                                 </div>
                             </div>
                             <div class="pusk">
-                                <div class="pusk-btn"></div>
+                                <div class="img-line">
+                                    <img src="assets/img/bandit/line-top.png" alt="">
+                                </div>
+                                <div class="pusk-btn resizeEl" data-bg-w="110"  data-bg-h="1116"></div>
                             </div>
 
                             <!--MEN-->

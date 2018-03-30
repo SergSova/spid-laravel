@@ -8,8 +8,11 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use stdClass;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Lang;
 
 /**
  * Class Post
@@ -20,6 +23,8 @@ use stdClass;
  * @property bool    $published
  * @property string  $publishedOn
  * @property string  $mainImage
+ * @property string  $mainVideo
+ * @property boolean $isVideo
  * @property boolean $isBlackTitle
  * @property boolean $isVioletPostStyle
  * @property boolean $isBig
@@ -34,9 +39,39 @@ use stdClass;
  * @property string  $slug
  * @property int     $category_id
  * @property int     $seo_id
+ * @property Carbon  $deleted_at
  */
 class Post extends Model
 {
+    use SoftDeletes;
+
+    protected $casts
+        = [
+            'published'         => 'boolean',
+            'isVideo'           => 'boolean',
+            'isBlackTitle'      => 'boolean',
+            'isVioletPostStyle' => 'boolean',
+            'isBig'             => 'boolean',
+        ];
+
+    protected $dates = ['deleted_at'];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->Slider = $this->slider ? json_decode($this->slider) : collect();
+    }
+
+    public function getModTitleAttribute()
+    {
+        return strstr( $this->title,'~') ? '<span>'.implode('</span> <span>', explode('~', $this->title)).'</span>' : $this->title;
+    }
+
+    public function getSliderAttribute($value)
+    {
+        return collect(json_decode($value));
+    }
+
     protected $fillable
         = [
             'title',
@@ -44,6 +79,8 @@ class Post extends Model
             'isBlackTitle',
             'isVioletPostStyle',
             'isBig',
+            'isVideo',
+            'mainVideo',
             'content',
             'description',
             'author',
@@ -53,36 +90,14 @@ class Post extends Model
             'publishedOn',
         ];
 
-    public function nav($direction)
-    {
-        $obj = new stdClass();
-        $obj->title = '';
-        $obj->alias = '';
-        $index = $this->index + ($direction == 'next' ? 1 : -1);
-        $mod = self::where(['page_index' => $index])->first();
-        if ($mod) {
-            $obj->title = $this->clearTitle($mod);
-            $obj->alias = $mod->alias;
-        }
-
-        return $obj;
-    }
-
-    public function prev()
-    {
-        return $this->nav('prev');
-    }
-
-    public function next()
-    {
-        return $this->nav('next');
-    }
-
     public function seo()
     {
         return $this->hasOne(Seo::class, 'id', 'seo_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function category()
     {
         return $this->hasOne(BlogCategory::class, 'id', 'category_id');
@@ -98,6 +113,40 @@ class Post extends Model
             $this->seo_id = $seo->id;
             $this->save();
         }
+    }
+
+    public function getUrlAttribute()
+    {
+        return route('blogArticle', [$this->category->slug, $this->slug]);
+    }
+
+    public function getFormatDataAttribute()
+    {
+        /** @var Carbon $data */
+        $data = $this->publishedOn;
+        if (is_null($data)) {
+            return '-';
+        }
+
+        $date = Carbon::parse($data);
+
+        return $date->diffInHours(Carbon::now()) == 0
+            ? $date->diffForHumans()
+            :
+            $date->day.' '.Lang::get('month.m'.$date->month).' '.$date->year.' '.$date->hour.':'.$date->minute;
+    }
+
+    public function getFullDataAttribute()
+    {
+        $date = Carbon::parse($this->publishedOn);
+
+        return $date->day
+            .' '
+            .Lang::get('month.m'.$date->month)
+            .' '
+            .$date->year
+            .' '
+            .Lang::get('site.year');
     }
 
 }
