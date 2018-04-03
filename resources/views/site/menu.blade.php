@@ -36,7 +36,7 @@ if ($menu_route == 'blog.fitred' || $menu_route == 'blogArticle')
         @include('site.chanks.js_hover')
     </a>
     <div class="top-btns">
-        <button class="top-btn top-btn_search">@lang('site.search')</button>
+        <a href="{{route('search','вич')}}"><button class="top-btn top-btn_search">@lang('site.search')</button></a>
         <button class="top-btn top-btn_close">@lang('site.close')</button>
     </div>
     <div class="nav-wrap">

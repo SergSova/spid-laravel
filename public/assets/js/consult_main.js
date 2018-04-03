@@ -62,25 +62,7 @@ $(document).ready(function() {
 
     $('.popup-wrapper__consultants-column').find('.current-day').siblings().each(function() {$(this).removeClass('current-day');});
 
-    if (prev_page.length) {
-        $('.navigate-box__left').on('click', function() {
-            location.assign('/' + prev_page);
-        });
-    }
 
-    if (!prev_page.length) {
-        $('.navigate-box__left').css('display', 'none');
-    }
-    
-    if (next_page.length) {
-        $('.navigate-box__right').on('click', function() {
-            location.assign('/' + next_page);
-        });
-    }
-
-    if (!next_page.length) {
-        $('.navigate-box__right').css('display', 'none');
-    }
 
     /*----------------- onhover logo dragstore  -----------------*/
         $('.js-hover').hover(function() {

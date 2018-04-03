@@ -23,3 +23,30 @@
         <div class="navigate-box__text">@lang('site.next_page')</div>
     </div>
 </div>
+
+@section('scripts')
+    @parent
+    <script>
+        $(function () {
+            if (prev_page.length) {
+                $('.navigate-box__left').on('click', function() {
+                    location.assign('/' + prev_page);
+                });
+            }
+
+            if (!prev_page.length) {
+                $('.navigate-box__left').css('display', 'none');
+            }
+
+            if (next_page.length) {
+                $('.navigate-box__right').on('click', function() {
+                    location.assign('/' + next_page);
+                });
+            }
+
+            if (!next_page.length) {
+                $('.navigate-box__right').css('display', 'none');
+            }
+        });
+    </script>
+@endsection

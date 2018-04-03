@@ -203,9 +203,12 @@
 //     else document.getElementById('loader').style.display = 'none';
 // }
 
+var preloaderHide = false;
+
 $(window).on('load', function() {
     $('.preloader').delay(1000).fadeOut(300, function() {
         var scroll_up = 0;
+        preloaderHide = true;
 
         $(window).on('scrollUp', function(e) {
     
@@ -216,6 +219,16 @@ $(window).on('load', function() {
             }
     
         });
+
+        var promiseAudio = document.querySelector('.test-noize-audio').play();
+		if (promiseAudio !== undefined) {
+			promiseAudio.catch(error => {
+				// Auto-play was prevented
+				// Show a UI element to let the user manually start playback
+			}).then(() => {
+				// Auto-play started
+			});
+		}
     });
 
     $('.preloader svg').delay(1000).fadeOut(300);
@@ -281,7 +294,8 @@ window.addEventListener('load', function() {
 
 		if (this.answers) {
 			var _a = JSON.parse(this.answers);
-			this.currentId = _a[_a.length - 1].qID + 1;
+			this.currentId = +_a[_a.length - 1].qID + 1;
+			console.log( this.currentId )
 			currentIdGlobal = this.currentId;
 			ANSWER = _a;
 
@@ -300,6 +314,7 @@ window.addEventListener('load', function() {
 	Test.prototype.refreshAll = function(e) {
 		localStorage.removeItem('aids-test');
 		this.view();
+		document.body.classList.remove('total');
 	};
 
 	Test.prototype.setAnswer = function(e) {
@@ -364,6 +379,7 @@ window.addEventListener('load', function() {
 		}
 
 		this.qestionWrap.innerHTML = '<p>' + total + '</p>';
+		document.body.classList.add('total');
 		this.sendMail();
 	};
 
@@ -523,33 +539,34 @@ window.addEventListener('load', function() {
 				// 	gainNode.gain.value = currentVolume;
 				// }
 
-				var promiseAudio = document.querySelector('.test-noize-audio').play();
-				if (promiseAudio !== undefined) {
-					promiseAudio.catch(error => {
-						// Auto-play was prevented
-						// Show a UI element to let the user manually start playback
-					}).then(() => {
-						// Auto-play started
-						console.log('d')
-					});
-				}
+				if (preloaderHide) {
+					var promiseAudio = document.querySelector('.test-noize-audio').play();
+					if (promiseAudio !== undefined) {
+						promiseAudio.catch(error => {
+							// Auto-play was prevented
+							// Show a UI element to let the user manually start playback
+						}).then(() => {
+							// Auto-play started
+						});
+					}
 
-				if (testStart) {
-					video.src = 'assets/video/' + videos[th.currentId];
-				
-				} else {
-					video.src = 'assets/video/' + videos[0];
-				}
+					if (testStart) {
+						video.src = 'assets/video/' + videos[th.currentId];
+					
+					} else {
+						video.src = 'assets/video/' + videos[0];
+					}
 
-				var promise = video.play();
-				if (promise !== undefined) {
-					promise.catch(error => {
-						// Auto-play was prevented
-						// Show a UI element to let the user manually start playback
-					}).then(() => {
-						// Auto-play started
-						
-					});
+					var promise = video.play();
+					if (promise !== undefined) {
+						promise.catch(error => {
+							// Auto-play was prevented
+							// Show a UI element to let the user manually start playback
+						}).then(() => {
+							// Auto-play started
+							
+						});
+					}
 				}
 			}
 		}
@@ -586,6 +603,18 @@ window.addEventListener('load', function() {
 			$('.test__preview-box .test__preview-box-btn').closest('.test-section').removeClass('test-video-fix');
 			videos.splice(0, 1);
 			video.src = 'assets/video/' + videos[currentIdGlobal];
+
+			var promise = video.play();
+			if (promise !== undefined) {
+				promise.catch(error => {
+					// Auto-play was prevented
+					// Show a UI element to let the user manually start playback
+				}).then(() => {
+					// Auto-play started
+					
+				});
+			}
+
 			testStart = true;
 			//if (gainNode) gainNode.gain.value = 0;
 			testAudio.volume = 0;
@@ -747,23 +776,5 @@ window.addEventListener('load', function() {
 		});
 	/*----------------- end onhover logo dragstore  -----------------*/
 
-	if (prev_page.length) {
-		$('.navigate-box__left').on('click', function() {
-			location.assign('/' + prev_page);
-		});
-	}
 
-	if (!prev_page.length) {
-		$('.navigate-box__left').css('display', 'none');
-	}
-
-	if (next_page.length) {
-		$('.navigate-box__right').on('click', function() {
-			location.assign('/' + next_page);
-		});
-	}
-
-	if (!next_page.length) {
-		$('.navigate-box__right').css('display', 'none');
-	}
 });

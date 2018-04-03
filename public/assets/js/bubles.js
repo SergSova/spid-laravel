@@ -231,7 +231,7 @@ DrugStore.prototype.checkHand = function(e, controlsOffset, hand) {
         deltaX = Math.abs(centerControlsX - handCenterX),
         deltaY = Math.abs(centerControlsY - handCenterY),
         distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        console.log( deltaX / distance, Math.cos(distance))
+        
     if (((controlsOffset.width / 2 + hand.width / 2) >= deltaX) && ((controlsOffset.height / 2 + hand.height / 2) >= deltaY)) {
         
         return true;

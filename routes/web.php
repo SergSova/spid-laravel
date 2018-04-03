@@ -81,6 +81,8 @@ Route::group(
                 Route::get('/{category}/{article}', 'Site\BlogController@view')->name('blogArticle');
             }
         );
+
+        Route::get('/search/{search}', 'Site\SearchController@search')->name('search');
     }
 );
 

@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/blog/media.css')}}">
 @endsection
 @section('body')
-    <div id="p_prldr">
+    <!-- <div id="p_prldr">
         <div class="preo_prego">
             <div class="cube-all">
                 <div class="thecube">
@@ -31,6 +31,23 @@
                 </div>
 
             </div>
+        </div>
+    </div> -->
+    <div class="landscape">
+        <div class="landscape-inner">
+            <div class="landscape-icon">
+                <div class="landscape-icon__condom_fill"></div>
+                <div class="landscape-icon__condom_stroke"></div>
+                <div class="landscape-icon__condom_arrow"></div>
+            </div>
+
+            <h5 class="landscape-title">@lang('site.landscape_title')</h5>
+            <p class="landscape-desc">@lang('site.landscape_desc')</p>
+        </div>
+    </div>
+    <div class="preloader">
+        <div class="preloader-inner">
+            <?php include "assets/img/svg/about/preloader-inner.svg" ?>
         </div>
     </div>
     <main>
@@ -81,6 +98,7 @@
                     <div class="to-top">@lang('site.above')</div>
                 </div>
             </div>
+            @include('site.chanks.navigate_box')
         </div>
 
         @include('blog.category')

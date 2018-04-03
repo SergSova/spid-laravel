@@ -55,7 +55,7 @@ $lang = app()->getLocale();
 
                         <button type="submit" class="js-questions-next test__test-btn none">{{$model->{'test_btn_next_'.$lang} }}</button>
 
-                        <button class="js-questions-refresh test__test-btn-refresh none">{{$model->{'test_btn_refresh_'.$lang} }}</button>
+                        <button class="test__test-btn js-questions-refresh test__test-btn-refresh none">{{$model->{'test_btn_refresh_'.$lang} }}</button>
                     </form>
                 </div>
             </div>
@@ -106,6 +106,7 @@ $lang = app()->getLocale();
             </div>
 
             <img class="test-bottom-shadow" src="{{asset('assets/img/aids-test/test-bottom-shadow.png')}}" alt="">
+            @include('site.chanks.navigate_box')
         </div>
     </main>
 @endsection
