@@ -1,15 +1,37 @@
+<?php
+
+$lang = app()->getLocale();
+?>
 @extends('site.layout')
 
-@section('title',$model->getTitle())
+@section('title',$model->seo_title)
 
 @section('styles')
-    <link rel="stylesheet" href="assets/css/drug-store/reset.css">
-    <link rel="stylesheet" href="assets/css/drug-store/index.css">
-    <link rel="stylesheet" href="assets/css/sliderCanvas.css">
-    <link rel="stylesheet" href="assets/css/resize.css">
+    @parent
+    <link rel="stylesheet" href="{{asset('assets/css/drug-store/reset.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/drug-store/index.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/sliderCanvas.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/resize.css')}}">
 @endsection
 
 @section('body')
+<div class="landscape">
+        <div class="landscape-inner">
+            <div class="landscape-icon">
+                <div class="landscape-icon__condom_fill"></div>
+                <div class="landscape-icon__condom_stroke"></div>
+                <div class="landscape-icon__condom_arrow"></div>
+            </div>
+
+            <h5 class="landscape-title">@lang('site.landscape_title')</h5>
+            <p class="landscape-desc">@lang('site.landscape_desc')</p>
+        </div>
+    </div>
+<div class="preloader">
+        <div class="preloader-inner">
+            <?php include "assets/img/svg/about/preloader-inner.svg" ?>
+        </div>
+    </div>
     <div class="modal modal-bb">
         <div class="modal__inner">
             <div class="modal__icons">
@@ -49,14 +71,11 @@
                     </div>
                 </div>
             </div>
-            <div class="modal__text"><p>{!! $model->modal_text !!}</p></div>
-            <button class="modal__btn">{!! $model->modal_btn !!}</button>
+            <div class="modal__text"><p>{!! $model->{'modal_text_'.$lang} !!}</p></div>
+            <button class="modal__btn">{!! $model->{'modal_btn_'.$lang} !!}</button>
         </div>
     </div>
-    <div class="burger"></div>
-    <div class="game-icons top-logo">
-        <img class="js-hover" src="assets/img/drug-store/drug-store-logo1.svg" alt="" data="assets/img/drug-store/drug-store-logo2.svg,assets/img/drug-store/drug-store-logo3.svg,assets/img/drug-store/drug-store-logo4.svg">
-    </div>
+
     <nav class="game-icons slider-controls slide-2">
         <a href="<?= $prev['alias'] ?? '/aids'?> " class="str str-prev">
             <?php include('assets/img/svg/slide-bubles/str_prev.svg') ?>
@@ -74,7 +93,7 @@
             <div class="games full bubbles">
                 <h1 class="neon-blue bubbles-title">
                     <span>{!! $model->title !!}</span>
-                    <span class="went-wrong">{!! $model->wrong !!}</span>
+                    <span class="went-wrong">{!! $model->{'wrong_'.$lang} !!}</span>
                 </h1>
                 <div class="game game4 full js-game4" id="game4">
                     <div class="game-wrap full">
@@ -90,11 +109,11 @@
 
 @section('scripts')
     @parent
-    <script src="assets/js/libs/pixi.js"></script>
-    <script src="assets/js/libs/bump.js"></script>
-    <script src="assets/js/libs/tweenMax.js"></script>
-    <script src="assets/js/libs/CSSPlugin.min.js"></script>
-    <script src="assets/js/libs/spriteUtilities.js"></script>
+    <script src="{{asset('assets/js/libs/pixi.js')}}"></script>
+    <script src="{{asset('assets/js/libs/bump.js')}}"></script>
+    <script src="{{asset('assets/js/libs/tweenMax.js')}}"></script>
+    <script src="{{asset('assets/js/libs/CSSPlugin.min.js')}}"></script>
+    <script src="{{asset('assets/js/libs/spriteUtilities.js')}}"></script>
     <script>
         var modalVis = true;
 
@@ -145,5 +164,5 @@
             modalAnim()
         })
     </script>
-    <script src="assets/js/bubles.js"></script>
+    <script src="{{asset('assets/js/bubles.js')}}"></script>
 @endsection

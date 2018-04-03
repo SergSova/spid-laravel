@@ -5,7 +5,20 @@ function init() {
   var mouse = document.querySelector('.mouse'),
     shlapnik = document.querySelector('.bg-shlapnik'),
     d = document.createElement('div')
-
+    /* Rotator Game */
+    var spiners = document.querySelectorAll('.rotator-row-wrap');
+    var spiner = [];
+    var actSpin = 0;
+    init = [], spins = [], stops = [];
+    var rand;
+    canSpin = true;
+    var headOn = false;
+    cikl = 0;
+    degrees = [300,330,0,30,60,90,120,150,180,210,240,270];
+    spinArr = $('.spin');
+    elms = [];
+    k = 0;
+    activeSpin = 4;
     kolumb = document.querySelector('.kolumb'),
     hat = document.querySelectorAll('.hat'),
     resizeEl = document.querySelectorAll('.resizeEl'),
@@ -18,6 +31,7 @@ function init() {
     WKoef = w_w / 1920,
     detect,
     HKoef = w_h / 945;
+    var uniKoef = window.innerWidth / window.innerHeight >= 1.979 ? HKoef : WKoef
 
   if (detect) {
     var ua = detect.parse(navigator.userAgent);
@@ -25,7 +39,6 @@ function init() {
       $('body').addClass('ios-active');
     }
   }
-  var uniKoef = window.innerWidth / window.innerHeight >= 1.979 ? HKoef : WKoef
 
   for (var i = 0; i < resizeEl.length; i++) {
     resizeEl[i].setAttribute('data-w', resizeEl[i].clientWidth);
@@ -70,56 +83,66 @@ function init() {
       if (bg_pos_x && bg_pos_y) {
         resizeEl[i].style.backgroundPosition = bg_pos_x * uniKoef + 'px ' + bg_pos_y * uniKoef + 'px';
       }
+
+
+
+
       if (transOrig) {
         // resizeEl[i].style.transformOrigin = '50% ' // + transOrig * uniKoef + 'px';
 
-        if(cans && resizeEl[i].classList.contains('spin')) {
-          cans =  false
-          transOrig = 280
-          r1 = 30
-          r2 = 60
-          r3 = 90
-          str = '<style>' +
-            '.spin:nth-child(1){\n' +
-            '    opacity: 0;\n' +
-            '    transform: rotateX('+r3+'deg) translateZ('+ transOrig * uniKoef + 'px);\n' +
-            '}\n' +
-            '.spin:nth-child(2){\n' +
-            '    transform: rotateX('+r2+'deg) translateZ('+ transOrig * uniKoef + 'px);\n' +
-            '}\n' +
-            '.spin:nth-child(3){\n' +
-            '    transform: rotateX('+r1+'deg) translateZ('+ transOrig * uniKoef + 'px);' +
-            '}\n' +
-            '.spin:nth-child(4){\n' +
-            '    transform: rotateX(0) translateZ('+ transOrig * uniKoef + 'px);\n' +
-            '}\n' +
-            '.spin:nth-child(5) {\n' +
-            '    transform: translate(0px,0px) rotateX(-'+r1+'deg) translateZ('+ transOrig * uniKoef + 'px);\n' +
-            '}\n' +
-            '.spin:nth-child(6){\n' +
-            '    transform: translate(0px,0px) rotateX(-'+r2+'deg) translateZ('+ transOrig * uniKoef + 'px);\n' +
-            '}\n' +
-            '.spin:nth-child(7){\n' +
-            '    transform: translate(0px,0px) rotateX(-'+r3+'deg) translateZ('+ transOrig * uniKoef + 'px);\n' +
-            '}'+
-            '</style>'
-          d.innerHTML = str
-          document.body.append(d)
-        }
+        // if(cans && resizeEl[i].classList.contains('spin')) {
+        //   cans =  false
+        //   transOrig = 280
+        //   r1 = 30
+        //   r2 = 60
+        //   r3 = 90
+        //   str = '<style>' +
+        //     '.spin:nth-child(1){\n' +
+        //     // '    opacity: 0;\n' +
+        //     '    transform: rotateX('+r3+'deg) translateZ('+ transOrig * uniKoef + 'px);\n' +
+        //     '}\n' +
+        //     '.spin:nth-child(2){\n' +
+        //     '    transform: rotateX('+r2+'deg) translateZ('+ transOrig * uniKoef + 'px);\n' +
+        //     '}\n' +
+        //     '.spin:nth-child(3){\n' +
+        //     '    transform: rotateX('+r1+'deg) translateZ('+ transOrig * uniKoef + 'px);' +
+        //     '}\n' +
+        //     '.spin:nth-child(4){\n' +
+        //     '    transform: rotateX(0) translateZ('+ transOrig * uniKoef + 'px);\n' +
+        //     '}\n' +
+        //     '.spin:nth-child(5) {\n' +
+        //     '    transform: translate(0px,0px) rotateX(-'+r1+'deg) translateZ('+ transOrig * uniKoef + 'px);\n' +
+        //     '}\n' +
+        //     '.spin:nth-child(6){\n' +
+        //     '    transform: translate(0px,0px) rotateX(-'+r2+'deg) translateZ('+ transOrig * uniKoef + 'px);\n' +
+        //     '}\n' +
+        //     '.spin:nth-child(7){\n' +
+        //     '    transform: translate(0px,0px) rotateX(-'+r3+'deg) translateZ('+ transOrig * uniKoef + 'px);\n' +
+        //     '}'+
+        //     '</style>'
+        //   d.innerHTML = str
+        //   document.body.append(d)
+        // }
       }
 
     }
+    for (var i = 0; i < spiners.length-1; i++) {
+        elH = spiners[i].clientHeight * 3.4;
+        elT = (spiners[i].offsetTop + spiners[i].clientHeight) - spiners[i].clientHeight* 2.1;
+        el = document.querySelector('.rotator-row-line' +(i +1));
+        elL = (i+1 ) * spiners[i].clientWidth + i* 3;
+        el.style.left = elL + 'px' ;
+        el.style.top = elT + 'px' ;
+        el.style.height = elH + 'px' ;
+    }
+    for (var i= 0; i < spinArr.length; i++) {
+        if(k == 12) { k = 0}
+        spinArr[i].style.transform = 'rotateX('+degrees[k]+'deg) translateZ(' + 281.18518518518516 * uniKoef +'px)';
+        k++
+    }
+
   }
   resizeElents();
-  /* Rotator Game */
-  var spiners = document.querySelectorAll('.rotator-row-wrap');
-  var spiner = [];
-  var actSpin = 0;
-  init = [], spins = [], stops = [];
-  var rand;
-  canSpin = true;
-  var headOn = false;
-  cikl = 0;
 
   wrongAnswer = [[1, 3, 1, 1],[1, 3, 2, 1],[1, 3, 3, 1],[1, 3, 4, 1],[1, 3, 5, 1],[1, 3, 6, 1],[1, 3, 7, 1],[1, 3, 1, 6],[1, 3, 2, 6],[1, 3, 3, 6],[1, 3, 4, 6],[1, 3, 5, 6],[1, 3, 6, 6],[1, 3, 7, 6],[1, 4, 1, 6],[1, 4, 2, 6],[1, 4, 3, 6],[1, 4, 4, 6],[1, 4, 5, 6],[1, 4, 6, 6],[1, 4, 7, 6],[1, 4, 1, 1],[1, 4, 2, 1],[1, 4, 3, 1],[1, 4, 4, 1],[1, 4, 5, 1],[1, 4, 6, 1],[1, 4, 7, 1],[1, 5, 1, 2],[1, 5, 2, 2],[1, 5, 3, 2],[1, 5, 4, 2],[1, 5, 5, 2],[1, 5, 6, 2],[1, 5, 7, 2],[1, 5, 1, 6],[1, 5, 2, 6],[1, 5, 3, 6],[1, 5, 4, 6],[1, 5, 5, 6],[1, 5, 6, 6],[1, 5, 7, 6],[1, 5, 1, 1],[1, 5, 2, 1],[1, 5, 3, 1],[1, 5, 4, 1],[1, 5, 5, 1],[1, 5, 6, 1],[1, 5, 7, 1],[1, 6, 1, 2],[1, 6, 2, 2],[1, 6, 3, 2],[1, 6, 4, 2],[1, 6, 5, 2],[1, 6, 6, 2],[1, 6, 7, 2],[1, 6, 1, 3],[1, 6, 2, 3],[1, 6, 3, 3],[1, 6, 4, 3],[1, 6, 5, 3],[1, 6, 6, 3],[1, 6, 7, 3],[1, 6, 1, 4],[1, 6, 2, 4],[1, 6, 3, 4],[1, 6, 4, 4],[1, 6, 5, 4],[1, 6, 6, 4],[1, 6, 7, 4],[1, 6, 1, 6],[1, 6, 2, 6],[1, 6, 3, 6],[1, 6, 4, 6],[1, 6, 5, 6],[1, 6, 6, 6],[1, 6, 7, 6],[1, 6, 1, 1],[1, 6, 2, 1],[1, 6, 3, 1],[1, 6, 4, 1],[1, 6, 5, 1],[1, 6, 6, 1], [1, 6, 7, 1]];
 
@@ -127,12 +150,7 @@ function init() {
 
 
 
-  function animStart() {
-    cikl = cikl == 4 ? 0 : cikl;
-    $('.rotator-row-wrap .spin').removeClass('true false')
-    spiner[cikl].spinStart(spiner[cikl], rand[cikl], 15)
-    cikl++
-  }
+/*
 
   function Spiner(el, uniq) {
     this.this = this
@@ -253,7 +271,152 @@ function init() {
       }, 500 * i)
     }
   })
+   function animStart() {
+    cikl = cikl == 4 ? 0 : cikl;
+    $('.rotator-row-wrap .spin').removeClass('true false')
+    spiner[cikl].spinStart(spiner[cikl], rand[cikl], 15)
+    cikl++
+  }
 
+
+*/
+
+
+  
+  function Rotate(el,uniq,degree) {
+    this.this = this
+    this.el = el
+    this.uniq = uniq
+    this.degree = degree
+    this.active = 4
+    this.children  = this.el.children
+      for (var j = 0; j < this.children.length; j++){
+          p = this.active + 2  == 12 ? 1 : this.active + 2;
+          d = this.active - 1  == 0 ? 12 : this.active - 1;
+          k = this.active  - 2  == 0 ? 12 : this.active - 2;
+
+          if(this.children[j].classList.contains('spin' +  this.active)) {
+              this.children[j].style.opacity = 0.6
+          }else if(this.children[j].classList.contains('spin' + d)) {
+              this.children[j].style.opacity = 1
+          }else if(this.children[j].classList.contains('spin' + k)) {
+              console.log(this.active);
+              this.children[j].style.opacity = 0.6
+          }else {
+              this.children[j].style.opacity = 0.3
+          }
+      }
+  }
+
+
+  Rotate.prototype.spin = function (elm, stoPos, cicl) {
+    time =130;
+    if(cicl <=0 && stoPos == this.active && this.uniq == actSpin) {
+      elm.spinStop(elm, stoPos, cicl);
+      actSpin++
+      window.cancelAnimationFrame(init[this.uniq]);
+      return true;
+    }
+
+    this.active = this.active  == 12 ? 1 : this.active + 1;
+    this.degree = this.degree - 30;
+
+    setTimeout(function () {
+      init[this.uniq] =  window.requestAnimationFrame(function () {
+        elm.spin(elm, stoPos, cicl)
+      });
+    }, time);
+
+    this.el.style.transition = 'all ' + (time ) + 'ms linear,opacity 0.01s';
+    this.el.style.transform = 'rotateX('+(parseInt(this.degree))+'deg) ';
+
+      for (var j = 0; j < this.children.length; j++){
+          p = this.active + 2  == 12 ? 1 : this.active + 2;
+          d = this.active - 1  == 0 ? 12 : this.active - 1;
+          k = this.active  - 2  == 0 ? 12 : this.active - 2;
+
+          if(this.children[j].classList.contains('spin' +  this.active)) {
+              this.children[j].style.opacity = 0.8
+          }else if(this.children[j].classList.contains('spin' + d)) {
+              this.children[j].style.opacity = 1
+          }else if(this.children[j].classList.contains('spin' + k)) {
+              console.log(this.active);
+              this.children[j].style.opacity = 0.8
+          }else {
+              this.children[j].style.opacity = 0.5
+          }
+      }
+
+
+
+
+
+    cicl--
+  }
+
+  Rotate.prototype.spinStop = function (elm, stoPos, cicl) {
+
+    this.active = this.active  == 12 ? 1 : this.active + 1;
+      for (var j = 0; j < this.children.length; j++){
+          p = this.active + 2  == 12 ? 1 : this.active + 2;
+          d = this.active - 1  == 0 ? 12 : this.active - 1;
+          k = this.active  - 2  == 0 ? 12 : this.active - 2;
+
+          if(this.children[j].classList.contains('spin' +  this.active)) {
+              this.children[j].style.opacity = 0.6
+          }else if(this.children[j].classList.contains('spin' + d)) {
+              this.children[j].style.opacity = 1
+          }else if(this.children[j].classList.contains('spin' + k)) {
+              console.log(this.active);
+              this.children[j].style.opacity = 0.6
+          }else {
+              this.children[j].style.opacity = 0.3
+          }
+      }
+    this.degree = this.degree - 30;
+    this.el.style.transition  =  'all ' + 1000 + 'ms cubic-bezier(0, 1.24, 1, 1),opacity 0.1s';
+    this.el.style.transform = 'rotateX('+(parseInt(this.degree))+'deg) ';
+
+    canSpin = true;
+  }
+
+
+
+
+
+
+
+  $('.pusk-btn').click(function () {
+    if (!canSpin) {
+      return
+    }
+    $(this).addClass('active').next();
+    canSpin = false;
+    actSpin = 0;
+    rands  = Math.floor((Math.random() * 7) + 1)
+    rand =  headOn ? rightAnswer[Math.floor(Math.random() * rightAnswer.length)] : wrongAnswer[Math.floor(Math.random() * wrongAnswer.length)];
+    rand[0] = headOn ?  rands == 2 ? 1 : rands :  rands;
+    $('.rotator-row-wrap').each(function () {
+      bg_pos_y = $(this).find('.spin:nth-child(4)  .spin-image').attr('data-bg-y')
+      $(this).find('.spin:nth-child(4)  .spin-image').css({'background-position': -0 * uniKoef + 'px ' + bg_pos_y * uniKoef + 'px'})
+    })
+    for (i = 0; i < spiner.length; i++) {
+      setTimeout(function () {
+        animStart()
+      }, 500 * i)
+    }
+  })
+  function animStart() {
+    cikl = cikl == 4 ? 0 : cikl;
+    $('.rotator-row-wrap .spin').removeClass('true false')
+    spiner[cikl].spin(spiner[cikl], rand[cikl], 15);
+    cikl++
+  }
+
+
+  for (var i= 0; i < spiners.length; i++) {
+    spiner[i] = new Rotate(spiners[i],i,0);
+  }
 
 
 

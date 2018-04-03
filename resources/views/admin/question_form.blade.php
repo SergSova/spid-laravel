@@ -1,13 +1,13 @@
-<div id="accordion">
+<div id="accordion{{$lang}}">
     <div class="card">
-        <div class="card-header" id="headingTwo">
+        <div class="card-header" id="headingTwo{{$lang}}">
             <h5 class="mb-0">
-                <a class="btn btn-primary" data-toggle="collapse" href="#collapseTwo" role="button" aria-expanded="false" aria-controls="collapseTwo">
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseTwo{{$lang}}" role="button" aria-expanded="false" aria-controls="collapseTwo{{$lang}}">
                     Вопросы
                 </a>
             </h5>
         </div>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div id="collapseTwo{{$lang}}" class="collapse" aria-labelledby="headingTwo{{$lang}}" data-parent="#accordion{{$lang}}">
             <div class="card-body">
                 @forelse($model->getQuestions() as $key=>$question)
                     <div class="row question-wrap">
@@ -17,12 +17,13 @@
                         </div>
                         <div class="col">
                             <div class="form-group ">
-                                {{ Form::label("Question[$key][question]",'Вопрос') }}
-                                {{ Form::text("Question[$key][question]", $question->question,['class'=>'form-control']) }}
+
+                                {{ Form::label("Question[$key][question_$lang]",'Вопрос') }}
+                                {{ Form::text("Question[$key][question_$lang]", $question->{'question_'.$lang},['class'=>'form-control']) }}
                             </div>
                             <div class="form-group">
-                                {{ Form::label("Question[$key][answer]",'Ответ') }}
-                                {{ Form::textarea("Question[$key][answer]",$question->answer,['class'=>'form-control','rows'=>3]) }}
+                                {{ Form::label("Question[$key][answer_$lang]",'Ответ') }}
+                                {{ Form::textarea("Question[$key][answer_$lang]",$question->{'answer_'.$lang},['class'=>'form-control','rows'=>3]) }}
                             </div>
                         </div>
                         <div class="index-change col-lg-1">
@@ -88,7 +89,7 @@
             }
 
             function pushIndexes() {
-                $(".index-text").each(function (inx) {
+                $(".tab-pane.active .index-text").each(function (inx) {
                     $(this).val(inx)
                 });
             }

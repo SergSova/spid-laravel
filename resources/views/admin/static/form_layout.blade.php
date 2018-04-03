@@ -10,7 +10,8 @@
         {!! Form::model($model,['url'=>route('staticPageEdit',[$model->id,$model->alias]),'method'=>'post','class'=>'']) !!}
 
         @include($form)
-        @include('admin.seo_form')
+        @include('admin.seo_form',['lang'=>'ru','index'=>'ru'])
+        @include('admin.seo_form',['lang'=>'uk','index'=>'uk'])
 
         {{ Form::submit('Сохранить',['class'=>'btn btn-primary mb-2']) }}
         <a href="{{ $model->alias=='index'?'/': '/'.$model->alias}}" target="_blank" class="btn btn-info mb-2 float-right">Просмотреть страницу</a>

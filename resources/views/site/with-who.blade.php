@@ -1,12 +1,18 @@
+<?php
+
+$lang = app()->getLocale()
+?>
+
 @extends('site.layout')
 
-@section('title',$model->getTitle())
+@section('title',$model->seo_title)
 
 @section('styles')
-    <link rel="stylesheet" href="assets/css/drug-store/reset.css">
-    <link rel="stylesheet" href="assets/css/drug-store/index.css">
-    <link rel="stylesheet" href="assets/css/with-who.css">
-    <link rel="stylesheet" href="assets/css/resize.css">
+    @parent
+    <link rel="stylesheet" href="{{asset('assets/css/drug-store/reset.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/drug-store/index.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/with-who.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/resize.css')}}">
 @endsection
 
 @section('body')
@@ -29,16 +35,12 @@
                 </div>
             </div>
             <div class="modal__text">
-                {!! $model->modal_text !!}
+                {!! $model->{'modal_text_'.$lang} !!}
             </div>
-            <button class="modal__btn">{!! $model->modal_btn !!}</button>
+            <button class="modal__btn">{!! $model->{'modal_btn_'.$lang} !!}</button>
         </div>
     </div>
-    <div class="burger"></div>
-    <div class="game-icons top-logo">
-        <img class="js-hover" src="assets/img/drug-store/drug-store-logo1.svg" alt=""
-             data="assets/img/drug-store/drug-store-logo2.svg,assets/img/drug-store/drug-store-logo3.svg,assets/img/drug-store/drug-store-logo4.svg">
-    </div>
+
     <nav class="game-icons slider-controls slide-4">
         <a href="/slide-rocket" class="str str-prev">
             <?php include "assets/img/svg/with-who/str-prev.svg"?>
@@ -53,10 +55,10 @@
     <div class="container with-who">
         <div class="party-bg">
             <div class="title">
-                <h1 class="neon-pink">{!! $model->title !!}</h1>
+                <h1 class="neon-pink">{!! $model->title_mod !!}</h1>
             </div>
             <div class="humans">
-                @foreach($humans as $human)
+                @foreach($model->{'Humans_'.$lang} as $human)
                     <div class="human">
                         <div class="human-option">
                             <div class="name-illness">
@@ -68,12 +70,12 @@
                             </div>
                             <div class="human-popup">
                                 <div class="btn-close"></div>
-                                <div class="pop-title">{!! $model->pop_title !!}</div>
+                                <div class="pop-title">{!! $model->{'pop_title_'.$lang} !!}</div>
                                 <form metod="GET" action="" accept-charset="UTF-8">
                                     <div class="form-you-know">
                                         @for($i=1;$i<=6;$i++)
                                             <label class="ill" for="check-ill-1-{{$i}}">
-                                                <span>{!! $model->{'chk_'.$i} !!}</span>
+                                                <span>{!! $model->{'chk_'.$i.'_'.$lang} !!}</span>
                                                 <input type="checkbox" class="checkbox" id="check-ill-1-{{$i}}">
                                                 <span class="checkbox-custom"></span>
                                             </label>
@@ -92,6 +94,6 @@
 
 @section('scripts')
     @parent
-    <script src="assets/js/main22.js"></script>
-    <script src="assets/js/with-who.js"></script>
+    <script src="{{asset('assets/js/main22.js')}}"></script>
+    <script src="{{asset('assets/js/with-who.js')}}"></script>
 @endsection

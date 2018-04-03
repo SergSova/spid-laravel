@@ -4,11 +4,12 @@
  * @var \App\Blog $model
  */
 ?>
-@extends('site.layout',$model)
+@extends('site.layout')
 
-@section('title', $model->clearTitle())
+@section('title', $model->seo_title)
 
 @section('styles')
+    @parent
     <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900&amp;subset=latin-ext"
           rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/css/lib/reset.css')}}">
@@ -37,12 +38,7 @@
             <div class="wrapper">
                 <div class="fixid-container">
                     <header class="header">
-                        <div class="logo-box">
-                            <img src="{{asset('assets/img/blog/header/logo-white.png')}}" alt="">
-                        </div>
-
                         <div class="menu-box category-popup-btn__box">
-                            <img class="menu-box_img category-popup-btn__img" src="{{asset('assets/img/blog/header/menu-burger.png')}}" alt="">
                             <strong class="menu-box_text category-popup-btn__text">@lang('site.category')</strong>
                         </div>
                     </header>
@@ -92,6 +88,7 @@
     </main>
 @endsection
 @section('scripts')
+    @parent
     <script src="{{ asset('assets/js/libs/vibrant.js') }}"></script>
     <script src="{{ asset('assets/js/libs/imagesloaded.pkgd.min.js') }}"></script>
     <script src="{{ asset('assets/js/libs/anime.min.js') }}"></script>

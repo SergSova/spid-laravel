@@ -9,16 +9,17 @@ class BlogSeeder extends Seeder {
 	 * @return void
 	 */
 	public function run() {
-		DB::table( 'static_pages' )->insert(
-			[
-				'id'          => 10,
-				'title'       => 'Блог',
-				'description' => '',
-				'page_index'  => 10,
-				'menutitle'   => '',
-				'published'   => 1,
-				'alias'       => 'blog',
-			]
-		);
+//		DB::table( 'static_pages' )->insert(
+//			[
+//				'id'          => 10,
+//				'title_ru'       => 'Блог',
+//				'page_index'  => 10,
+//				'published'   => 1,
+//				'alias'       => 'blog',
+//			]
+//		);
+
+        $this->call(BlogCategorySeeder::class);
+        $this->call(BlogPostsSeeder::class);
 	}
 }

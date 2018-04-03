@@ -724,34 +724,16 @@ article.blog-news .content-article .blog-image img {
   display: block;
 }
 
-/*---------------------logo styles ----------------------------------*/
-  .logo-box {
-    position: absolute;
-    top: 2.083vw;
-    left: 0;
-    transform: translateX(-85%);
-    z-index: 1;
-  }
-/*---------------------logo styles ----------------------------------*/
 
 /*---------------------menu styles ----------------------------------*/
   .menu-box {
     position: absolute;
-    top: 2.083vw;
-    right: 0;
-    transform: translateX(100%);
-    z-index: 1;
+    top: 6.083vw;
+    right: 2%;
+    z-index: 10;
     text-align: center;
   }
 
-  .menu-box_img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    outline: none;
-    border: none;
-    margin-bottom: 10px;
-  }
 
   .menu-box_text {
     font-family: 'Montserrat', sans-serif;

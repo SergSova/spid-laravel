@@ -2,47 +2,53 @@
 /**
  * @var \App\StaticPage $model
  */
+
+$langi       = $lang ?? '';
+$index_title = isset( $index ) ? "[$index]" : '';
+$index       = $index ?? '';
 ?>
-<div id="accordionSEO">
+<div id="accordionSEO{{$langi}}">
     <div class="card">
-        <div class="card-header" id="headingSEO">
+        <div class="card-header" id="headingSEO{{$langi}}">
             <h5 class="mb-0">
-                <a class="btn btn-primary" data-toggle="collapse" href="#collapseSEO" role="button" aria-expanded="false" aria-controls="collapseSEO">
-                    SEO
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseSEO{{$langi}}" role="button"
+                   aria-expanded="false" aria-controls="collapseSEO{{$langi}}">
+                    SEO{{' '.$langi}}
                 </a>
             </h5>
         </div>
-        <div id="collapseSEO" class="collapse" aria-labelledby="headingSEO" data-parent="#accordionSEO">
+        <div id="collapseSEO{{$langi}}" class="collapse" aria-labelledby="headingSEO{{$langi}}"
+             data-parent="#accordionSEO{{$langi}}">
             <div class="card-body">
                 <div class="form-group">
-                    {{ Form::label('Seo[seo_title]','SEO Title') }}
-                    {{ Form::text('Seo[seo_title]', $model->seo->seo_title ??null,['class'=>'form-control']) }}
+                    {{ Form::label('Seo'.$index_title.'[seo_title]','SEO Title') }}
+                    {{ Form::text('Seo'.$index_title.'[seo_title]', $model->{'seo'.$index}->seo_title ??NULL,['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('Seo[seo_keywords]','SEO Keywords') }}
-                    {{ Form::text('Seo[seo_keywords]', $model->seo->seo_keywords ??null,['class'=>'form-control']) }}
+                    {{ Form::label('Seo'.$index_title.'[seo_keywords]','SEO Keywords') }}
+                    {{ Form::text('Seo'.$index_title.'[seo_keywords]', $model->{'seo'.$index}->seo_keywords ??NULL,['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('Seo[seo_description]','SEO Description') }}
-                    {{ Form::textarea('Seo[seo_description]', $model->seo->seo_description ??null,['class'=>'form-control']) }}
+                    {{ Form::label('Seo'.$index_title.'[seo_description]','SEO Description') }}
+                    {{ Form::textarea('Seo'.$index_title.'[seo_description]', $model->{'seo'.$index}->seo_description ??NULL,['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('Seo[seo_text]','SEO Text') }}
-                    {{ Form::textarea('Seo[seo_text]', $model->seo->seo_text ??null,['class'=>'form-control']) }}
+                    {{ Form::label('Seo'.$index_title.'[seo_text]','SEO Text') }}
+                    {{ Form::textarea('Seo'.$index_title.'[seo_text]', $model->{'seo'.$index}->seo_text ??NULL,['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('Seo[og_title]','OG Title') }}
-                    {{ Form::text('Seo[og_title]', $model->seo->og_title ??null,['class'=>'form-control']) }}
+                    {{ Form::label('Seo'.$index_title.'[og_title]','OG Title') }}
+                    {{ Form::text('Seo'.$index_title.'[og_title]', $model->{'seo'.$index}->og_title ??NULL,['class'=>'form-control']) }}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('Seo[og_description]','OG Description') }}
-                    {{ Form::textarea('Seo[og_description]', $model->seo->og_description ??null,['class'=>'form-control']) }}
+                    {{ Form::label('Seo'.$index_title.'[og_description]','OG Description') }}
+                    {{ Form::textarea('Seo'.$index_title.'[og_description]', $model->{'seo'.$index}->og_description ??NULL,['class'=>'form-control']) }}
                 </div>
                 @include('admin.chanks.img_lfm',[
-                'id'=>'og_image',
-                'name'=>"Seo[og_image]",
+                'id'=>'og_image'.($index??''),
+                'name'=>'Seo'.$index_title.'[og_image]',
                 'title'=>'OG Image',
-                'value'=>$model->seo->og_description ??null
+                'value'=>$model->{'seo'.$index}->image ??NULL
                 ])
             </div>
         </div>

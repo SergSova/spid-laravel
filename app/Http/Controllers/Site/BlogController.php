@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Collection;
 
 class BlogController extends Controller
 {
+
+
     public function index($category = null)
     {
         $model = Blog::find(10);

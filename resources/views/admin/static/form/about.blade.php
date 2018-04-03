@@ -1,30 +1,42 @@
-<?php
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        @foreach(\App\Http\Middleware\Locale::$languages as $lang)
+            <a class="nav-item nav-link {{$loop->first?'active':''}}" id="nav-{{$lang}}-tab" data-toggle="tab"
+               role="tab" aria-controls="nav-{{$lang}}" aria-selected="true"
+               href="#nav-{{$lang}}">{{$lang=='uk'?'ua':$lang}}</a>
+        @endforeach
+    </div>
+</nav>
 
-
-?>
-
-<div class="form-group">
-    {{ Form::label('title', 'Заголовок') }}
-    {{ Form::text('title', null ,['class'=>'form-control']) }}
+<div class="tab-content" id="nav-tabContent">
+    @foreach(\App\Http\Middleware\Locale::$languages as $lang)
+        <div class="tab-pane fade {{$loop->first?'show active':''}}" id="nav-{{$lang}}" role="tabpanel"
+             aria-labelledby="nav-{{$lang}}-tab">
+            <div class="form-group">
+                {{ Form::label('title_'.$lang, 'Заголовок') }}
+                {{ Form::text('title_'.$lang, NULL ,['class'=>'form-control']) }}
+            </div>
+            <div class="form-group">
+                {{ Form::label('supported_'.$lang, 'Заголовок поддержки') }}
+                {{ Form::text('supported_'.$lang, NULL ,['class'=>'form-control ']) }}
+            </div>
+            <div class="form-group">
+                {{ Form::label('desc_title_'.$lang, 'Заголовок контента') }}
+                {{ Form::text('desc_title_'.$lang, NULL ,['class'=>'form-control ']) }}
+            </div>
+            <div class="form-group">
+                {{ Form::label('description_'.$lang, 'Содержимое') }}
+                {{ Form::textarea('description_'.$lang, NULL ,['class'=>'form-control my-editor']) }}
+            </div>
+        </div>
+    @endforeach
 </div>
-<div class="form-group">
-    {{ Form::label('supported', 'Заголовок поддержки') }}
-    {{ Form::text('supported', null ,['class'=>'form-control ']) }}
-</div>
-<div class="form-group">
-    {{ Form::label('desc_title', 'Заголовок контента') }}
-    {{ Form::text('desc_title', null ,['class'=>'form-control ']) }}
-</div>
-<div class="form-group">
-    {{ Form::label('description', 'Содержимое') }}
-    {{ Form::textarea('description', null ,['class'=>'form-control my-editor']) }}
-</div>
-
 <div id="accordion">
     <div class="card">
         <div class="card-header" id="headingTwo">
             <h5 class="mb-0">
-                <a class="btn btn-primary" data-toggle="collapse" href="#collapseTwo" role="button" aria-expanded="false" aria-controls="collapseTwo">
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseTwo" role="button"
+                   aria-expanded="false" aria-controls="collapseTwo">
                     Слайдер
                 </a>
             </h5>
@@ -54,7 +66,7 @@
                 @empty
                     <div class="row photo-wrap">
                         <div class="form-group col-lg-1">
-                            {{ Form::text('Photo[0][index]',null,['class'=>'index-text form-control-plaintext','readonly'=>1]) }}
+                            {{ Form::text('Photo[0][index]',NULL,['class'=>'index-text form-control-plaintext','readonly'=>1]) }}
                         </div>
                         <div class="col">
                             @include('admin.chanks.img_lfm',['id'=>'photo0','name'=>"Photo[0][path]",'title'=>'Фото 0'])

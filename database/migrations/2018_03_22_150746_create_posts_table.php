@@ -17,7 +17,19 @@ class CreatePostsTable extends Migration
             'posts',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('title');
+                $table->string('title_ru');
+                $table->string('title_uk')->nullable();
+                $table->text('description_ru')->nullable();
+                $table->text('description_uk')->nullable();
+                $table->text('content_ru')->nullable();
+                $table->text('content_uk')->nullable();
+                $table->unsignedInteger('seo_id_ru')->nullable();
+                $table->foreign('seo_id_ru')->references('id')->on('seos')
+                    ->onDelete('cascade');
+                $table->unsignedInteger('seo_id_uk')->nullable();
+                $table->foreign('seo_id_uk')->references('id')->on('seos')
+                    ->onDelete('cascade');
+
                 $table->boolean('published')->default(1);
                 $table->dateTime('publishedOn')->nullable();
                 $table->string('mainImage')->nullable();
@@ -26,8 +38,6 @@ class CreatePostsTable extends Migration
                 $table->boolean('isVioletPostStyle')->default(0);
                 $table->boolean('isBig')->default(0);
                 $table->boolean('isVideo')->default(0);
-                $table->text('content')->nullable();
-                $table->text('description')->nullable();
                 //slider - это JSON объект (path, alt, title)
                 $table->text('slider')->nullable();
                 $table->unsignedInteger('viewers')->default(0);
@@ -41,9 +51,6 @@ class CreatePostsTable extends Migration
                 $table->foreign('category_id')->references('id')->on('blog_categories')
                     ->onDelete('cascade');
 
-                $table->unsignedInteger('seo_id')->nullable();
-                $table->foreign('seo_id')->references('id')->on('seos')
-                    ->onDelete('cascade');
 
                 $table->softDeletes();
                 $table->timestamps();

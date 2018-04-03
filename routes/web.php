@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
+//Локализация
 Route::get(
     'setlocale/{lang}',
     function ($lang) {
@@ -53,23 +54,21 @@ Route::get(
     }
 )->name('setlocale');
 
-//Локализация
 Route::group(
     ['prefix' => App\Http\Middleware\Locale::getLocale()],
     function () {
-
         Route::get('/', 'Site\SiteController@index')->name('home');
-        Route::get('/aids', 'Site\SiteController@aids');
+        Route::get('/aids', 'Site\SiteController@aids')->name('aids');
         Route::get('/slide-bubles', 'Site\SiteController@slideBubles');
         Route::get('/slide-rocket', 'Site\SiteController@slideRocket');
         Route::get('/with-who', 'Site\SiteController@withWho');
-        Route::get('/bandit', 'Site\SiteController@bandit');
-        Route::get('/condoms-white', 'Site\SiteController@condomsWhite');
-        Route::get('/consultants', 'Site\SiteController@consultants');
-        Route::get('/aids-test', 'Site\SiteController@testPage');
-        Route::get('/faq', 'Site\SiteController@faq');
-        Route::get('/map', 'Site\SiteController@map');
-        Route::get('/about', 'Site\SiteController@about');
+        Route::get('/bandit', 'Site\SiteController@bandit')->name('bandit');
+        Route::get('/condoms-white', 'Site\SiteController@condomsWhite')->name('condoms');
+        Route::get('/consultants', 'Site\SiteController@consultants')->name('consult');
+        Route::get('/about', 'Site\SiteController@about')->name('about');
+        Route::get('/aids-test', 'Site\SiteController@testPage')->name('test');
+        Route::get('/faq', 'Site\SiteController@faq')->name('faq');
+        Route::get('/map', 'Site\SiteController@map')->name('map');
 
         Auth::routes();
 
@@ -103,10 +102,17 @@ Route::group(
             'Admin\StaticPageController@edit'
         )->name('staticPageEdit')->where(['staticPage' => '[0-9]+']);
 
+//        Route::post('/lang/{lang}/{base}/{post_id}', 'LangResourceController@store')->name('lang.store');
+//        Route::get('/lang/{base}', 'LangResourceController@show')->name('lang.show');
+//        Route::delete('/lang/{lang}/{base}', 'LangResourceController@destroy')->name('lang.destroy');
+
         Route::resource('/blog', 'Admin\BlogController');
+        Route::get('/blog/create-lang/{post}/{lang}', 'Admin\BlogController@createLang')->name('blog.create-lang');
+        Route::get('/blog-edit-lang/{post_id}/{base_id}/{lang}', 'Admin\BlogController@editLang')->name('blog.edit-lang');
         Route::resource('/blog-category', 'Admin\BlogCategoryController');
         Route::get('/blog/pub/{post}', 'Admin\BlogController@pub')->name('blog.pub');
-        Route::delete('/blog/clear/{blog?}', 'Admin\BlogController@removeAll')->name('blog.clear');
+        Route::post('/blog/restore/{post_id}', 'Admin\BlogController@restore')->name('blog.restore')->where(['post_id' => '[0-9]+']);
+        Route::delete('/blog-clear/{blog?}', 'Admin\BlogController@removeAll')->name('blog.clear');
 
     }
 );

@@ -100,25 +100,12 @@ h2 {
     line-height: 3vh;
     margin-left: 40px;
 }
-.burger {
-    background: url('../../img/drug-store/burger.png') no-repeat center center;
-    position: absolute;
-    right: 2%;
-    top: 4%;
-    height: 50px;
-    width: 52px;
-    z-index: 50;
-}
 
 .coffin {
     bottom: 4%;
     left: 2%;
 }
 
-.top-logo {
-    top: 4%;
-    left: 2%;
-}
 
 .game-icons {
     position: absolute;
@@ -1310,7 +1297,7 @@ canvas {
 
 @media all and (max-width: 991px) {
     .modal__text {
-        font-size: 18px;
+        font-size: 2.5vw;
     }
 
     .modal__btn,

@@ -11,21 +11,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
-        $this->call(IndexSeeder::class);
-        $this->call(AidsSeeder::class);
-        $this->call(SlideBublesSeeder::class);
-        $this->call(SlideRocketSeeder::class);
-        $this->call(WithWhoSeeder::class);
-        $this->call(BanditSeeder::class);
-        $this->call(CondomsWhiteSeeder::class);
-        $this->call(ConsultantsSeeder::class);
-        $this->call(TestPageSeeder::class);
+        $this->call(UsersTableSeeder::class);
         $this->call(BlogSeeder::class);
-        $this->call(BlogCategorySeeder::class);
-        $this->call(BlogPostsSeeder::class);
         $this->call(FaqSeeder::class);
-        $this->call(MapSeeder::class);
+        $this->call(StaticPagesSeeder::class);
+
+//        $this->call(IndexSeeder::class);
+//        $this->call(AidsSeeder::class);
+//        $this->call(SlideBublesSeeder::class);
+//        $this->call(SlideRocketSeeder::class);
+//        $this->call(WithWhoSeeder::class);
+//        $this->call(BanditSeeder::class);
+//        $this->call(CondomsWhiteSeeder::class);
+//        $this->call(ConsultantsSeeder::class);
+//        $this->call(TestPageSeeder::class);
+
+//        $this->call(MapSeeder::class);
+//        $this->call(AboutSeeder::class);
 
     }
 }

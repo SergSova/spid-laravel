@@ -13,9 +13,6 @@ use Carbon\Carbon;
  * @var \App\Blog $model
  */
 $title = 'Блог';
-setlocale(LC_ALL, "ru_RU.UTF-8");
-
-Carbon::setLocale('uk');
 
 $date = Carbon::now()->diffForHumans();
 ?>
@@ -48,7 +45,7 @@ $date = Carbon::now()->diffForHumans();
                 <td></td>
             </tr>
             </thead>
-            @forelse($model->posts() as $post)
+            @forelse($model->posts()/*->where('lang',app()->getLocale())*/ as $post)
                 <tr {{$post->trashed()?'class="table-danger"':''}}>
                     <td>{{$post->id}}</td>
                     {{--                    <td>{{$post->index}}</td>--}}
@@ -63,6 +60,10 @@ $date = Carbon::now()->diffForHumans();
                             <a href="{{ route('blog.edit',[$post->id]) }}" class="btn-sm btn btn-info">Редактировать</a>
                             @if(!$post->trashed())
                                 <a href="{{ route('blog.pub',[$post->id]) }}" class="btn-sm btn {{$post->published?'btn-warning':'btn-success'}}">{{$post->published?'Снять с публикации':'Опубликовать'}}</a>
+                            @else
+                                {{Form::open(['route'=>['blog.restore',$post->id],'method'=>'post'])}}
+                                <input type="submit" class="btn-sm btn btn-success" value="Востановить"/>
+                                {{Form::close()}}
                             @endif
                             {{Form::open(['route'=>[($post->trashed()?'blog.clear':'blog.destroy'), $post->id], 'method'=>'delete'])}}
                             <button onclick="return confirm('are you sure?')" type="submit" class="btn-sm btn btn-danger">

@@ -6,10 +6,11 @@
 ?>
 @extends('site.layout')
 
-@section('title',$model->getTitle())
+@section('title',$model->seo_title)
 
 @section('styles')
-    <link rel="stylesheet" href="assets/css/main.css">
+    @parent
+    <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
 @endsection
 
 @section('body')
@@ -92,27 +93,34 @@
             </svg>
         </div>
     </div>
-
-    <main class="content">
-        <div class="content-section">
-            <div class="logo-box">
-                <img class="js-hover" src="assets/img/drug-store/drug-store-logo1.svg" alt="" data="assets/img/drug-store/drug-store-logo2.svg,assets/img/drug-store/drug-store-logo3.svg,assets/img/drug-store/drug-store-logo4.svg" data-src="assets/img/drug-store/drug-store-logo1.svg">
+    <div class="landscape">
+        <div class="landscape-inner">
+            <div class="landscape-icon">
+                <div class="landscape-icon__condom_fill"></div>
+                <div class="landscape-icon__condom_stroke"></div>
+                <div class="landscape-icon__condom_arrow"></div>
             </div>
 
+            <h5 class="landscape-title">@lang('site.landscape_title')</h5>
+            <p class="landscape-desc">@lang('site.landscape_desc')</p>
+        </div>
+    </div>
+    <main class="content">
+        <div class="content-section">
+            
             <div class="content__left-box">
                 <h1 class="main-caption clip-fix">
-                    <div class="main-caption_letter">
                         {!! str_replace('/',' - <br>',$model->title) !!}
-                    </div>
                 </h1>
             </div>
 
             <div id="custom-slider">
-                <div class="custom-slider_section cf">
-                    @foreach($model->Tabs as $inx=>$tab)
+                <div class="custom-slider_section">
+                    @foreach($model->{'Tabs_'.app()->getLocale()} as $inx=>$tab)
                         <div class="custom-slider_wrap">
                             <div class="custom-slider_wrap-top-text">
-                                <h3><span>{!! $tab->title !!}</span></h3>
+                                <h3 id="cond-white"><span>{!! $tab->title !!}</span></h3>
+
                                 @if($tab->add_box1)
                                     <div class="custom-slider_wrap-add-box">
                                         <div class="custom-slider_wrap-add-caption"><span>{!! $tab->add_box1 !!}</span>
@@ -132,8 +140,8 @@
                                 <div class="custom-slider_section-content">
                                     <div class="custom-slider_section-content-img">
                                         <img class="origin-img"
-                                            src="assets/img/condoms-white/condoms-{{$inx}}-{!! $section->index !!}.png"
-                                            data-hover="assets/img/condoms-white/condoms-{{$inx}}-{!! $section->index !!}-hover.png"
+                                            src="/assets/img/condoms-white/condoms-{{$inx}}-{!! $section->index !!}.png"
+                                            data-hover="/assets/img/condoms-white/condoms-{{$inx}}-{!! $section->index !!}-hover.png"
                                             alt="">
                                     </div>
                                     <div class="text"><strong>{!! $section->title !!}</strong>{!! $section->text !!}</div>
@@ -143,41 +151,21 @@
                     @endforeach
                 </div>
                 <div class="custom-slider_nav-container">
-                    @foreach($model->Tabs as $inx=>$tab)
+                    @foreach($model->{'Tabs_'.app()->getLocale()} as $inx=>$tab)
                         <div class="nav-button"><strong class="nav-button-text">{!! $tab->menu_title !!}</strong></div>
                     @endforeach
                     <div class="line"></div>
                 </div>
             </div>
 
-            <div class="navigate-box">
-                <div class="navigate-box__left">
-                    <div class="navigate-box__left-wrap">
-                        <span class="navigate-box__line"></span>
-
-                        <span class="navigate-box__line"></span>
-                    </div>
-
-                    <div class="navigate-box__text">предыдущая <br> страница</div>
-                </div>
-
-                <div class="navigate-box__right">
-                    <div class="navigate-box__right-wrap">
-                        <span class="navigate-box__line"></span>
-                            
-                        <span class="navigate-box__line"></span>
-                    </div>
-
-                    <div class="navigate-box__text">следующая <br> страница</div>
-                </div>
-            </div>
+            @include('site.chanks.navigate_box')
         </div>
     </main>
 @endsection
 
 @section('scripts')
     @parent
-    <script src="assets/js/libs/jquery.touch.js"></script>
-    <script src="assets/js/libs/wheel-indicator.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="{{asset('assets/js/libs/jquery.touch.js')}}"></script>
+    <script src="{{asset('assets/js/libs/wheel-indicator.js')}}"></script>
+    <script src="{{asset('assets/js/main.js')}}"></script>
 @endsection

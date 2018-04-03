@@ -8,6 +8,8 @@
 
 namespace App;
 
+use App\Http\Controllers\LangResourceModel;
+use App\Http\Middleware\Locale;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,7 +21,12 @@ use Illuminate\Support\Facades\Lang;
  *
  * @package App
  * @property int     $id
- * @property string  $title
+ * @property string  $title_ru
+ * @property string  $content_ru
+ * @property string  $description_ru
+ * @property string  $title_uk
+ * @property string  $content_uk
+ * @property string  $description_uk
  * @property bool    $published
  * @property string  $publishedOn
  * @property string  $mainImage
@@ -28,8 +35,6 @@ use Illuminate\Support\Facades\Lang;
  * @property boolean $isBlackTitle
  * @property boolean $isVioletPostStyle
  * @property boolean $isBig
- * @property string  $content
- * @property string  $description
  * @property string  $slider
  * @property int     $viewers
  * @property int     $followers
@@ -38,7 +43,8 @@ use Illuminate\Support\Facades\Lang;
  * @property int     $index
  * @property string  $slug
  * @property int     $category_id
- * @property int     $seo_id
+ * @property int     $seo_id_ru
+ * @property int     $seo_id_uk
  * @property Carbon  $deleted_at
  */
 class Post extends Model
@@ -54,45 +60,59 @@ class Post extends Model
             'isBig'             => 'boolean',
         ];
 
-    protected $dates = ['deleted_at'];
-
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-        $this->Slider = $this->slider ? json_decode($this->slider) : collect();
-    }
-
-    public function getModTitleAttribute()
-    {
-        return strstr( $this->title,'~') ? '<span>'.implode('</span> <span>', explode('~', $this->title)).'</span>' : $this->title;
-    }
-
-    public function getSliderAttribute($value)
-    {
-        return collect(json_decode($value));
-    }
-
     protected $fillable
         = [
-            'title',
+            'title_ru',
             'mainImage',
             'isBlackTitle',
             'isVioletPostStyle',
             'isBig',
             'isVideo',
             'mainVideo',
-            'content',
-            'description',
+            'content_ru',
+            'description_ru',
             'author',
             'category_id',
             'authorImage',
             'published',
             'publishedOn',
+            'title_uk',
+            'content_uk',
+            'description_uk',
         ];
 
-    public function seo()
+    protected $dates = ['deleted_at'];
+
+    public function getModTitleAttribute()
     {
-        return $this->hasOne(Seo::class, 'id', 'seo_id');
+        $locale = \app()->getLocale();
+        $title = $this->{'title_'.$locale} ?? $this->{'title_'.Locale::$mainLanguage}.'*';
+
+        return strstr($title, '~') ? '<span>'.implode('</span> <span>', explode('~', $title)).'</span>' : $title;
+    }
+
+    public function getContentAttribute($key)
+    {
+        return $this->{'content_'. \app()->getLocale()};
+    }
+    public function getTitleAttribute($key)
+    {
+        return $this->{'title_'. \app()->getLocale()};
+    }
+
+    public function getDescriptionAttribute($key)
+    {
+        return $this->{'description_'. \app()->getLocale()};
+    }
+
+    public function seoru()
+    {
+        return $this->hasOne(Seo::class, 'id', 'seo_id_ru');
+    }
+
+    public function seouk()
+    {
+        return $this->hasOne(Seo::class, 'id', 'seo_id_uk');
     }
 
     /**
@@ -106,13 +126,21 @@ class Post extends Model
     public function saveSeo($request)
     {
         if ($Request_seo = $request->get('Seo')) {
-            if (!$seo = $this->seo) {
-                $seo = new Seo();
+            foreach ($Request_seo as $lang => $seoReq) {
+                if (!$seo = $this->{'seo'.$lang}) {
+                    $seo = new Seo();
+                }
+                $seo->fill($seoReq)->save();
+                $this->{'seo_id'.($lang ? '_'.$lang : '')} = $seo->id;
             }
-            $seo->fill($Request_seo)->save();
-            $this->seo_id = $seo->id;
             $this->save();
+
         }
+    }
+
+    public function getSliderAttribute($value)
+    {
+        return collect($value ? json_decode($value) : []);
     }
 
     public function getUrlAttribute()
@@ -149,4 +177,12 @@ class Post extends Model
             .Lang::get('site.year');
     }
 
+    public function getAllCategoryAttribute()
+    {
+        return BlogCategory::all()->flatMap(
+            function ($el) {
+                return [$el->title => $el->id];
+            }
+        )->flip();
+    }
 }

@@ -75,7 +75,7 @@
     z-index: 12;
 }
 
-.burger {
+/*.burger {
     position: absolute;
     right: 2%;
     top: 4%;
@@ -116,7 +116,7 @@
 
 .burger:hover .burger-item_bottom {
     transform: translateY(10px);
-}
+}*/
 
 .game-icons {
     position: absolute;
@@ -130,7 +130,7 @@
     position: absolute;
     z-index: 20;
 }
-.top-logo {
+/*.top-logo {
     top: 4%;
     left: 2%;
 }
@@ -142,7 +142,7 @@
 .game-icons.top-logo img {
     width: 50%;
     height: auto;
-}
+}*/
 
 .title {
     position: absolute;

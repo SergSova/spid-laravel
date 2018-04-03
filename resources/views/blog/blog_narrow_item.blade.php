@@ -65,7 +65,6 @@
                             </div>
                             <div class="blog-title">
                                 <h2>{!! $post->mod_title !!}</h2>
-                                <h3>Мастер класс от Андре Тана</h3>
                             </div>
                             <div class="bottom-link">
                                 <a href="{{$post->url}}">@lang('site.more')</a>

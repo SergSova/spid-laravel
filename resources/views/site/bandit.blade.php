@@ -1,14 +1,39 @@
+<?php
+
+$lang = app()->getLocale();
+?>
 @extends('site.layout')
 
-@section('title',$model->getTitle())
+@section('title',$model->seo_title)
 
 @section('styles')
-    <link rel="stylesheet" href="assets/css/drug-store/reset.css">
-    <link rel="stylesheet" href="assets/css/drug-store/index.css">
-    <link rel="stylesheet" href="assets/css/bandit.css">
+    @parent
+    <link rel="stylesheet" href="{{asset('assets/css/main_about.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/drug-store/reset.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/drug-store/index.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/bandit.css')}}">
+
 @endsection
 
 @section('body')
+<div class="preloader">
+        <div class="preloader-inner">
+            <?php include "assets/img/svg/about/preloader-inner.svg" ?>
+        </div>
+    </div>
+    <div class="landscape">
+        <div class="landscape-inner">
+            <div class="landscape-icon">
+                <div class="landscape-icon__condom_fill"></div>
+                <div class="landscape-icon__condom_stroke"></div>
+                <div class="landscape-icon__condom_arrow"></div>
+            </div>
+
+            <h5 class="landscape-title">@lang('site.landscape_title')</h5>
+            <p class="landscape-desc">@lang('site.landscape_desc')</p>
+        </div>
+    </div>
+
     <div class="modal modal-band">
         <div class="modal__inner">
             <div class="modal__icons">
@@ -19,14 +44,11 @@
                     <?php include 'assets/img/svg/bandit/band-start.svg'?>
                 </div>
             </div>
-            <div class="modal__text">{!! $model->modal_text !!}</div>
-            <button class="modal__btn">{!! $model->modal_btn !!}</button>
+            <div class="modal__text">{!! $model->{'modal_text_'.$lang} !!}</div>
+            <button class="modal__btn">{!! $model->{'modal_btn_'.$lang} !!}</button>
         </div>
     </div>
-    <div class="burger"></div>
-    <div class="game-icons top-logo">
-        <img class="js-hover" src="assets/img/drug-store/drug-store-logo1.svg" alt="" data="assets/img/drug-store/drug-store-logo2.svg,assets/img/drug-store/drug-store-logo3.svg,assets/img/drug-store/drug-store-logo4.svg">
-    </div>
+
     <nav class="game-icons slider-controls slide-5">
         <a href="/with-who" class="str str-prev">
             <?php include 'assets/img/svg/bandit/str-prev.svg'?>
@@ -43,22 +65,25 @@
             <div class="games full">
                 <div class="game game2 full js-game2" id="game2">
                     <div class="game-wrap full">
-                        <h1><span>{!! $model->title !!}</span></h1>
+                        <h1><span>{!! $model->title_mod !!}</span></h1>
                         <div class="container-game">
-                            <a href="/condoms-white/">
+                            <a href="{{route('condoms')}}">
                                 <div class="rocket-btn-wrap">
-                                    <button class="rocket-btn">{!! $model->rocket_btn !!}</button>
+                                    <button class="rocket-btn">{!! $model->{'rocket_btn_'.$lang} !!}</button>
                                 </div>
                             </a>
                             <div class="rotator-game">
                                 <div class="head-rotator">
-                                    <span>{!! $model->rotator1 !!}</span>
-                                    <span>{!! $model->rotator2 !!}</span>
-                                    <span>{!! $model->rotator3 !!}</span>
-                                    <span>{!! $model->rotator4 !!}</span>
+                                    <span>{!! $model->{'rotator1_'.$lang} !!}</span>
+                                    <span>{!! $model->{'rotator2_'.$lang} !!}</span>
+                                    <span>{!! $model->{'rotator3_'.$lang} !!}</span>
+                                    <span>{!! $model->{'rotator4_'.$lang} !!}</span>
                                 </div>
 
                                 <div class="spins-wrap ">
+                                    <div class="rotator-row-line1 before"></div>
+                                    <div class="rotator-row-line2 before"></div>
+                                    <div class="rotator-row-line3 before"></div>
                                     <div class="rotator-row-wrap rotator-row1 resizeEl" id="spiner1">
                                         <div class="spin spin1 resizeEl" data-t-o="-450">
                                             <div class="spin-bg"></div>
@@ -85,6 +110,26 @@
                                             <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-1072"></div>
                                         </div>
                                         <div class="spin spin7 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-650"></div>
+                                        </div>
+                                        <div class="spin spin8 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-4"></div>
+                                        </div>
+                                        <div class="spin spin9 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-220"></div>
+                                        </div>
+                                        <div class="spin spin10 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-436"></div>
+                                        </div>
+                                        <div class="spin spin11 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-650"></div>
+                                        </div>
+                                        <div class="spin spin12 resizeEl" data-t-o="-450">
                                             <div class="spin-bg"></div>
                                             <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-650"></div>
                                         </div>
@@ -119,6 +164,26 @@
                                             <div class="spin-bg"></div>
                                             <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-650"></div>
                                         </div>
+                                        <div class="spin spin8 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-4"></div>
+                                        </div>
+                                        <div class="spin spin9 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-220"></div>
+                                        </div>
+                                        <div class="spin spin10 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-436"></div>
+                                        </div>
+                                        <div class="spin spin11 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-650"></div>
+                                        </div>
+                                        <div class="spin spin12 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-650"></div>
+                                        </div>
                                     </div>
                                     <!--Spin 3-->
                                     <div class="rotator-row-wrap rotator-row3 resizeEl" id="spiner3">
@@ -147,6 +212,26 @@
                                             <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-1072"></div>
                                         </div>
                                         <div class="spin spin7 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-650"></div>
+                                        </div>
+                                        <div class="spin spin8 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-4"></div>
+                                        </div>
+                                        <div class="spin spin9 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-220"></div>
+                                        </div>
+                                        <div class="spin spin10 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-436"></div>
+                                        </div>
+                                        <div class="spin spin11 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-650"></div>
+                                        </div>
+                                        <div class="spin spin12 resizeEl" data-t-o="-450">
                                             <div class="spin-bg"></div>
                                             <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-650"></div>
                                         </div>
@@ -181,14 +266,34 @@
                                             <div class="spin-bg"></div>
                                             <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-650"></div>
                                         </div>
+                                        <div class="spin spin8 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-4"></div>
+                                        </div>
+                                        <div class="spin spin9 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-220"></div>
+                                        </div>
+                                        <div class="spin spin10 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-436"></div>
+                                        </div>
+                                        <div class="spin spin11 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-650"></div>
+                                        </div>
+                                        <div class="spin spin12 resizeEl" data-t-o="-450">
+                                            <div class="spin-bg"></div>
+                                            <div class="spin-image resizeEl" data-bg-w="637" data-bg-h="1250" data-bg-x="0" data-bg-y="-650"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="pusk">
                                 <div class="img-line">
-                                    <img src="assets/img/bandit/line-top.png" alt="">
+                                    <img src="{{asset('assets/img/bandit/line-top.png')}}" alt="">
                                 </div>
-                                <div class="pusk-btn resizeEl" data-bg-w="110"  data-bg-h="1116"></div>
+                                <div class="pusk-btn resizeEl" data-bg-w="110" data-bg-h="1116"></div>
                             </div>
 
                             <!--MEN-->
@@ -197,12 +302,14 @@
                                     <div class="men-on-off">
                                     </div>
                                     <div class="men-turn-on-off">
-                                        <div class="men-turn-on-off-content" data-on="{!! $model->tumb_on_off[0] !!}" data-off="{!! $model->tumb_on_off[1] !!}">
-                                            <div><span class="turn-on-off">{!! $model->tumb_on_off[0] !!}</span><br/>{!! $model->tumb_on_off[2] !!}</div>
+                                        <div class="men-turn-on-off-content" data-on="{!! $model->{'tumb_on_off_'.$lang}[0] !!}" data-off="{!! $model->{'tumb_on_off_'.$lang}[1] !!}">
+                                            <div><span class="turn-on-off">{!! $model->{'tumb_on_off_'.$lang}[0] !!}</span><br/>{!! $model->{'tumb_on_off_'.$lang}[2] !!}</div>
                                             <div class="turn"></div>
                                         </div>
                                     </div>
-                                    <div class="lightning-s"><img src="assets/img/bandit/men/lightnings1.png"><img src="assets/img/bandit/men/lightnings2.png">
+                                    <div class="lightning-s">
+                                        <img src="{{asset('assets/img/bandit/men/lightnings1.png')}}">
+                                        <img src="{{asset('assets/img/bandit/men/lightnings2.png')}}">
                                     </div>
                                 </div>
                             </div>
@@ -217,8 +324,10 @@
 
 @section('scripts')
     @parent
-    <script src="assets/js/libs/detect.min.js"></script>
-    <script src="assets/js/main22.js"></script>
+    <script src="{{asset('assets/js/main_about.js')}}"></script>
+    <script src="{{asset('assets/js/libs/detect.min.js')}}"></script>
+    <script src="{{asset('assets/js/main22.js')}}"></script>
+
     <script>
         $(document).ready(function () {
 

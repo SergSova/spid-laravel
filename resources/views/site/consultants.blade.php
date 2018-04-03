@@ -8,10 +8,11 @@ use App\StaticPage;
 
 @extends('site.layout')
 
-@section('title',$model->getTitle())
+@section('title',$model->seo_title)
 
 @section('styles')
-    <link rel="stylesheet" href="assets/css/consult_main.css">
+    @parent
+    <link rel="stylesheet" href="{{asset('assets/css/consult_main.css')}}">
 @endsection
 
 @section('body')
@@ -30,17 +31,14 @@ use App\StaticPage;
                 <div class="landscape-icon__condom_arrow"></div>
             </div>
 
-            <h5 class="landscape-title">примите горизонтальное положение</h5>
-            
-            <p class="landscape-desc">переверните экран</p>
+            <h5 class="landscape-title">@lang('site.landscape_title')</h5>
+
+            <p class="landscape-desc">@lang('site.landscape_desc')</p>
         </div>
     </div>
 
     <main class="content">
         <div class="content-section">
-            <div class="logo-box">
-                <img class="js-hover" src="/assets/img/drug-store/drug-store-logo1.svg" alt="" data="/assets/img/drug-store/drug-store-logo2.svg,/assets/img/drug-store/drug-store-logo3.svg,/assets/img/drug-store/drug-store-logo4.svg" data-src="/assets/img/drug-store/drug-store-logo1.svg">
-            </div>
 
             <div class="consultants__left-box">
                 <div class="main-caption clip">
@@ -57,10 +55,10 @@ use App\StaticPage;
                     <span>{!! $model->longtitle !!}</span>
                 </h3>
                 <div class="consultants-content__content">
-                    @foreach($model->list as $i=>$val)
+                    @foreach($model->{'list_'.app()->getLocale()} as $i=>$val)
                         <div class="consultants-content__content-item">
                             <div class="consultants-content__img-wrap">
-                                <img src="assets/img/consultants/consultants-img-{{$i}}.png" alt="">
+                                <img src="/assets/img/consultants/consultants-img-{{$i}}.png" alt="">
                             </div>
                             <div class="consultants-content__text">{{ $val }}</div>
                         </div>
@@ -69,11 +67,15 @@ use App\StaticPage;
 
                 <div class="consultants-content__button-box">
                     <div class="consultants-content__button-wrapper">
-                        <button class="consultants-content__button consultants-btn"><span>расписание консультантов</span></button>
+                        <button class="consultants-content__button consultants-btn">
+                            <span>@lang('site.consult_schedule')</span>
+                        </button>
                     </div>
 
                     <div class="consultants-content__button-wrapper">
-                        <button class="consultants-content__button call-jivochat"><span>обратиться к специалисту</span></button>
+                        <button class="consultants-content__button call-jivochat">
+                            <span>@lang('site.consult_specialist')</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -84,10 +86,10 @@ use App\StaticPage;
                         <div class="popup-wrapper__consultants-column">
                             <div class="popup-wrapper__consultants-cell"></div>
                             @for($i=1;$i<=7;$i++)
-                                <div class="popup-wrapper__consultants-cell">{{ $model->{'consHeader_'.$i} }}</div>
+                                <div class="popup-wrapper__consultants-cell">{{ $model->{'consHeader_'.$i.'_'.app()->getLocale()} }}</div>
                             @endfor
                         </div>
-                        @foreach($model->consultants as $consultant)
+                        @foreach($model->{'Consultant_'.app()->getLocale()} as $consultant)
                             <div class="popup-wrapper__consultants-column">
                                 <div class="popup-wrapper__consultants-cell">{!! $consultant->title !!}</div>
 
@@ -102,36 +104,15 @@ use App\StaticPage;
                 </div>
             </div>
 
-            <div class="navigate-box">
-                <div class="navigate-box__left">
-                    <div class="navigate-box__left-wrap">
-                        <span class="navigate-box__line"></span>
-
-                        <span class="navigate-box__line"></span>
-                    </div>
-
-                    <div class="navigate-box__text">предыдущая <br> страница</div>
-                </div>
-
-                <div class="navigate-box__right">
-                    <div class="navigate-box__right-wrap">
-                        <span class="navigate-box__line"></span>
-                            
-                        <span class="navigate-box__line"></span>
-                    </div>
-
-                    <div class="navigate-box__text">следующая <br> страница</div>
-                </div>
-            </div>
+            @include('site.chanks.navigate_box')
         </div>
 
     </main>
 @endsection
-
 @section('scripts')
     @parent
-    <script src="assets/js/libs/wheel-indicator.js"></script>
-    <script src="assets/js/consult_main.js"></script>
+    <script src="{{asset('assets/js/libs/wheel-indicator.js')}}"></script>
+    <script src="{{asset('assets/js/consult_main.js')}}"></script>
     <!-- BEGIN JIVOSITE CODE {literal} -->
     <script type='text/javascript'>
         (function () {

@@ -7,21 +7,38 @@
 
     <title>@yield('title','Page')</title>
 
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800&amp;subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700" rel="stylesheet">
-    <link href="/assets/css/menu.css" rel="stylesheet" type="text/css">
-
+    <link href="{{asset('assets/css/menu.css')}}" rel="stylesheet" type="text/css">
     @yield('styles')
 </head>
 <body class="{{$body_class??''}}">
-
 @include('site.menu')
 
 @yield('body')
 
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+$(window).on('load', function() {
+    $('.preloader').delay(1000).fadeOut(300, function() {
+        var scroll_up = 0;
 
+        $(window).on('scrollUp', function(e) {
+    
+            scroll_up += 1;
+    
+            if (scroll_up > 1) {
+                location.assign('/map');
+            }
+    
+        });
+    });
+
+    $('.preloader svg').delay(1000).fadeOut(300);
+});
+</script>
 @if(isset($model) && method_exists($model,'getNext'))
     <script>
         var next_page = '{{$model->getNext()['alias']}}';

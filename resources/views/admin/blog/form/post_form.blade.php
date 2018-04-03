@@ -3,20 +3,49 @@
 /**
  * @var \App\Post $model
  */
+
+
 ?>
 
-<div class="form-row">
-    <div class="form-group">
-        {{ Form::label('category_id', 'Категория') }}
-        {{ Form::select('category_id', $model->allCategory, $model->category_id,['class'=>'custom-select','placeholder'=>'Выберете категорию']) }}
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        @foreach(\App\Http\Middleware\Locale::$languages as $lang)
+            <a class="nav-item nav-link {{$loop->first?'active':''}}" id="nav-{{$lang}}-tab" data-toggle="tab"
+               role="tab" aria-controls="nav-{{$lang}}" aria-selected="true"
+               href="#nav-{{$lang}}">{{$lang=='uk'?'ua':$lang}}</a>
+        @endforeach
     </div>
-    <div class="form-group col">
-        {{ Form::label('title', 'Заголовок') }}
-        {{ Form::text('title', null ,['class'=>'form-control']) }}
-        <small class="form-text text-muted">~ - символ разделения строк</small>
-    </div>
-</div>
+</nav>
 
+<div class="tab-content" id="nav-tabContent">
+    @foreach(\App\Http\Middleware\Locale::$languages as $lang)
+        <div class="tab-pane fade {{$loop->first?'show active':''}}" id="nav-{{$lang}}" role="tabpanel" aria-labelledby="nav-{{$lang}}-tab">
+            <?php
+            $langi='';
+            if ($lang != \App\Http\Middleware\Locale::$mainLanguage)
+                $langi = ' '.($lang == 'uk' ? 'ua' : $lang);
+            ?>
+            <div class="form-group col">
+                {{ Form::label('title'.'_'.$lang, 'Заголовок'.$langi) }}
+                {{ Form::text('title'.'_'.$lang, null ,['class'=>'form-control']) }}
+                <small class="form-text text-muted">~ - символ разделения строк</small>
+            </div>
+            <div class="form-group">
+                {{ Form::label('content'.'_'.$lang,'Содержимое'.$langi) }}
+                {{ Form::textarea('content'.'_'.$lang,null, ['class'=>'form-control my-editor']) }}
+            </div>
+            <div class="form-group">
+                {{ Form::label('description'.'_'.$lang,'Краткое описание'.$langi) }}
+                {{ Form::textarea('description'.'_'.$lang,null, ['class'=>'form-control']) }}
+            </div>
+            @include('admin.seo_form',['lang'=>$lang,'index'=>$lang])
+        </div>
+    @endforeach
+</div>
+<div class="form-group">
+    {{ Form::label('category_id', 'Категория') }}
+    {{ Form::select('category_id', $model->all_category, $model->category_id,['class'=>'custom-select','placeholder'=>'Выберете категорию']) }}
+</div>
 <div class="form-row">
     @include('admin.chanks.img_lfm',['id'=>'mainImage1','name'=>'mainImage','title'=>'Основная картинка'])
 
@@ -44,15 +73,6 @@
         </div>
     </div>
 </div>
-
-<div class="form-group">
-    {{ Form::label('content','Содержимое') }}
-    {{ Form::textarea('content',null, ['class'=>'form-control my-editor']) }}
-</div>
-<div class="form-group">
-    {{ Form::label('description','Краткое описание') }}
-    {{ Form::textarea('description',null, ['class'=>'form-control']) }}
-</div>
 <div class="form-row">
     <div class="form-group">
         {{ Form::label('author','Автор') }}
@@ -61,7 +81,6 @@
 
     @include('admin.chanks.img_lfm',['id'=>'authorImage1','name'=>'authorImage','title'=>'Картинка автора','subClass'=>'col'])
 </div>
-
 <div id="accordion">
     <div class="card">
         <div class="card-header" id="headingTwo">
@@ -143,7 +162,6 @@
         </div>
     </div>
 </div>
-
 <div class="form-row">
     <div class="form-check col">
         {{ Form::checkbox('published',1,true,['class'=>'form-check-input']) }}

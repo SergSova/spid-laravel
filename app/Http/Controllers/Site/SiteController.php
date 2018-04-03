@@ -22,24 +22,28 @@ class SiteController extends Controller
     {
         /** @var StaticPage $model */
         $model = StaticPage::find(1);
-        $model->title = preg_replace('/(\w+)\s(\w+)/u', '$1 <div> $2 </div>', $model->title);
-        $model->longtitle = '<span>'.join('</span><span>', explode('/', $model->longtitle)).'</span>';
+        $model->title_mod = preg_replace('/(\w+)\s(\w+)/u', '$1 <div> $2 </div>', $model->title);
+        $model->longtitle_mod = '<span>'.join('</span><span>', explode('/', $model->longtitle)).'</span>';
 
         return view($this->prefix.'index')->with(compact('model'));
     }
 
     public function aids()
     {
+        /** @var StaticPage $model */
         $model = StaticPage::find(2);
         $next = $model->getNext();
         $prev = $model->getPrev();
 
         $modal = json_decode($model->description);
+        $model->merge($modal);
 
-        $model->title = join('<br>', explode('/', $model->title));
-        $model->modal_text = '<p>'.join('</p><p>', explode('/', $modal->modal_text)).'</p>';
-        $model->modal_btn = $modal->modal_btn;
-        $model->modal_bottom = '<p>'.join('<br>', explode('/', $modal->modal_bottom)).'</p>';
+
+        $lang = app()->getLocale();
+        $model->title_mod = join('<br>', explode('/', $model->title));
+
+        $model->{'modal_text_'.$lang} = '<p>'.join('</p><p>', explode('/', $modal->{'modal_text_'.$lang})).'</p>';
+        $model->{'modal_bottom_'.$lang} = '<p>'.join('<br>', explode('/', $modal->{'modal_bottom_'.$lang})).'</p>';
 
         return view($this->prefix.'aids')->with(compact('model', 'next', 'prev'));
     }
@@ -62,12 +66,13 @@ class SiteController extends Controller
         $next = $model->getNext();
         $prev = $model->getPrev();
 
-        $model->title = join('<br>', explode('/', $model->title));
-        $modal = json_decode($model->description);
-        $model->modal_text = '<p>'.join('</p><p>', explode('/', $modal->modal_text)).'</p>';
-        $model->modal_btn = $modal->modal_btn;
-        $model->text_bottom = explode('/', $modal->text_bottom);
-        $model->wrong = join('<br>', explode('/', $modal->wrong));
+        $model->title_mod = join('<br>', explode('/', $model->title));
+        $model->merge(json_decode($model->description));
+        $lang = app()->getLocale();
+
+        $model->{'modal_text_'.$lang} = '<p>'.join('</p><p>', explode('/', $model->{'modal_text_'.$lang})).'</p>';
+        $model->{'text_bottom_'.$lang} = explode('/', $model->{'text_bottom_'.$lang});
+        $model->{'wrong_'.$lang} = join('<br>', explode('/', $model->{'wrong_'.$lang}));
 
         return view($this->prefix.'slide-rocket')->with(compact('model', 'next', 'prev'));
     }
@@ -79,15 +84,12 @@ class SiteController extends Controller
         $next = $model->getNext();
         $prev = $model->getPrev();
 
-        $model->title = join('<br>', explode('/', $model->title));
-        $modal = json_decode($model->description);
-        $model->merge($modal);
-        $model->modal_text = '<p>'.join('</p><p>', explode('/', $modal->modal_text)).'</p>';
+        $model->title_mod = join('<br>', explode('/', $model->title));
+        $model->merge(json_decode($model->description));
+        $model->{'modal_text_'.app()->getLocale()} = '<p>'.join('</p><p>', explode('/', $model->{'modal_text_'.app()->getLocale()})).'</p>';
+        $model->{'pop_title_'.app()->getLocale()} = preg_replace('/^([\w\s]+)\*\s?(\w+)\s?\*(.*)$/u', '$1<span>$2</span>$3', $model->{'pop_title_'.app()->getLocale()});
 
-        $humans = json_decode($model->longtitle) ?? [];
-
-
-        return view($this->prefix.'with-who')->with(compact('model', 'humans', 'next', 'prev'));
+        return view($this->prefix.'with-who')->with(compact('model', 'next', 'prev'));
     }
 
     public function bandit()
@@ -100,11 +102,12 @@ class SiteController extends Controller
         /** @var StaticPage $model */
         $model->merge($modal);
 
-        $model->tumb_on_off = explode('/', $model->tumb_on_off);
-        $model->modal_text = '<p>'.join('</p><p>', explode('/', $model->modal_text)).'</p>';
-        $model->rotator4 = join('<br>', explode('/', $model->rotator4));
+        $lang = app()->getLocale();
+        $model->{'tumb_on_off_'.$lang} = explode('/', $model->{'tumb_on_off_'.$lang});
+        $model->{'modal_text_'.$lang} = '<p>'.join('</p><p>', explode('/', $model->{'modal_text_'.$lang})).'</p>';
+        $model->{'rotator4_'.$lang} = join('<br>', explode('/', $model->{'rotator4_'.$lang}));
 
-        $model->title = join('<br>', explode('/', $model->title));
+        $model->title_mod = join('<br>', explode('/', $model->title));
 
         return view($this->prefix.'bandit')->with(compact('model', 'next', 'prev'));
     }
@@ -116,7 +119,6 @@ class SiteController extends Controller
         $modal = json_decode($model->description);
         /** @var StaticPage $model */
         $model->merge($modal);
-//        $model->title_arr = explode('/', $model->title);
 
         return view($this->prefix.'condoms-white')->with(compact('model', 'next', 'prev'));
     }
@@ -133,10 +135,11 @@ class SiteController extends Controller
 
     public function testPage()
     {
-	    $model = StaticPage::find(9);
-	    $modal = json_decode($model->description);
-	    /** @var StaticPage $model */
-	    $model->merge($modal);
+        $model = StaticPage::find(9);
+        $modal = json_decode($model->description);
+        /** @var StaticPage $model */
+        $model->merge($modal);
+
         return view($this->prefix.'test-page')->with(compact('model'));
     }
 
@@ -153,16 +156,23 @@ class SiteController extends Controller
         $modal = json_decode($model->description);
         /** @var StaticPage $model */
         $model->merge($modal);
+
         return view($this->prefix.'map')->with(compact('model'));
     }
+
     public function about()
     {
         $model = StaticPage::find(13);
-        $modal = json_decode($model->description);
         /** @var StaticPage $model */
-        $model->merge($modal);
-
+        $model->merge(json_decode($model->description));
+        $model->merge(json_decode($model->longtitle));
 
         return view($this->prefix.'about')->with(compact('model'));
+    }
+
+    public function search($search)
+    {
+        $lang = app()->getLocale();
+        $static = StaticPage::where('title_'.$lang);
     }
 }

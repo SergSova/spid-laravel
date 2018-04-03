@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Blog;
 use App\BlogCategory;
 use App\Http\Controllers\Controller;
+use App\LangResource;
 use App\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -50,19 +51,25 @@ class BlogController extends Controller
      */
     public function create()
     {
-        $model = new Post();
+        $model = $model ?? new Post();
         $title = 'Создание статьи';
         $route = 'blog.store';
         $method = 'post';
-        $model->slider = [];
-        $model->allCategory = BlogCategory::all()->flatMap(
-            function ($el) {
-                return [$el->title => $el->id];
-            }
-        )->flip();
 
         return view('admin.blog.form.form_create')->with(compact('model', 'title', 'route', 'method'));
     }
+
+    public function createLang($model, $local)
+    {
+        $model = $model ?? new Post();
+        $title = 'Создание перевода для "'.strip_tags($model->mod_title).'"';
+        $route = 'blog.store';
+        $method = 'post';
+        app()->setLocale($local);
+
+        return view('admin.blog.form.form_create')->with(compact('model', 'title', 'route', 'method', 'local'));
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -74,9 +81,13 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $model = new Post();
-        $model->slug = str_slug($request->get('title'));
+        $model->slug = str_slug($request->get('title_ru'));
+
         if ($model->fill($request->all()) && $model->save()) {
-            $model->slider = json_encode($request->get('Photo'));
+            $slider = array_filter($request->get('Photo'),function ($el){return $el['path']!='';});
+            $model->slider = json_encode($slider);
+
+            $model->saveSeo($request);
             if ($model->save()) {
                 Session::flash('flash_message', 'Статья "'.$model->title.'" создана');
 
@@ -111,15 +122,9 @@ class BlogController extends Controller
     {
         /** @var Post $model */
         $model = Post::find($id);
-        $title = 'Редактирование статьи "'.$model->title.'"';
+        $title = 'Редактирование статьи "'.strip_tags($model->mod_title).'"';
         $route = 'blog.update';
         $method = 'PUT';
-        $model->allCategory = BlogCategory::all()->flatMap(
-            function ($el) {
-                return [$el->title => $el->id];
-            }
-        )->flip();
-
 
         return view('admin.blog.form.form_create')->with(compact('model', 'title', 'route', 'method'));
     }
@@ -136,11 +141,13 @@ class BlogController extends Controller
     {
         /** @var Post $model */
         $model = Post::find($id);
-        $model->slug = str_slug($request->get('title'));
+        $model->slug = str_slug($request->get('title_ru'));
         if ($model->fill($request->all()) && $model->save()) {
-            $model->slider = json_encode($request->get('Photo'));
+            $slider = array_filter($request->get('Photo'),function ($el){return $el['path']!='';});
+            $model->slider = json_encode($slider);
+            $model->saveSeo($request);
             if ($model->save()) {
-                Session::flash('flash_message', 'Статья "'.$model->title.'" обновлена');
+                Session::flash('flash_message', 'Статья "'.strip_tags($model->mod_title).'" обновлена');
 
                 return redirect(route('blog.index'));
             }
@@ -150,7 +157,7 @@ class BlogController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Пометить на удаление определенную статью.
      *
      * @param  int $id
      *
@@ -169,20 +176,37 @@ class BlogController extends Controller
         return redirect(route('blog.index'));
     }
 
+    /**
+     * Удалить совсем помеченые на удаление статьи если указан Id удаляеться указанная статья
+     *
+     * @param null $id Id статьи которую нужно удалить совсем
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function removeAll($id = null)
     {
         if ($id) {
             Session::flash('flash_message', 'Статья "'.$id.'" удалена');
-            Post::withTrashed()->where('id', $id)->forceDelete();
+            Post::onlyTrashed()->find($id)->forceDelete();
         } else {
 
-            Post::withTrashed()->get()->each(
+            Post::onlyTrashed()->get()->each(
                 function ($item) {
                     Session::flash('flash_message', 'Статья "'.$item->id.'" удалена');
                     $item->forceDelete();
                 }
             );
         }
+
+        return redirect(route('blog.index'));
+    }
+
+    public function restore($id)
+    {
+        $post = Post::onlyTrashed()->find($id);
+        $post->restore();
+        Session::flash('flash_message', 'Статья "'.strip_tags($post->mod_title).'" востановлена');
+
         return redirect(route('blog.index'));
     }
 }

@@ -2,36 +2,52 @@
 
 namespace App;
 
+use App\Http\Middleware\Locale;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class StaticPage
  *
  * @package App
- * @property string      title
- * @property string      longtitle
- * @property string      description
+ * @property string      title_ru
+ * @property string      title_uk
+ * @property string      longtitle_ru
+ * @property string      longtitle_uk
+ * @property string      description_ru
+ * @property string      description_uk
  * @property int         page_index
  * @property string      menutitle
  * @property boolean     published
  * @property string      alias
- * @property int         seo_id
+ * @property int         seo_id_ru
+ * @property int         seo_id_uk
  * @property Seo         seo
  * @property FaqAnswer[] questions
  */
 class StaticPage extends Model
 {
-    protected $fillable = ['title', 'longtitle', 'description', 'menutitle'];
+    protected $fillable
+        = [
+            'title_ru',
+            'longtitle_ru',
+            'description_ru',
+            'title_uk',
+            'longtitle_uk',
+            'description_uk',
+            'menutitle',
+        ];
 
 
     public function saveSeo($request)
     {
         if ($Request_seo = $request->get('Seo')) {
-            if (!$seo = $this->seo) {
-                $seo = new Seo();
+            foreach ($Request_seo as $lang => $seoReq) {
+                if (!$seo = $this->{'seo'.$lang}) {
+                    $seo = new Seo();
+                }
+                $seo->fill($seoReq)->save();
+                $this->{'seo_id'.($lang ? '_'.$lang : '')} = $seo->id;
             }
-            $seo->fill($Request_seo)->save();
-            $this->seo_id = $seo->id;
             $this->save();
         }
     }
@@ -43,7 +59,7 @@ class StaticPage extends Model
 
     public function seo()
     {
-        return $this->hasOne(Seo::class, 'id', 'seo_id');
+        return $this->hasOne(Seo::class, 'id', 'seo_id_ru');
     }
 
     public function getNext()
@@ -56,22 +72,6 @@ class StaticPage extends Model
         if ($mod) {
             $obj['title'] = $this->clearTitle($mod);
             $obj['alias'] = $mod->alias;
-        }
-
-        return $obj;
-    }
-
-    public function getPrev()
-    {
-        $obj = [
-            'title' => ' ',
-            'alias' => '',
-        ];
-
-        $model = self::where(['page_index' => $this->page_index - 1])->first();
-        if ($model) {
-            $obj['title'] = $this->clearTitle($model);
-            $obj['alias'] = $model->alias == 'index' ? '/' : $model->alias;
         }
 
         return $obj;
@@ -93,20 +93,25 @@ class StaticPage extends Model
         return $fc.mb_substr($str, 1);
     }
 
-    public function getTitle()
+    public function getPrev()
     {
-        return $this->seo->seo_title ?? $this->clearTitle($this).' | '.config('app.name');
-    }
+        $obj = [
+            'title' => ' ',
+            'alias' => '',
+        ];
 
-    public function merge($obj)
-    {
-        if (!is_null($obj)) {
-            foreach ($obj as $key => $val) {
-                $this->$key = $val;
-            }
+        $model = self::where(['page_index' => $this->page_index - 1])->first();
+        if ($model) {
+            $obj['title'] = $this->clearTitle($model);
+            $obj['alias'] = $model->alias == 'index' ? '/' : $model->alias;
         }
 
-        return $this;
+        return $obj;
+    }
+
+    public function getSeoTitleAttribute()
+    {
+        return $this->seo->seo_title ?? $this->clearTitle($this).' | '.config('app.name');
     }
 
     public function saveCustomField($request, $name)
@@ -127,134 +132,113 @@ class StaticPage extends Model
                 }
                 break;
             case 'aids':
-                $this->description = json_encode(
-                    [
-                        'modal_text'   => $_POST['modal_text'],
-                        'modal_btn'    => $_POST['modal_btn'],
-                        'modal_bottom' => $_POST['modal_bottom'],
-                    ],
-                    JSON_UNESCAPED_UNICODE
-                );
+                $filds = collect(['modal_text', 'modal_btn', 'modal_bottom']);
+
+                foreach (Locale::$languages as $language) {
+                    $isMain = Locale::$mainLanguage == $language;
+                    $this->{'description_'.$language} = json_encode(
+                        $filds->flatMap(
+                            function ($el) use ($language, $isMain) {
+                                return [$el.'_'.$language => $_POST[$el.'_'.$language]];
+                            }
+                        ),
+                        JSON_UNESCAPED_UNICODE
+                    );
+                }
                 break;
             case 'slide-bubles':
-                $this->description = json_encode(
+                $filds = collect(
                     [
-                        'modal_text' => $_POST['modal_text'],
-                        'modal_btn'  => $_POST['modal_btn'],
-                        'wrong'      => $_POST['wrong'],
-                    ],
-                    JSON_UNESCAPED_UNICODE
+                        'modal_text',
+                        'modal_btn',
+                        'wrong',
+                    ]
                 );
                 break;
             case 'slide-rocket':
-                $this->description = json_encode(
+                $filds = collect(
                     [
-                        'modal_text'  => $_POST['modal_text'],
-                        'modal_btn'   => $_POST['modal_btn'],
-                        'text_bottom' => $_POST['text_bottom'],
-                        'wrong'       => $_POST['wrong'],
-                    ],
-                    JSON_UNESCAPED_UNICODE
+                        'modal_text',
+                        'modal_btn',
+                        'text_bottom',
+                        'wrong',
+                    ]
                 );
                 break;
             case 'with-who':
-                $this->description = json_encode(
+                $filds = collect(
                     [
-                        'modal_text' => $_POST['modal_text'],
-                        'modal_btn'  => $_POST['modal_btn'],
-                        'pop_title'  => $_POST['pop_title'],
-                        'chk_1'      => $_POST['chk_1'],
-                        'chk_2'      => $_POST['chk_2'],
-                        'chk_3'      => $_POST['chk_3'],
-                        'chk_4'      => $_POST['chk_4'],
-                        'chk_5'      => $_POST['chk_5'],
-                        'chk_6'      => $_POST['chk_6'],
-                    ],
-                    JSON_UNESCAPED_UNICODE
+                        'modal_text',
+                        'modal_btn',
+                        'pop_title',
+                        'chk_1',
+                        'chk_2',
+                        'chk_3',
+                        'chk_4',
+                        'chk_5',
+                        'chk_6',
+                        'Humans',
+                    ]
                 );
-                $humans = $request->only('Human')['Human'];
-                $this->longtitle = json_encode($humans);
                 break;
             case 'bandit':
-                $this->description = json_encode(
+                $filds = collect(
                     [
-                        'modal_text'  => $_POST['modal_text'],
-                        'modal_btn'   => $_POST['modal_btn'],
-                        'tumb_on_off' => $_POST['tumb_on_off'],
-                        'rocket_btn'  => $_POST['rocket_btn'],
-                        'rotator1'    => $_POST['rotator1'],
-                        'rotator2'    => $_POST['rotator2'],
-                        'rotator3'    => $_POST['rotator3'],
-                        'rotator4'    => $_POST['rotator4'],
-                    ],
-                    JSON_UNESCAPED_UNICODE
+                        'modal_text',
+                        'modal_btn',
+                        'tumb_on_off',
+                        'rocket_btn',
+                        'rotator1',
+                        'rotator2',
+                        'rotator3',
+                        'rotator4',
+                    ]
                 );
                 break;
             case 'condoms-white':
-                $tabs = $_POST['Tab'];
-                $this->description = json_encode(
-                    [
-                        'Tabs' => $tabs ?? [],
-                    ],
-                    JSON_UNESCAPED_UNICODE
-                );
+                $filds = collect(['Tabs']);
                 break;
             case 'consultants':
-                $list = $_POST['list'];
-                $this->description = json_encode(
+                $filds = collect(
                     [
-                        'description'  => $_POST['description'],
-                        'consultants'  => $_POST['Consultant'],
-                        'consHeader_1' => $_POST['consHeader_1'],
-                        'consHeader_2' => $_POST['consHeader_2'],
-                        'consHeader_3' => $_POST['consHeader_3'],
-                        'consHeader_4' => $_POST['consHeader_4'],
-                        'consHeader_5' => $_POST['consHeader_5'],
-                        'consHeader_6' => $_POST['consHeader_6'],
-                        'consHeader_7' => $_POST['consHeader_7'],
-                        'list'         => $list ?? [],
-                    ],
-                    JSON_UNESCAPED_UNICODE
+                        'description',
+                        'Consultant',
+                        'consHeader_1',
+                        'consHeader_2',
+                        'consHeader_3',
+                        'consHeader_4',
+                        'consHeader_5',
+                        'consHeader_6',
+                        'consHeader_7',
+                        'list',
+                    ]
                 );
                 break;
             case 'aids-test':
-                $quest = $_POST['Quest'];
-                $answer = $_POST['Answer'];
-//                dd($quest);
-                $this->description = json_encode(
-                    [
-                        'description'   => $_POST['description'],
-                        'test_btn'      => $_POST['test_btn'],
-                        'test_btn_next' => $_POST['test_btn_next'],
-                        'Quest'         => $quest ?? [],
-                        'Answer'        => $answer ?? [],
-                    ],
-                    JSON_UNESCAPED_UNICODE
-                );
+                $filds = collect(['description', 'test_btn', 'test_btn_next', 'test_btn_refresh', 'Quest', 'Answer',]);
                 break;
             case 'about':
                 $slider = $_POST['Photo'];
-                $this->description = json_encode(
-                    [
-                        'desc_title'  => $_POST['desc_title'],
-                        'supported'   => $_POST['supported'],
-                        'description' => $_POST['description'],
-                        'slider'      => $slider ?? [],
-                    ],
-                    JSON_UNESCAPED_UNICODE
-                );
+                $filds = collect(['desc_title', 'supported', 'description']);
+                $this->longtitle_ru = json_encode(['slider' => collect($slider)], JSON_UNESCAPED_UNICODE);
+                $this->longtitle_uk = json_encode(['slider' => collect($slider)], JSON_UNESCAPED_UNICODE);
                 break;
             case 'map':
-                $city = $_POST['City'];
-
-                $this->description = json_encode(
-                    [
-                        'City' => $city ?? [],
-                    ]
-                    ,
+                $filds = collect(['City']);
+                break;
+        }
+        if (isset($filds)) {
+            foreach (Locale::$languages as $language) {
+                $isMain = Locale::$mainLanguage == $language;
+                $this->{'description_'.$language} = json_encode(
+                    $filds->flatMap(
+                        function ($el) use ($language, $isMain) {
+                            return [$el.'_'.$language => $_POST[$el.'_'.$language]];
+                        }
+                    ),
                     JSON_UNESCAPED_UNICODE
                 );
-                break;
+            }
         }
         $this->save();
 
@@ -262,9 +246,9 @@ class StaticPage extends Model
 
     public function loadCustomField($name)
     {
-        $modal = json_decode($this->description);
-        $this->merge($modal);
-
+        $this->merge(json_decode($this->description_uk));
+        $this->merge(json_decode($this->description_ru));
+        $lang = app()->getLocale();
         switch ($name) {
             case 'aids':
                 break;
@@ -273,23 +257,55 @@ class StaticPage extends Model
             case'slide-rocket':
                 break;
             case 'with-who':
-                $this->humans = json_decode($this->longtitle) ?? [];
+                $this->Humans_ru = $this->Humans_ru ?? collect();
+                $this->Humans_uk = $this->Humans_uk ?? collect();
                 break;
             case 'condoms-white':
                 break;
             case 'consultants':
-                $this->consultants = $model->consultants ?? [];
+                $this->Consultant_ru = $model->Consultant_ru ?? collect();
+                $this->Consultant_uk = $model->Consultant_uk ?? collect();
                 break;
             case 'about':
-                $this->slider = $this->slider ?? [];
+                $this->merge(json_decode($this->longtitle_uk));
+                $this->merge(json_decode($this->longtitle_ru));
                 break;
             case 'aids-test':
-                $this->Quest = $this->Quest ?? [];
-                $this->Answer = $this->Answer ?? [];
+                $this->Quest_ru = $this->Quest_ru ?? collect();
+                $this->Answer_ru = $this->Answer_ru ?? collect();
+                $this->Quest_uk = $this->Quest_uk ?? collect();
+                $this->Answer_uk = $this->Answer_uk ?? collect();
                 break;
             case 'map':
-                $this->City = $this->City ?? [];
+                $this->City_ru = $this->City_ru ?? collect();
+                $this->City_uk = $this->City_uk ?? collect();
                 break;
         }
+    }
+
+    public function merge($obj)
+    {
+        if (!is_null($obj)) {
+            foreach ($obj as $key => $val) {
+                $this->$key = $val;
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTitleAttribute($key)
+    {
+        return $this->{'title_'.app()->getLocale()};
+    }
+
+    public function getLongtitleAttribute($key)
+    {
+        return $this->{'longtitle_'.app()->getLocale()};
+    }
+
+    public function getDescriptionAttribute($key)
+    {
+        return $this->{'description_'.app()->getLocale()};
     }
 }

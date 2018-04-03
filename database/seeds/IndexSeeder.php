@@ -14,9 +14,9 @@ class IndexSeeder extends Seeder
         DB::table('static_pages')->insert(
             [
                 'id'          => '1',
-                'title'       => 'Будь настойчивей',
-                'longtitle'   => 'Нет презерватива / нет / секса',
-                'description' => 'Скроль',
+                'title_ru'       => 'Будь настойчивей',
+                'longtitle_ru'   => 'Нет презерватива / нет / секса',
+                'description_ru' => 'Скроль',
                 'page_index'  => 1,
                 'menutitle'   => '',
                 'published'   => 1,

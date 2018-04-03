@@ -17,7 +17,8 @@ $(window).on('load', function() {
 });
 
 $(document).ready(function() {
-    $('#logo-slider').slick({
+    if($('#logo-slider').length) {
+      $('#logo-slider').slick({
         dots: false,
         fade: true,
         speed: 500,
@@ -25,7 +26,9 @@ $(document).ready(function() {
         slidesToScroll: 1,
         prevArrow: '<button type="button" class="slick-prev"></button>',
         nextArrow: '<button type="button" class="slick-next"></button>',
-    });
+      });
+    }
+
 
     /*----------------- onhover logo dragstore  -----------------*/
         $('.js-hover').hover(function() {

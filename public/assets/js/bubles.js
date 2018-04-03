@@ -18,6 +18,7 @@ function DrugStore() {
     th.cloudParalax;
     th.handMove;
     th.controls = document.querySelector('.slider-controls');
+    th.handHideObjects = [document.querySelector('.burger'), document.querySelector('.top-logo'), document.querySelector('.slider-controls')];
 
     window.addEventListener('resize', function () {
         //rocket.setMetrics();
@@ -168,10 +169,20 @@ DrugStore.prototype._createHand = function() {
     th.hand.x = 0;
     th.hand.y = 0;
 
-    var controlsOffset = th.controls.getBoundingClientRect();
-    var can = false;
-    
+    var controlsOffsets = [],
+        can = false,
+        hover = false;
+
+    th.handHideObjects.forEach(function(o) {
+        if (o) {
+            var box = o.getBoundingClientRect();
+
+            controlsOffsets.push(box);
+        }
+    });
+
     th.handMove = function(e) {
+        hover = false;
         th.hand.anchor = { x: 0.5, y: 1 };
         th.hand.x = e.data.global.x;
         th.hand.y = e.data.global.y;
@@ -180,25 +191,24 @@ DrugStore.prototype._createHand = function() {
         w_w = window.clientWidth || window.innerWidth;
         w_h = window.clientHeight || window.innerHeight;
         
-        //console.log( e.data.global.x, controlsOffset.left, e.data.global.y, controlsOffset.top)
-        if ((e.data.global.x > controlsOffset.left) && (e.data.global.y > controlsOffset.top)) {
-            can = true;
+        controlsOffsets.forEach(function(ob) {
+            if (th.checkHand(e, ob, th.hand)) {
+                hover = true;
+            }
+        });
+
+        if (hover) {
             new TweenMax.to(th.hand, 0.32, {
                 ease: Power0.easeNone,
                 alpha: 0
             });
         } else {
-            if (can) {
-                new TweenMax.to(th.hand, 0.32, {
-                    ease: Power0.easeNone,
-                    alpha: 1,
-                    onComplete: function() {
-                        can = false;
-                        console.log(can)
-                    }
-                });
-            }
+            new TweenMax.to(th.hand, 0.32, {
+                ease: Power0.easeNone,
+                alpha: 1
+            });
         }
+        //console.log( e.data.global.x, controlsOffset.left, e.data.global.y, controlsOffset.top)
     }
 
     $(window).on('start', function() {
@@ -212,6 +222,29 @@ DrugStore.prototype._createHand = function() {
     }
 }
 
+DrugStore.prototype.checkHand = function(e, controlsOffset, hand) {
+    var th = this,
+        centerControlsX = controlsOffset.left + controlsOffset.width / 2,
+        centerControlsY = controlsOffset.top + controlsOffset.height / 2,
+        handCenterX = hand.centerX - hand.width / 2,
+        handCenterY = hand.centerY - hand.height / 2,
+        deltaX = Math.abs(centerControlsX - handCenterX),
+        deltaY = Math.abs(centerControlsY - handCenterY),
+        distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        console.log( deltaX / distance, Math.cos(distance))
+    if (((controlsOffset.width / 2 + hand.width / 2) >= deltaX) && ((controlsOffset.height / 2 + hand.height / 2) >= deltaY)) {
+        
+        return true;
+    } else {
+        return false;
+    }
+    // if ((e.data.global.x > controlsOffset.left) && (e.data.global.x < controlsOffset.right) && (e.data.global.y > controlsOffset.top) && (e.data.global.y < controlsOffset.bottom)) {
+    //     return true;
+    // } else {
+    //     return false;
+    // }
+
+}
 
 DrugStore.prototype.mobileAndTabletcheck = function() {
   var check = false;

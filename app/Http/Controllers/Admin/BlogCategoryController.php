@@ -50,7 +50,7 @@ class BlogCategoryController extends Controller
     public function store(Request $request)
     {
         $model = new BlogCategory();
-        $model->slug = str_slug($request->get('title'));
+        $model->slug = str_slug($request->get('title_ru'));
         if ($model->fill($request->all()) && $model->save()) {
             return redirect(route('blog-category.index'));
         }
@@ -101,7 +101,7 @@ class BlogCategoryController extends Controller
     {
         /** @var Post $model */
         $model = BlogCategory::find($id);
-        $model->slug = str_slug($request->get('title'));
+        $model->slug = str_slug($request->get('title_ru'));
         if ($model->fill($request->all()) && $model->save()) {
             return redirect(route('blog-category.index'));
         }

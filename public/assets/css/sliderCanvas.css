@@ -1,15 +1,21 @@
 body, html {
     margin: 0;
     height: 100%;
+    width: 100%;
     font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    position: relative;
 }
 
-body {
-    width: 100%;
-    overflow: hidden;
-}
 * {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 @font-face {font-family: 'Comfortaa-Regular'; src: url('../fonts/Comfortaa/Comfortaa-Regular.ttf');}
@@ -24,10 +30,12 @@ body {
 
 #bubles-container,
 #rocket-container {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     font-family: 'Montserrat-Medium', 'sans-serif';
-    height: 100%;
-    width: 100%;
 }
 
 #rocket-container canvas {
@@ -36,7 +44,7 @@ body {
 
 .rocket-btn-wrap {
     position: absolute;
-    bottom: 64px;
+    bottom: 4%;
     left: 50%;
     font: 16px 'Montserrat-Light';
 }
@@ -142,21 +150,49 @@ h1 {
     width: 100%;
 }
 
+@media all and (max-width: 1200px) and (min-width: 768px) {
+    .rocket-btn-wrap {
+        left: 19%!important;
+    }
+}
 @media all and (max-width: 991px) {
+    /*.rocket-btn:after {
+        width: 91%;
+        height: 64%;
+        left: -8%;
+        top: -34%;
+    }*/
     .rocket-btn {
         padding: 6px 40px;
         margin: 0 10px;
     }
-    
-    /*.rocket-btn-wrap {
+    .rocket-btn-wrap {
         left: 28%;
         width: 350px;
         text-align: center;
         font-size: 11px;
         bottom: 10px;
-    }*/
+    }
 
     .slider-controls {
         bottom: 10px;
+    }
+}
+
+@media all and (max-width: 600px) and (orientation: landscape) {
+    .rocket-btn-wrap {
+        left: 11%!important;
+    }
+
+    .rocket-btn {
+        padding: 3px 20px;
+        margin: 0 10px;
+        font-size: 11px;
+    }
+}
+
+@media all and (max-width: 767px) {
+    .rocket-btn-wrap {
+        width: auto;
     }
 }

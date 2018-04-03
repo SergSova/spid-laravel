@@ -7,19 +7,37 @@
 ?>
 @extends('site.layout')
 
-@section('title',$model->getTitle())
+@section('title',$model->seo_title)
 
 @section('styles')
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/index.css">
+    @parent
+    <link rel="stylesheet" href="{{asset('assets/css/reset.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/index.css')}}">
 @endsection
 
 @section('body')
+<div class="preloader">
+        <div class="preloader-inner">
+            <?php include "assets/img/svg/about/preloader-inner.svg" ?>
+        </div>
+    </div>
+    <div class="landscape">
+        <div class="landscape-inner">
+            <div class="landscape-icon">
+                <div class="landscape-icon__condom_fill"></div>
+                <div class="landscape-icon__condom_stroke"></div>
+                <div class="landscape-icon__condom_arrow"></div>
+            </div>
+
+            <h5 class="landscape-title">@lang('site.landscape_title')</h5>
+            <p class="landscape-desc">@lang('site.landscape_desc')</p>
+        </div>
+    </div>
     <canvas id="canvas"></canvas>
     <div class="texts-wrap">
         <div class="scroll-box">
             <div class="scroll-box-text hidden">
-            {!! $model->title !!}
+            {!! $model->title_mod !!}
             </div>
             <div class="scroll-box-line"></div>
             <div class="scroll-box-text">{{$model->description}}</div>
@@ -27,7 +45,7 @@
         <div class="no-aids">
             <div class="no-inside">
                 <div>
-                    {!! $model->longtitle !!}
+                    {!! $model->longtitle_mod !!}
                 </div>
             </div>
         </div>
@@ -36,5 +54,5 @@
 
 @section('scripts')
     @parent
-    <script src="assets/js/madam.js"></script>
+    <script src="{{asset('assets/js/madam.js')}}"></script>
 @endsection

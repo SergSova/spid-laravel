@@ -1,57 +1,55 @@
+<?php
+
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Request;
+
+$menu_route = Request::route()->getName();
+
+$menuList = [
+    'home'    => Lang::get('menu.main'),
+    'aids'    => Lang::get('menu.aids'),
+    'condoms' => Lang::get('menu.condoms'),
+    'consult' => Lang::get('menu.consult'),
+    'test'    => Lang::get('menu.test'),
+    'blog'    => Lang::get('menu.blog'),
+    'faq'     => Lang::get('menu.faq'),
+    'map'     => Lang::get('menu.map'),
+    'about'   => Lang::get('menu.about'),
+];
+
+if ($menu_route == 'blog.fitred' || $menu_route == 'blogArticle')
+    $menu_route = 'blog';
+?>
+
 <div class="burger">
     <span class="burger-item burger-item_top"></span>
     <span class="burger-item burger-item_center"></span>
     <span class="burger-item burger-item_bottom"></span>
 </div>
-
+<a class="logo-box" {{\Request::route()->getName()!='home'?'href='.route('home'):'' }}>
+    @include('site.chanks.js_hover')
+</a>
 <div class="wrap menu">
-    <div class="menu-overlay-wrap">
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-        <div class="menu-overlay"><span></span></div>
-    </div>
+    <div class="menu-overlay-wrap"></div>
     <div class="menu-clip-fix"></div>
-    <div class="logo-box">
-        <img class="js-hover" src="{{asset('assets/img/drug-store/drug-store-logo1.svg')}}" alt="" data="{{asset('assets/img/drug-store/drug-store-logo2.svg')}},{{asset('assets/img/drug-store/drug-store-logo3.svg')}},{{asset('assets/img/drug-store/drug-store-logo4.svg')}}" data-src="{{asset('assets/img/drug-store/drug-store-logo1.svg')}}">
-    </div>
+    <a class="logo-box" {{\Request::route()->getName()!='home'?'href='.route('home'):'' }}>
+        @include('site.chanks.js_hover')
+    </a>
     <div class="top-btns">
-        <button class="top-btn top-btn_search">поиск</button>
-        <button class="top-btn top-btn_close">закрыть</button>
+        <button class="top-btn top-btn_search">@lang('site.search')</button>
+        <button class="top-btn top-btn_close">@lang('site.close')</button>
     </div>
     <div class="nav-wrap">
         <nav id="nav" class="nav">
             <ul class="nav__list">
-                <li class="nav__item"><a class="nav__link active" href="/">Главная</a></li>
-                <li class="nav__item"><a class="nav__link" href="/aids">Рулетка</a></li>
-                <li class="nav__item"><a class="nav__link" href="/condoms-white">нужно знать</a></li>
-                <li class="nav__item"><a class="nav__link" href="/consultants">консультация</a></li>
-                <li class="nav__item"><a class="nav__link" href="/about">о нас</a></li>
-                <li class="nav__item"><a class="nav__link" href="/aids-test">тест</a></li>
-                <li class="nav__item"><a class="nav__link" href="/blog">блог</a></li>
-                <li class="nav__item"><a class="nav__link" href="/faq">f.a.q</a></li>
-                <li class="nav__item"><a class="nav__link" href="/map">карта</a></li>
-                <li class="nav__item"><a class="nav__link" href="{{route('setlocale','uk')}}">UA</a></li>
-                <li class="nav__item"><a class="nav__link" href="{{route('setlocale','ru')}}">RU</a></li>
-                <li class="nav__item"><a class="nav__link" href="{{route('setlocale','en')}}">EN</a></li>
+                @foreach($menuList as $k=>$m_item)
+                    <li class="nav__item">
+                        <a class="nav__link {{$menu_route == $k?'active':''}}" href="{{route($k)}}">{{$m_item}}</a>
+                    </li>
+                @endforeach
+
+                {{--<li class="nav__item"><a class="nav__link" href="{{route('setlocale','ru')}}">ru</a></li>--}}
+                {{--<li class="nav__item"><a class="nav__link" href="{{route('setlocale','uk')}}">ua</a></li>--}}
             </ul>
         </nav>
     </div>
@@ -102,7 +100,13 @@
                 th.link = th.nav.querySelector('.nav__link');
                 th.linkActive = th.nav.querySelector('.nav__link.active');
                 th.links = Array.prototype.slice.call(th.nav.querySelector('.nav__list').children);
+                th.linkHeight = th.links[0].offsetHeight / 2;
                 th.linkOverlaysWrap = document.querySelector('.menu-overlay-wrap');
+
+                for (var z = 0; z < (th.links.length * 2) - 1; z++) {
+                    th.linkOverlaysWrap.innerHTML += '<div style="height: ' + th.linkHeight + 'px;" class="menu-overlay"><span></span></div>';
+                }
+
                 th.linkOverlays = th.linkOverlaysWrap.children;
 
                 window.addEventListener('scroll', function (e) {
@@ -203,7 +207,10 @@
                     for (var z = 0; z < th.linkOverlays.length; z++) {
                         th.linkOverlays[z].classList.remove('anim');
                     }
-                    th.linkActive.classList.remove('out');
+
+                    if (th.linkActive) {
+                        th.linkActive.classList.remove('out');
+                    }
                 }
 
                 function mouseoutHandler(e) {
@@ -227,7 +234,9 @@
                                 th.linkOverlays[z].classList.remove('anim')
                             }
 
-                            th.linkActive.classList.add('out');
+                            if (th.linkActive) {
+                                th.linkActive.classList.add('out');
+                            }
                             th.linkOverlays[index]['linkOverlaysFlag'] = true;
                             th.linkOverlays[index].classList.add('anim');
                             var bapX = 0;
@@ -240,7 +249,7 @@
                                     requestAnimationFrame(s);
                                 }
 
-                                if (Math.abs(bapX % 136) !== 0) {
+                                if (Math.abs(bapX % 134) !== 0) {
                                     if (!th.linkOverlays[index].linkOverlaysFlag) {
                                         requestAnimationFrame(s);
                                     }

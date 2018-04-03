@@ -17,8 +17,10 @@
                 'faq_answers',
                 function (Blueprint $table) {
                     $table->increments('id');
-                    $table->string('question');
-                    $table->text('answer');
+                    $table->string('question_ru');
+                    $table->string('question_uk');
+                    $table->text('answer_ru');
+                    $table->text('answer_uk');
                     $table->unsignedInteger('index');
 
                     $table->timestamps();
