@@ -13,7 +13,7 @@ class AlterFaqAnswersTable extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE faq_answers ADD FULLTEXT faqsearch(question_ru, question_uk,answer_ru,answer_uk)');
+        DB::statement('ALTER TABLE `faq_answers` ADD FULLTEXT faqsearch(question_ru, question_uk,answer_ru,answer_uk)');
     }
 
     /**

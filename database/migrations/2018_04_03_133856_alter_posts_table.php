@@ -14,7 +14,7 @@ class AlterPostsTable extends Migration
     public function up()
     {
         DB::statement(
-            'ALTER TABLE posts ADD FULLTEXT postsearch(title_ru,title_uk,content_ru,content_uk)'
+            'ALTER TABLE `posts` ADD FULLTEXT postsearch(title_ru,title_uk,content_ru,content_uk)'
         );
 
     }
