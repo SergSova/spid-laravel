@@ -135,6 +135,34 @@ html, body {
     transition: opacity .5s linear 1s;
 }
 
+.navigate-box__left, .navigate-box__right {
+    position: relative;
+}
+.navigate-box__right {
+    right: auto;
+    transform: none;
+    top: -3px;
+}
+.after-text {
+    position: relative;
+    font-size: 8px;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.if-ready {
+    text-align: right;
+    width: 71px;
+    margin: 0 13px 0 40px;
+    font-size: 8px;
+    text-transform: lowercase;
+    line-height: 1.5;
+}
+.no-aids.open .after-text {
+    opacity: .7;
+    transition: opacity .5s linear 1.5s;
+}
 @keyframes  bee {
     0%{opacity: .7}
     50%{opacity: 1}

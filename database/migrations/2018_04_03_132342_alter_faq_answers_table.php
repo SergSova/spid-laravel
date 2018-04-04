@@ -13,7 +13,8 @@ class AlterFaqAnswersTable extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE `faq_answers` ADD FULLTEXT faqsearch(question_ru, question_uk,answer_ru,answer_uk)');
+        DB::statement('ALTER TABLE `drag_faq_answers` ADD FULLTEXT faqsearch_ru(question_ru, answer_ru)');
+        DB::statement('ALTER TABLE `drag_faq_answers` ADD FULLTEXT faqsearch_uk( question_uk,answer_uk)');
     }
 
     /**
@@ -26,7 +27,8 @@ class AlterFaqAnswersTable extends Migration
         Schema::table(
             'faq_answers',
             function (Blueprint $table) {
-                $table->dropIndex('faqsearch');
+                $table->dropIndex('faqsearch_ru');
+                $table->dropIndex('faqsearch_uk');
             }
         );
     }

@@ -727,9 +727,9 @@ article.blog-news .content-article .blog-image img {
 
 /*---------------------menu styles ----------------------------------*/
   .menu-box {
-    position: absolute;
+    position: fixed;
     top: 6.083vw;
-    right: 2%;
+    right: 1.4%;
     z-index: 10;
     text-align: center;
   }
@@ -742,6 +742,11 @@ article.blog-news .content-article .blog-image img {
     font-weight: 400;
     text-transform: uppercase;
     color: white;
+  }
+  .potate-category {
+    background: url("../../img/drug-store/category.svg") no-repeat center center;
+    height: 60px;
+    margin-bottom: 7px;
   }
 /*---------------------menu styles ----------------------------------*/
 

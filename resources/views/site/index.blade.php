@@ -47,6 +47,17 @@
                 <div>
                     {!! $model->longtitle_mod !!}
                 </div>
+                <div class="after-text">
+                   <div class="if-ready">Узнать больше</div>
+                    <a href="/aids">
+                        <div class="navigate-box__right">
+                            <div class="navigate-box__right-wrap">
+                                <span class="navigate-box__line"></span>
+                                <span class="navigate-box__line"></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

@@ -89,7 +89,9 @@ $body_class = 'one_blog';
                                         <figure>
                                             <div class="blog-image">
                                                 <img src="{{$model->mainImage}}">
-                                                <h1>{!! $model->mod_title !!}</h1>
+                                                <h1 {{$model->isBlackTitle?'class=black-title':''}}>
+                                                    {!! $model->mod_title !!}
+                                                </h1>
                                             </div>
                                             <figcaption>
                                                 <div class="blog-news-content">

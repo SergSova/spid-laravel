@@ -15,30 +15,32 @@
     @yield('styles')
 </head>
 <body class="{{$body_class??''}}">
-@include('site.menu')
+@if(\Request::route()->getName()!='home')
+    @include('site.menu')
+@endif
 
 @yield('body')
 
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-$(window).on('load', function() {
-    $('.preloader').delay(1000).fadeOut(300, function() {
-        var scroll_up = 0;
+    $(window).on('load', function () {
+        $('.preloader').delay(1000).fadeOut(300, function () {
+            var scroll_up = 0;
 
-        $(window).on('scrollUp', function(e) {
-    
-            scroll_up += 1;
-    
-            if (scroll_up > 1) {
-                location.assign('/map');
-            }
-    
+            $(window).on('scrollUp', function (e) {
+
+                scroll_up += 1;
+
+                if (scroll_up > 1) {
+                    location.assign('/map');
+                }
+
+            });
         });
+        $('.preloader svg').delay(1000).fadeOut(300);
     });
-
-    $('.preloader svg').delay(1000).fadeOut(300);
-});
 </script>
+<script src="{{asset('assets/js/preloader.js')}}"></script>
 @if(isset($model) && method_exists($model,'getNext'))
     <script>
         var next_page = '{{$model->getNext()['alias']}}';

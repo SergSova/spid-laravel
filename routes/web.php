@@ -55,7 +55,7 @@ Route::get(
 )->name('setlocale');
 
 Route::group(
-    ['prefix' => App\Http\Middleware\Locale::getLocale()],
+    ['prefix' => App\Http\Middleware\Locale::getLocale(), 'middleware' => 'reconstr'],
     function () {
         Route::get('/', 'Site\SiteController@index')->name('home');
         Route::get('/aids', 'Site\SiteController@aids')->name('aids');
@@ -70,8 +70,6 @@ Route::group(
         Route::get('/faq', 'Site\SiteController@faq')->name('faq');
         Route::get('/map', 'Site\SiteController@map')->name('map');
 
-        Auth::routes();
-
         //BLOG
         Route::group(
             ['prefix' => 'blog'],
@@ -81,11 +79,13 @@ Route::group(
                 Route::get('/{category}/{article}', 'Site\BlogController@view')->name('blogArticle');
             }
         );
-
         Route::get('/search/{search}', 'Site\SearchController@search')->name('search');
     }
 );
 
+Auth::routes();
+
+Route::view('/reconstr', 'site.reconstruction')->name('reconstr');
 //Admin
 Route::group(
     ['prefix' => 'admin', 'middleware' => 'admin'],

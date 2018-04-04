@@ -97,7 +97,7 @@ $lang = app()->getLocale();
                                 </div>
                             </div>
                             <div>
-                                <input type="range" min="0" val="0.5" max="1" step="0.1" data-rangeslider>
+                                <input type="range" min="0" val="0.2" max="1" step="0.1" data-rangeslider>
                                 <output></output>
                             </div>
                         </div>

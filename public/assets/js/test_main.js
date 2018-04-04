@@ -240,7 +240,7 @@ window.addEventListener('load', function() {
 	var video = document.querySelector('.test-default-tv_iframe'),
 		testAudio = document.querySelector('.test-noize-audio'),
 		videoIsPlay = false,
-		currentVolume = 0.5,
+		currentVolume = 0,
 		prevVolume = currentVolume,
 		currentIdGlobal = 0;
 	video.volume = 0;
@@ -376,6 +376,17 @@ window.addEventListener('load', function() {
 		if (flagB > 0) {
 			total = 'высокий риск';
 			video.src = 'assets/video/high-risk.mp4';
+		}
+
+		var promise = video.play();
+		if (promise !== undefined) {
+			promise.catch(error => {
+				// Auto-play was prevented
+				// Show a UI element to let the user manually start playback
+			}).then(() => {
+				// Auto-play started
+				
+			});
 		}
 
 		this.qestionWrap.innerHTML = '<p>' + total + '</p>';
@@ -708,7 +719,7 @@ window.addEventListener('load', function() {
         }
     });
 
-    $element.val(0.5).change();
+    $element.val(0.1).change();
 
     $('.sound').click(function() {
 	  if (!$(this).hasClass('sound-mute')) {

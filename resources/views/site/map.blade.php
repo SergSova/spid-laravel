@@ -131,7 +131,6 @@
                     <a class="marker-info__btn marker-info__btn_2"></a>
                 </div>
             </div>
-            <p class="marker-info__copyright">Copyright © 2018 Drugstore. @lang('site.reserved')</p>
         </div>
     </div>
 @endsection

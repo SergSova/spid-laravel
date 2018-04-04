@@ -27,7 +27,7 @@
                             </div>
                             <div class="blog-title">
                                 <h3>{{$post->category->title}}</h3>
-                                <h2>{!! $post->mod_title !!}</h2>
+                                <h2 >{!! $post->mod_title !!}</h2>
                                 <data>{!! $post->full_data !!}}</data>
                             </div>
                             <p>{{strip_tags($post->description)}}</p>
@@ -64,7 +64,7 @@
                                 <span><img src="{{$post->category->icon}}" alt="{{$post->category->title}}"></span>
                             </div>
                             <div class="blog-title">
-                                <h2>{!! $post->mod_title !!}</h2>
+                                <h2 >{!! $post->mod_title !!}</h2>
                             </div>
                             <div class="bottom-link">
                                 <a href="{{$post->url}}">@lang('site.more')</a>
@@ -90,7 +90,7 @@
                             </div>
                             <div class="blog-title">
                                 <h3>{{$post->category->title}}</h3>
-                                <h2>{!! $post->mod_title !!}</h2>
+                                <h2 >{!! $post->mod_title !!}</h2>
                                 <data>{{$post->full_data}}</data>
                             </div>
                             <p>{{strip_tags($post->description)}}</p>

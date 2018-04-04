@@ -162,7 +162,7 @@ class StaticPagesSeeder extends \Illuminate\Database\Seeder
                 null,
                 null,
             ],
-            [10, 'Блог', null, null, 'Блог', null, null, 10, null, 1, 'blog', 10, 11, null, '2018-04-03 03:41:02'],
+            [10, 'Блог', null, null, 'Блог', null, null, 10, null, 1, 'blog', null, null],
             [
                 11,
                 'f.a.q.',

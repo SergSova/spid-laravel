@@ -136,7 +136,7 @@
   function onWheel(e) {
     e = e || window.event;
     delta  = e.pageY;
-    console.log(paus);
+    // console.log(paus);
 
     if(delta > 0 &&  paus == 1 || paus == 4) {
       paus++;
@@ -181,7 +181,7 @@
   }
 
   window.onresize = function () {
-    d.append( c.width + ' - ' +  c.height +'/');
+    // d.append( c.width + ' - ' +  c.height +'/');
     c.width = window.innerWidth;
     c.height = window.innerHeight;
     ctx.drawImage(imgs[glob], 0, 0, c.width, c.height);

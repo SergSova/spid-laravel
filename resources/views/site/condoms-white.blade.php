@@ -112,6 +112,22 @@
                 <h1 class="main-caption clip-fix">
                         {!! str_replace('/',' - <br>',$model->title) !!}
                 </h1>
+                <div class="scroll-box-wrap">
+                    <div class="scroll-box">
+                        <div class="scroll-box-text hidden">
+                        Будь <div> настойчивей </div>
+                        </div>
+                        <div class="scroll-box-line"></div>
+                        <div class="scroll-box-text">Скроль</div>
+                    </div>
+                    <div class="no-aids">
+                        <div class="no-inside">
+                            <div>
+                                <span>Нет презерватива </span><span> нет </span><span> секса</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div id="custom-slider">

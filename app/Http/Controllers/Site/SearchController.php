@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Site;
 use App\FaqAnswer;
 use App\Http\Controllers\Controller;
 use App\Post;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
@@ -19,11 +20,13 @@ class SearchController extends Controller
     public function search($search)
     {
         $lang = app()->getLocale();
-        $static = FaqAnswer::where('question_'.$lang, 'like', '%'.$search.'%')
-            ->orWhere('answer_'.$lang, 'like', '%'.$search.'%')
-            ->get();
-//        $posts = Post::where();
-        dd($static);
+        $match = "question_$lang, answer_$lang";
+        $static = FaqAnswer::whereRaw("match ($match) AGAINST (\"$search*\" IN BOOLEAN MODE)")->get();
+        $post_match = "title_$lang, content_$lang";
+        $posts = Post::whereRaw("match ($post_match) AGAINST (\"$search*\" IN BOOLEAN MODE)")->get();
+
+        dd($static, $posts);
+
         return $search;
     }
 }

@@ -75,9 +75,9 @@
             </div>
 
             <div class="content__bottom-box">
-                <div class="freshagency-logo-box">
+                <a href="http://freshweb.agency" class="freshagency-logo-box">
                     <img src="{{asset('assets/img/about/freshagency-logo.svg')}}" alt="">
-                </div>
+                </a>
 
                 <div class="copyright-text">Copyright © 2018 Drugstore. @lang('site.reserved')</div>
             </div>
@@ -92,5 +92,4 @@
     <script src="{{asset('assets/js/libs/slick.min.js')}}"></script>
     <script src="{{asset('assets/js/libs/jquery.mCustomScrollbar.concat.min.js')}}"></script>
     <script src="{{asset('assets/js/libs/wheel-indicator.js')}}"></script>
-    <script src="{{asset('assets/js/main_about.js')}}"></script>
 @endsection

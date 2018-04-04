@@ -16,6 +16,23 @@ $lang = app()->getLocale()
 @endsection
 
 @section('body')
+<div class="landscape">
+        <div class="landscape-inner">
+            <div class="landscape-icon">
+                <div class="landscape-icon__condom_fill"></div>
+                <div class="landscape-icon__condom_stroke"></div>
+                <div class="landscape-icon__condom_arrow"></div>
+            </div>
+
+            <h5 class="landscape-title">@lang('site.landscape_title')</h5>
+            <p class="landscape-desc">@lang('site.landscape_desc')</p>
+        </div>
+    </div>
+<div class="preloader">
+        <div class="preloader-inner">
+            <?php include "assets/img/svg/about/preloader-inner.svg" ?>
+        </div>
+    </div>
     <div class="modal modal-wh">
         <div class="modal__inner">
             <div class="modal__icons">

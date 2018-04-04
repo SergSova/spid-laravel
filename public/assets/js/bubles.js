@@ -30,6 +30,10 @@ function DrugStore() {
         th.reInit();   
     });
 
+    window.addEventListener('orientationchange', function() {
+        th.reInit();
+    });
+
     th.checkWindowTabIsActive();
 }
 

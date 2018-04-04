@@ -333,15 +333,16 @@ function init() {
           d = this.active - 1  == 0 ? 12 : this.active - 1;
           k = this.active  - 2  == 0 ? 12 : this.active - 2;
 
-          if(this.children[j].classList.contains('spin' +  this.active)) {
-              this.children[j].style.opacity = 0.8
-          }else if(this.children[j].classList.contains('spin' + d)) {
-              this.children[j].style.opacity = 1
-          }else if(this.children[j].classList.contains('spin' + k)) {
-              this.children[j].style.opacity = 0.8
-          }else {
-              this.children[j].style.opacity = 0.6
-          }
+          // if(this.children[j].classList.contains('spin' +  this.active)) {
+          //     this.children[j].style.opacity = 0.8
+          // }else if(this.children[j].classList.contains('spin' + d)) {
+          //     this.children[j].style.opacity = 1
+          // }else if(this.children[j].classList.contains('spin' + k)) {
+          //     this.children[j].style.opacity = 0.8
+          // }else {
+          //     this.children[j].style.opacity = 0.6
+          // }
+        this.children[j].style.opacity = 1
       }
     cicl--
   }

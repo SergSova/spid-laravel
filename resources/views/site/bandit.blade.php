@@ -5,18 +5,22 @@ $lang = app()->getLocale();
 @extends('site.layout')
 
 @section('title',$model->seo_title)
-
+<meta name="apple-mobile-web-app-capable"
+      content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent" />
 @section('styles')
     @parent
     <link rel="stylesheet" href="{{asset('assets/css/main_about.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/drug-store/reset.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/drug-store/index.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/bandit.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/resize.css')}}">
 
 @endsection
 
 @section('body')
-<div class="preloader">
+    <div class="preloader">
         <div class="preloader-inner">
             <?php include "assets/img/svg/about/preloader-inner.svg" ?>
         </div>
@@ -69,6 +73,10 @@ $lang = app()->getLocale();
                         <div class="container-game">
                             <a href="{{route('condoms')}}">
                                 <div class="rocket-btn-wrap">
+                                    <div class="door-wrap">
+                                        <img src="assets/img/bandit/door.png" alt="">
+                                        <img src="assets/img/bandit/d_h.png" alt="">
+                                    </div>
                                     <button class="rocket-btn">{!! $model->{'rocket_btn_'.$lang} !!}</button>
                                 </div>
                             </a>
@@ -324,7 +332,6 @@ $lang = app()->getLocale();
 
 @section('scripts')
     @parent
-    <script src="{{asset('assets/js/main_about.js')}}"></script>
     <script src="{{asset('assets/js/libs/detect.min.js')}}"></script>
     <script src="{{asset('assets/js/main22.js')}}"></script>
 
@@ -340,6 +347,20 @@ $lang = app()->getLocale();
                 e.preventDefault();
                 $('.modal').fadeOut();
                 modalVis = false;
+                if(window.matchMedia("(max-width: 1000px) and (orientation: landscape)").matches) {
+                  if (document.body.requestFullscreen) {
+                    document.body.requestFullscreen();
+                  } else if (document.body.mozRequestFullScreen) {
+                    document.body.mozRequestFullScreen();
+                  } else if (document.body.webkitRequestFullscreen) {
+                    document.body.webkitRequestFullscreen();
+                  }
+                  if (document.body.webkitEnterFullScreen) {
+                    document.body.webkitEnterFullScreen();
+                  }
+
+                }
+
             });
 
             function modalAnim() {

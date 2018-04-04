@@ -5,9 +5,9 @@ $lang = app()->getLocale();
 @extends('site.layout')
 
 @section('title',$model->seo_title)
-
 @section('styles')
     @parent
+    <meta name="viewport" content="width=device-width, initial-scale=1.0001, minimum-scale=1.0001, maximum-scale=1.0001, user-scalable=no">
     <link rel="stylesheet" href="{{asset('assets/css/drug-store/reset.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/drug-store/index.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/sliderCanvas.css')}}">

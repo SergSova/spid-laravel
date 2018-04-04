@@ -55,6 +55,29 @@ $(document).ready(function() {
             clearInterval(this.timer);
         });
     /*----------------- end onhover logo dragstore  -----------------*/
+    /*----------------- NEXT page REVOLVER  -----------------*/
+    if($('.str-next').length) {
+        $('.str-next').click(function (event) {
+            event.preventDefault();
+            $(this).parents('.game-icons').toggleClass('shoot');
+            linkLocation = this.href;
 
+            setTimeout(function () {
+                window.location = linkLocation;
+            }, 1700)
+        });
+    }
+        if($('.str-prev').length) {
+        $('.str-prev').click(function (event) {
+            event.preventDefault();
+            $(this).toggleClass('active');
+            linkLocation = this.href;
+
+            setTimeout(function () {
+                window.location = linkLocation;
+            }, 1000)
+        });
+    }
+    /*----------------- end NEXT page REVOLVER  -----------------*/
 
 });

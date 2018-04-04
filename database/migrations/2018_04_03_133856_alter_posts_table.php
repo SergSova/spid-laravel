@@ -14,7 +14,10 @@ class AlterPostsTable extends Migration
     public function up()
     {
         DB::statement(
-            'ALTER TABLE `posts` ADD FULLTEXT postsearch(title_ru,title_uk,content_ru,content_uk)'
+            'ALTER TABLE `drag_posts` ADD FULLTEXT postsearch_ru(title_ru,content_ru)'
+        );
+        DB::statement(
+            'ALTER TABLE `drag_posts` ADD FULLTEXT postsearch_uk(title_uk,content_uk)'
         );
 
     }
@@ -29,7 +32,8 @@ class AlterPostsTable extends Migration
         Schema::table(
             'posts',
             function (Blueprint $table) {
-                $table->dropIndex('postsearch');
+                $table->dropIndex('postsearch_ru');
+                $table->dropIndex('postsearch_uk');
             }
         );
     }
