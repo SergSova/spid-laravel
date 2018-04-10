@@ -3,6 +3,8 @@
 /**
  * @var \App\StaticPage $model
  */
+$body_class = $model->alias??'';
+
 ?>
 @extends('site.layout')
 

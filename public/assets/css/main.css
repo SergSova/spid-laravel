@@ -708,10 +708,10 @@
         -webkit-text-fill-color: transparent;
         -webkit-background-clip: text;
         background-position:  0 0%;
-        -webkit-background-size: 1000% 100%;
-           -moz-background-size: 1000% 100%;
-             -o-background-size: 1000% 100%;
-                background-size: 1000% 100%;
+        -webkit-background-size: 1650% 100%;
+           -moz-background-size: 1650% 100%;
+             -o-background-size: 1650% 100%;
+                background-size: 1650% 100%;
         -webkit-animation: stripes-fix 17s infinite linear forwards;
            -moz-animation: stripes-fix 17s infinite linear forwards;
              -o-animation: stripes-fix 17s infinite linear forwards;
@@ -781,7 +781,7 @@
     }
 
     .custom-slider_wrap__inner {
-        
+
     }
 
     .custom-slider_wrap {

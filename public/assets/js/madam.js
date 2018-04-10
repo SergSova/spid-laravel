@@ -1,13 +1,20 @@
 (function () {
-  d =  document.createElement('div')
-  d.style.position = 'absolute'
-  d.style.top = '50%'
-  d.style.left = '0'
-  d.style.color = '#fff'
-  document.body.prepend(d)
-  window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
-      d.append(errorMsg+' --1-- '+url+' --1-- '+lineNumber);
+    d =  document.createElement('div')
+    d.style.position = 'absolute'
+    d.style.top = '50%'
+    d.style.left = '0'
+    d.style.color = '#fff',
+    document.body.prepend(d)
+    var detect;
+  if (detect) {
+    var ua = detect.parse(navigator.userAgent);
+    if(ua.os.family == 'iOS') {
+      $('body').addClass('ios-active');
+    }
   }
+  // window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
+  //     d.append(errorMsg+' --1-- '+url+' --1-- '+lineNumber);
+  // }
 
   function getCookie(name) {
     var matches = document.cookie.match(new RegExp(

@@ -57,13 +57,24 @@ class StaticPage extends Model
         return FaqAnswer::orderBy('index')->get();
     }
 
-    public function seo()
+    public function getSeoAttribute($key)
+    {
+        return $this->{'seo'.app()->getLocale()};
+    }
+
+    public function seoru()
     {
         return $this->hasOne(Seo::class, 'id', 'seo_id_ru');
     }
 
+    public function seouk()
+    {
+        return $this->hasOne(Seo::class, 'id', 'seo_id_uk');
+    }
+
     public function getNext()
     {
+        $lang = app()->getLocale();
         $obj = [
             'title' => ' ',
             'alias' => '',
@@ -71,7 +82,24 @@ class StaticPage extends Model
         $mod = self::where(['page_index' => $this->page_index + 1])->first();
         if ($mod) {
             $obj['title'] = $this->clearTitle($mod);
-            $obj['alias'] = $mod->alias;
+            $obj['alias'] = $lang == 'uk' ? "/$lang/$mod->alias" : $mod->alias;
+        }
+
+        return $obj;
+    }
+    public function getPrev()
+    {
+        $lang = app()->getLocale();
+        $obj = [
+            'title' => ' ',
+            'alias' => '',
+        ];
+
+        $model = self::where(['page_index' => $this->page_index - 1])->first();
+        if ($model) {
+            $model->alias = $model->alias == 'index' ? '/' : $model->alias;
+            $obj['title'] = $this->clearTitle($model);
+            $obj['alias'] = $lang == 'uk' ? "/$lang/$model->alias" : $model->alias;
         }
 
         return $obj;
@@ -93,25 +121,10 @@ class StaticPage extends Model
         return $fc.mb_substr($str, 1);
     }
 
-    public function getPrev()
-    {
-        $obj = [
-            'title' => ' ',
-            'alias' => '',
-        ];
-
-        $model = self::where(['page_index' => $this->page_index - 1])->first();
-        if ($model) {
-            $obj['title'] = $this->clearTitle($model);
-            $obj['alias'] = $model->alias == 'index' ? '/' : $model->alias;
-        }
-
-        return $obj;
-    }
 
     public function getSeoTitleAttribute()
     {
-        return $this->seo->seo_title ?? $this->clearTitle($this).' | '.config('app.name');
+        return $this->{'seo'.app()->getLocale()}->seo_title ?? $this->clearTitle($this).' | '.config('app.name');
     }
 
     public function saveCustomField($request, $name)

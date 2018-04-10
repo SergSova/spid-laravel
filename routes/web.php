@@ -67,7 +67,7 @@ Route::group(
         Route::get('/consultants', 'Site\SiteController@consultants')->name('consult');
         Route::get('/about', 'Site\SiteController@about')->name('about');
         Route::get('/aids-test', 'Site\SiteController@testPage')->name('test');
-        Route::get('/faq', 'Site\SiteController@faq')->name('faq');
+        Route::get('/faq/{index_faq?}', 'Site\SiteController@faq')->name('faq');
         Route::get('/map', 'Site\SiteController@map')->name('map');
 
         //BLOG
@@ -91,7 +91,8 @@ Route::group(
     ['prefix' => 'admin', 'middleware' => 'admin'],
     function () {
 
-        Route::get('/', 'Admin\IndexController@index')->name('admin');
+//        Route::get('/', 'Admin\IndexController@index')->name('admin');
+        Route::get('/', 'Admin\StaticPageController@index')->name('admin');
         Route::get('/static', 'Admin\StaticPageController@index')->name(
             'staticPage'
         );

@@ -28,10 +28,10 @@ class CreateStaticPagesTable extends Migration {
 
 				$table->unsignedInteger( 'seo_id_ru' )->nullable();
 				$table->foreign( 'seo_id_ru' )->references( 'id' )->on( 'seos' )
-				      ->onDelete( 'cascade' );
+				      ->onDelete( 'set null' );
 				$table->unsignedInteger( 'seo_id_uk' )->nullable();
 				$table->foreign( 'seo_id_uk' )->references( 'id' )->on( 'seos' )
-				      ->onDelete( 'cascade' );
+				      ->onDelete( 'set null' );
 				$table->timestamps();
 			}
 		);

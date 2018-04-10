@@ -7,6 +7,34 @@
  */
 
 ?>
+@extends('site.layout')
+
+@section('title','Авторизация')
+
+
+@section('styles')
+    <link rel="stylesheet" href="{{asset('assets/css/blog/reset.css')}}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        a {
+            color: darkgray;
+            text-decoration: none
+        }
+
+        .container {
+            color: white;
+        }
+    </style>
+@endsection
+@section('body')
+
 <div class="container">
     <nav class="navbar" role="navigation">
         <ul class="nav navbar-nav">
@@ -47,3 +75,4 @@
         <button type="submit" class="btn btn-default">@lang('auth.sign_up')</button>
     </form>
 </div>
+@endsection

@@ -37,6 +37,30 @@ if ($menu_route == 'blog.fitred' || $menu_route == 'blogArticle')
     </a>
     <div class="top-btns">
         <a href="{{route('search','вич')}}"><button class="top-btn top-btn_search">@lang('site.search')</button></a>
+        <div class="top-search empty">
+            <form action="/search" class="search-form">
+                {{ csrf_field() }}
+                <p class="search-form__top">
+                    <input type="text" autocomplete="off" placeholder="Поиск" name="search" class="search-form__q" />
+                </p> 
+                <button class="search-form__clear"></button>
+            </form>
+            <div class="top-search-results">
+                <div class="top-search-results__inner">
+                    <!-- <div class="top-search-result">
+                        <div class="top-search-result__img">
+                            <img src="http://3.j2landing.com/speed/img1.png" alt="">
+                        </div>
+                        <div class="top-search-result__content">
+                            <h5 class="top-search-result__title">Заглавие какой-то статьи</h5>
+                            <div class="top-search-result__desc">
+                                <p>Краткое описание для ознакомления</p>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
         <button class="top-btn top-btn_close">@lang('site.close')</button>
     </div>
     <div class="nav-wrap">
@@ -58,15 +82,196 @@ if ($menu_route == 'blog.fitred' || $menu_route == 'blogArticle')
 
 @section('scripts')
     @parent
+    <script src="{{asset('assets/js/libs/jquery.touch.js')}}"></script>
     <script type="text/javascript">
+        (function($) {
+            var f, mW;
+
+            $.fn.myMenuScroll = function(methodOrOptions) {
+                return this.each(function() {
+                    var th = $(this),
+                        inner = th.find('.top-search-results__inner'),
+                        resultsH = th.height(),
+                        innerH = inner.height(),
+                        offsetTop = inner.offset().top,
+                        methods = {
+                           update: function() {
+                                desttroy();
+                                init();
+                           }
+                        },
+                        draggerH;
+
+                    if ( methods[methodOrOptions] ) {
+                        return methods[ methodOrOptions ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+                    } 
+
+                    th.append('<div class="scroll"><div class="scroll-drag"></div></div>');
+                    var dragger = th.find('.scroll-drag');
+                    draggerH = $(dragger).height();
+
+                    f = function(e) {
+                        updateMetrics();
+                        var delta = innerH - resultsH,
+                            top,
+                            dy = e.pageY || e.originalEvent.touches[0].pageY - dragger.offset().top;
+
+                        function drag(e) {
+                            e.preventDefault();
+                            var eY = e.pageY || e.originalEvent.touches[0].pageY - dy;
+       
+                            if ((eY >= offsetTop) && ((eY + draggerH) <= (offsetTop + resultsH))) {
+                                top = eY - offsetTop;
+                                $(dragger).css('top', top + 'px');
+                                var pers = top / (resultsH - draggerH);
+                                translateObj(pers * delta);
+                            } else if (eY <= offsetTop) {
+                                top = 0;
+                                $(dragger).css('top', '0px');
+                                translateObj(top);
+                            } else {
+                                top = resultsH - draggerH;
+                                $(dragger).css('top', top + 'px');
+                                translateObj(delta);
+                            }
+                        }
+
+                        function drop() {
+                            $(window).off('mousemove touchmove', drag);
+                            $(window).off('mouseup touchend', drop);
+                        }
+
+                        $(window).on('mousemove touchmove', drag);
+                        $(window).on('mouseup touchend', drop);
+                    };
+
+                    mW = function(e) {
+                        console.log( e.originalEvent.wheelDeltaY );
+                    }
+                    
+                    function init() {
+                        updateMetrics();
+                        var delta = innerH - resultsH;
+
+                        if (delta > 0) {
+                            th.removeClass('scroll-hide');
+                            var scroll = th.find('.scroll');
+                            scroll.css('height', resultsH + 'px');
+
+                            $(th.find('.scroll-drag')).on('mousedown touchstart', f);
+                            inner.on('mousewheel', mW);
+                        } else {
+                            th.addClass('scroll-hide');
+                        }
+                    }
+
+                    function desttroy() {
+                        var d = $(th.find('.scroll-drag'));
+                        d.css('top', 0 + 'px');
+                        translateObj(0);
+                        d.off('mousedown touchstart', f);
+                    }
+
+                    function updateMetrics() {
+                        offset = inner.offset();
+                        innerH = inner.height();
+                        resultsH = th.height();
+                    }
+
+                    function translateObj(y) {
+                        inner.css('transform', 'translateY(-' + y + 'px)');
+                    }
+
+                    init()
+                });
+            }
+        }(jQuery));
+
         $(document).ready(function () {
-            $('.burger').on('click', function () {
-                $('body').addClass('menu-open');
-            })
+            //$('.top-search-results').touch();
+            $('.top-search-results').myMenuScroll();
+
+            $('.burger').on('click', function (e) {
+                if (!$(this).hasClass('burger_active')) {
+                    e.stopPropagation();
+                    $('body').addClass('menu-open');
+                    $(this).addClass('burger_active');
+                }
+            });
 
             $('.top-btn_close').on('click', function () {
                 $('body').removeClass('menu-open');
-            })
+                $('.burger').removeClass('burger_active');
+            });
+
+            $('body').on('click', '.burger_active', function() {
+                $('body').removeClass('menu-open');
+                $(this).removeClass('burger_active');
+            });
+
+            document.querySelector('.top-btn_search').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.classList.add('search-open');
+            });
+
+            document.querySelector('.search-form__clear').addEventListener('click', function(e) {
+                e.preventDefault();
+                clearForm();
+                document.body.classList.remove('search-open');
+            });
+
+            var searchList = document.querySelector('.top-search-results'),
+                topSearch = document.querySelector('.top-search'),
+                searchIcons = document.querySelector('.top-btn_search'),
+                searchInput = document.querySelector('.search-form__q'),
+                topSearchResults__inner = document.querySelector('.top-search-results__inner'),
+                searchListBox = searchList.getBoundingClientRect(),
+                searchMaxH = window.innerHeight - searchListBox.top;
+
+            if (window.innerWidth > 1200) {
+                searchList.style.maxHeight = (searchMaxH - window.getComputedStyle(searchList, null).getPropertyValue('margin-bottom').slice(0, -2) - window.getComputedStyle(searchList, null).getPropertyValue('margin-top').slice(0, -2)) + 'px';
+            }
+            var s = false;
+             
+            searchInput.addEventListener('input', function() {
+                //topSearchResults__inner.innerHTML += '<div class="top-search-result"><div class="top-search-result__img"><img src="http://3.j2landing.com/speed/img1.png" alt=""></div><div class="top-search-result__content"><h5 class="top-search-result__title">Заглавие какой-то статьи</h5><div class="top-search-result__desc"><p>Краткое описание для ознакомления</p></div></div></div>';
+                //topSearch.classList.remove('empty');
+                if (searchInput.value.trim() !== '') {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                        },
+                        url: "/search/" + searchInput.value,
+                        method: "get",
+                        processData: false,
+                        contentType: false,
+                    }).done(function(d) {
+                      if (d) {
+                        topSearch.classList.remove('empty');
+                        topSearchResults__inner.innerHTML = d;
+
+                        $('.top-search-results').myMenuScroll('update');
+
+                        if (!s) {
+                            //$(topSearchResults__inner).mCustomScrollbar()
+                        } else {
+                            clearForm();
+                        }
+                        
+                      } else {
+                        clearForm();
+                      }
+                    });
+                } else {
+                    clearForm();
+                }
+            });
+            
+            function clearForm() {
+                topSearchResults__inner.innerHTML = '';
+                topSearch.classList.add('empty');
+                s = false;
+            }
         })
     </script>
     <script type="text/javascript">

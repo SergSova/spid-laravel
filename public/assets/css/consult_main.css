@@ -858,8 +858,8 @@
         background-clip: text;
         -webkit-text-fill-color: transparent;
         -webkit-background-clip: text;
-        background-position: 0 -12%;
-        background-size: 100% 700%;
+        background-position: 0 0;
+        background-size: 1200% 100%;
         -webkit-animation: stripes 20s infinite linear forwards;
         animation: stripes 20s infinite linear forwards;
         margin-top: 13.5852vh;
@@ -867,19 +867,19 @@
 
     @-webkit-keyframes stripes {
         0% {
-            background-position: 0 -13%;
+            background-position: 0 0;
         }
         100% {
-            background-position: 0% -130%;
+            background-position: 100% 0;
         }
     }
     
     @keyframes stripes {
         0% {
-            background-position: 0 -13%;
+            background-position: 0 0;
         }
         100% {
-            background-position: 0% -130%;
+            background-position: 100% 0;
         }
     }
 

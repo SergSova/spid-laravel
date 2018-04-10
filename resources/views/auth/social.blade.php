@@ -5,16 +5,27 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{asset('assets/css/blog/reset.css')}}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        a{
+            color: darkgray;
+            text-decoration: none
+        }
         .container{
             color: white;
         }
     </style>
 @endsection
 @section('body')
+
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
+            <div class="">
                 @if ($errors->has('msg'))
                     <div class="alert alert-warning">
                         {{ $errors->first('msg') }}
@@ -23,10 +34,11 @@
                 @endif
 
                 <div class="panel panel-default">
-                    <div class="panel-heading text-center">Social Login</div>
+                    <div class="panel-heading text-center">@lang('auth.social_login')</div>
 
                     <div class="panel-body">
-                        <p class="lead text-center">Authenticate using your social network account from one of following providers</p>
+                        <p class="lead text-center">@lang('auth.social_providers')</p>
+
                         <a href="{{ route('social.oauth', 'facebook') }}" class="btn btn-primary btn-block">
                             Facebook
                         </a>
@@ -36,16 +48,15 @@
                         <a href="{{ route('social.oauth', 'google') }}" class="btn btn-danger btn-block">
                             Google
                         </a>
-                        <a href="{{ route('social.oauth', 'github') }}" class="btn btn-default btn-block">
+                        <a href="{{ route('social.oauth', 'github') }}" class="btn btn-secondary btn-block">
                             Github
                         </a>
                         <hr>
                         <a href="{{ route('login') }}" class="btn btn-default btn-block">
-                            Login with Email
+                            @lang('auth.social_email')
                         </a>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 @endsection

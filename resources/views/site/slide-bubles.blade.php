@@ -1,6 +1,8 @@
 <?php
 
 $lang = app()->getLocale();
+$body_class = $model->alias ?? '';
+
 ?>
 @extends('site.layout')
 
@@ -8,14 +10,14 @@ $lang = app()->getLocale();
 @section('styles')
     @parent
     <meta name="viewport" content="width=device-width, initial-scale=1.0001, minimum-scale=1.0001, maximum-scale=1.0001, user-scalable=no">
-    <link rel="stylesheet" href="{{asset('assets/css/drug-store/reset.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/reset.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/drug-store/index.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/sliderCanvas.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/resize.css')}}">
 @endsection
 
 @section('body')
-<div class="landscape">
+    <div class="landscape">
         <div class="landscape-inner">
             <div class="landscape-icon">
                 <div class="landscape-icon__condom_fill"></div>
@@ -27,7 +29,7 @@ $lang = app()->getLocale();
             <p class="landscape-desc">@lang('site.landscape_desc')</p>
         </div>
     </div>
-<div class="preloader">
+    <div class="preloader">
         <div class="preloader-inner">
             <?php include "assets/img/svg/about/preloader-inner.svg" ?>
         </div>
@@ -109,60 +111,28 @@ $lang = app()->getLocale();
 
 @section('scripts')
     @parent
+    <script>
+        var bubles = [
+            {name: 'bloger', text:'{{Lang::get('bubles.bloger')}}' },
+            {name: 'boots', text:'{{Lang::get('bubles.boots')}}' },
+            {name: 'car', text:'{{Lang::get('bubles.car')}}' },
+            {name: 'figure', text:'{{Lang::get('bubles.figure')}}' },
+            {name: 'figureMan', text:'{{Lang::get('bubles.figureMan')}}' },
+            {name: 'flat', text:'{{Lang::get('bubles.flat')}}' },
+            {name: 'friends', text:'{{Lang::get('bubles.friends')}}' },
+            {name: 'love2', text:'{{Lang::get('bubles.love2')}}' },
+            {name: 'wedding', text:'{{Lang::get('bubles.wedding')}}' },
+            {name: 'mobile', text:'{{Lang::get('bubles.mobile')}}' },
+            {name: 'parashut', text:'{{Lang::get('bubles.parashut')}}' },
+            {name: 'star', text:'{{Lang::get('bubles.star')}}' },
+            {name: 'travel', text:'{{Lang::get('bubles.travel')}}' },
+            {name: 'visa', text:'{{Lang::get('bubles.visa')}}' }
+        ];
+    </script>
     <script src="{{asset('assets/js/libs/pixi.js')}}"></script>
     <script src="{{asset('assets/js/libs/bump.js')}}"></script>
     <script src="{{asset('assets/js/libs/tweenMax.js')}}"></script>
     <script src="{{asset('assets/js/libs/CSSPlugin.min.js')}}"></script>
     <script src="{{asset('assets/js/libs/spriteUtilities.js')}}"></script>
-    <script>
-        var modalVis = true;
-
-        $(document).ready(function () {
-
-            var modalAnimId,
-                hand = $('.wh-hand path'),
-                cl = $('.bb-click'),
-                containerOffsetT = $('.modal__icons').offset().top,
-                containerOffsetL = $('.modal__icons').offset().left,
-                bubles = $('.bb-buble'),
-                clickTimer;
-
-            $('.modal__btn').on('click', function (e) {
-                e.preventDefault();
-                $('.modal').fadeOut();
-                modalVis = false;
-                $(window).trigger('start');
-            });
-
-            function modalAnim() {
-                bubles.each(function () {
-                    var th = $(this),
-                        t = hand.offset().top - containerOffsetT,
-                        l = hand.offset().left - containerOffsetL;
-
-                    cl.css({'left': (l - cl.width() / 3.5) + 'px', 'top': (t - cl.height() / 5) + 'px'});
-
-                    if (((th.offset().left + th.width() * 0.4) <= hand.offset().left) && ((th.offset().left + th.width() * 0.6) >= hand.offset().left)
-                        && ((th.offset().top <= hand.offset().top) && ((th.offset().top + th.height()) >= hand.offset().top))) {
-                        cl.css({'opacity': 1});
-                    } else {
-                        clearTimeout(clickTimer);
-                        clickTimer = setTimeout(function () {
-                            cl.css({'opacity': 0});
-                        }, 25);
-                    }
-
-                })
-
-                if (modalVis) {
-                    modalAnimId = requestAnimationFrame(modalAnim)
-                } else {
-                    cancelAnimationFrame(modalAnimId)
-                }
-            }
-
-            modalAnim()
-        })
-    </script>
     <script src="{{asset('assets/js/bubles.js')}}"></script>
 @endsection

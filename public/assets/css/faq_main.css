@@ -1047,23 +1047,23 @@ button {
     transition: width 0.3s;
 }
 
-.mCSB_outside > .mCSB_container {
+.faq-content-box .mCSB_outside > .mCSB_container {
     padding-top: 35px;
     /*padding-bottom: 35px;*/
 }
 
-.mCSB_scrollTools {
+.faq-content-box .mCSB_scrollTools {
     width: 24px;
     opacity: 1;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 
-.mCSB_scrollTools .mCSB_dragger {
+.faq-content-box .mCSB_scrollTools .mCSB_dragger {
     height: 110px !important;
     overflow: hidden;
 }
 
-#mCSB_1_dragger_vertical:before {
+.faq-content-box #mCSB_1_dragger_vertical:before {
     content: "";
     position: absolute;
     top: 50%;
@@ -1084,25 +1084,25 @@ button {
     background-size: contain;
 }
 
-#mCSB_1_dragger_vertical.top-scroll:before {
+.faq-content-box #mCSB_1_dragger_vertical.top-scroll:before {
     background: url(../img/drug-store/condom.svg) no-repeat center center #fff;
     background-size: 50%;
     border-radius: 50%;
 }
 
-#mCSB_1_dragger_vertical.middle-scroll:before {
+.faq-content-box #mCSB_1_dragger_vertical.middle-scroll:before {
     background: url(../img/drug-store/heart.svg) no-repeat center center #fff;
     background-size: 50%;
     border-radius: 50%;
 }
 
-#mCSB_1_dragger_vertical.bottom-scroll:before {
+.faq-content-box #mCSB_1_dragger_vertical.bottom-scroll:before {
     background: url(../img/drug-store/blood.svg) no-repeat center center #fff;
     background-size: 50%;
     border-radius: 50%;
 }
 
-.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+.faq-content-box .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
     width: 4px;
     background-color: rgb(255, 255, 255);
     -webkit-border-radius: 0;
@@ -1110,16 +1110,16 @@ button {
     border-radius: 0;
 }
 
-.mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar {
+.faq-content-box .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar {
     background-color: rgb(255, 255, 255);
 }
 
-.mCSB_scrollTools .mCSB_draggerRail {
+.faq-content-box .mCSB_scrollTools .mCSB_draggerRail {
     /*width: 1px;*/
     background-color: rgba(255, 255, 255, 1);
 }
 
-.mCSB_scrollTools .mCSB_draggerRail {
+.faq-content-box .mCSB_scrollTools .mCSB_draggerRail {
     position: absolute;
     width: 61.082vh;
     height: 2px;

@@ -1,6 +1,8 @@
 <?php
 
 $lang = app()->getLocale();
+$body_class = $model->alias??'';
+
 ?>
 
 @extends('site.layout')
@@ -59,9 +61,9 @@ $lang = app()->getLocale();
         </div>
     </div>
 
-    <div class="game-icons coffin">
-        <img src="{{asset('assets/img/drug-store/coffin.png')}}" alt="">
-    </div>
+    {{--<div class="game-icons coffin">--}}
+        {{--<img src="{{asset('assets/img/drug-store/coffin.png')}}" alt="">--}}
+    {{--</div>--}}
     <nav class="game-icons slider-controls slide-1">
         <a href="<?= $prev['alias'] ?? '/bandit'?>" class="str str-prev">
             <?php include "assets/img/svg/aids/str-prev.svg"?>
@@ -112,44 +114,5 @@ $lang = app()->getLocale();
 @section('scripts')
     @parent
     <script src="{{asset('assets/js/columb.js')}}"></script>
-    <script>
-        var modalVis = true;
 
-        $(document).ready(function () {
-
-            var modalAnimId,
-                handWrap = $('.k-hands'),
-                hand = $('.k-hand_move svg > g'),
-                containerOffsetT = $('.modal__icons').offset().top,
-                containerOffsetL = $('.modal__icons').offset().left,
-                bubles = $('.bb-buble'),
-                hat = $('.k-hat>svg>g'),
-                clickTimer;
-
-            $('.modal__btn').on('click', function (e) {
-                e.preventDefault();
-                $('.modal').fadeOut();
-                modalVis = false;
-                $(window).trigger('start');
-            });
-
-            function modalAnim() {
-                //console.log(hand, hat.offset().top)
-                if ((handWrap.offset().top + handWrap.height() * 0.68) >= hat.offset().top) {
-                    handWrap.addClass('hold');
-                } else {
-                    handWrap.removeClass('hold');
-                }
-
-
-                if (modalVis) {
-                    modalAnimId = requestAnimationFrame(modalAnim)
-                } else {
-                    cancelAnimationFrame(modalAnimId)
-                }
-            }
-
-            modalAnim()
-        })
-    </script>
 @endsection

@@ -21,12 +21,12 @@ class SearchController extends Controller
     {
         $lang = app()->getLocale();
         $match = "question_$lang, answer_$lang";
-        $static = FaqAnswer::whereRaw("match ($match) AGAINST (\"$search*\" IN BOOLEAN MODE)")->get();
+        $faqs = FaqAnswer::whereRaw("match ($match) AGAINST (\"$search*\" IN BOOLEAN MODE)")->get();
         $post_match = "title_$lang, content_$lang";
         $posts = Post::whereRaw("match ($post_match) AGAINST (\"$search*\" IN BOOLEAN MODE)")->get();
 
-        dd($static, $posts);
+//        dd($faqs, $posts);
 
-        return $search;
+        return view('search.result')->with(compact('posts','faqs'));
     }
 }

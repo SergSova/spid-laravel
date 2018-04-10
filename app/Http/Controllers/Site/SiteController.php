@@ -143,11 +143,11 @@ class SiteController extends Controller
         return view($this->prefix.'test-page')->with(compact('model'));
     }
 
-    public function faq()
+    public function faq($index=null)
     {
         $model = StaticPage::find(11);
 
-        return view($this->prefix.'faq')->with(compact('model'));
+        return view($this->prefix.'faq')->with(compact('model', 'index'));
     }
 
     public function map()

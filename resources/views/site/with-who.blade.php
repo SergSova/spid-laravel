@@ -1,6 +1,8 @@
 <?php
 
-$lang = app()->getLocale()
+$lang = app()->getLocale();
+$body_class = $model->alias??'';
+
 ?>
 
 @extends('site.layout')
@@ -59,10 +61,10 @@ $lang = app()->getLocale()
     </div>
 
     <nav class="game-icons slider-controls slide-4">
-        <a href="/slide-rocket" class="str str-prev">
+        <a class="str str-prev">
             <?php include "assets/img/svg/with-who/str-prev.svg"?>
         </a>
-        <a href="/bandit" class="str str-next">
+        <a class="str str-next">
             <?php include "assets/img/svg/with-who/str-next.svg"?>
         </a>
         <div class="bullets">
@@ -111,6 +113,5 @@ $lang = app()->getLocale()
 
 @section('scripts')
     @parent
-    <script src="{{asset('assets/js/main22.js')}}"></script>
     <script src="{{asset('assets/js/with-who.js')}}"></script>
 @endsection

@@ -541,7 +541,7 @@ h2 {
 .rocket-btn-wrap {
     position: absolute;
     top: 30.7%;
-    left: 11%;
+    left: 14%;
     font: 16px 'Montserrat-Light';
     cursor: pointer;
 }
@@ -590,26 +590,7 @@ h2 {
 .rocket-btn:focus {
     outline: none;
 }
-/*.rocket-btn::after {*/
-    /*content: '';*/
-    /*position: absolute;*/
-    /*width: 99%;*/
-    /*height: 74%;*/
-    /*left: -5%;*/
-    /*top: -14%;*/
-    /*backface-visibility: hidden;*/
-    /*border: 10px solid #1A2ECF;*/
-    /*opacity: .4;*/
-    /*filter: blur(4px);*/
-    /*transition: all .6s linear;*/
-/*}*/
-.rocket-btn:hover {
-    /*transform: scale(0.95);*/
-    /*border-color: #0894CD;*/
-}
-.rocket-btn:hover::after {
-    /*opacity: 0.1;*/
-}
+
 .rocket-btn-text {
     display: inline-block;
     vertical-align: middle;
@@ -1000,7 +981,7 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 59%;
+    width: 82%;
     position: relative;
     border: 1px solid #fff;
     margin: 0 auto;
@@ -1043,10 +1024,13 @@ h2 {
     text-align: center;
     position: absolute;
     bottom: 1.5vh;
+    /*display: flex;*/
+    /*justify-content: center;*/
 }
 .pusk-btn {
-    display: inline-block;
-    background: url(../img/bandit/men/pusk.png) no-repeat center center;
+    display: block;
+    background-image: url(../img/bandit/men/pusk.png);
+    background-repeat: no-repeat;
     background-position: 0 0;
     width: 110px;
     height: 93px;
@@ -1094,10 +1078,19 @@ h2 {
         left: 76.5%;
     }
     .rotator-game {
-        margin-top: 22%;
+        margin-top: 3%;
+        margin-left:0;
+    }
+    .rocket-btn-wrap {
+        width: 135px;
+        top: 22.7%;
+        left: 16%;
+    }
+    .rocket-btn {
+        width: 135px;
     }
  }
-@media screen and (max-width: 1370px) and (min-height: 1020px){
+@media screen and (max-width: 1370px) and (min-height: 1010px){
     .rotator-row-line1.before {
         left: 25.3%;
     }
@@ -1110,6 +1103,13 @@ h2 {
     .rocket-btn-wrap {
         top: 27%;
     }
+    .rotator-game {
+        margin-top: 15%;
+        margin-left: 0;
+    }
+    .men-right {
+        top: 7.6%;
+    }
 }
 
 @media screen and (max-width: 1370px) and (min-width: 1290px){
@@ -1120,7 +1120,8 @@ h2 {
 
 @media screen and (max-width: 1285px) {
     .rocket-btn-wrap {
-        top:26%
+        top:26%;
+        width: 110px;
     }
     .rocket-btn {
         font-size: 12px;
@@ -1128,6 +1129,7 @@ h2 {
     }
     .men-right {
         right: 17%;
+        top: 11.2%;
     }
     .head-rotator span{
         margin-left: 28px;
@@ -1145,12 +1147,12 @@ h2 {
         left: 76.3%;
     }
     .rocket-btn-wrap {
-        top: 26%
+        top: 26.5%
     }
 }
 @media screen and (max-width: 1050px) and (min-height: 760px){
     .rocket-btn-wrap {
-        top: 20%
+        top: 26.5%
     }
     .rotator-game {
         margin-top: 20%;
@@ -1158,6 +1160,7 @@ h2 {
     .rocket-btn {
         padding: 7px 15px;
         font-size: 10px;
+        width: 110px;
     }
     .rotator-row-line1.before {
         left: 25.9%;
@@ -1215,12 +1218,18 @@ h2 {
     }
 
     .rocket-btn {
-        font-size: 7px;
-        padding: 9px 6px;
+        font-size: 0.8vw;
+        padding: 3px 6px;
         width: 100%;
+        margin-top: 17px;
     }
+    .rocket-btn,
+    .rocket-btn-wrap {
+        width: 60px;
+        line-height: 1.3;
+    }
+    .rocket-btn-wrap {
 
-    .door-wrap {
     }
 }
 @media screen and (max-width: 680px) and (min-height: 360px) {

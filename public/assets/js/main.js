@@ -7,7 +7,7 @@ $(window).on('load', function() {
             scroll_up += 1;
     
             if (scroll_up > 1) {
-                location.assign('/map');
+               // location.assign('/map');
             }
     
         });

@@ -115,215 +115,7 @@ h2 {
     width: 50%;
     height: auto;
 }
-/****************** navigation ****************************/
-.str {
-    position: absolute;
-    bottom: 0;
-    height: 73%;
-    width: 33%;
-    z-index: 50;
-    top: 13.5%;
-}
 
-.slider-controls {
-    bottom: 4%;
-    right: 2%;
-    width: 212px;
-    height: 55px;
-}
-
-.bullets {
-   /* background: url('../../img/drug-store/bullets.svg') no-repeat;*/
-    background-position: 0 0;
-    left: 50%;
-    top: 0;
-    -webkit-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-            transform: translateX(-50%);
-    position: absolute;
-    width: 54px;
-    height: 61px;
-    z-index: 1;
-}
-
-.str-prev {
-    /*background: url('../../img/drug-store/str-prev.svg');*/
-    background-size: 100% 100%;
-    left: 0;
-    -webkit-transform-origin: right bottom;
-        -ms-transform-origin: right bottom;
-            transform-origin: right bottom;
-}
-.str-prev:hover #left-shoot {
-    -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
-    -webkit-transform-origin: 54px 12px 0;
-        -ms-transform-origin: 54px 12px 0;
-            transform-origin: 54px 12px 0;
-}
-
-.str-next {
-    /*background: url('../../img/drug-store/str-next.svg');*/
-    background-size: 100% 100%;
-    right: 0;
-    -webkit-transform-origin: left bottom;
-        -ms-transform-origin: left bottom;
-            transform-origin: left bottom;
-}
-.str-next:hover #right-shoot {
-    -webkit-transform: rotate(-45deg);
-        -ms-transform: rotate(-45deg);
-            transform: rotate(-45deg);
-    -webkit-transform-origin: 16px 12px 0;
-        -ms-transform-origin: 16px 12px 0;
-            transform-origin: 16px 12px 0;
-}
-.game-icons .str {
-    -webkit-animation-direction: alternate;
-            animation-direction: alternate;
-    -webkit-animation-duration: .2s;
-            animation-duration: .2s;
-    -webkit-animation-timing-function: ease-in-out;
-            animation-timing-function: ease-in-out;
-}
-
-.str-prev.active {
-    -webkit-animation-name: shootLeft;
-            animation-name: shootLeft;
-}
-@-webkit-keyframes shootLeft {
-    from {
-        -webkit-transform: rotate(0);
-                transform: rotate(0)
-    }
-    to {
-        -webkit-transform: rotate(30deg);
-                transform: rotate(30deg);
-    }
-}
-@keyframes shootLeft {
-    from {
-        -webkit-transform: rotate(0);
-                transform: rotate(0)
-    }
-    to {
-        -webkit-transform: rotate(30deg);
-                transform: rotate(30deg);
-    }
-}
-.game-icons.shoot .str-next {
-    -webkit-animation-name: shootRight;
-            animation-name: shootRight;
-}
-
-@-webkit-keyframes shootRight {
-    from {
-        -webkit-transform: rotate(0);
-                transform: rotate(0)
-    }
-    to {
-        -webkit-transform: rotate(-30deg);
-                transform: rotate(-30deg);
-    }
-}
-
-@keyframes shootRight {
-    from {
-        -webkit-transform: rotate(0);
-                transform: rotate(0)
-    }
-    to {
-        -webkit-transform: rotate(-30deg);
-                transform: rotate(-30deg);
-    }
-}
-
-
-
-.slide-1 .bullets>svg {
-
-}
-.slide-2 .bullets>svg {
-    -webkit-transform: rotate(72deg);
-        -ms-transform: rotate(72deg);
-            transform: rotate(72deg);
-}
-.slide-3 .bullets>svg{
-    -webkit-transform: rotate(145deg);
-        -ms-transform: rotate(145deg);
-            transform: rotate(145deg);
-}
-.slide-4 .bullets>svg {
-    -webkit-transform: rotate(216deg);
-        -ms-transform: rotate(216deg);
-            transform: rotate(216deg);
-}
-.slide-5 .bullets>svg {
-    -webkit-transform: rotate(288deg);
-        -ms-transform: rotate(288deg);
-            transform: rotate(288deg);
-}
-
-.game-icons.shoot .bullets>svg {
-    overflow: visible;
-    -webkit-transition: .3s 1s;
-    -o-transition: .3s 1s;
-    transition: .3s 1s;
-}
-.game-icons.shoot.slide-1 .bullets>svg {
-    -webkit-transform: rotate(72deg);
-        -ms-transform: rotate(72deg);
-            transform: rotate(72deg);
-}
-.game-icons.shoot.slide-2 .bullets>svg {
-    -webkit-transform: rotate(145deg);
-        -ms-transform: rotate(145deg);
-            transform: rotate(145deg);
-}
-.game-icons.shoot.slide-3 .bullets>svg {
-    -webkit-transform: rotate(216deg);
-        -ms-transform: rotate(216deg);
-            transform: rotate(216deg);
-}
-.game-icons.shoot.slide-4 .bullets>svg {
-    -webkit-transform: rotate(288deg);
-        -ms-transform: rotate(288deg);
-            transform: rotate(288deg);
-}
-.game-icons.shoot.slide-5 .bullets>svg {
-    -webkit-transform: rotate(361deg);
-        -ms-transform: rotate(361deg);
-            transform: rotate(361deg);
-}
-
-
-.game-icons.slide-1 .bullets>svg .bullet1-1,
-.game-icons.slide-2 .bullets>svg .bullet2-2,
-.game-icons.slide-3 .bullets>svg .bullet3-3,
-.game-icons.slide-4 .bullets>svg .bullet4-4,
-.game-icons.slide-5 .bullets>svg .bullet5-5 {
-    -webkit-transition: all .3s ease-in-out;
-    -o-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
-    -webkit-transform: scale(1);
-        -ms-transform: scale(1);
-            transform: scale(1);
-    -webkit-transform-origin: center center;
-        -ms-transform-origin: center center;
-            transform-origin: center center;
-}
-.game-icons.shoot.slide-1 .bullets>svg .bullet1-1,
-.game-icons.shoot.slide-2 .bullets>svg .bullet2-2,
-.game-icons.shoot.slide-3 .bullets>svg .bullet3-3,
-.game-icons.shoot.slide-4 .bullets>svg .bullet4-4,
-.game-icons.shoot.slide-5 .bullets>svg .bullet5-5 {
-    -webkit-transform: scale(0);
-        -ms-transform: scale(0);
-            transform: scale(0);
-}
-
-/****************** end navigation ***********************/
 /**************** names of games ***********************/
 .games-names {
     overflow: hidden;
@@ -439,7 +231,7 @@ h2 {
     /*position: relative;*/
 }
 
-.games.active .game {
+/*.games.active .game {
 
 }
 .games.active .game.active {
@@ -470,11 +262,11 @@ h2 {
     -webkit-transform: scale(0.5);
         -ms-transform: scale(0.5);
             transform: scale(0.5);
-}
+}*/
 /*.games.active .game.active-prev > .game-wrap {*/
 /*transform: scale(0.3);*/
 /*}*/
-.game {
+/*.game {
     -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
     -webkit-transition: 1s;
@@ -488,7 +280,7 @@ h2 {
 .game1 {
     cursor: none;
     overflow: hidden;
-}
+}*/
 
 .game1 .game-wrap{
     background: url("../../img/drug-store/bg_kolumb.jpg") 50% 50% no-repeat;
@@ -689,7 +481,7 @@ h2 {
     bottom: 0;
     right: 0;
     background: rgba(0, 0, 0, .85);
-    z-index: 99;
+    z-index: 1001;
 }
 
 .modal__inner {
@@ -703,7 +495,7 @@ h2 {
 }
 
 .modal__btn {
-    border: 2px solid #B00F8B;
+    border: 0.5px solid #B00F8B;
     color: #fff;
     font: 13px 'Montserrat';
     background: transparent;
@@ -1297,7 +1089,7 @@ canvas {
 
 @media all and (max-width: 991px) {
     .modal__text {
-        font-size: 4.5vmin;
+        font-size: 4vmin;
     }
 
     .modal__btn,
@@ -1307,5 +1099,35 @@ canvas {
 
     .modal__btn {
         padding: 4vmin 12vmin;
+        font-size: 3vmin;
+    }
+
+    .modal__inner {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+@media all and (max-width: 767px) {
+    .modal-bottom {
+        display: none;
+    }
+
+    .modal__btn {
+        margin-top: 11vmin;
+    }
+
+    /*.modal__inner {
+        top: initial;
+        bottom: 5%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
+    }*/
+}
+
+@media all and (min-width: 768px) {
+    .modal-kolumb + .game-icons {
+        z-index: 100;
     }
 }

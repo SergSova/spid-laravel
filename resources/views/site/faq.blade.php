@@ -1,10 +1,13 @@
+<?php
+
+$body_class = $model->alias ?? '';
+?>
 @extends('site.layout')
 
 @section('title',$model->seo_title)
 
 @section('styles')
     @parent
-    <link rel="stylesheet" href="{{asset('assets/css/lib/jquery.mCustomScrollbar.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/faq_main.css')}}">
 @endsection
 
@@ -48,7 +51,7 @@
                 <div class="faq-content-box">
                     <div class="faq-content-wrapper">
                         @foreach($model->getQuestions() as $question)
-                            <div class="faq-content__question">
+                            <div class="faq-content__question {{isset($index)&&$question->index==$index?'question-active':''}}" id="question-{{$question->index}}">
                                 <h4 class="faq-content__heading">{{$question->question}}
                                     <div class="faq-content__icon"></div>
                                 </h4>
@@ -71,7 +74,6 @@
 
 @section('scripts')
     @parent
-    <script src="{{asset('assets/js/libs/jquery.mCustomScrollbar.concat.min.js')}}"></script>
     <script src="{{asset('assets/js/libs/wheel-indicator.js')}}"></script>
     <script src="{{asset('assets/js/faq_main.js')}}"></script>
 @endsection

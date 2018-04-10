@@ -4,6 +4,7 @@
  * @var \App\StaticPage $model
  */
 
+$body_class = $model->alias??'';
 ?>
 @extends('site.layout')
 
@@ -49,7 +50,7 @@
                 </div>
                 <div class="after-text">
                    <div class="if-ready">Узнать больше</div>
-                    <a href="/aids">
+                    <a href="{{$model->getNext()['alias']}}">
                         <div class="navigate-box__right">
                             <div class="navigate-box__right-wrap">
                                 <span class="navigate-box__line"></span>
@@ -65,5 +66,6 @@
 
 @section('scripts')
     @parent
+    <script src="{{asset('assets/js/libs/detect.min.js')}}"></script>
     <script src="{{asset('assets/js/madam.js')}}"></script>
 @endsection

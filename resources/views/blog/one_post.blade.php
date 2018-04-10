@@ -35,21 +35,14 @@ $body_class = 'one_blog';
     <link rel="stylesheet" href="{{asset('assets/css/blog/slick.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/blog/blog.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/blog/media.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/blog/media-blog.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/blog/one-blog.css')}}">
 @endsection
 
 @section('body')
-    <div id="p_prldr">
-        <div class="preo_prego">
-            <div class="cube-all">
-                <div class="thecube">
-                    <div class="cube c1"></div>
-                    <div class="cube c2"></div>
-                    <div class="cube c4"></div>
-                    <div class="cube c3"></div>
-                </div>
-            </div>
-            <span class="svg_anm"></span>
+    <div class="preloader">
+        <div class="preloader-inner">
+            <?php include "assets/img/svg/about/preloader-inner.svg" ?>
         </div>
     </div>
     <main>
@@ -144,24 +137,20 @@ $body_class = 'one_blog';
                                 </div>
 
                                 <div class="blog-navi">
-                                    <div class="blog-prev">
-                                        <a href="{{$prev->url}}">
+                                    <a href="{{$prev->url}}" class="blog-prev">
                                             <img src="{{$prev->mainImage}}">
                                             <div class="blog-navi-text">
                                                 <img src="{{asset('assets/img/blog/icon-filter/blog-nav-arr-prev.png')}}">
                                                 {!! $prev->mod_title !!}
                                             </div>
-                                        </a>
-                                    </div>
-                                    <div class="blog-next">
-                                        <a href="{{$next->url}}">
+                                    </a>
+                                        <a href="{{$next->url}}" class="blog-next">
                                             <img src="{{$next->mainImage}}">
                                             <div class="blog-navi-text">
                                                 {!! $next->mod_title !!}
                                                 <img src="{{asset('assets/img/blog/icon-filter/blog-nav-arr-next.png')}}">
                                             </div>
                                         </a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -172,70 +161,7 @@ $body_class = 'one_blog';
                         </aside>
                         <div class="ajax-blog"></div>
                     </div>
-                    {{--                    <div class="about-description">
-                                            <h4>ИНТЕРНЕТ МАГАЗИН ОБУВИ В УКРАИНЕ - PREGO</h4>
-                                            <div class="about-description-p">
-                                                <p>Торговая марка PREGO - Прего появилась на рынке Украины не так давно, но уже успела
-                                                    зарекомендовать себя и получить доверие покупателя. Впервые была представлена в магазинах
-                                                    сети Взуттевый Глянц и Ботик (Botik), но современный мир не стоит на месте, наряду с
-                                                    обычными магазинами мы все чаще покупаем разные товары, в том числе и брендовую обувь
-                                                    в интернет магазине, поэтому с радостью представляем Вам, уважаемый клиент - обновленный
-                                                    интернет магазин обуви PREGO.
-                                                    Торговая марка PREGO - Прего появилась на рынке Украины не так давно, но уже успела
-                                                    зарекомендовать себя и получить доверие покупателя. Впервые была представлена в магазинах
-                                                    сети Взуттевый Глянц и Ботик (Botik), но современный мир не стоит на месте, наряду с
-                                                    обычными магазинами мы все чаще покупаем разные товары, в том числе и брендовую обувь
-                                                    в интернет магазине, поэтому с радостью представляем Вам, уважаемый клиент - обновленный
-                                                    интернет магазин обуви PREGO.</p>
-                                                <p>Торговая марка PREGO - Прего появилась на рынке Украины не так давно, но уже успела
-                                                    зарекомендовать себя и получить доверие покупателя. Впервые была представлена в магазинах
-                                                    сети Взуттевый Глянц и Ботик (Botik), но современный мир не стоит на месте, наряду с
-                                                    обычными магазинами мы все чаще покупаем разные товары, в том числе и брендовую обувь
-                                                    в интернет магазине, поэтому с радостью представляем Вам, уважаемый клиент - обновленный
-                                                    интернет магазин обуви PREGO.
-                                                    Торговая марка PREGO - Прего появилась на рынке Украины не так давно, но уже успела
-                                                    зарекомендовать себя и получить доверие покупателя. Впервые была представлена в магазинах
-                                                    сети Взуттевый Глянц и Ботик (Botik), но современный мир не стоит на месте, наряду с
-                                                    обычными магазинами мы все чаще покупаем разные товары, в том числе и брендовую обувь
-                                                    в интернет магазине, поэтому с радостью представляем Вам, уважаемый клиент - обновленный
-                                                    интернет магазин обуви PREGO.</p>
-                                            </div>
-                                            <div class="SeoText">
-                                                <span class="on">@lang('site.read_more')</span>
-                                                <span class="off">@lang('site.close')</span>
-                                            </div>
-                                        </div>--}}
-                    <footer>
-                        <div class="footer_wrapper">
-                            <div class="footer__local">
-                                <div class="footer__local_logo">
-                                    <a target="_blank" href="{{route('home')}}">
-                                        <img src="{{asset('assets/img/blog/icon-filter/logo.png')}}" alt="">
-                                    </a>
-                                </div>
-                                <div class="footer__local_i">
-                                    <div class="footer__local_site_info">
-                                        Copyright © 2018 Drugstore. @lang('site.reserved')
-                                    </div>
-                                </div>
-                                <div class="footer__local_icon">
-                                    <a target="_blank" class="fa-facebook-1" href="https://www.facebook.com/pregotheone/">
-                                        <img src="{{asset('assets/img/blog/icon-telefon/f-01.svg')}}" alt="">
-                                    </a>
-                                    <a target="_blank" class="fa-viber-1" href="viber://add?number=+38066696-82-74">
-                                        <img src="{{asset('assets/img/blog/icon-telefon/v-01.svg')}}" alt="">
-                                    </a>
-                                    <a target="_blank" class="fa-youtube-1"
-                                       href="https://www.youtube.com/channel/UCRZe3K0cxIr7bKmotw4MKQQ">
-                                        <img src="{{asset('assets/img/blog/icon-telefon/y-01.svg')}}" alt="">
-                                    </a>
-                                    <a target="_blank" class="fa-instagram-1" href="https://www.instagram.com/pregotheone/">
-                                        <img src="{{asset('assets/img/blog/icon-telefon/i-01.svg')}}" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
+
                 </div>
             </div>
             <div class="scroll-substitute"></div>

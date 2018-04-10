@@ -28,34 +28,36 @@
 
             <div class="form-group">
                 {{ Form::label('title_'.$lang, 'Заголовок') }}
-                {{ Form::text('title_'.$lang, null ,['class'=>'form-control']) }}
+                {{ Form::text('title_'.$lang, NULL ,['class'=>'form-control']) }}
             </div>
             <div id="accordionCity{{$lang}}">
                 <div class="card">
                     <div class="card-header" id="headingCity{{$lang}}">
                         <h5 class="mb-0">
-                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseCity{{$lang}}" role="button" aria-expanded="false" aria-controls="collapseCity{{$lang}}">
+                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseCity{{$lang}}"
+                               role="button" aria-expanded="false" aria-controls="collapseCity{{$lang}}">
                                 Города
                             </a>
                         </h5>
                     </div>
-                    <div id="collapseCity{{$lang}}" class="collapse" aria-labelledby="headingCity{{$lang}}" data-parent="#accordionCity{{$lang}}">
+                    <div id="collapseCity{{$lang}}" class="collapse" aria-labelledby="headingCity{{$lang}}"
+                         data-parent="#accordionCity{{$lang}}">
                         <div class="card-body">
                             @forelse($model->{'City_'.$lang} as $key=>$city)
                                 <div class="city-wrap">
                                     <div class="row">
                                         <div class="form-group">
                                             {{ Form::label("City_".$lang."[$key][title]", 'Город') }}
-                                            {{ Form::text("City_".$lang."[$key][title]", null ,['class'=>'form-control']) }}
+                                            {{ Form::text("City_".$lang."[$key][title]", NULL ,['class'=>'form-control']) }}
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 {{ Form::label("City_".$lang."[$key][lat]", 'lat') }}
-                                                {{ Form::text("City_".$lang."[$key][lat]", null ,['class'=>'form-control']) }}
+                                                {{ Form::text("City_".$lang."[$key][lat]", NULL ,['class'=>'form-control']) }}
                                             </div>
                                             <div class="col">
                                                 {{ Form::label("City_".$lang."[$key][lng]", 'lng') }}
-                                                {{ Form::text("City_".$lang."[$key][lng]", null ,['class'=>'form-control']) }}
+                                                {{ Form::text("City_".$lang."[$key][lng]", NULL ,['class'=>'form-control']) }}
                                             </div>
                                         </div>
                                     </div>
@@ -63,77 +65,25 @@
                                         <div class="card">
                                             <div class="card-header" id="headingCenter{{$key}}">
                                                 <h5 class="mb-0">
-                                                    <a class="btn btn-primary" data-toggle="collapse" href="#collapseCenter{{$key}}" role="button" aria-expanded="false" aria-controls="collapseCenter{{$key}}">
+                                                    <a class="btn btn-primary" data-toggle="collapse"
+                                                       href="#collapseCenter{{$key}}" role="button"
+                                                       aria-expanded="false" aria-controls="collapseCenter{{$key}}">
                                                         Центры
                                                     </a>
                                                 </h5>
                                             </div>
-                                            <div id="collapseCenter{{$key}}" class="collapse" aria-labelledby="headingCenter{{$key}}" data-parent="#accordionCenter{{$key}}">
+                                            <div id="collapseCenter{{$key}}" class="collapse"
+                                                 aria-labelledby="headingCenter{{$key}}"
+                                                 data-parent="#accordionCenter{{$key}}">
                                                 <div class="card-body">
                                                     @if(isset($city->centers))
                                                         @foreach($city->centers as $c_key=>$center)
-                                                            <div class="center-wrap">
-                                                                <div class="form-row">
-                                                                    <div class="col form-group">
-                                                                        {{ Form::label("City_".$lang."[$key][centers][$c_key][title]", 'Название') }}
-                                                                        {{ Form::text("City_".$lang."[$key][centers][$c_key][title]", null ,['class'=>'form-control']) }}
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        {{ Form::label("City_".$lang."[$key][centers][$c_key][dopInfo]", 'Дополнительное инфо') }}
-                                                                        {{ Form::text("City_".$lang."[$key][centers][$c_key][dopInfo]", null ,['class'=>'form-control']) }}
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    {{ Form::label("City_".$lang."[$key][centers][$c_key][info]", 'Инфо') }}
-                                                                    {{ Form::textarea("City_".$lang."[$key][centers][$c_key][info]", null ,['class'=>'form-control','rows'=>2]) }}
-                                                                </div>
-                                                                <div class="form-row">
-                                                                    <div class="col">
-                                                                        {{ Form::label("City_".$lang."[$key][centers][$c_key][lat]", 'lat') }}
-                                                                        {{ Form::text("City_".$lang."[$key][centers][$c_key][lat]", null ,['class'=>'form-control']) }}
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        {{ Form::label("City_".$lang."[$key][centers][$c_key][lng]", 'lng') }}
-                                                                        {{ Form::text("City_".$lang."[$key][centers][$c_key][lng]", null ,['class'=>'form-control']) }}
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <a class="btn btn-danger btn-sm btn-remove">X</a>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
+                                                            @include('admin.static.form.chank.map_center_item',
+                                                            ['base'=>"City_" . $lang . "[$key][centers][$c_key]"])
                                                         @endforeach
                                                     @else
-                                                        <div class="center-wrap">
-                                                            <div class="row">
-                                                                <div class="col form-group">
-                                                                    {{ Form::label("City_".$lang."[$key][centers][0][title]", 'Название') }}
-                                                                    {{ Form::text("City_".$lang."[$key][centers][0][title]", null ,['class'=>'form-control']) }}
-                                                                </div>
-                                                                <div class="col form-group">
-                                                                    {{ Form::label("City_".$lang."[$key][centers][0][dopInfo]", 'Дополнительное инфо') }}
-                                                                    {{ Form::text("City_".$lang."[$key][centers][0][dopInfo]", null ,['class'=>'form-control']) }}
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                {{ Form::label("City_".$lang."[$key][centers][0][info]", 'Инфо') }}
-                                                                {{ Form::textarea("City_".$lang."[$key][centers][0][info]", null ,['class'=>'form-control','rows'=>2]) }}
-                                                            </div>
-                                                            <div class="form-row">
-                                                                <div class="col">
-                                                                    {{ Form::label("City_".$lang."[$key][centers][0][lat]", 'lat') }}
-                                                                    {{ Form::text("City_".$lang."[$key][centers][0][lat]", null ,['class'=>'form-control']) }}
-                                                                </div>
-                                                                <div class="col">
-                                                                    {{ Form::label("City_".$lang."[$key][centers][0][lng]", 'lng') }}
-                                                                    {{ Form::text("City_".$lang."[$key][centers][0][lng]", null ,['class'=>'form-control']) }}
-                                                                </div>
-                                                                <div class="col">
-                                                                    <a class="btn btn-danger btn-sm btn-remove">X</a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
+                                                        @include('admin.static.form.chank.map_center_item',
+                                                            ['base'=>"City_" . $lang . "[$key][centers][0]"])
                                                     @endif
                                                     <div class="form-group add-center btn btn-success">Добавить центр</div>
                                                 </div>
@@ -145,16 +95,16 @@
                                 <div class="row city-wrap">
                                     <div class="form-group">
                                         {{ Form::label("City_".$lang."[0][title]", 'Город') }}
-                                        {{ Form::text("City_".$lang."[0][title]", null ,['class'=>'form-control']) }}
+                                        {{ Form::text("City_".$lang."[0][title]", NULL ,['class'=>'form-control']) }}
                                     </div>
                                     <div class="form-row">
                                         <div class="col">
                                             {{ Form::label("City_".$lang."[0][lat]", 'lat') }}
-                                            {{ Form::text("City_".$lang."[0][lat]", null ,['class'=>'form-control']) }}
+                                            {{ Form::text("City_".$lang."[0][lat]", NULL ,['class'=>'form-control']) }}
                                         </div>
                                         <div class="col">
                                             {{ Form::label("City_".$lang."[0][lng]", 'lng') }}
-                                            {{ Form::text("City_".$lang."[0][lng]", null ,['class'=>'form-control']) }}
+                                            {{ Form::text("City_".$lang."[0][lng]", NULL ,['class'=>'form-control']) }}
                                         </div>
                                     </div>
                                 </div>
@@ -162,44 +112,18 @@
                                     <div class="card">
                                         <div class="card-header" id="headingCenter0">
                                             <h5 class="mb-0">
-                                                <a class="btn btn-primary" data-toggle="collapse" href="#collapseCenter0" role="button" aria-expanded="false" aria-controls="collapseCenter0">
+                                                <a class="btn btn-primary" data-toggle="collapse"
+                                                   href="#collapseCenter0" role="button" aria-expanded="false"
+                                                   aria-controls="collapseCenter0">
                                                     Центры
                                                 </a>
                                             </h5>
                                         </div>
-                                        <div id="collapseCenter0" class="collapse" aria-labelledby="headingCenter0" data-parent="#accordionCenter0">
+                                        <div id="collapseCenter0" class="collapse" aria-labelledby="headingCenter0"
+                                             data-parent="#accordionCenter0">
                                             <div class="card-body">
-                                                <div class="center-wrap">
-                                                    <div class="row">
-                                                        <div class="col form-group">
-                                                            {{ Form::label("City_".$lang."[0][centers][0][title]", 'Название') }}
-                                                            {{ Form::text("City_".$lang."[0][centers][0][title]", null ,['class'=>'form-control']) }}
-                                                        </div>
-                                                        <div class="col form-group">
-                                                            {{ Form::label("City_".$lang."[0][centers][0][dopInfo]", 'Дополнительное инфо') }}
-                                                            {{ Form::text("City_".$lang."[0][centers][0][dopInfo]", null ,['class'=>'form-control']) }}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        {{ Form::label("City_".$lang."[0][centers][0][info]", 'Инфо') }}
-                                                        {{ Form::textarea("City_".$lang."[0][centers][0][info]", null ,['class'=>'form-control','rows'=>2]) }}
-                                                    </div>
-
-                                                    <div class="form-row">
-                                                        <div class="col">
-                                                            {{ Form::label("City_".$lang."[0][centers][0][lat]", 'lat') }}
-                                                            {{ Form::text("City_".$lang."[0][centers][0][lat]", null ,['class'=>'form-control']) }}
-                                                        </div>
-                                                        <div class="col">
-                                                            {{ Form::label("City_".$lang."[0][centers][0][lng]", 'lng') }}
-                                                            {{ Form::text("City_".$lang."[0][centers][0][lng]", null ,['class'=>'form-control']) }}
-                                                        </div>
-                                                        <div class="col">
-                                                            <a class="btn btn-danger btn-sm btn-remove">X</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
+                                                @include('admin.static.form.chank.map_center_item',
+                                                ['base'=>"City_" . $lang . "[0][centers][0]"])
                                                 <div class="form-group add-center btn btn-success">Добавить центр</div>
                                             </div>
                                         </div>

@@ -7,14 +7,16 @@
 
     <title>@yield('title','Page')</title>
 
+    @include('site.seo.meta')
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800&amp;subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('assets/css/lib/jquery.mCustomScrollbar.css')}}">
     <link href="{{asset('assets/css/menu.css')}}" rel="stylesheet" type="text/css">
     @yield('styles')
 </head>
-<body class="{{$body_class??''}}">
+<body class="{{$body_class??''}}" data-alias="{{$body_class??''}}">
 @if(\Request::route()->getName()!='home')
     @include('site.menu')
 @endif
@@ -27,19 +29,12 @@
         $('.preloader').delay(1000).fadeOut(300, function () {
             var scroll_up = 0;
 
-            $(window).on('scrollUp', function (e) {
-
-                scroll_up += 1;
-
-                if (scroll_up > 1) {
-                    location.assign('/map');
-                }
-
-            });
+            
         });
         $('.preloader svg').delay(1000).fadeOut(300);
     });
 </script>
+<script src="{{asset('assets/js/libs/jquery.mCustomScrollbar.concat.min.js')}}"></script>
 <script src="{{asset('assets/js/preloader.js')}}"></script>
 @if(isset($model) && method_exists($model,'getNext'))
     <script>

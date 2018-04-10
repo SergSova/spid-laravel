@@ -5,6 +5,8 @@
  */
 
 $lang = app()->getLocale();
+$body_class = $model->alias??'';
+
 ?>
 @extends('site.layout')
 

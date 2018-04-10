@@ -110,7 +110,7 @@ DrugStore.prototype.setup = function() {
     th.app.renderer.resize(th.canvasContainerWidth, th.canvasContainerHeight);
     th.app.stage.addChild(this.topContainer);  
 
-    th.bgSprite = new PIXI.Sprite(PIXI.loader.resources['assets/img/drug-store/bg.jpg'].texture);
+    th.bgSprite = new PIXI.Sprite(PIXI.loader.resources['/assets/img/drug-store/bg.jpg'].texture);
     th.bgSprite.width = th.canvasContainerWidth;
     th.bgSprite.height = th.canvasContainerHeight;
     th.topContainer.addChild(th.bgSprite);
@@ -153,7 +153,7 @@ DrugStore.prototype._createClouds = function() {
         {name: 'cloudCenter', offsetX: 8, offsetY: 0, widthPersent: 100},
         {name: 'cloudBig', offsetX: 0, offsetY: 0, widthPersent: 100},
     ].forEach(function(cloud) {
-        var sprite = new PIXI.Sprite(PIXI.loader.resources['assets/img/drug-store/clouds/' + cloud['name'] + '.png'].texture),
+        var sprite = new PIXI.Sprite(PIXI.loader.resources['/assets/img/drug-store/clouds/' + cloud['name'] + '.png'].texture),
             scale = th._getScale(sprite.width, cloud['widthPersent']);
 
         sprite.scale.set(scale);
@@ -163,7 +163,7 @@ DrugStore.prototype._createClouds = function() {
 
 DrugStore.prototype._createHand = function() {
     var th = this,
-        handTexture = th.su.filmstrip('assets/img/drug-store/hand.png', 207, 250);
+        handTexture = th.su.filmstrip('/assets/img/drug-store/hand.png', 207, 250);
 
     th.topContainer.interactive = true; 
     th.hand = new PIXI.extras.MovieClip(handTexture);
@@ -263,12 +263,12 @@ DrugStore.prototype._createOthers = function() {
         _parallaxSpeed = .005;
     
     [
-        {name: 'assets/img/drug-store/other/fly-man', offsetX: 7, offsetY: 70, widthPersent: 17},
-        {name: 'assets/img/drug-store/other/fly-man2', offsetX: 50, offsetY: 52, widthPersent: 4},
-        {name: 'assets/img/drug-store/other/fly-wooman2', offsetX: 80, offsetY: 5, widthPersent: 11},
-        {name: 'assets/img/drug-store/other/fly-wooman', offsetX: 14, offsetY: 8, widthPersent: 11},
-        {name: 'assets/img/drug-store/clouds/cloudBig', offsetX: 0, offsetY: 0, widthPersent: 100},
-        {name: 'assets/img/drug-store/clouds/cloudCenter', offsetX: 8, offsetY: 0, widthPersent: 100},
+        {name: '/assets/img/drug-store/other/fly-man', offsetX: 7, offsetY: 70, widthPersent: 17},
+        {name: '/assets/img/drug-store/other/fly-man2', offsetX: 50, offsetY: 52, widthPersent: 4},
+        {name: '/assets/img/drug-store/other/fly-wooman2', offsetX: 80, offsetY: 5, widthPersent: 11},
+        {name: '/assets/img/drug-store/other/fly-wooman', offsetX: 14, offsetY: 8, widthPersent: 11},
+        {name: '/assets/img/drug-store/clouds/cloudBig', offsetX: 0, offsetY: 0, widthPersent: 100},
+        {name: '/assets/img/drug-store/clouds/cloudCenter', offsetX: 8, offsetY: 0, widthPersent: 100},
     ].forEach(function(elem) {
         var sprite = new PIXI.Sprite(PIXI.loader.resources[elem['name'] + '.png'].texture),
             scale = th._getScale(sprite.width, elem['widthPersent']),
@@ -279,7 +279,7 @@ DrugStore.prototype._createOthers = function() {
         sprite.x = th._getWidth(elem['offsetX']);
         sprite.y = th._getHeight(elem['offsetY']);
 
-        if (elem['name'] == 'assets/img/drug-store/clouds/cloudBig') {
+        if (elem['name'] == '/assets/img/drug-store/clouds/cloudBig') {
             sprite.alpha = 0.19;
             parallaxDirection *= -1;
         } 
@@ -330,7 +330,7 @@ DrugStore.prototype._createCircles = function() {
         {name: 'visa', offsetX: 82, offsetY: 19, mobileCoef: 1, widthPersent: 10, text: 'иметь банковскую карту\nс безлимом', textOffset: 0.83}
     ].forEach(function(circle) {
         var circleContainer = new PIXI.Container(),
-            sprite = new PIXI.Sprite(PIXI.loader.resources['assets/img/drug-store/circles/' + circle['name'] + '.png'].texture),
+            sprite = new PIXI.Sprite(PIXI.loader.resources['/assets/img/drug-store/circles/' + circle['name'] + '.png'].texture),
             scale;
         if (!th.mobileAndTabletcheck()) {
             scale = th._getScale(sprite.width, circle['widthPersent']);
@@ -412,7 +412,7 @@ DrugStore.prototype.setAnim = function(sprite, delayTime) {
             y: sprite['_childShadow'].position.y + 5, 
             width: spriteWidth + 5,
             height: spriteHeight + 5
-        },
+        }
     ).yoyo(true).repeat(-1).delay(delayTime);
 }
 
@@ -514,7 +514,7 @@ DrugStore.prototype._moveBubble = function(sprite, c, cW, cH) {
             ease: Power0.easeNone,
             y: c1Top + deltaY, 
             x: c1Left + deltaX,
-        },
+        }
     ).yoyo(true).repeat(0);
 
     new TweenMax.fromTo([c1.scale, c1['p'].scale], 0.4, 
@@ -526,7 +526,7 @@ DrugStore.prototype._moveBubble = function(sprite, c, cW, cH) {
             ease: Power0.easeNone,
             y: 1, 
             x: 1
-        },
+        }
     ).yoyo(true).repeat(0);
 }
 
@@ -576,28 +576,28 @@ document.addEventListener('DOMContentLoaded', function() {
     D.init();
     
     PIXI.loader
-    .add('assets/img/drug-store/bg.jpg')
-    .add('assets/img/drug-store/hand.png')
-    .add('assets/img/drug-store/circles/bloger.png')
-    .add('assets/img/drug-store/circles/boots.png')
-    .add('assets/img/drug-store/circles/car.png')
-    .add('assets/img/drug-store/circles/figure.png')
-    .add('assets/img/drug-store/circles/figureMan.png')
-    .add('assets/img/drug-store/circles/flat.png')
-    .add('assets/img/drug-store/circles/friends.png')
-    .add('assets/img/drug-store/circles/love2.png')
-    .add('assets/img/drug-store/circles/wedding.png')
-    .add('assets/img/drug-store/circles/mobile.png')
-    .add('assets/img/drug-store/circles/parashut.png')
-    .add('assets/img/drug-store/circles/star.png')
-    .add('assets/img/drug-store/circles/travel.png')
-    .add('assets/img/drug-store/circles/visa.png')
-    .add('assets/img/drug-store/other/fly-man.png')
-    .add('assets/img/drug-store/other/fly-man2.png')
-    .add('assets/img/drug-store/other/fly-wooman.png')
-    .add('assets/img/drug-store/other/fly-wooman2.png')
-    .add('assets/img/drug-store/clouds/cloudCenter.png')
-    .add('assets/img/drug-store/clouds/cloudBig.png')
-    .add("assets/fonts/Montserrat/Montserrat-Medium.ttf")
+    .add('/assets/img/drug-store/bg.jpg')
+    .add('/assets/img/drug-store/hand.png')
+    .add('/assets/img/drug-store/circles/bloger.png')
+    .add('/assets/img/drug-store/circles/boots.png')
+    .add('/assets/img/drug-store/circles/car.png')
+    .add('/assets/img/drug-store/circles/figure.png')
+    .add('/assets/img/drug-store/circles/figureMan.png')
+    .add('/assets/img/drug-store/circles/flat.png')
+    .add('/assets/img/drug-store/circles/friends.png')
+    .add('/assets/img/drug-store/circles/love2.png')
+    .add('/assets/img/drug-store/circles/wedding.png')
+    .add('/assets/img/drug-store/circles/mobile.png')
+    .add('/assets/img/drug-store/circles/parashut.png')
+    .add('/assets/img/drug-store/circles/star.png')
+    .add('/assets/img/drug-store/circles/travel.png')
+    .add('/assets/img/drug-store/circles/visa.png')
+    .add('/assets/img/drug-store/other/fly-man.png')
+    .add('/assets/img/drug-store/other/fly-man2.png')
+    .add('/assets/img/drug-store/other/fly-wooman.png')
+    .add('/assets/img/drug-store/other/fly-wooman2.png')
+    .add('/assets/img/drug-store/clouds/cloudCenter.png')
+    .add('/assets/img/drug-store/clouds/cloudBig.png')
+    .add('/assets/fonts/Montserrat/Montserrat-Medium.ttf')
     .load(D.setup.bind(D))
 });

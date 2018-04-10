@@ -25,10 +25,10 @@ class CreatePostsTable extends Migration
                 $table->text('content_uk')->nullable();
                 $table->unsignedInteger('seo_id_ru')->nullable();
                 $table->foreign('seo_id_ru')->references('id')->on('seos')
-                    ->onDelete('cascade');
+                    ->onDelete('set null');
                 $table->unsignedInteger('seo_id_uk')->nullable();
                 $table->foreign('seo_id_uk')->references('id')->on('seos')
-                    ->onDelete('cascade');
+                    ->onDelete('set null');
 
                 $table->boolean('published')->default(1);
                 $table->dateTime('publishedOn')->nullable();

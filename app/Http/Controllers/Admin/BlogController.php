@@ -33,10 +33,10 @@ class BlogController extends Controller
             $post->published = !$post->published;
             if ($post->published) {
                 $post->publishedOn = Carbon::now()->toDateTimeString();
-                Session::flash('flash_message', 'Статья "'.$post->title.'" опубликованна');
+                Session::flash('flash_message', 'Статья "'.strip_tags($post->mod_title)." ($post->id)".'" опубликованна');
             } else {
                 $post->publishedOn = null;
-                Session::flash('flash_message', 'Статья "'.$post->title.'" снята с публикации');
+                Session::flash('flash_message', 'Статья "'.strip_tags($post->mod_title)." ($post->id)".'" снята с публикации');
             }
             $post->save();
         }
@@ -89,7 +89,7 @@ class BlogController extends Controller
 
             $model->saveSeo($request);
             if ($model->save()) {
-                Session::flash('flash_message', 'Статья "'.$model->title.'" создана');
+                Session::flash('flash_message', 'Статья "'.strip_tags($model->mod_title)." ($model->id)".'" создана');
 
                 return redirect(route('blog.index'));
             }
@@ -122,7 +122,7 @@ class BlogController extends Controller
     {
         /** @var Post $model */
         $model = Post::find($id);
-        $title = 'Редактирование статьи "'.strip_tags($model->mod_title).'"';
+        $title = 'Редактирование статьи "'.strip_tags($model->mod_title)." ($model->id)".'"';
         $route = 'blog.update';
         $method = 'PUT';
 
@@ -147,7 +147,7 @@ class BlogController extends Controller
             $model->slider = json_encode($slider);
             $model->saveSeo($request);
             if ($model->save()) {
-                Session::flash('flash_message', 'Статья "'.strip_tags($model->mod_title).'" обновлена');
+                Session::flash('flash_message', 'Статья "'.strip_tags($model->mod_title)." ($model->id)".'" обновлена');
 
                 return redirect(route('blog.index'));
             }
@@ -165,13 +165,13 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        Session::flash('flash_message', 'Статья "'.$id.'" помечена на удаление');
         /** @var Post $post */
         $post = Post::find($id);
         $post->published = false;
         $post->publishedOn = null;
         $post->save();
         Post::destroy($id);
+        Session::flash('flash_message', 'Статья "'.strip_tags($post->mod_title)." ($post->id)".'" помечена на удаление');
 
         return redirect(route('blog.index'));
     }

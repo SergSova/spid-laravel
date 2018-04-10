@@ -105,6 +105,11 @@ class Post extends Model
         return $this->{'description_'. \app()->getLocale()};
     }
 
+    public function getSeoAttribute($key)
+    {
+        return $this->{'seo'.app()->getLocale()};
+    }
+
     public function seoru()
     {
         return $this->hasOne(Seo::class, 'id', 'seo_id_ru');

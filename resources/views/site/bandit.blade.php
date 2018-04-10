@@ -1,14 +1,16 @@
 <?php
 
 $lang = app()->getLocale();
+$body_class = $model->alias ?? '';
+
 ?>
 @extends('site.layout')
 
 @section('title',$model->seo_title)
 <meta name="apple-mobile-web-app-capable"
-      content="yes" />
+      content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent" />
+      content="black-translucent"/>
 @section('styles')
     @parent
     <link rel="stylesheet" href="{{asset('assets/css/main_about.css')}}">
@@ -54,10 +56,10 @@ $lang = app()->getLocale();
     </div>
 
     <nav class="game-icons slider-controls slide-5">
-        <a href="/with-who" class="str str-prev">
+        <a class="str str-prev">
             <?php include 'assets/img/svg/bandit/str-prev.svg'?>
         </a>
-        <a href="/condoms-white" class="str str-next">
+        <a class="str str-next">
             <?php include 'assets/img/svg/bandit/str-next.svg'?>
         </a>
         <div class="bullets">
@@ -74,8 +76,8 @@ $lang = app()->getLocale();
                             <a href="{{route('condoms')}}">
                                 <div class="rocket-btn-wrap">
                                     <div class="door-wrap">
-                                        <img src="assets/img/bandit/door.png" alt="">
-                                        <img src="assets/img/bandit/d_h.png" alt="">
+                                        <img src="{{asset('assets/img/bandit/door.png')}}" alt="">
+                                        <img src="{{asset('assets/img/bandit/d_h.png')}}" alt="">
                                     </div>
                                     <button class="rocket-btn">{!! $model->{'rocket_btn_'.$lang} !!}</button>
                                 </div>
@@ -335,49 +337,4 @@ $lang = app()->getLocale();
     <script src="{{asset('assets/js/libs/detect.min.js')}}"></script>
     <script src="{{asset('assets/js/main22.js')}}"></script>
 
-    <script>
-        $(document).ready(function () {
-
-            var modalVis = true,
-                modalAnimId,
-                btn = $('.band-start'),
-                hand = $('.wh-hand path');
-
-            $('.modal__btn').on('click', function (e) {
-                e.preventDefault();
-                $('.modal').fadeOut();
-                modalVis = false;
-                if(window.matchMedia("(max-width: 1000px) and (orientation: landscape)").matches) {
-                  if (document.body.requestFullscreen) {
-                    document.body.requestFullscreen();
-                  } else if (document.body.mozRequestFullScreen) {
-                    document.body.mozRequestFullScreen();
-                  } else if (document.body.webkitRequestFullscreen) {
-                    document.body.webkitRequestFullscreen();
-                  }
-                  if (document.body.webkitEnterFullScreen) {
-                    document.body.webkitEnterFullScreen();
-                  }
-
-                }
-
-            });
-
-            function modalAnim() {
-                if ((btn.offset().left <= hand.offset().left) && ((btn.offset().left + btn.width() - 12) >= hand.offset().left)) {
-                    btn.addClass('active');
-                } else {
-                    btn.removeClass('active');
-                }
-
-                if (modalVis) {
-                    modalAnimId = requestAnimationFrame(modalAnim)
-                } else {
-                    cancelAnimationFrame(modalAnimId)
-                }
-            }
-
-            modalAnim()
-        })
-    </script>
 @endsection

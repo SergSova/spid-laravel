@@ -606,4 +606,12 @@ html, body {
         bottom:9vh;
         z-index: 1000;
     }
+    .ios  .texts-wrap {
+        bottom:16vh;
+    }
+    .no-aids {
+        font: 2.08vw 'Comfortaa', 'Montserrat', sans-serif
+    }
 }
+
+

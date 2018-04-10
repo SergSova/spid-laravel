@@ -15,9 +15,9 @@ $route = \Request::route()->getName();
             <li class="nav-item left">
                 <h2>{{config('app.name')}}</h2>
             </li>
-            <li class="nav-item">
+           {{-- <li class="nav-item">
                 <a href="{{route('admin')}}" class="nav-link  {{$route=='admin'?'active':''}}">Главная</a>
-            </li>
+            </li>--}}
             <li class="nav-item">
                 <a href="{{route('staticPage')}}" class="nav-link {{$route=='staticPage'?'active':''}}">Статические
                     страницы</a>
