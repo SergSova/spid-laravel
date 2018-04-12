@@ -28,7 +28,7 @@
 @foreach($faqs as $faq)
     <div class="top-search-result">
         <div class="top-search-result__img">
-            <img src="{{asset('assets/js/tinymce/plugins/emoticons/img/smiley-cool.gif')}}" alt="Faq">
+            <img src="{{asset('assets/img/faq/FAQ big (1).png')}}" alt="Faq">
         </div>
         <div class="top-search-result__content">
             <a href="{{route('faq',$faq->index)}}">

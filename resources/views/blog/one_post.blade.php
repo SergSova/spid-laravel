@@ -47,33 +47,34 @@ $body_class = 'one_blog';
     </div>
     <main>
         <div class="wrapper">
-            <div class="fixid-container">
-                <div class="content">
-                    <div class="content-head">
-                        <div class="wrapper-breadcrumb-filter">
-                            <div class="bread-crumbs" id="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
-                                <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
-                                     class="button">
-                                    <a href="{{route('blog')}}" itemprop="item">
-                                        <span itemprop="name" class="label1">@lang('menu.blog')</span>
-                                        <meta itemprop="position" content="1">
-                                    </a>
-                                </div>
-                                <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
-                                     class="button">
-                                    <a href="{{route('blog.fitred',$model->category->slug)}}" itemprop="item">
-                                        <span itemprop="name" class="label1">{{$model->category->title}}</span>
-                                        <meta itemprop="position" content="2">
-                                    </a>
-                                </div>
-                                <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
-                                     class="button">
-                                    <span itemprop="name" class="label1">{{strip_tags($model->mod_title)}}</span>
-                                    <meta itemprop="position" content="3">
-                                </div>
-                            </div>
+            <div class="content-head">
+                <div class="wrapper-breadcrumb-filter">
+                    <div class="bread-crumbs" id="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                        <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
+                             class="button">
+                            <a href="{{route('blog')}}" itemprop="item">
+                                <span itemprop="name" class="label1">@lang('menu.blog')</span>
+                                <meta itemprop="position" content="1">
+                            </a>
+                        </div>
+                        <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
+                             class="button">
+                            <a href="{{route('blog.fitred',$model->category->slug)}}" itemprop="item">
+                                <span itemprop="name" class="label1">{{$model->category->title}}</span>
+                                <meta itemprop="position" content="2">
+                            </a>
+                        </div>
+                        <div itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
+                             class="button">
+                            <span itemprop="name" class="label1">{{strip_tags($model->mod_title)}}</span>
+                            <meta itemprop="position" content="3">
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="fixid-container">
+                <div class="content">
+
                     <div class="content-wrapper scroll-container" id="scroll">
                         <div class="article-wrap">
                             <div class="blog-main one-blog translate-block">
@@ -133,7 +134,9 @@ $body_class = 'one_blog';
                                     </div>
                                 </article>
                                 <div class="disqus-thread">
-                                    <div id="disqus_thread"></div>
+                                    <div id="disqus_thread">
+
+                                    </div>
                                 </div>
 
                                 <div class="blog-navi">
@@ -161,7 +164,128 @@ $body_class = 'one_blog';
                         </aside>
                         <div class="ajax-blog"></div>
                     </div>
+                    <div class="about-description hidden" hidden>
+                        <h4>ИНТЕРНЕТ МАГАЗИН ОБУВИ В УКРАИНЕ - PREGO</h4>
+                        <div class="about-description-p">
+                            <p>Торговая марка PREGO - Прего появилась на рынке Украины не так давно, но уже успела
+                                зарекомендовать себя и получить доверие покупателя. Впервые была представлена в магазинах
+                                сети Взуттевый Глянц и Ботик (Botik), но современный мир не стоит на месте, наряду с
+                                обычными магазинами мы все чаще покупаем разные товары, в том числе и брендовую обувь
+                                в интернет магазине, поэтому с радостью представляем Вам, уважаемый клиент - обновленный
+                                интернет магазин обуви PREGO.
+                                Торговая марка PREGO - Прего появилась на рынке Украины не так давно, но уже успела
+                                зарекомендовать себя и получить доверие покупателя. Впервые была представлена в магазинах
+                                сети Взуттевый Глянц и Ботик (Botik), но современный мир не стоит на месте, наряду с
+                                обычными магазинами мы все чаще покупаем разные товары, в том числе и брендовую обувь
+                                в интернет магазине, поэтому с радостью представляем Вам, уважаемый клиент - обновленный
+                                интернет магазин обуви PREGO.</p>
+                            <p>Торговая марка PREGO - Прего появилась на рынке Украины не так давно, но уже успела
+                                зарекомендовать себя и получить доверие покупателя. Впервые была представлена в магазинах
+                                сети Взуттевый Глянц и Ботик (Botik), но современный мир не стоит на месте, наряду с
+                                обычными магазинами мы все чаще покупаем разные товары, в том числе и брендовую обувь
+                                в интернет магазине, поэтому с радостью представляем Вам, уважаемый клиент - обновленный
+                                интернет магазин обуви PREGO.
+                                Торговая марка PREGO - Прего появилась на рынке Украины не так давно, но уже успела
+                                зарекомендовать себя и получить доверие покупателя. Впервые была представлена в магазинах
+                                сети Взуттевый Глянц и Ботик (Botik), но современный мир не стоит на месте, наряду с
+                                обычными магазинами мы все чаще покупаем разные товары, в том числе и брендовую обувь
+                                в интернет магазине, поэтому с радостью представляем Вам, уважаемый клиент - обновленный
+                                интернет магазин обуви PREGO.</p>
+                        </div>
+                        <div class="SeoText">
+                            <span class="on">Читать далее</span>
+                            <span class="off">Закрыть</span>
+                        </div>
+                    </div>
+                    <footer class="hidden" hidden>
+                        <div class="footer_wrapper">
+                            <div class="footer__columns">
+                                <div class="footer__column">
+                                    <div class="footer__column-title">Каталог</div>
+                                    <div class="js-footer-items">
+                                        <div class="footer__column-item"><a href="#1">Женская обувь</a></div>
+                                        <div class="footer__column-item"><a href="#!">Сумки</a></div>
+                                        <div class="footer__column-item"><a href="#!">Мужская обувь</a></div>
+                                        <div class="footer__column-item"><a href="#!">Аксессуары</a></div>
+                                        <div class="footer__column-item"><a href="#!">Карта сайта</a></div>
+                                    </div>
+                                </div>
+                                <div class="footer__column">
+                                    <div class="footer__column-title">О Компании</div>
+                                    <div class="js-footer-items">
+                                        <div class="footer__column-item"><a href="#1">О нас</a></div>
+                                        <div class="footer__column-item"><a href="#!">Блог</a></div>
+                                        <div class="footer__column-item"><a href="#!">Отзывы</a></div>
+                                    </div>
+                                </div>
+                                <div class="footer__column">
+                                    <div class="footer__column-title">Покупателям</div>
+                                    <div class="js-footer-items">
+                                        <div class="footer__column-item"><a href="#1">Доставка</a></div>
+                                        <div class="footer__column-item"><a href="#!">Оплата</a></div>
+                                        <div class="footer__column-item"><a href="#!">Гарантия и возврат</a></div>
+                                        <div class="footer__column-item"><a href="#!">Наши магазины</a></div>
+                                    </div>
 
+                                </div>
+                                <div class="footer__column">
+                                    <div class="footer__column-title">Контакты</div>
+                                    <div class="js-footer-items">
+                                        <div class="footer__column_phone">
+                                            <ul>
+                                                <li>
+                                                    <span><img src="assets/images/icon-telefon/vodafon.png" alt=""></span>
+                                                    <a href="tel:0666968274">+38 (066) 696-82-74</a>
+                                                </li>
+                                                <li>
+                                                    <span><img src="assets/images/icon-telefon/kievstar.png" alt=""></span>
+                                                    <a href="tel:0672247743">+38 (067) 224-77-43 </a>
+                                                </li>
+                                                <li>
+                                                    <span><img src="assets/images/icon-telefon/life.png" alt=""></span>
+                                                    <a href="tel:0637214069">+38 (063) 721-40-69</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="footer__column_p">
+                                            <span>Звоните нам</span>
+                                            <p>с 09.00 до 20.00 (пн.-сб.)</p>
+                                            <p>и с 09.00 до 18.00 (вс.)</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="footer__local">
+                                <div class="footer__local_logo">
+                                    <a target="_blank" href="https://prego.ua/">
+                                        <img src="assets/images/icon-filter/logo.png" alt="">
+                                    </a>
+                                </div>
+                                <div class="footer__local_i">
+                                    <div class="footer__local_site_info">
+                                        © 2014-2017 Официальный сайт Prego все права защищены
+                                    </div>
+                                </div>
+                                <div class="footer__local_icon">
+                                    <a target="_blank" class="fa-facebook-1" href="https://www.facebook.com/pregotheone/">
+                                        <img src="assets/images/icon-telefon/f-01.svg" alt="">
+                                    </a>
+                                    <a target="_blank" class="fa-viber-1" href="viber://add?number=+38066696-82-74">
+                                        <img src="assets/images/icon-telefon/v-01.svg" alt="">
+                                    </a>
+                                    <a target="_blank" class="fa-youtube-1"
+                                       href="https://www.youtube.com/channel/UCRZe3K0cxIr7bKmotw4MKQQ">
+                                        <img src="assets/images/icon-telefon/y-01.svg" alt="">
+                                    </a>
+                                    <a target="_blank" class="fa-instagram-1" href="https://www.instagram.com/pregotheone/">
+                                        <img src="assets/images/icon-telefon/i-01.svg" alt="">
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </footer>
                 </div>
             </div>
             <div class="scroll-substitute"></div>
@@ -198,9 +322,20 @@ $body_class = 'one_blog';
     <script src="{{asset('assets/js/libs/vibrant.js')}}"></script>
     <script src="{{asset('assets/js/libs/imagesloaded.pkgd.min.js')}}"></script>
     <script src="{{asset('assets/js/libs/anime.min.js')}}"></script>
-    <script src="{{asset('assets/js/blog/animation.js')}}" async=""></script>
-    <script src="{{asset('assets/js/blog/scroll.js')}}" async=""></script>
+    <script async="" src="{{asset('assets/js/blog/animation.js')}}" ></script>
+    <script async="" src="{{asset('assets/js/blog/scroll.js')}}" ></script>
 
     <script src="{{asset('/assets/js/libs/slick.min.js')}}"></script>
     <script src="{{asset('assets/js/blog-slider.js')}}"></script>
+    <div id="disqus_thread"></div>
+    <script>
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://drugstore-1.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
 @endsection

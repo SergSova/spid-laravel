@@ -1027,21 +1027,21 @@
         text-transform: uppercase;
     }
 
-    .content__additional-logo-box img {
+    .content__additional-logo-box img,
+    .content__additional-logo-box svg {
         display: inline-block;
         margin-right: 1.522%;
         height: auto;
+        max-width: 159px;
+    }
+
+    .content__additional-logo-box img:nth-child(2) {
+        max-width: 213px;
+        margin-right: 3%;
     }
 
     .content__text-wrap {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-flex-wrap: wrap;
-            -ms-flex-wrap: wrap;
-                flex-wrap: wrap;
+        display: block;
     }
 
     .content__text,
@@ -1054,13 +1054,18 @@
 
     .content__text {
         margin-right: 3.99%;
-        -webkit-flex-basis: 48%;
-            -ms-flex-preferred-size: 48%;
-                flex-basis: 48%;
+        width: 48%;
+        float: left;
     }
 
     .content__text + .content__text {
         margin-right: 0;
+    }
+
+    .content__text-wrap:after {
+        content: '';
+        display: block;
+        clear: both;
     }
 
     .content__sign {
@@ -1093,7 +1098,7 @@
         display: inline-block;
         max-width: 100%;
         max-height: 100%;
-        width: 11.848vh;
+        width: 16.848vh;
     }
 
     #logo-slider .slick-prev,

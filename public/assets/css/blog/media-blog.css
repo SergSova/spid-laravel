@@ -57,8 +57,9 @@
 }
 
 @media screen and (max-width: 1024px) {
-    body .content {
-        padding: 100px 80px 0 20px;
+    .main-content .content,
+    .one_blog .content {
+        padding: 100px 15vw 0 17vw;
         width: 100%;
         margin: 0 auto;
     }
@@ -260,6 +261,7 @@
         margin-left: 13px;
         line-height: 44px;
         letter-spacing: 2px;
+        width: inherit;
     }
     .one-blog .blog-title {
         padding: 26px 0 23px;
@@ -374,9 +376,10 @@
         padding: 93px 0 0;
     }
     .one-blog .blog-image h1 {
-        line-height: 32px;
-        font-size: 29px;
+        line-height: 5vw;
+        font-size: 5vw;
         letter-spacing: 1.3px;
+        width: inherit;
     }
 
     .one-blog .full-content-slider .slick-slide {
@@ -429,4 +432,29 @@
         width: 100%;
     }
 
+}
+@media (max-width: 375px) and (orientation: portrait) {
+    .potate-category > svg {
+        width: 75%;
+    }
+    .menu-box_text {
+        font-size: 2vw;
+        margin-top: -10%;
+    }
+    .main-content .content, .one_blog .content {
+        padding: 100px 24vw 0 17vw !important;
+    }
+}
+@media (max-width: 812px) and (orientation: landscape) {
+    .main-content .content,
+    .one_blog .content {
+        padding: 100px 19vw 0 17vw !important;
+    }
+    .potate-category > svg {
+        height: auto;
+        width: 80%;
+    }
+    .menu-box_text {
+        margin-top: 20px;
+    }
 }

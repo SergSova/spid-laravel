@@ -487,3 +487,16 @@
         }
     }
 /*---------------------menu styles ----------------------------------*/
+
+.marker-info__btns.condom .marker-info__btn_2 {
+    display: none;
+}
+
+.marker-info__btns.miki .marker-info__btn_1 {
+    display: none;
+}
+
+.marker-info__btns.condom .marker-info__btn,
+.marker-info__btns.miki .marker-info__btn {
+    margin-top: 0;
+}

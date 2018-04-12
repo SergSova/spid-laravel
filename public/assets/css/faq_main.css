@@ -1244,6 +1244,7 @@ button {
     .faq-content__heading {
         padding-left: 5.82vw;
         font-size: 1.94vw;
+        line-height: 2vw;
     }
 
     .faq-content__description {

@@ -22,5 +22,6 @@
         justify-content: center;
         background: url(assets/img/faq/FAQ-background.jpg) no-repeat center center;
         background-size: cover;
+        z-index: 1005;
     }
 </style>

@@ -128,6 +128,9 @@
     position: relative;
     padding: 0;
     margin-bottom: 15px;
+    font-weight: 500;
+    color: #000;
+    letter-spacing: normal;
 }
 .one-blog .blog-video {
     margin-bottom: 35px;
@@ -261,7 +264,9 @@
     margin-left: 20px;
 }
 
-
+.one_blog .content {
+    padding: 0 7vw 0 11vw;
+}
 /*---------end ONE BLOG---------*/
 .quotes {
     width: 100%;
@@ -308,6 +313,7 @@
     padding: 10px 19px;
     position: relative;
     transition: 0.8s;
+    background: #fff;
 }
 
 .disqus-thread:hover{

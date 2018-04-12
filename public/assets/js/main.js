@@ -143,12 +143,16 @@ $(window).on('load', function() {
                             setActiveButton();
                             currentX = 0;
                             setActiveItems();
-
-                            // console.log(currentY);
                         } 
                     } else {
                         currentX += showItems;
                         setActiveItems();
+
+                        if (currentY >= tabs.length - 1) {
+                            $('body').addClass('scroll-stop');
+                        } else {
+                            $('body').removeClass('scroll-stop');
+                        }
                     }
                 }
 
@@ -173,6 +177,8 @@ $(window).on('load', function() {
                     } else {
                         currentX -= showItems;
                         setActiveItems();
+
+                        $('body').removeClass('scroll-stop');
                     }
                 }
 
@@ -182,6 +188,10 @@ $(window).on('load', function() {
                 //     location.assign('/Aids/bandit.html');
                 // }
 
+            });
+
+            $(window).on('resize', function() {
+                setActiveButton();
             });
 
             $('.nav-button').on('click', function() {
@@ -217,15 +227,24 @@ $(document).ready(function() {
                 $('<img class=\'hover-img\' src=' + target.data('hover') + '></img>').insertAfter($(this).find(target));
             }
 
-            target.animate({
-                opacity: 0,
-            }, 250);
+            // target.animate({
+            //     opacity: 0,
+            // }, 250);
+
+            // target.next().animate({
+            //     opacity: 1,
+            // }, 250);
         });
 
         $(parentElement).on('mouseleave', function() {       
-            $(this).find('.origin-img').animate({
-                opacity: 1,
-            }, 250);
+            // var th = $(this).find('.origin-img');
+            // th.next().animate({
+            //     opacity: 0,
+            // }, 250);
+            
+            // th.animate({
+            //     opacity: 1,
+            // }, 250);
         });
     }
 

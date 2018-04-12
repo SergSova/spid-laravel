@@ -1017,15 +1017,24 @@ h3#cond-white {
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     }
 
+    .custom-slider_section-content:hover .hover-img {
+        opacity: 1;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    }
+
     .custom-slider_section-content-img .hover-img {
         max-height: 100%;
-        opacity: 1!important;
+        opacity: 1;
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
         /*opacity: 0;*/
         z-index: 0;
         position: absolute;
         left: 50%;
         top: 50%;
+        -webkit-transition: opacity 0.25s;
+        -o-transition: opacity 0.25s;
+        -moz-transition: opacity 0.25s;
+        transition: opacity 0.25s;
         /*transform: translate(-50%, -2%);*/
     }
 
@@ -1375,6 +1384,10 @@ h3#cond-white {
     position: absolute;
     bottom: 4.427vw;
     left: 0;
+}
+
+.scroll-stop .scroll-box-wrap {
+    opacity: 0;
 }
 
 @keyframes  bee {
@@ -1807,5 +1820,74 @@ h3#cond-white {
     100% {
         height: 0;
         bottom: -100%;
+    }
+}
+
+@media all and (max-width: 767px) {
+    .custom-slider_section-content-img .origin-img {
+        position: relative;
+        max-height: none; 
+    }
+    .custom-slider_section-content-img img {
+        width: 130px;
+        max-width: none;
+    }
+    .custom-slider_section-content {
+        width: 100%;
+        flex-basis: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding-right: 0;
+    }
+    .custom-slider_section-content-img .ellipse {
+        width: 100px!important;
+        height: 100px!important;
+        top: 50%;
+        bottom: initial;
+    }
+    .content-section {
+        padding-left: 27px;
+    }
+
+    .custom-slider_nav-container .nav-button {
+        font-size: 1.2vw;
+    }
+
+    .custom-slider_nav-container {
+        padding-bottom: 2.145vw;
+    }
+
+    .custom-slider_section-content .text {
+        padding-left: 20px;
+    }
+
+    .custom-slider_wrap {
+        right: 0;
+    }
+
+    .custom-slider_section-content .text {
+        font-size: 1.6vw;
+        max-width: 65%;
+    }
+
+    .custom-slider_section-content-img {
+        margin-bottom: 0;
+    }
+
+}
+
+.condoms-white {
+    background: #2C2D31;
+}
+
+@media (max-width: 812px) and (orientation: landscape) {
+    .custom-slider_nav-container .line:before,
+    .custom-slider_nav-container .line:after {
+        width: 15px;
+        height: 15px;
+    }
+    .custom-slider_section-content .text {
+        font-size: 1.5vw;
     }
 }

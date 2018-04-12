@@ -166,7 +166,7 @@ class Post extends Model
         return $date->diffInHours(Carbon::now()) == 0
             ? $date->diffForHumans()
             :
-            $date->day.' '.Lang::get('month.m'.$date->month).' '.$date->year.' '.$date->hour.':'.$date->minute;
+            $date->format('d').' '.Lang::get('month.m'.$date->month).' '.$date->format('Y H:i')/*.' '.$date->hour.':'.$date->minute*/;
     }
 
     public function getFullDataAttribute()

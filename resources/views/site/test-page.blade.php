@@ -63,9 +63,9 @@ $body_class = $model->alias??'';
             </div>
 
             <div class="test-content">
-                <h3 class="test-content__heading">
+                <!-- <h3 class="test-content__heading">
                     <span>{{$model->{'longtitle_'.$lang} }}</span>
-                </h3>
+                </h3> -->
 
                 <div class="test-content_tv-box">
                     <div class="test-content_tv-wrap">

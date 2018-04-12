@@ -52,8 +52,8 @@ $body_class = $model->alias??'';
             <div class="content__center-box">
                 <div class="content__additional-logo-box">
                     <div class="text">{{$model->{'supported_'.app()->getLocale()} }}</div>
-                    <img src="{{asset('assets/img/about/alliance-logo.png')}}" alt="">
-                    <img src="{{asset('assets/img/about/elton-john-logo.png')}}" alt="">
+                    <img src="{{asset('assets/img/about/Alians.svg')}}" alt="">
+                    <img src="{{asset('assets/img/about/ejaf_3_green__logo_with_text_with_border2.png')}}" alt="">
                 </div>
 
                 <h2 class="content__heading">{{$model->{'desc_title_'.app()->getLocale()} }}</h2>

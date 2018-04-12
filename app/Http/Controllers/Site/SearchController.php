@@ -23,7 +23,7 @@ class SearchController extends Controller
         $match = "question_$lang, answer_$lang";
         $faqs = FaqAnswer::whereRaw("match ($match) AGAINST (\"$search*\" IN BOOLEAN MODE)")->get();
         $post_match = "title_$lang, content_$lang";
-        $posts = Post::whereRaw("match ($post_match) AGAINST (\"$search*\" IN BOOLEAN MODE)")->get();
+        $posts = Post::whereRaw("match ($post_match) AGAINST (\"$search*\" IN BOOLEAN MODE)")->where( 'published', 1 )->get();
 
 //        dd($faqs, $posts);
 

@@ -28,8 +28,6 @@
     $(window).on('load', function () {
         $('.preloader').delay(1000).fadeOut(300, function () {
             var scroll_up = 0;
-
-            
         });
         $('.preloader svg').delay(1000).fadeOut(300);
     });

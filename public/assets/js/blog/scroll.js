@@ -55,7 +55,20 @@ function createObj() {
   }
 
   function onWheel(e) {
-    $('.scroll-substitute').css({'pointer-events': 'auto'})
+    eDelta = e.deltaY
+    console.log(eDelta);
+console.log(35243);
+    scrollTop = wraper.pageYOffset || wraper.scrollTop;
+    if( eDelta > 0) {
+      if(scrollSubstitute.height() != scrollTop +  window.innerHeight ) {
+        $('.scroll-substitute').css({'pointer-events': 'auto'});
+      }
+    }else {
+      if(scrollTop != 0 ) {
+        $('.scroll-substitute').css({'pointer-events': 'auto'});
+      }
+    }
+
   }
 
   wraper.onscroll = function () {
@@ -69,7 +82,7 @@ function createObj() {
     scrollBefore = scrollTop;
     canAnim();
   }
-
+l=0
   function canAnim() {
     canScroll = false;
     stopTrill = scrollDown ? (Math.floor(contAnim) >= Math.floor(scrollTop) - 1 /*|| k1 < Math.floor(scrollTop)*/) : Math.floor(contAnim) <= Math.floor(scrollTop);

@@ -66,7 +66,6 @@ DrugStore.prototype.checkWindowTabIsActive = function() {
                     //th.reInit();
                     //location.reload();
                     setTimeout(function() {
-                        console.log('d')
                         th.reInit();
                     }, 500)
                 }
@@ -215,10 +214,8 @@ DrugStore.prototype._createHand = function() {
         //console.log( e.data.global.x, controlsOffset.left, e.data.global.y, controlsOffset.top)
     }
 
-    $(window).on('start', function() {
-        th.topContainer.on('touchmove', th.handMove);
-        th.topContainer.on('mousemove', th.handMove);
-    });
+    th.topContainer.on('touchmove', th.handMove);
+    th.topContainer.on('mousemove', th.handMove);
 
     if (!modalVis) {
         th.topContainer.on('touchmove', th.handMove);
@@ -601,3 +598,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .add('/assets/fonts/Montserrat/Montserrat-Medium.ttf')
     .load(D.setup.bind(D))
 });
+
+$(window).on('load', function() {
+    $(window).trigger('start')
+})

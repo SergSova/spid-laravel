@@ -16,7 +16,17 @@ $(window).on('load', function() {
 
 $(document).ready(function() {
 
-    var scroll_box, scroll_box_parent;
+    var scroll_box, 
+        scroll_box_parent, 
+        scrollTop = 0,
+        active = document.querySelector('.question-active');
+
+    if (active) {
+        var _head = active.querySelector('.faq-content__heading');
+        scrollTop = $(active).offset().top - $(active).closest('.faq-content-wrapper').offset().top;
+
+        initAccordion.call(_head);
+    }
 
     $('.faq-content-wrapper').mCustomScrollbar({
             scrollbarPosition: 'outside',
@@ -24,7 +34,7 @@ $(document).ready(function() {
             mouseWheel: { 
                 deltaFactor: '16px' 
             },
-
+            setTop: scrollTop - 20 + 'px',
             callbacks: {
                 onInit: function () {
                     scroll_box = $('#mCSB_1_dragger_vertical');
@@ -91,7 +101,10 @@ $(document).ready(function() {
 
     var k = 0, first_click = false, previous_question;
 
-    $('.faq-content__heading').on('click', function() {
+    $('.faq-content__heading').on('click', initAccordion);
+
+    function initAccordion(e) {
+        console.log( $(this) )
         var description = $(this).siblings('.faq-content__description');
         var description_inner_wrap = description.find('.faq-content__description-inner-wrap');
         var line = description.find('.faq-content__description-line');
@@ -201,7 +214,7 @@ $(document).ready(function() {
 
         first_click = true;
 
-    });
+    }
 
     /*----------------- onhover logo dragstore  -----------------*/
         $('.js-hover').hover(function() {

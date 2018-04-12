@@ -28,17 +28,19 @@ function init() {
   var mouseX, mouseY, mouseCanAnim = false;
   var uniKoef = innerWidth / window.innerHeight >= 1.979 ? HKoef : WKoef
 
+
+
   for (var i = 0; i < resizeEl.length; i++) {
     resizeEl[i].setAttribute('data-w', resizeEl[i].clientWidth);
     resizeEl[i].setAttribute('data-h', resizeEl[i].clientHeight);
   }
 
 
-  window.onmousemove = function (e) {
+  document.addEventListener('mousemove', function (e) {
     mouseMoving(e);
     animateMan(e);
     animateMouse(e);
-  }
+  })
 
   window.onresize = function () {
     w_w = window.innerWidth,
@@ -51,7 +53,6 @@ function init() {
   }
 
   function resizeElents() {
-    console.log(141)
     /* h smaller */
     for (var i = 0; i < resizeEl.length; i++) {
       elW = resizeEl[i].getAttribute('data-w');
@@ -94,7 +95,6 @@ function init() {
         hat[i].style.left = hat[i].getAttribute('data-left') * WKoef + 'px';
       }
 
-
       hatCover[i].style.top = kolumbWr.offsetTop - hat[i].clientHeight / 1.5 + 'px';
       hatCover[i].style.left = kolumbWr.offsetLeft + kolumbWr.clientWidth / 2 - hat[i].clientWidth / 2 + 'px';
       hatCover[i].style.width = hat[i].clientWidth + 'px';
@@ -111,9 +111,16 @@ function init() {
     mouseY = e.pageY;
     mouseW = mouse.clientWidth / 3;
     mouseH = mouse.clientHeight - mouse.clientHeight / 5;
+    mL = mouseX - mouseW;
+    mT = mouseY - mouseH
+    $('.mouse').css({
+      left:  mL + 'px',
+      top: mT + 'px'
+    })
+// alert(12)
 
-    mouse.style.left = mouseX - mouseW + 'px';
-    mouse.style.top = mouseY - mouseH + 'px';
+    // mouse.style.left = mL + 'px';
+    // mouse.style.top = mT + 'px';
 
     /* background -paralax */
     w_w = window.innerWidth;
@@ -121,7 +128,7 @@ function init() {
 
     bgX = w_w / 2 > mouseX ? mouseX : -mouseX;
     bgY = w_h / 2 > mouseY ? mouseY : -mouseY;
-    shlapnik.style.backgroundPosition = bgX * .01 + 'px  ' + bgY * .01 + 'px ';
+    // shlapnik.style.backgroundPosition = bgX * .01 + 'px  ' + bgY * .01 + 'px ';
 
     if (elem != null) {
       if (!elem.classList.contains('last')) {
@@ -142,10 +149,7 @@ function init() {
           return true;
         }
       }else {
-        $('h1').html('ПРИЕХАЛИ!')
-        // $('.ups').css({
-        //   opacity:1
-        // })
+        $('h1 img').attr('src', $('h1 img').attr('data-end'));
       }
       elem.style.left = mouseX - elStats.positionX + 'px';
       elem.style.top = mouseY - elStats.positionY + 'px';
@@ -261,11 +265,7 @@ function init() {
         canAnimate = false;
       }
     }
-
-
-
-  } 
-  
+  }
   dragHats();
 
   kolumb.classList.add('active-left');
@@ -411,11 +411,6 @@ function init() {
   $('.game').eq(1).addClass('active');
   $('.game').eq(2).addClass('active-next');
   
-  // $('.game-icons').hover(function(){
-  //   $('.mouse').css({opacity:0})
-  // }).mouseleave(function () {
-  //   $('.mouse').css({opacity:1})
-  // })
 }
 document.addEventListener("DOMContentLoaded", init);
 

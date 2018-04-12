@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Blog;
 use App\BlogCategory;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 use App\LangResource;
 use App\Post;
 use Carbon\Carbon;
@@ -78,7 +79,7 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         $model = new Post();
         $model->slug = str_slug($request->get('title_ru'));
@@ -137,7 +138,7 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
         /** @var Post $model */
         $model = Post::find($id);

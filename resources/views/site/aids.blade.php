@@ -80,7 +80,8 @@ $body_class = $model->alias??'';
             <div class="games full">
                 <div class="game game1 full js-game1" id="game1">
                     <div class="game-wrap columb">
-                        <h1>{!! $model->title_mod !!}</h1>
+                        {{--<h1>{!! $model->title_mod !!}</h1>--}}
+                        <h1><img src="assets/img/title.png"  data-end="assets/img/title-end.png" alt=""></h1>
                         <div class="bg-shlapnik full">
                             <div class="mouse resizeEl" data-w="253" data-h="207" data-bg-w="253" data-bg-h="2484"></div>
                             <div class="kolumb-plus-hats">

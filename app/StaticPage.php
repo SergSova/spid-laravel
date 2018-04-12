@@ -52,6 +52,7 @@ class StaticPage extends Model
         }
     }
 
+
     public function getQuestions()
     {
         return FaqAnswer::orderBy('index')->get();
@@ -81,12 +82,14 @@ class StaticPage extends Model
         ];
         $mod = self::where(['page_index' => $this->page_index + 1])->first();
         if ($mod) {
+            $mod->alias = $mod->alias == 'index' ? '/' : '/'.$mod->alias;
             $obj['title'] = $this->clearTitle($mod);
-            $obj['alias'] = $lang == 'uk' ? "/$lang/$mod->alias" : $mod->alias;
+            $obj['alias'] = $lang == 'uk' ? "/".$lang.$mod->alias : $mod->alias;
         }
 
         return $obj;
     }
+
     public function getPrev()
     {
         $lang = app()->getLocale();
@@ -97,9 +100,9 @@ class StaticPage extends Model
 
         $model = self::where(['page_index' => $this->page_index - 1])->first();
         if ($model) {
-            $model->alias = $model->alias == 'index' ? '/' : $model->alias;
+            $model->alias = $model->alias == 'index' ? '/' : '/'.$model->alias;
             $obj['title'] = $this->clearTitle($model);
-            $obj['alias'] = $lang == 'uk' ? "/$lang/$model->alias" : $model->alias;
+            $obj['alias'] = $lang == 'uk' ? "/".$lang.$model->alias : $model->alias;
         }
 
         return $obj;
@@ -120,7 +123,6 @@ class StaticPage extends Model
 
         return $fc.mb_substr($str, 1);
     }
-
 
     public function getSeoTitleAttribute()
     {
@@ -320,5 +322,49 @@ class StaticPage extends Model
     public function getDescriptionAttribute($key)
     {
         return $this->{'description_'.app()->getLocale()};
+    }
+
+    public function getAdressAttribute($key)
+    {
+        return $this->{'City_'.app()->getLocale()}
+            ? json_encode(
+                collect($this->{'City_'.app()->getLocale()})
+                    ->flatMap(
+                        function ($el) {
+                            return $el->centers;
+                        }
+                    )
+                    ->map(
+                        function ($el) {
+                            $el->info = str_replace(array("\r\n", "\r", "\n"), "<br />", $el->info);
+                            return $el;
+                        }
+                    )
+                    ->filter(
+                        function ($el) {
+                            return $el->title != '';
+                        }
+                    ),
+                JSON_UNESCAPED_UNICODE
+            )
+            :
+            '""';
+    }
+
+    public function getTownsAttribute($key)
+    {
+        return $this->{'City_'.app()->getLocale()} ? json_encode(
+            collect($this->{'City_'.app()->getLocale()})->map(
+                function ($el) {
+                    unset($el->centers);
+                    return $el;
+                }
+            )->filter(
+                function ($el) {
+                    return $el->title != '';
+                }
+            ),
+            JSON_UNESCAPED_UNICODE
+        ) : '""';
     }
 }

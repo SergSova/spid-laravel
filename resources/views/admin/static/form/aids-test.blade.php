@@ -1,3 +1,14 @@
+<?php
+
+
+$otvet_title = [
+    'Хороший результат',
+    'Не очень хороший, но норм результат',
+    'Плохой, но не критично',
+    'Очень плохо',
+];
+?>
+
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         @foreach(\App\Http\Middleware\Locale::$languages as $lang)
@@ -15,28 +26,28 @@
 
             <div class="form-group">
                 {{ Form::label('title_'.$lang, 'Заголовок') }}
-                {{ Form::text('title_'.$lang, NULL ,['class'=>'form-control']) }}
+                {{ Form::text('title_'.$lang, null ,['class'=>'form-control']) }}
             </div>
             <div class="form-group">
                 {{ Form::label('longtitle_'.$lang, 'Полный заголовок') }}
-                {{ Form::text('longtitle_'.$lang, NULL ,['class'=>'form-control']) }}
+                {{ Form::text('longtitle_'.$lang, null ,['class'=>'form-control']) }}
             </div>
             <div class="form-group">
                 {{ Form::label('description_'.$lang, 'Описание') }}
-                {{ Form::textarea('description_'.$lang, NULL ,['class'=>'form-control']) }}
+                {{ Form::textarea('description_'.$lang, null ,['class'=>'form-control']) }}
             </div>
             <div class="form-row">
                 <div class="col form-group">
                     {{ Form::label('test_btn_'.$lang, 'Текст кнопки') }}
-                    {{ Form::text('test_btn_'.$lang, NULL ,['class'=>'form-control']) }}
+                    {{ Form::text('test_btn_'.$lang, null ,['class'=>'form-control']) }}
                 </div>
                 <div class="col form-group">
                     {{ Form::label('test_btn_next_'.$lang, 'Текст кнопки далее') }}
-                    {{ Form::text('test_btn_next_'.$lang, NULL ,['class'=>'form-control']) }}
+                    {{ Form::text('test_btn_next_'.$lang, null ,['class'=>'form-control']) }}
                 </div>
                 <div class="col form-group">
                     {{ Form::label('test_btn_refresh_'.$lang, 'Текст кнопки повторить') }}
-                    {{ Form::text('test_btn_refresh_'.$lang, NULL ,['class'=>'form-control']) }}
+                    {{ Form::text('test_btn_refresh_'.$lang, null ,['class'=>'form-control']) }}
                 </div>
             </div>
 
@@ -60,7 +71,7 @@
                                         </div>
                                         <div class="form-group col">
                                             {{ Form::label("Quest_".$lang."[$key][label]", 'Вопрос') }}
-                                            {{ Form::text("Quest_".$lang."[$key][label]", NULL ,['class'=>'form-control']) }}
+                                            {{ Form::text("Quest_".$lang."[$key][label]", null ,['class'=>'form-control']) }}
                                         </div>
                                         <div class="index-change col-lg-1">
                                             <span class="btn btn-sm btn-danger btn-rem">X</span>
@@ -68,11 +79,11 @@
                                     </div>
                                     <div class="form-check-inline">
                                         <div class="form-check">
-                                            {{ Form::checkbox("Quest_".$lang."[$key][user]", 1, NULL ,['class'=>'form-check-input']) }}
+                                            {{ Form::checkbox("Quest_".$lang."[$key][user]", 1, null ,['class'=>'form-check-input']) }}
                                             {{ Form::label("Quest_".$lang."[$key][user]", 'Человек') }}
                                         </div>
                                         <div class="form-check">
-                                            {{ Form::checkbox("Quest_".$lang."[$key][multi]", 1, NULL ,['class'=>'form-check-input']) }}
+                                            {{ Form::checkbox("Quest_".$lang."[$key][multi]", 1, null ,['class'=>'form-check-input']) }}
                                             {{ Form::label("Quest_".$lang."[$key][multi]", 'Мульти',['class'=>'form-check-label']) }}
                                         </div>
                                     </div>
@@ -82,15 +93,15 @@
                                                 <div class="form-inline variant">
                                                     <div class=" form-group">
                                                         {{ Form::label("Quest_".$lang."[$key][vars][$v_key][k]", 'Ответ') }}
-                                                        {{ Form::text("Quest_".$lang."[$key][vars][$v_key][k]", NULL ,['class'=>'form-control']) }}
+                                                        {{ Form::text("Quest_".$lang."[$key][vars][$v_key][k]", null ,['class'=>'form-control']) }}
                                                     </div>
                                                     <div class=" form-group">
                                                         {{ Form::label("Quest_".$lang."[$key][vars][$v_key][v]", 'Оценка') }}
-                                                        {{ Form::text("Quest_".$lang."[$key][vars][$v_key][v]", NULL ,['class'=>'form-control']) }}
+                                                        {{ Form::text("Quest_".$lang."[$key][vars][$v_key][v]", null ,['class'=>'form-control']) }}
                                                     </div>
                                                     <div class=" form-group">
                                                         {{ Form::label("Quest_".$lang."[$key][vars][$v_key][hint]", 'Подсказка') }}
-                                                        {{ Form::text("Quest_".$lang."[$key][vars][$v_key][hint]", NULL ,['class'=>'form-control']) }}
+                                                        {{ Form::text("Quest_".$lang."[$key][vars][$v_key][hint]", null ,['class'=>'form-control']) }}
                                                     </div>
                                                     <span class="btn btn-danger btn-sm btn-remove">X</span>
                                                 </div>
@@ -99,15 +110,15 @@
                                             <div class="form-inline variant">
                                                 <div class=" form-group">
                                                     {{ Form::label("Quest_".$lang."[$key][vars][0][k]", 'Ответ') }}
-                                                    {{ Form::text("Quest_".$lang."[$key][vars][0][k]", NULL ,['class'=>'form-control']) }}
+                                                    {{ Form::text("Quest_".$lang."[$key][vars][0][k]", null ,['class'=>'form-control']) }}
                                                 </div>
                                                 <div class=" form-group">
                                                     {{ Form::label("Quest_".$lang."[$key][vars][0][v]", 'Оценка') }}
-                                                    {{ Form::text("Quest_".$lang."[$key][vars][0][v]", NULL ,['class'=>'form-control']) }}
+                                                    {{ Form::text("Quest_".$lang."[$key][vars][0][v]", null ,['class'=>'form-control']) }}
                                                 </div>
                                                 <div class=" form-group">
                                                     {{ Form::label("Quest_".$lang."[$key][vars][0][hint]", 'Подсказка') }}
-                                                    {{ Form::text("Quest_".$lang."[$key][vars][0][hint]", NULL ,['class'=>'form-control']) }}
+                                                    {{ Form::text("Quest_".$lang."[$key][vars][0][hint]", null ,['class'=>'form-control']) }}
                                                 </div>
                                                 <span class="btn btn-danger btn-sm btn-remove">X</span>
                                             </div>
@@ -123,7 +134,7 @@
                                         </div>
                                         <div class="form-group col">
                                             {{ Form::label("Quest_".$lang."[0][label]", 'Вопрос') }}
-                                            {{ Form::text("Quest_".$lang."[0][label]", NULL ,['class'=>'form-control']) }}
+                                            {{ Form::text("Quest_".$lang."[0][label]", null ,['class'=>'form-control']) }}
                                         </div>
                                         <div class="index-change col-lg-1">
                                             <span class="btn btn-sm btn-danger btn-rem">X</span>
@@ -131,11 +142,11 @@
                                     </div>
                                     <div class="form-check-inline">
                                         <div class="form-check">
-                                            {{ Form::checkbox("Quest_".$lang."[0][user]", 1, FALSE ,['class'=>'form-check-input']) }}
+                                            {{ Form::checkbox("Quest_".$lang."[0][user]", 1, false ,['class'=>'form-check-input']) }}
                                             {{ Form::label("Quest_".$lang."[0][user]", 'Человек') }}
                                         </div>
                                         <div class="form-check">
-                                            {{ Form::checkbox("Quest_".$lang."[0][multi]", 1, FALSE ,['class'=>'form-check-input']) }}
+                                            {{ Form::checkbox("Quest_".$lang."[0][multi]", 1, false ,['class'=>'form-check-input']) }}
                                             {{ Form::label("Quest_".$lang."[0][multi]", 'Мульти',['class'=>'form-check-label']) }}
                                         </div>
                                     </div>
@@ -143,15 +154,15 @@
                                         <div class="form-inline variant">
                                             <div class="form-group">
                                                 {{ Form::label("Quest_".$lang."[0][vars][0][k]", 'Ответ') }}
-                                                {{ Form::text("Quest_".$lang."[0][vars][0][k]", NULL ,['class'=>'form-control']) }}
+                                                {{ Form::text("Quest_".$lang."[0][vars][0][k]", null ,['class'=>'form-control']) }}
                                             </div>
                                             <div class="form-group">
                                                 {{ Form::label("Quest_".$lang."[0][vars][0][v]", 'Оценка') }}
-                                                {{ Form::text("Quest_".$lang."[0][vars][0][v]", NULL ,['class'=>'form-control']) }}
+                                                {{ Form::text("Quest_".$lang."[0][vars][0][v]", null ,['class'=>'form-control']) }}
                                             </div>
                                             <div class="form-group">
                                                 {{ Form::label("Quest_".$lang."[0][vars][0][hint]", 'Подсказка') }}
-                                                {{ Form::text("Quest_".$lang."[0][vars][0][hint]", NULL ,['class'=>'form-control']) }}
+                                                {{ Form::text("Quest_".$lang."[0][vars][0][hint]", null ,['class'=>'form-control']) }}
                                             </div>
                                             <span class="btn btn-danger btn-sm btn-remove">X</span>
                                         </div>
@@ -178,21 +189,12 @@
                     <div id="collapseAnswer{{$lang}}" class="collapse" aria-labelledby="headingAnswe{{$lang}}r"
                          data-parent="#accordionAnswer{{$lang}}">
                         <div class="card-body">
-                            @forelse($model->{'Answer_'.$lang} as $key=>$answer)
+                            @for($i=0;$i<count($otvet_title);$i++)
                                 <div class="form-group answer">
-                                    {{ Form::label("Answer_".$lang."[$key]", 'Ответ '.($key+1)) }}
-                                    {{ Form::text("Answer_".$lang."[$key]", NULL ,['class'=>'form-control']) }}
-                                    <span class="btn btn-danger rem-answer">X</span>
+                                    {{ Form::label("Answer_".$lang."[$i]", $otvet_title[$i].':') }}
+                                    {{ Form::textarea("Answer_".$lang."[$i]", null ,['class'=>'form-control','rows'=>'2']) }}
                                 </div>
-                                <div class="btn btn-success btn-sm add-answer">Добавить Ответ</div>
-                            @empty
-                                <div class="form-group answer">
-                                    {{ Form::label("Answer_".$lang."[0]", 'Ответ 1') }}
-                                    {{ Form::text("Answer_".$lang."[0]", NULL ,['class'=>'form-control']) }}
-                                    <span class="btn btn-danger rem-answer">X</span>
-                                </div>
-                                <div class="btn btn-success btn-sm add-answer">Добавить Ответ</div>
-                            @endforelse
+                            @endfor
                         </div>
                     </div>
                 </div>

@@ -290,11 +290,11 @@ $(document).ready(function () {
         getStr = getCookie('alias');
         alias = $('body').attr('data-alias');
         if (getStr.search(alias) >= 0) {
+          if(!window.matchMedia('(max-width:770px)').matches){
             $('.modal').fadeOut(0);
+          }
         }
-
     }
-
 
     $('.modal__btn').on('click', function (e) {
         e.preventDefault();

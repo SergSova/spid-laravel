@@ -362,7 +362,7 @@ h1.neon-pink {
 }
 
 .human-popup .pop-title span {
-    color: #ff3366;
+    color: #b63266;
     font-size: 1vw;
 }
 
@@ -379,7 +379,7 @@ h1.neon-pink {
     justify-content: space-between;
     flex-wrap: nowrap;
     line-height: 1.86vw;
-    cursor: pointer;
+    pointer-events: none;
 }
 
 .human-popup .checkbox {

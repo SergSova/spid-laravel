@@ -22,6 +22,7 @@ function init() {
     elms = [];
     k = 0, allEl = 0;
     activeSpin = 4;
+    posBtn = 0
     kolumb = document.querySelector('.kolumb'),
     hat = document.querySelectorAll('.hat'),
     resizeEl = document.querySelectorAll('.resizeEl'),
@@ -34,14 +35,14 @@ function init() {
     detect,
     WKoef = w_w / 1920,
     HKoef = w_h / 945;
-    var uniKoef = window.innerWidth / window.innerHeight >= 1.979 ? HKoef : WKoef
-
+    var uniKoef =/* window.innerWidth / window.innerHeight >= 1.979 ? HKoef : */ WKoef
   if (detect) {
     var ua = detect.parse(navigator.userAgent);
     if(ua.os.family == 'iOS') {
       $('body').addClass('ios-active');
     }
   }
+
 
   for (var i = 0; i < resizeEl.length; i++) {
     resizeEl[i].setAttribute('data-w', resizeEl[i].clientWidth);
@@ -54,7 +55,7 @@ function init() {
       w_h = window.innerHeight,
       WKoef = w_w / 1920,
       HKoef = w_h / 945,
-      uniKoef = innerWidth / window.innerHeight >= 1.979 ? HKoef : WKoef;
+      uniKoef = /*innerWidth / window.innerHeight >= 1.979 ? HKoef : */ WKoef;
     resizeElents();
   }
 
@@ -73,7 +74,6 @@ function init() {
       bg_pos_x = resizeEl[i].getAttribute('data-bg-x');
       bg_pos_y = resizeEl[i].getAttribute('data-bg-y');
       transOrig = resizeEl[i].getAttribute('data-t-o');
-
       if(!resizeEl[i].classList.contains('spin-image')){
         resizeEl[i].style.width = Math.floor(elW * uniKoef)+ 'px';
         resizeEl[i].style.height = Math.floor(elH * uniKoef) + 'px';
@@ -156,20 +156,13 @@ function init() {
     this.active = 4
     this.children  = this.el.children
       for (var j = 0; j < this.children.length; j++){
-          p = this.active + 2  == 12 ? 1 : this.active + 2;
-          d = this.active - 1  == 0 ? 12 : this.active - 1;
-          k = this.active  - 2  == 0 ? 12 : this.active - 2;
-
-          if(this.children[j].classList.contains('spin' +  this.active)) {
-              this.children[j].style.opacity = 0.6
-          }else if(this.children[j].classList.contains('spin' + d)) {
-              this.children[j].style.opacity = 1
-          }else if(this.children[j].classList.contains('spin' + k)) {
-              console.log(this.active);
-              this.children[j].style.opacity = 0.6
-          }else {
-              this.children[j].style.opacity = 0.3
-          }
+        p = this.active - 3  < 1 ? 12 +  (this.active - 3) : this.active - 3;
+        if(this.children[j].classList.contains('spin' +  p)) {
+          console.log(32443);
+          this.children[j].classList.add('no-after')
+        }else {
+          this.children[j].classList.remove('no-after')
+        }
       }
   }
 
@@ -186,58 +179,35 @@ function init() {
     this.active = this.active  == 12 ? 1 : this.active + 1;
     this.degree = this.degree - 30;
 
-    setTimeout(function () {
-      init[this.uniq] =  window.requestAnimationFrame(function () {
-        elm.spin(elm, stoPos, cicl)
-      });
-    }, time);
-
-    this.el.style.transition = 'all ' + (time ) + 'ms linear,opacity 0.5s';
-    this.el.style.transform = 'rotateX('+(parseInt(this.degree))+'deg) ';
-
-      for (var j = 0; j < this.children.length; j++){
-          p = this.active + 2  == 12 ? 1 : this.active + 2;
-          d = this.active - 1  == 0 ? 12 : this.active - 1;
-          k = this.active  - 2  == 0 ? 12 : this.active - 2;
-
-          // if(this.children[j].classList.contains('spin' +  this.active)) {
-          //     this.children[j].style.opacity = 0.8
-          // }else if(this.children[j].classList.contains('spin' + d)) {
-          //     this.children[j].style.opacity = 1
-          // }else if(this.children[j].classList.contains('spin' + k)) {
-          //     this.children[j].style.opacity = 0.8
-          // }else {
-          //     this.children[j].style.opacity = 0.6
-          // }
-        this.children[j].style.opacity = 1
+    for (var j = 0; j < this.children.length; j++){
+      p = this.active - 2  < 1 ? 12 +  (this.active - 2) : this.active - 2;
+      dd = this.active - 6  < 1 ? 12 +  (this.active - 6) : this.active - 6;
+      if(this.children[j].classList.contains('spin' +  p)) {
+        this.children[j].classList.add('no-after')
+      }else  if(this.children[j].classList.contains('spin' +  dd)){
+        this.children[j].classList.remove('no-after')
       }
-    cicl--
+    }
+      setTimeout(function () {
+        init[this.uniq] =  window.requestAnimationFrame(function () {
+          elm.spin(elm, stoPos, cicl)
+        });
+      }, time);
+
+      this.el.style.transition = 'all ' + (time ) + 'ms linear, opacity 0s';
+      this.el.style.transform = 'rotateX('+(parseInt(this.degree))+'deg) ';
+
+      cicl--
   }
 
   Rotate.prototype.spinStop = function (elm, stoPos, cicl) {
 
     this.active = this.active  == 12 ? 1 : this.active + 1;
-      for (var j = 0; j < this.children.length; j++){
-          p = this.active + 2  == 12 ? 1 : this.active + 2;
-          d = this.active - 1  == 0 ? 12 : this.active - 1;
-          k = this.active  - 2  == 0 ? 12 : this.active - 2;
 
-          if(this.children[j].classList.contains('spin' +  this.active)) {
-              this.children[j].style.opacity = 0.6
-          }else if(this.children[j].classList.contains('spin' + d)) {
-              this.children[j].style.opacity = 1
-              this.children[j].classList.add('active');
-          }else if(this.children[j].classList.contains('spin' + k)) {
-              console.log(this.active);
-              this.children[j].style.opacity = 0.6
-          }else {
-              this.children[j].style.opacity = 0.3
-          }
-      }
     this.degree = this.degree - 30;
     this.el.style.transition  =  'all ' + 1000 + 'ms cubic-bezier(0, 1.24, 1, 1),opacity 1s linear';
     this.el.style.transform = 'rotateX('+(parseInt(this.degree))+'deg) ';
-
+    $('.pusk-btn')
 
     allEl++
     allEl == 4 ? (allEl = 0, afterStop()) : '';
@@ -251,18 +221,32 @@ function init() {
         imEl = $(this).find('.spin.active .spin-image')
         bg_pos_y = imEl.attr('data-bg-y')
         if (headOn) {
-          imEl.css({'background-position': -231 * uniKoef + 'px ' + bg_pos_y * uniKoef + 'px'})
+          imEl.css({'background-position': -231 * uniKoef + 'px ' + Math.floor(bg_pos_y * uniKoef) + 'px'})
         }else {
-          imEl.css({'background-position': -456 * uniKoef + 'px ' + bg_pos_y * uniKoef + 'px'})
+          imEl.css({'background-position': -456 * uniKoef + 'px ' + Math.floor(bg_pos_y * uniKoef) + 'px'})
         }
       })
+      $('.pusk-btn').removeClass('active')
       canSpin = true;
     },1000)
 
   }
 
-
-
+  function  btnAnim() {
+    if(posBtn == 12) {
+      posBtn = 0;
+      window.cancelAnimationFrame(btnAnim);
+      $('.pusk-btn').css({'background-position':  '0px ' + Math.floor((bg_pos_y * uniKoef) / 12)  *  posBtn + 'px'});
+      clearTimeout(tur);
+      return
+    }
+    var tur = setTimeout(function () {
+        window.requestAnimationFrame(btnAnim);
+    }, 10);
+    bg_pos_y = $('.pusk-btn').attr('data-bg-h')
+    $('.pusk-btn').css({'background-position':  '0px ' +(bg_pos_y * uniKoef) / 12 *(-1) *  posBtn + 'px'});
+    posBtn++
+  }
 
 
 
@@ -270,7 +254,8 @@ function init() {
     if (!canSpin) {
       return
     }
-    $(this).addClass('active').next();
+    btnAnim()
+
     canSpin = false;
     actSpin = 0;
     rands  = Math.floor((Math.random() * 7) + 1)
@@ -279,7 +264,7 @@ function init() {
     $('.rotator-row-wrap').each(function () {
       imEl = $(this).find('.spin.active .spin-image')
       bg_pos_y = imEl.attr('data-bg-y')
-      imEl.css({'background-position': -0 * uniKoef + 'px ' + bg_pos_y * uniKoef + 'px'});
+      imEl.css({'background-position': -0 * uniKoef + 'px ' + (bg_pos_y * uniKoef)  + 'px'});
 
       setTimeout(function () {
         $('.spin').removeClass('active');

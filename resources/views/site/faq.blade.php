@@ -1,5 +1,11 @@
 <?php
 
+
+/**
+ *
+ * @var \App\StaticPage $model
+ * @var \App\FaqAnswer $question
+ */
 $body_class = $model->alias ?? '';
 ?>
 @extends('site.layout')
@@ -14,7 +20,7 @@ $body_class = $model->alias ?? '';
 @section('body')
     <div class="preloader">
         <div class="preloader-inner">
-            <?php include 'assets/img/svg/consultants/preloader-inner.svg'?>
+			<?php include 'assets/img/svg/consultants/preloader-inner.svg'?>
         </div>
     </div>
 
@@ -51,7 +57,8 @@ $body_class = $model->alias ?? '';
                 <div class="faq-content-box">
                     <div class="faq-content-wrapper">
                         @foreach($model->getQuestions() as $question)
-                            <div class="faq-content__question {{isset($index)&&$question->index==$index?'question-active':''}}" id="question-{{$question->index}}">
+                            <div class="faq-content__question {{isset($index)&&$question->index==$index?'question-active':''}}"
+                                 id="question-{{$question->index}}">
                                 <h4 class="faq-content__heading">{{$question->question}}
                                     <div class="faq-content__icon"></div>
                                 </h4>

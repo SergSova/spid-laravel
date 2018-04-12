@@ -30,7 +30,7 @@
         $(function () {
             if (prev_page.length) {
                 $('.navigate-box__left').on('click', function() {
-                    location.assign('/' + prev_page);
+                    location.assign( prev_page);
                 });
             }
 
@@ -40,7 +40,7 @@
 
             if (next_page.length) {
                 $('.navigate-box__right').on('click', function() {
-                    location.assign('/' + next_page);
+                    location.assign( next_page);
                 });
             }
 

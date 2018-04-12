@@ -331,6 +331,15 @@ body.menu-open .menu {
         -moz-background-size: 1600% 100%;
         -o-background-size: 1600% 100%;
         background-size: 1600% 100%;
+        text-decoration: none;
+        outline: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
     }
 }
 
@@ -544,17 +553,16 @@ body.menu-open .menu {
     position: absolute;
     bottom: 0;
     transform: translateY(115%);
-    color: white;
+    color: transparent;
     font-size: 8px;
     left: 8px;
     text-align: center;
-    opacity: 0;
-    transition: opacity 0.5s;
+    transition: all .5s;
 }
 
 .navigate-box__left:hover .navigate-box__text,
 .navigate-box__right:hover .navigate-box__text {
-    opacity: 1;
+    color: #fff;
 }
 
 /*---------------------navigate-box styles ----------------------------------*/
@@ -1256,6 +1264,12 @@ svg.preloader-inner__nouse {
     }
 }
 
+@media (max-width: 767px) and (orientation: portrait) {
+    .globalClass_ET {
+        opacity: 0;
+    }
+}
+
 /*---------------------portrait styles--------------------------------*/
 
 /****************** navigation REVOLVER_BULLET****************************/
@@ -1266,6 +1280,7 @@ svg.preloader-inner__nouse {
     width: 33%;
     z-index: 50;
     top: 13.5%;
+    cursor: pointer;
 }
 
 .slider-controls {
@@ -1485,7 +1500,6 @@ svg.preloader-inner__nouse {
     right: 100%;
     top: 0;
     background: #202123;
-    border-radius: 24px;
     width: 50px;
     transition: all .5s;
     transform: translateX(59px);
@@ -1500,6 +1514,10 @@ svg.preloader-inner__nouse {
 .search-form {
     position: relative;
     padding: 0 18px;
+}
+
+.top-search-result__content a {
+    text-decoration: none;
 }
 
 .search-form__q {
@@ -1548,16 +1566,29 @@ svg.preloader-inner__nouse {
 
 .top-search-result__img {
     width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    overflow: hidden;
     margin-right: 10px;
+    position: relative;
+}
+
+.top-search-result__content {
+    width: calc(100% - 58px);
 }
 
 .top-search-result__img img {
-    width: 100%;
+    max-width: none;
+    max-height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
 }
 
 .top-search-results {
     padding: 0;
-    margin: 30px 18px 35px 18px;
+    margin: 30px 10px 35px 12px;
     overflow: hidden;
     position: relative;
     /*max-height: 200px;*/
@@ -1582,6 +1613,7 @@ svg.preloader-inner__nouse {
     opacity: .6;
     transition: all .5s;
     margin-top: 26px;
+    padding-right: 30px;
     /*animation: fadeIn 1s linear;*/
 }
 
@@ -1661,6 +1693,10 @@ body.search-open .top-search {
         height: 48px;
         overflow: hidden;
     }
+
+    .top-search {
+        border-radius: 24px;
+    }
 }
 
 @media all and (max-width: 1200px) {
@@ -1679,13 +1715,12 @@ body.search-open .top-search {
     }
 
     .search-form__q {
-        height: 11.2vh;
+        height: 86px;
     }
 
     .top-search-results {
-        top: 11.2vh;
+        top: 86px;
         position: absolute;
-        top: 11.2vh;
         bottom: 0;
         left: 0;
         right: 0;
@@ -1700,9 +1735,9 @@ body.search-open .top-search {
     }
 
     .top-search-result__title {
-        font-size: 1.8vmin;
+        font-size: 22px;
         font-weight: 700;
-        margin-bottom: 7px;
+        margin-bottom: 0;
     }
 
     .top-search-result__desc {
@@ -1715,22 +1750,38 @@ body.search-open .top-search {
     }
 
     .top-search-results {
-        margin: 6vh 2.99vw 6vh 2.99vw;
+        margin: 50px 21px 41px 41px;
     }
 
     .top-search-result {
         padding: 0;
-        margin-top: 6vh;
+        margin-top: 44px;
     }
 
     .top-search-result:first-child {
         margin-top: 0;
     }
+
+    .top-search-result__img {
+        width: 100px;
+        height: 100px;
+        margin-right: 24px;
+    }
 }
 
 @media all and (max-width: 767px) {
     .top-search-results {
-        margin: 4.68vh 2.99vw 4.68vh 2.99vw;
+        margin: 15px 8px 15px 15px;
+    }
+
+    .top-search-result__title {
+        font-size: 12px;
+    }
+
+    .top-search-result__img {
+        width: 44px;
+        height: 44px;
+        margin-right: 9px;
     }
 }
 
@@ -1765,7 +1816,7 @@ body.search-open .top-search {
 
 .scroll {
     position: absolute;
-    right: 10px;
+    right: 0;
     top: 0;
     bottom: 0;
     width: 21px;
@@ -1779,6 +1830,7 @@ body.search-open .top-search {
     left: 50%;
     transform: translateX(-50%);
     width: 2px;
+    opacity: .6;
     background: #B8B8B8;
 }
 
@@ -1800,6 +1852,16 @@ body.search-open .top-search {
 .empty .scroll {
     opacity: 0;
     z-index: -1;
+}
+
+@media all and (max-width: 767px) {
+    .search-form__q {
+        height: 41px;
+    }
+
+    .top-search-results {
+        top: 41px;
+    }
 }
 
 /*search end*/

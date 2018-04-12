@@ -1,208 +1,3 @@
-// function BufferLoader(context, urlList, callback) {
-// 	this.context = context;
-// 	this.urlList = urlList;
-// 	this.onload = callback;
-// 	this.bufferList = new Array();
-// 	this.loadCount = 0;
-// }
-
-// BufferLoader.prototype.loadBuffer = function(url, index) {
-// 	// Load buffer asynchronously
-// 	var request = new XMLHttpRequest();
-// 	request.open("GET", url, true);
-// 	request.responseType = "arraybuffer";
-
-// 	var loader = this;
-
-// 	request.onload = function() {
-// 		// Asynchronously decode the audio file data in request.response
-// 		loader.context.decodeAudioData(
-// 		request.response,
-// 		function(buffer) {
-// 			if (!buffer) {
-// 			alert('error decoding file data: ' + url);
-// 			return;
-// 			}
-// 			loader.bufferList[index] = buffer;
-// 			if (++loader.loadCount == loader.urlList.length)
-// 			loader.onload(loader.bufferList);
-// 		},
-// 		function(error) {
-// 			console.error('decodeAudioData error', error);
-// 		}
-// 		);
-// 	}
-
-// 	request.onerror = function() {
-// 		alert('BufferLoader: XHR error');
-// 	}
-
-// 	request.send();
-// }
-
-// BufferLoader.prototype.load = function() {
-// 	for (var i = 0; i < this.urlList.length; ++i)
-// 	this.loadBuffer(this.urlList[i], i);
-// }
-
-// var context;
-// var bufferLoader;
-// var gainNode;
-// var source1;
-// var BUFFERS;
-// var currentVolume;
-// var testStart;
-
-// function init() {
-//   // Fix up prefixing
-//   window.AudioContext = window.AudioContext || window.webkitAudioContext;
-//   context = new AudioContext();
-
-//   bufferLoader = new BufferLoader(
-//     context,
-//     [
-//       'assets/video/noise-audio.mp3',
-//     ],
-//     finishedLoading
-//     );
-
-//   bufferLoader.load();
-// }
-
-// function finishedLoading(bufferList) {
-// 	BUFFERS = bufferList;
-//   // Create two sources and play them both together.
-//   source1 = context.createBufferSource();
-//   source1.buffer = bufferList[0];
-
-//   source1.connect(context.destination);
-//   source1.start(0);
-//   gainNode = context.createGain();
-// // Connect the source to the gain node.
-//   source1.connect(gainNode);
-// // Connect the gain node to the destination.
-//   gainNode.connect(context.destination);
-//   source1.loop = true;
-// }
-
-// function play() {
-// 	if (!context.createGain)
-// 	  context.createGain = context.createGainNode;
-// 	gainNode = context.createGain();
-// 	source1 = context.createBufferSource();
-// 	source1.buffer = BUFFERS[0];
-  
-// 	// Connect source to a gain node
-// 	source1.connect(gainNode);
-// 	// Connect gain node to destination
-// 	gainNode.connect(context.destination);
-// 	// Start playback in a loop
-// 	source1.loop = true;
-// 	if (!source1.start) source1.start = source1.noteOn;
-// 	source1.start(0);
-// 	source1 = source1;
-
-// 	gainNode.gain.value = currentVolume;
-// };
-
-// var video;
-// var container = document.getElementById('container');
-// var firstPlay = true;
-
-// if(!Utils.isAndroid) {
-//     var options = {
-//         id: 'video',
-//         //audio: './medias/sound.mp3',
-//         bufferAudio: false,
-//         autoplay: true,
-//         xhr: false,
-//         loop: true
-//     };
-
-//     video = new CanvasVideo({
-//         src: './assets/video/1.mp4',
-//         mime: 'video/mp4'
-//     }, options);
-//     container.appendChild(video.element);
-
-//     // document.addEventListener('touchend', function(e){
-//     //     document.getElementById('playButton').style.display = 'none';
-//     // });
-
-// } else {
-//     Utils.displayInfoBar();
-//     video = document.createElement('video');
-//     var s = document.createElement('source');
-//     s.src = './assets/video/1.mp4';
-//     s.mime = 'video/mp4';
-//     video.appendChild(s);
-//     video.loop = true;
-//     video.id = 'video';
-//     container.appendChild(video);
-
-//     //document.getElementById('playButton').style.display = 'block';
-
-//     document.addEventListener('touchend', function(e){
-
-//         //document.getElementById('playButton').style.display = 'none';
-//         video.play();
-//     });
-// }
-
-// if (!Utils.isMobile) {
-//     // center on desktop
-//     document.getElementById('container').className = 'center';
-// } else {
-//     // fullscreen on mobile
-//     window.addEventListener('resize', resize);
-//     resize();
-// }
-
-// function playVideo(e) {
-//     document.removeEventListener('touchend', playVideo);
-//     //document.getElementById('playButton').style.display = 'block';
-//     video.play();
-// }
-
-// video.addEventListener('timeupdate', onTimeUpdate);
-// video.addEventListener('canplaythrough', onCanPlayThrough);
-// //video.addEventListener('playing', onPlaying);
-// // video.addEventListener('play', onPlaying);
-// // video.addEventListener('waiting', onWaiting);
-
-// function onTimeUpdate(e) {
-// 	video.play()
-//     document.getElementById('interface').innerHTML = Utils.timeCode(video.currentTime);
-// }
-
-// function onCanPlayThrough(e) {
-//     if(video.needTouchDevice) {
-//         //document.getElementById('playButton').style.display = 'block';
-//         document.addEventListener('touchend', playVideo);
-//     }
-//     showLoader(false);
-// }
-
-// function onPlaying(e) {
-//     //document.getElementById('playButton').style.display = 'none';
-//     showLoader(false);
-// }
-
-// function onWaiting(e) {
-//     showLoader(true);
-// }
-
-// function resize(e) {
-//     var size = Utils.cover(579, 326);
-//     video.width = size.width;
-//     video.height = size.height;
-// }
-
-// function showLoader(boo) {
-//     if(boo) document.getElementById('loader').style.display = 'block';
-//     else document.getElementById('loader').style.display = 'none';
-// }
-
 var preloaderHide = false;
 
 $(window).on('load', function() {
@@ -299,7 +94,7 @@ window.addEventListener('load', function() {
 			currentIdGlobal = this.currentId;
 			ANSWER = _a;
 
-			if(this.currentId >= QUESTIONS.length) {
+			if (this.currentId >= QUESTIONS.length) {
 				this.totals();
 			} else {
 				this.viewQuestion();
@@ -359,22 +154,22 @@ window.addEventListener('load', function() {
 			total;
 
 		if ((flagZero > 0) && (flagM == 0) && (flagC == 0) && (flagB == 0)) {
-			total = 'нет риска, тестироваться не нужно';
+			total = totals[0];
 			video.src = 'assets/video/no-risk.mp4';
 		}
 
 		if ((flagZero > 0) && (flagM > 0) && (flagC == 0) && (flagB == 0)) {
-			total = 'минимальный риск';
+			total = totals[1];
 			video.src = 'assets/video/minimal-risk.mp4';
 		}
 
 		if ((flagC > 0) && (flagB == 0)) {
-			total = 'средняя степень риска ';
+			total = totals[2];
 			video.src = 'assets/video/middle-risk.mp4';
 		}
 
 		if (flagB > 0) {
-			total = 'высокий риск';
+			total = totals[3];
 			video.src = 'assets/video/high-risk.mp4';
 		}
 
@@ -396,7 +191,7 @@ window.addEventListener('load', function() {
 
 	Test.prototype.sendMail = function() {
 		var mail = '';
-
+		var data = {};
 		for (var z = 0; z < ANSWER.length; z++) {
 			var id = ANSWER[z]['qID'],
 				answer = ANSWER[z]['answer'];
@@ -404,6 +199,7 @@ window.addEventListener('load', function() {
 			QUESTIONS.forEach(function(q) {
 				if (q.id == id) {
 					mail += q.label + ': ' + answer + '\n';
+					data[q.id] = {label:q.label,answer:answer}
 				}
 			})
 		}
@@ -462,7 +258,7 @@ window.addEventListener('load', function() {
 			questionTitle.innerHTML = currentQuestion.label;
 			question.appendChild(questionTitle);
 
-			if (currentQuestion.multi) {
+			if (currentQuestion.multi == 1) {
 				for (var z = 0; z < currentQuestion.vars.length; z++) {
 					var label = document.createElement('label'),
 						className = '',

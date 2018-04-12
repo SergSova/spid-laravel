@@ -55,17 +55,7 @@ $body_class = $model->alias ?? '';
         </div>
     </div>
 
-    <nav class="game-icons slider-controls slide-5">
-        <a class="str str-prev">
-            <?php include 'assets/img/svg/bandit/str-prev.svg'?>
-        </a>
-        <a class="str str-next">
-            <?php include 'assets/img/svg/bandit/str-next.svg'?>
-        </a>
-        <div class="bullets">
-            <?php include 'assets/img/svg/bandit/bullets.svg'?>
-        </div>
-    </nav>
+
     <div class="main-scene full bandit">
         <div class="games-wrapper">
             <div class="games full">
@@ -299,12 +289,7 @@ $body_class = $model->alias ?? '';
                                     </div>
                                 </div>
                             </div>
-                            <div class="pusk">
-                                <div class="img-line">
-                                    <img src="{{asset('assets/img/bandit/line-top.png')}}" alt="">
-                                </div>
-                                <div class="pusk-btn resizeEl" data-bg-w="110" data-bg-h="1116"></div>
-                            </div>
+
 
                             <!--MEN-->
                             <div class="men-right">
@@ -330,10 +315,27 @@ $body_class = $model->alias ?? '';
             </div>
         </div>
     </div>
+    <nav class="game-icons slider-controls slide-5">
+        <a class="str str-prev">
+            <?php include 'assets/img/svg/bandit/str-prev.svg'?>
+        </a>
+        <a class="str str-next">
+            <?php include 'assets/img/svg/bandit/str-next.svg'?>
+        </a>
+        <div class="bullets">
+            <?php include 'assets/img/svg/bandit/bullets.svg'?>
+        </div>
+    </nav>
+    <div class="pusk">
+        <div class="img-line">
+            <img src="{{asset('assets/img/bandit/line-top.png')}}" alt="">
+        </div>
+        <div class="pusk-btn resizeEl" data-bg-w="110" data-bg-h="1116"></div>
+    </div>
 @endsection
 
 @section('scripts')
-    @parent
+    @parent/
     <script src="{{asset('assets/js/libs/detect.min.js')}}"></script>
     <script src="{{asset('assets/js/main22.js')}}"></script>
 

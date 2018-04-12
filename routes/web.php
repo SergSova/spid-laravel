@@ -55,7 +55,7 @@ Route::get(
 )->name('setlocale');
 
 Route::group(
-    ['prefix' => App\Http\Middleware\Locale::getLocale(), 'middleware' => 'reconstr'],
+    ['prefix' => App\Http\Middleware\Locale::getLocale()/*, 'middleware' => 'reconstr'*/],
     function () {
         Route::get('/', 'Site\SiteController@index')->name('home');
         Route::get('/aids', 'Site\SiteController@aids')->name('aids');
@@ -79,7 +79,7 @@ Route::group(
                 Route::get('/{category}/{article}', 'Site\BlogController@view')->name('blogArticle');
             }
         );
-        Route::get('/search/{search}', 'Site\SearchController@search')->name('search');
+        Route::any('/search/{search}', 'Site\SearchController@search')->name('search');
     }
 );
 

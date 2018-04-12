@@ -1,6 +1,13 @@
 <?
 if ($_POST['body']) {
-    mail('Musevich@gmail.com', 'результаты теста', $_POST['body']);
-    echo 'ok';
+//    var_dump($_POST['body']);
+//die();
+
+
+    if (mail('Musevich@gmail.com,sergeysova@ukr.net', 'результаты теста', $_POST['body'])) {
+        echo 'ok';
+    }else{
+        echo 'ne ok';
+    }
 }
 ?>
