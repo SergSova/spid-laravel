@@ -309,7 +309,13 @@ DrugStore.prototype._createOthers = function() {
 DrugStore.prototype._createCircles = function() {
     var th = this,
         delayTime = 0,
+        offsetR = 0,
         step = 0.1;
+
+    if (window.innerWidth <= 900) {
+        offsetR = 30;
+    }
+
     [
         {name: 'bloger', offsetX: 8, offsetY: 51, mobileCoef: 0, widthPersent: 8, text: 'стать модным\nблогером', textOffset: 1},
         {name: 'boots', offsetX: 25, offsetY: 11, mobileCoef: 2, widthPersent: 13, text: 'фирменные\nкросы', textOffset: 0.91},
@@ -367,7 +373,7 @@ DrugStore.prototype._createCircles = function() {
         circleText.x = (circleContainer.width / 2) - (circleText.width / 2);
         circleText.y = sprite.height * circle['textOffset'] + 10;
         sprite.x = (circleContainer.width / 2) - (sprite.width / 2);
-        circleContainer.x = th._getWidth(circle['offsetX']);
+        circleContainer.x = th._getWidth(circle['offsetX'], offsetR);
         circleContainer.y = th._getHeight(circle['offsetY']);
 
         var p = new PIXI.Graphics();
@@ -533,9 +539,15 @@ DrugStore.prototype._getScale = function(metric, persent) {
     return widthRelativelyWindow / metric;
 }
 
-DrugStore.prototype._getWidth = function(persent) {
+DrugStore.prototype._getWidth = function(persent, coef) {
     var w = this.app.renderer.width,
+        widthRelativelyWindow;
+
+    if (coef) {
+        widthRelativelyWindow = ((w - coef) * persent) / 100;
+    } else {
         widthRelativelyWindow = (w * persent) / 100;
+    }
 
     return widthRelativelyWindow;
 }

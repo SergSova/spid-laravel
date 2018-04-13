@@ -145,9 +145,7 @@
                 <div class="scroll-substitute">
                     <span></span>
                 </div>
-                <div class="wrap-top-top">
-                    <div class="to-top">@lang('site.above')</div>
-                </div>
+
             </div>
             @include('site.chanks.navigate_box')
         </div>

@@ -90,12 +90,12 @@ window.addEventListener('load', function() {
 		if (this.answers) {
 			var _a = JSON.parse(this.answers);
 			this.currentId = +_a[_a.length - 1].qID + 1;
-			console.log( this.currentId )
 			currentIdGlobal = this.currentId;
 			ANSWER = _a;
 
 			if (this.currentId >= QUESTIONS.length) {
 				this.totals();
+				localStorage.removeItem('aids-test');
 			} else {
 				this.viewQuestion();
 			}
@@ -143,6 +143,7 @@ window.addEventListener('load', function() {
 			this.viewQuestion();
 		} else {
 			this.totals();
+			localStorage.removeItem('aids-test');
 		}
 	};
 
@@ -197,23 +198,33 @@ window.addEventListener('load', function() {
 				answer = ANSWER[z]['answer'];
 
 			QUESTIONS.forEach(function(q) {
+				var _answer = [];
+
 				if (q.id == id) {
-					mail += q.label + ': ' + answer + '\n';
-					data[q.id] = {label:q.label,answer:answer}
+					answer.forEach(function(_a) {
+						q.vars.forEach(function(_q) {
+							if (_a == _q.v) {
+								_answer.push(_q.k);
+							}
+						});
+					});
+					mail += q.label + ': ' + _answer + '\n';
+					data[q.id] = {label:q.label, answer: _answer,index:q.id}
 				}
-			})
+			});
 		}
 
-		$.ajax({
-			type: "POST",
-			url: './assets/js/mail.php',
-			data: {
-				body: mail
-			},
-			success: function(d) {
-
-			}
-		});
+        // $.ajax({
+        //     type: 'POST',
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //     },
+        //     url: '/statistic/save',
+        //     data: data,
+        //     success: function (d) {
+        //         console.log(d);
+        //     }
+        // });
 	}
 
 	Test.prototype.calculate = function(val) {
@@ -264,7 +275,7 @@ window.addEventListener('load', function() {
 						className = '',
 						radio;
 
-					if (currentQuestion.vars[z].uncheckAll) {
+					if (currentQuestion.vars[z].uncheck) {
 						className = 'js-uncheckAll';
 					}
 
@@ -326,7 +337,7 @@ window.addEventListener('load', function() {
 			video.onloadeddata = function() {
 				if (testStart) {
 					//gainNode.gain.value = 0;
-					testAudio.volume = 0;
+					document.querySelector('.test-noize-audio').muted = true;
 				}
 			};
 
@@ -345,7 +356,7 @@ window.addEventListener('load', function() {
 				// if (gainNode) {
 				// 	gainNode.gain.value = currentVolume;
 				// }
-
+				
 				if (preloaderHide) {
 					var promiseAudio = document.querySelector('.test-noize-audio').play();
 					if (promiseAudio !== undefined) {
@@ -359,7 +370,6 @@ window.addEventListener('load', function() {
 
 					if (testStart) {
 						video.src = 'assets/video/' + videos[th.currentId];
-					
 					} else {
 						video.src = 'assets/video/' + videos[0];
 					}

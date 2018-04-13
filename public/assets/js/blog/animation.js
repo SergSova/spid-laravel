@@ -7,11 +7,20 @@ $(window).on('load', function () {
 
 
 $(document).ready(function () {
-    $('.blog-news').hover(function () {
-        $(this).find('.blog-image').addClass('hover');
-    }, function () {
-        $(this).find('.blog-image').removeClass('hover');
-    });
+    if (window.matchMedia("(min-width: 1025px)").matches) {
+        $('.blog-news').hover(function () {
+            $(this).find('.blog-image').addClass('hover');
+        }, function () {
+            $(this).find('.blog-image').removeClass('hover');
+        });
+
+
+        $('.large-translate .video .blog-news-content, .medium-translate .video .blog-news-content').hover(function () {
+            $(this).addClass('hover');
+        }, function () {
+            $(this).removeClass('hover');
+        });
+    }
 
     $('.tilter__figure').append('<div class="tilter-span-liner"><span></span></span></div>');
     $('.tilter .blog-image').append('<div class="tilter__deco tilter__deco--shine"><div></div></div>');
@@ -28,11 +37,6 @@ $(document).ready(function () {
         }
     });
 
-    $('.large-translate .video .blog-news-content, .medium-translate .video .blog-news-content').hover(function () {
-        $(this).addClass('hover');
-    }, function () {
-        $(this).removeClass('hover');
-    });
 
     $(function(){
         var hei_tilter = $(".large-translate article.tilter");

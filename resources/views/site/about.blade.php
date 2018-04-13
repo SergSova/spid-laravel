@@ -13,7 +13,7 @@ $body_class = $model->alias??'';
 ?>
 @extends('site.layout')
 
-@section('title', $model->seo_title))
+@section('title', $model->seo_title)
 
 @section('styles')
     @parent

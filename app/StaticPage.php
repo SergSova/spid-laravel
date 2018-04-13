@@ -230,7 +230,7 @@ class StaticPage extends Model
                 );
                 break;
             case 'aids-test':
-                $filds = collect(['description', 'test_btn', 'test_btn_next', 'test_btn_refresh', 'Quest', 'Answer',]);
+                $filds = collect(['short_description','description', 'test_btn', 'test_btn_next', 'test_btn_refresh', 'Quest', 'Answer',]);
                 break;
             case 'about':
                 $slider = $_POST['Photo'];

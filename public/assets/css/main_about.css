@@ -900,7 +900,7 @@
         position: relative;
         height: 100%;
         width: auto;
-        margin: 12vh 14% 0 9%;
+        padding: 12vh 14% 0 9%;
     }
 
 /*---------------------main styles ----------------------------------*/
@@ -1010,6 +1010,10 @@
            -moz-box-align: end;
             -ms-flex-align: end;
                 align-items: flex-end;
+        position: absolute;
+        bottom: 2.083vw;
+        left: 9%;
+        right: 14%;
     }
 
     .content__additional-logo-box {
@@ -1098,7 +1102,7 @@
         display: inline-block;
         max-width: 100%;
         max-height: 100%;
-        width: 16.848vh;
+        width: 10vw;
     }
 
     #logo-slider .slick-prev,
@@ -1221,7 +1225,7 @@
     }
 @media (min-width: 320px) and (max-width: 1023px) {
     .content__additional-logo-box img {
-        width: 30%;
+        width: 22%;
     }
     /*.freshagency-logo-box {
         height: 22vh;
@@ -1231,7 +1235,7 @@
         height: 13vh;
     }
     .content__text {
-        font-size: 60%;
+        font-size: 10px;
         flex-basis: 100%;
     }
     .about .content {
@@ -1256,7 +1260,6 @@
         -ms-flex-align: start;
         align-items: flex-start;
         height: 42px;
-        margin-bottom: 30px;
     }
     .copyright-text {
         font-size: 70%;
@@ -1268,12 +1271,12 @@
 }
     @media(min-width: 900px) {
         .content__center-box {
-            width: 73%;
+            width: 77%;
         }
 
         .clip-fix {
             /*margin-top: 15.321vh;*/
-            font-size: 10.214vh;
+            font-size: 5vw;
             word-spacing: -5px;
         }
 
@@ -1323,4 +1326,31 @@
         }
     }
 
+@media all and (max-width: 767px) {
+    .content__text, .content__heading {
+        font-size: 8px;
+    }
+
+    .content-section {
+        padding-right: 7%;
+        padding-left: 6%;
+    }
+
+    .content__bottom-box {
+        left: 7%;
+        right: 7%;
+    }
+
+    .content__left-box {
+        width: 17%
+    }
+
+    .clip-fix {
+        font-size: 4vw;
+    }
+
+    .content__center-box {
+        width: 82%;
+    }
+}
 /*---------------------about-us styles ----------------------------------*/

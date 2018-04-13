@@ -143,6 +143,8 @@ h1.neon-pink {
 .human-img img {
     height: inherit;
     width: auto;
+    padding: 0 0 4vh 0;
+    overflow: visible;
     -webkit-transition: all .5s;
     -moz-transition: all .5s;
     -o-transition: all .5s;
@@ -542,41 +544,13 @@ screen and (min-resolution: 2dppx) {
 }
 
 
-/*-----------------------Portraite Screens-----------------------*/
-
-@media screen and (min-width:768px) and (max-width:1024px) and (orientation:portrait),
-screen and (min-width:320px) and (max-width:767px) and (orientation:portrait) {
-    body {
-        display: none;
-    }
-
-    html:after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        width: 100vw;
-        height: 100vh;
-        background: #000;
-        color: #fff;
-        text-align: center;
-        font-size: 4vw;
-        font-family: 'Montserrat', sans-serif;
-        content: 'поверните Ваше устройство для более комфортного отображения сайта';
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
-
 
 
 /*-----------------------Tablet+Mobile Screens-----------------------*/
 
 @media screen and (min-width:320px) and (max-width:1024px) and (orientation:landscape) {
     .with-who .humans {
-        width: 100%;
+        width: calc(100% - 40px);
         margin-left: 2%;
     }
     .human-popup {

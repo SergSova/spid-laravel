@@ -35,6 +35,33 @@ $body_class = $model->alias ?? '';
             <p class="landscape-desc">@lang('site.landscape_desc')</p>
         </div>
     </div>
+    <div class="faq-search">
+        <button class="top-btn top-btn_search">@lang('site.search')</button>
+        <div class="top-search faq-top-search empty">
+            <form action="/search" class="search-form">
+                {{ csrf_field() }}
+                <p class="search-form__top">
+                    <input type="text" autocomplete="off" placeholder="Поиск" name="search" class="search-form__q" />
+                </p> 
+                <button class="search-form__clear"></button>
+            </form>
+            <div class="top-search-results">
+                <div class="top-search-results__inner">
+                    <!-- <div class="top-search-result">
+                        <div class="top-search-result__img">
+                            <img src="http://3.j2landing.com/speed/img1.png" alt="">
+                        </div>
+                        <div class="top-search-result__content">
+                            <h5 class="top-search-result__title">Заглавие какой-то статьи</h5>
+                            <div class="top-search-result__desc">
+                                <p>Краткое описание для ознакомления</p>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main class="content">
         <div class="content-section">

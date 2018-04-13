@@ -156,57 +156,61 @@ Rocket.prototype._addSpriteWithClone = function(objects) {
 }
 
 Rocket.prototype._setMetrics = function() {
-    var th = this;
+    var th = this,
+        offsetR = 0;
     th.canvasContainerWidth = window.innerWidth;
     th.canvasContainerHeight = window.innerHeight - 3;
     th.app.renderer.resize(th.canvasContainerWidth, th.canvasContainerHeight);
+
+    if (th.canvasContainerWidth <= 900) {
+        offsetR = 30;
+    }
 
     th.bgSprite.width = th.canvasContainerWidth;
     th.bgSprite.height = th.canvasContainerHeight;
 
     th.angleSprite.scale.set(th._getScale(th.angleSprite.width, 9));
-    th.angleSprite.x = th._getWidth(9);
+    th.angleSprite.x = th._getWidth(9, offsetR);
     th.angleSprite.y = th.app.renderer.height - 83 - th.angleSprite.height;
 
     th.planetLilacSprite.scale.set(th._getScale(th.planetLilacSprite.width, 13));
-    th.planetLilacSprite.x = th._getWidth(61);
+    th.planetLilacSprite.x = th._getWidth(61, offsetR);
     th.planetLilacSprite.y = th._getHeight(66);
     th._setMetricClone(th.planetLilacSprite, 0.55, 0.75);
 
     th.planetOrangecSprite.scale.set(th._getScale(th.planetOrangecSprite.width, 13));
-    th.planetOrangecSprite.x = th._getWidth(43);
+    th.planetOrangecSprite.x = th._getWidth(43, offsetR);
     th.planetOrangecSprite.y = th._getHeight(25);
     th._setMetricClone(th.planetOrangecSprite, 0.5, 0.75);
 
     th.planetHeir.scale.set(th._getScale(th.planetHeir.width, 13));
-    th.planetHeir.x = th._getWidth(12);
+    th.planetHeir.x = th._getWidth(12, offsetR);
     th.planetHeir.y = th._getHeight(16);
     th._setMetricClone(th.planetHeir, 0.66, 0.75);
 
     th.planetHat.scale.set(th._getScale(th.planetHat.width, 13));
-    th.planetHat.x = th._getWidth(72);
+    th.planetHat.x = th._getWidth(72, offsetR);
     th.planetHat.y = th._getHeight(8);
     th._setMetricClone(th.planetHat, 0.7, 0.75);
     
-
     th.planetQueen.scale.set(th._getScale(th.planetQueen.width, 13));
-    th.planetQueen.x = th._getWidth(79);
+    th.planetQueen.x = th._getWidth(79, offsetR);
     th.planetQueen.y = th._getHeight(42);
     th._setMetricClone(th.planetQueen, 0.65, 0.76);
 
     th.predmetSoska.scale.set(th._getScale(th.predmetSoska.width, 4));
-    th.predmetSoska.x = th._getWidth(29);
+    th.predmetSoska.x = th._getWidth(29, offsetR);
     th.predmetSoska.y = th._getHeight(8);
 
     th.predmetHeart.scale.set(th._getScale(th.predmetHeart.width, 3));
-    th.predmetHeart.x = th._getWidth(25);
+    th.predmetHeart.x = th._getWidth(25, offsetR);
     th.predmetHeart.y = th._getHeight(46);
 
     th.predmetRock.scale.set(th._getScale(th.predmetRock.width, 17));
-    th.predmetRock.x = th._getWidth(57);
+    th.predmetRock.x = th._getWidth(57, offsetR);
     th.predmetRock.y = th._getHeight(44);
 
-    th.predmetPomada.x = th._getWidth(84);
+    th.predmetPomada.x = th._getWidth(84, offsetR);
     th.predmetPomada.y = th._getHeight(25);
 
     // th.titleText.x = (th.app.renderer.width / 2) - (th.titleText.width / 2);
@@ -512,9 +516,15 @@ Rocket.prototype._getScale = function(metric, persent) {
     return widthRelativelyWindow / metric;
 }
 
-Rocket.prototype._getWidth = function(persent) {
+Rocket.prototype._getWidth = function(persent, coef) {
     var w = this.app.renderer.width,
+        widthRelativelyWindow;
+
+    if (coef) {
+        widthRelativelyWindow = ((w - coef) * persent) / 100;
+    } else {
         widthRelativelyWindow = (w * persent) / 100;
+    }
 
     return widthRelativelyWindow;
 }

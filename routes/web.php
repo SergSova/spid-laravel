@@ -70,6 +70,8 @@ Route::group(
         Route::get('/faq/{index_faq?}', 'Site\SiteController@faq')->name('faq');
         Route::get('/map', 'Site\SiteController@map')->name('map');
 
+
+
         //BLOG
         Route::group(
             ['prefix' => 'blog'],
@@ -83,6 +85,8 @@ Route::group(
     }
 );
 
+Route::post('/statistic/save', 'Site\StaticticController@save');
+
 Auth::routes();
 
 Route::view('/reconstr', 'site.reconstruction')->name('reconstr');
@@ -91,6 +95,7 @@ Route::group(
     ['prefix' => 'admin', 'middleware' => 'admin'],
     function () {
 
+        Route::get('/statistic', 'Site\StaticticController@view')->name('statistic');
 //        Route::get('/', 'Admin\IndexController@index')->name('admin');
         Route::get('/', 'Admin\StaticPageController@index')->name('admin');
         Route::get('/static', 'Admin\StaticPageController@index')->name(

@@ -85,7 +85,7 @@ if ($menu_route == 'blog.fitred' || $menu_route == 'blogArticle')
     <script src="{{asset('assets/js/libs/jquery.touch.js')}}"></script>
     <script type="text/javascript">
         (function($) {
-            var f, mW, scrollT = 0;
+            var f, mW, scrollT = 0, lastY = 0;
 
             $.fn.myMenuScroll = function(methodOrOptions) {
                 return this.each(function() {
@@ -151,17 +151,28 @@ if ($menu_route == 'blog.fitred' || $menu_route == 'blogArticle')
                     mW = function(e) {
                         var delta = getDelta(),
                             pers,
+                            currentY,
                             dragPosY = 0;
 
-                        scrollT += (e.originalEvent.wheelDeltaY) / 10;
+                        if (e.originalEvent.wheelDeltaY) {
+                            scrollT += (e.originalEvent.wheelDeltaY) / 10;
+                        } else {
+                            currentY = e.originalEvent.touches[0].clientY;
+                            scrollT += -(lastY - currentY);
+                            lastY = currentY;
+                        }
 
                         if ((scrollT <= 0) && (-delta < scrollT)) {
                             inner.css('transform', 'translateY(' + scrollT + 'px)');
                             pers = Math.abs(scrollT / delta);
                             dragPosY = pers * resultsH;
-                            
+    
                             if (dragPosY >= 0) {
-                                $(dragger).css('top', dragPosY + 'px');
+                                if (dragPosY >= (resultsH - draggerH)) {
+                                    $(dragger).css('top', (resultsH - draggerH) + 'px');
+                                } else {
+                                    $(dragger).css('top', dragPosY + 'px');
+                                }
                             } else {
                                 $(dragger).css('top', '0px');
                             }
@@ -190,10 +201,15 @@ if ($menu_route == 'blog.fitred' || $menu_route == 'blogArticle')
                             scroll.css('height', resultsH + 'px');
 
                             $(th.find('.scroll-drag')).on('mousedown touchstart', f);
-                            $('.top-search').on('mousewheel', mW);
+                            $('.top-search').on('mousewheel touchmove', mW);
+                            window.addEventListener('touchstart', onTouchstart);
                         } else {
                             th.addClass('scroll-hide');
                         }
+                    }
+
+                    function onTouchstart(e) {
+                        lastY = e.touches[0].clientY;
                     }
 
                     function destroy() {
@@ -201,7 +217,10 @@ if ($menu_route == 'blog.fitred' || $menu_route == 'blogArticle')
                         d.css('top', 0 + 'px');
                         translateObj(0);
                         scrollT = 0;
+                        lastY = 0;
+                        $('.top-search').off('mousewheel touchmove', mW);
                         d.off('mousedown touchstart', f);
+                        window.removeEventListener('touchstart', onTouchstart);
                     }
 
                     function updateMetrics() {
@@ -225,7 +244,7 @@ if ($menu_route == 'blog.fitred' || $menu_route == 'blogArticle')
         }(jQuery));
 
         $(document).ready(function () {
-            //$('.top-search-results').touch();
+            //$('.top-search').touch();
             $('.top-search-results').myMenuScroll();
 
             $('.burger').on('click', function (e) {
@@ -234,11 +253,13 @@ if ($menu_route == 'blog.fitred' || $menu_route == 'blogArticle')
                     $('body').addClass('menu-open');
                     $(this).addClass('burger_active');
                 }
+                $('body').removeClass('search-open');
             });
 
             $('.top-btn_close').on('click', function () {
                 $('body').removeClass('menu-open');
                 $('.burger').removeClass('burger_active');
+                $('body').removeClass('search-open');
             });
 
             $('body').on('click', '.burger_active', function() {
@@ -246,9 +267,9 @@ if ($menu_route == 'blog.fitred' || $menu_route == 'blogArticle')
                 $(this).removeClass('burger_active');
             });
 
-            document.querySelector('.top-btn_search').addEventListener('click', function(e) {
+            $('.top-btn_search').on('click', function(e) {
                 e.preventDefault();
-                document.body.classList.add('search-open');
+                $('body').addClass('search-open');
             });
 
             var searchClear = document.querySelectorAll('.search-form__clear');

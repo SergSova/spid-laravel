@@ -14,6 +14,7 @@ $body_class = $model->alias??'';
 
 @section('styles')
     @parent
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{asset('assets/css/rangeslider.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/test_main.css')}}">
@@ -48,6 +49,10 @@ $body_class = $model->alias??'';
                     <div class="test__preview-box">
                         <div class="text">
                             {!! $model->description !!}
+                            <button class="test__preview-box-btn">{{$model->{'test_btn_'.$lang} }}</button>
+                        </div>
+                        <div class="text mobile-text">
+                            {!! $model->{'short_description_'.app()->getLocale()} !!}
                             <button class="test__preview-box-btn">{{$model->{'test_btn_'.$lang} }}</button>
                         </div>
                     </div>
