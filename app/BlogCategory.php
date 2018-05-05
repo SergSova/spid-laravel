@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string  icon
  * @property string  slug
  * @property boolean isMain
+ * @property int     seo_id_ru
+ * @property int     seo_id_uk
  */
 class BlogCategory extends Model
 {
@@ -30,9 +32,25 @@ class BlogCategory extends Model
         return $this->{'title_'.app()->getLocale()} ?? $this->{'title_'.Locale::$mainLanguage}.'*';
     }
 
+
     public function posts()
     {
         return $this->hasMany(Post::class, 'category_id');
+    }
+
+    public function getSeoAttribute($key)
+    {
+        return $this->{'seo'.app()->getLocale()};
+    }
+
+    public function seoru()
+    {
+        return $this->hasOne(Seo::class, 'id', 'seo_id_ru');
+    }
+
+    public function seouk()
+    {
+        return $this->hasOne(Seo::class, 'id', 'seo_id_uk');
     }
 
 }

@@ -54,38 +54,55 @@ Route::get(
     }
 )->name('setlocale');
 
+
 Route::group(
-    ['prefix' => App\Http\Middleware\Locale::getLocale()/*, 'middleware' => 'reconstr'*/],
+    [
+        'domain' => 'drugstore.org.ua',
+        'prefix' => App\Http\Middleware\Locale::getLocale()/*, 'middleware' => 'reconstr'*/
+    ],
     function () {
-        Route::get('/', 'Site\SiteController@index')->name('home');
+        Route::get('/', 'Site\SiteController@index')->name('index');
         Route::get('/aids', 'Site\SiteController@aids')->name('aids');
-        Route::get('/slide-bubles', 'Site\SiteController@slideBubles');
-        Route::get('/slide-rocket', 'Site\SiteController@slideRocket');
-        Route::get('/with-who', 'Site\SiteController@withWho');
+        Route::get('/slide-bubles', 'Site\SiteController@slideBubles')->name('slide-bubles');
+        Route::get('/slide-rocket', 'Site\SiteController@slideRocket')->name('slide-rocket');
+        Route::get('/with-who', 'Site\SiteController@withWho')->name('with-who');
         Route::get('/bandit', 'Site\SiteController@bandit')->name('bandit');
-        Route::get('/condoms-white', 'Site\SiteController@condomsWhite')->name('condoms');
-        Route::get('/consultants', 'Site\SiteController@consultants')->name('consult');
+        Route::get('/condoms-white', 'Site\SiteController@condomsWhite')->name('condoms-white');
+        Route::get('/consultants', 'Site\SiteController@consultants')->name('consultants');
         Route::get('/about', 'Site\SiteController@about')->name('about');
-        Route::get('/aids-test', 'Site\SiteController@testPage')->name('test');
+        Route::get('/aids-test', 'Site\SiteController@testPage')->name('aids-test');
         Route::get('/faq/{index_faq?}', 'Site\SiteController@faq')->name('faq');
         Route::get('/map', 'Site\SiteController@map')->name('map');
 
-
-
         //BLOG
         Route::group(
-            ['prefix' => 'blog'],
+            [
+                'domain' => 'blog.drugstore.org.ua',
+//                'prefix' => 'blog',
+            ],
             function () {
                 Route::get('/', 'Site\BlogController@index')->name('blog');
                 Route::get('/{category}', 'Site\BlogController@index')->name('blog.fitred');
                 Route::get('/{category}/{article}', 'Site\BlogController@view')->name('blogArticle');
             }
         );
-        Route::any('/search/{search}', 'Site\SearchController@search')->name('search');
+
+        Route::group([],function(){
+            Route::any('/search/{search?}', 'Site\SearchController@search')->name('search');
+            Route::any('/search-faq/{search?}', 'Site\SearchController@searchFaq')->name('search-faq');
+            Route::any('/search-blog/{search?}', 'Site\SearchController@searchBlog')->name('search-blog');
+        });
     }
 );
 
 Route::post('/statistic/save', 'Site\StaticticController@save');
+Route::delete('/statistic/clear', 'Site\StaticticController@clear')->name('statClear');
+
+Route::get('/api/post/{lastUdate?}', 'ApiController@getPosts');
+Route::get('/api/faq/{lastUdate?}', 'ApiController@getFaq');
+
+Route::get('/api/meta', 'ApiController@getMetaSeo');
+
 
 Auth::routes();
 
@@ -95,6 +112,7 @@ Route::group(
     ['prefix' => 'admin', 'middleware' => 'admin'],
     function () {
 
+        Route::view('/file-manager', 'admin.blog.filemanager')->name('filemanager');
         Route::get('/statistic', 'Site\StaticticController@view')->name('statistic');
 //        Route::get('/', 'Admin\IndexController@index')->name('admin');
         Route::get('/', 'Admin\StaticPageController@index')->name('admin');
@@ -110,9 +128,6 @@ Route::group(
             'Admin\StaticPageController@edit'
         )->name('staticPageEdit')->where(['staticPage' => '[0-9]+']);
 
-//        Route::post('/lang/{lang}/{base}/{post_id}', 'LangResourceController@store')->name('lang.store');
-//        Route::get('/lang/{base}', 'LangResourceController@show')->name('lang.show');
-//        Route::delete('/lang/{lang}/{base}', 'LangResourceController@destroy')->name('lang.destroy');
 
         Route::resource('/blog', 'Admin\BlogController');
         Route::get('/blog/create-lang/{post}/{lang}', 'Admin\BlogController@createLang')->name('blog.create-lang');

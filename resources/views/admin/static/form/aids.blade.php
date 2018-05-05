@@ -12,11 +12,11 @@
     @foreach(\App\Http\Middleware\Locale::$languages as $lang)
         <div class="tab-pane fade {{$loop->first?'show active':''}}" id="nav-{{$lang}}" role="tabpanel"
              aria-labelledby="nav-{{$lang}}-tab">
-            <div class="form-group">
+            {{--<div class="form-group">
                 {{ Form::label('title_'.$lang, 'Заголовок') }}
                 {{ Form::text('title_'.$lang, NULL ,['class'=>'form-control']) }}
                 <small class="form-text text-muted">/ - символ разделения строк</small>
-            </div>
+            </div>--}}
             <div class="form-group">
                 {{ Form::label('modal_text_'.$lang,'Текст подсказки') }}
                 {{ Form::text('modal_text_'.$lang,NULL, ['class'=>'form-control']) }}
@@ -26,11 +26,7 @@
                 {{ Form::label('modal_btn_'.$lang,'Текст кнопки') }}
                 {{ Form::text('modal_btn_'.$lang,NULL, ['class'=>'form-control']) }}
             </div>
-            <div class="form-group">
-                {{ Form::label('modal_bottom_'.$lang,'Текст внизу с лева') }}
-                {{ Form::text('modal_bottom_'.$lang,NULL, ['class'=>'form-control']) }}
-                <small class="form-text text-muted">/ - символ разделения строк</small>
-            </div>
+
         </div>
     @endforeach
 </div>

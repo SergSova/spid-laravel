@@ -63,6 +63,7 @@ $body_class = $model->alias??'';
                         <button type="submit" class="js-questions-next test__test-btn none">{{$model->{'test_btn_next_'.$lang} }}</button>
 
                         <button class="test__test-btn js-questions-refresh test__test-btn-refresh none">{{$model->{'test_btn_refresh_'.$lang} }}</button>
+                        <button class="test__test-btn test-aids-free none">{{$model->{'test_free_'.$lang} }}</button>
                     </form>
                 </div>
             </div>

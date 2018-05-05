@@ -1,3 +1,10 @@
+<?php
+
+/**
+ * @var \App\StaticPage $model
+ */
+
+?>
 @extends('admin.layout')
 
 @section('title',$title)
@@ -8,7 +15,10 @@
         <h1>{{$title}}</h1>
 
         {!! Form::model($model,['url'=>route('staticPageEdit',[$model->id,$model->alias]),'method'=>'post','class'=>'']) !!}
-
+        {{--<div class="form-group col-1">
+            {{ Form::label('page_index', 'Index') }}
+            {{ Form::number('page_index', $model->page_index ,['class'=>'form-control']) }}
+        </div>--}}
         @include($form)
         @include('admin.seo_form',['lang'=>'ru','index'=>'ru'])
         @include('admin.seo_form',['lang'=>'uk','index'=>'uk'])

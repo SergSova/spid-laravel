@@ -54,7 +54,10 @@ $otvet_title = [
                     {{ Form::text('test_btn_refresh_'.$lang, null ,['class'=>'form-control']) }}
                 </div>
             </div>
-
+            <div class="form-group">
+                {{ Form::label('test_free_'.$lang, 'Безплатный тест') }}
+                {{ Form::text('test_free_'.$lang, null ,['class'=>'form-control']) }}
+            </div>
             <div id="accordion{{$lang}}">
                 <div class="card">
                     <div class="card-header" id="headingTwo{{$lang}}">

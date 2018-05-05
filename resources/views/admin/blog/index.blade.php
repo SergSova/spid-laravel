@@ -24,13 +24,15 @@ $date = Carbon::now()->diffForHumans();
 @section('body')
     <div class="container">
         <h1>{{$title}}</h1>
-        <div class="btn-toolbar">
+        <div class="btn-toolbar ">
             <a href="{{route('blog.create')}}" class="btn btn-success btn-sm ">Добавить статью</a>
             {{Form::open(['route'=>['blog.clear'], 'method'=>'delete'])}}
             <button onclick="return confirm('are you sure?')" type="submit" class="btn-sm  btn btn-danger">
                 Удалить все помеченые на удаление
             </button>
             {{Form::close()}}
+
+            {{--<a href="{{route('filemanager')}}" class="btn btn-sm btn-primary">File Manager</a>--}}
         </div>
         <table class="table table-sm table-hover table-bordered">
             <thead>
@@ -45,7 +47,7 @@ $date = Carbon::now()->diffForHumans();
                 <td></td>
             </tr>
             </thead>
-            @forelse($model->posts()/*->where('lang',app()->getLocale())*/ as $post)
+            @forelse($models=$model->posts()/*->where('lang',app()->getLocale())*/ as $post)
                 <tr {{$post->trashed()?'class=table-danger':''}}>
                     <td>{{$post->id}}</td>
                     {{--                    <td>{{$post->index}}</td>--}}
@@ -83,7 +85,9 @@ $date = Carbon::now()->diffForHumans();
             @empty
             @endforelse
         </table>
-
+        <nav aria-label="Page navigation example">
+            {{$models->links('admin.blog.pagination')}}
+        </nav>
     </div>
 @endsection
 

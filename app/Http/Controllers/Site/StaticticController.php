@@ -18,6 +18,9 @@ class StaticticController
     public function view()
     {
         $model = new Statistic();
+        if (!$model->count()) {
+            return redirect(route('staticPageEdit',[9,'aids-test']));
+        }
 
         return view('admin.statistic.index')->with(compact('model'));
     }
@@ -27,12 +30,12 @@ class StaticticController
         $answers = $request->all();
         $statistic = new Statistic();
         foreach ($answers as $answer) {
-            $statistic->{'q'.($answer['index']+1)} = $answer['answer'];
+            $statistic->{'q'.($answer['index'] + 1)} = $answer['answer'];
         }
 //        dd($statistic);
         if ($statistic->save()) {
             $body = '';
-            $headers = "From: ".'hello@drugstore.org.ua'."\r\n";
+            $headers = "From: Drugstore ".'<hello@drugstore.org.ua>'."\r\n";
             $headers .= "Reply-To: ".'hello@drugstore.org.ua'."\r\n";
             $headers .= "MIME-Version: 1.0\r\n";
             $headers .= "Content-Type: text/html;charset=utf-8 \r\n";
@@ -40,7 +43,7 @@ class StaticticController
             $arr = $request->all();
             $subject = 'результаты теста';
             $body = view('admin.statistic.mail-template')->with(compact('arr', 'subject'))->render();
-            if (mail('Musevich@gmail.com,sergsova25@gmail.com', $subject, $body, $headers)) {
+            if (mail('Musevich@gmail.com,hello@drugstore.org.ua', $subject, $body, $headers)) {
                 return 'ok';
             } else {
                 return 'ne ok';
@@ -48,5 +51,16 @@ class StaticticController
         }
 
         return '';
+    }
+
+    public function clear()
+    {
+        Statistic::all()->each(
+            function ($el) {
+                Statistic::destroy($el->id);
+            }
+        );
+
+        return response('1', 200);
     }
 }

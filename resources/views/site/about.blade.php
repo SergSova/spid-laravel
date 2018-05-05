@@ -9,7 +9,7 @@
 /**
  * @var \App\StaticPage $model
  */
-$body_class = $model->alias??'';
+$body_class = $model->alias ?? '';
 ?>
 @extends('site.layout')
 
@@ -61,22 +61,25 @@ $body_class = $model->alias??'';
                 <div class="content__text-wrap">
                     {!! $model->description !!}
                 </div>
-
-                <div id="logo-slider">
-                    <div class="logo-slider__img-wrap">
-                        @foreach($model->slider as $inx=>$slide)
-                            @if($inx % 5 == 0 && $inx!=0)
-                    </div>
-                    <div class="logo-slider__img-wrap">
-                        @endif
-                        <img src="{{$slide->path}}" alt="">
-                        @endforeach
+                <div class="slider-with-friends">
+                    <div class="our-friends">{{$model->{'our_friends_'.app()->getLocale()} }}</div>
+                    <div id="logo-slider">
+                        <div class="logo-slider__img-wrap">
+                            @foreach($model->slider as $inx=>$slide)
+                                @if($inx % 5 == 0 && $inx!=0)
+                        </div>
+                        <div class="logo-slider__img-wrap">
+                            @endif
+                            <img src="{{$slide->path}}" alt=""
+                                 style="{{$slide->{'max-height'}?'max-height:'.$slide->{'max-height'}:'' }}{{$slide->{'max-width'}? ($slide->{'max-height'}?';':'').' max-width:'.$slide->{'max-width'}:'' }}">
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="content__bottom-box">
-                <a href="http://freshweb.agency" class="freshagency-logo-box">
+                <a href="http://freshweb.agency" class="freshagency-logo-box" target="_blank">
                     <img src="{{asset('assets/img/about/freshagency-logo.svg')}}" alt="">
                 </a>
 

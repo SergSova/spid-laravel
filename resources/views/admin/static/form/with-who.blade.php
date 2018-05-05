@@ -26,7 +26,11 @@
                 {{ Form::label('modal_btn_'.$lang,'Текст кнопки') }}
                 {{ Form::text('modal_btn_'.$lang,null, ['class'=>'form-control']) }}
             </div>
-
+            <div class="form-group">
+                {{ Form::label('modal_bottom_'.$lang,'Текст внизу с лева') }}
+                {{ Form::text('modal_bottom_'.$lang,NULL, ['class'=>'form-control']) }}
+                <small class="form-text text-muted">/ - символ разделения строк</small>
+            </div>
             <div id="accordion_{{$lang}}">
                 <div class="card">
                     <div class="card-header" id="headingForms_{{$lang}}">

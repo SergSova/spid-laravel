@@ -207,8 +207,7 @@ function init() {
     this.degree = this.degree - 30;
     this.el.style.transition  =  'all ' + 1000 + 'ms cubic-bezier(0, 1.24, 1, 1),opacity 1s linear';
     this.el.style.transform = 'rotateX('+(parseInt(this.degree))+'deg) ';
-    $('.pusk-btn')
-
+    this.el.children[this.active - 2].classList.add('active')
     allEl++
     allEl == 4 ? (allEl = 0, afterStop()) : '';
   }
@@ -218,8 +217,8 @@ function init() {
   function afterStop() {
     setTimeout(function () {
       $('.rotator-row-wrap').each(function () {
-        imEl = $(this).find('.spin.active .spin-image')
-        bg_pos_y = imEl.attr('data-bg-y')
+        imEl = $(this).find('.spin.active .spin-image');
+        bg_pos_y = imEl.attr('data-bg-y');
         if (headOn) {
           imEl.css({'background-position': -231 * uniKoef + 'px ' + Math.floor(bg_pos_y * uniKoef) + 'px'})
         }else {
@@ -288,11 +287,6 @@ function init() {
     spiner[i] = new Rotate(spiners[i],i,0);
   }
 
-
-
-
-
-
   /*-----------------  MEN HEAD  -----------------*/
   $(document).ready(function () {
     $('.turn').click(function () {
@@ -300,8 +294,7 @@ function init() {
       if ($('.men-turn-on-off-content').hasClass('active')) {
         $('.turn-on-off').html('Выкл');
         headOn = true;
-      }
-      else {
+      }  else {
         $('.turn-on-off').html('Вкл');
         headOn = false;
       }

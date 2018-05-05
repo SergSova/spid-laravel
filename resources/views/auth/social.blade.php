@@ -39,9 +39,9 @@
                     <div class="panel-body">
                         <p class="lead text-center">@lang('auth.social_providers')</p>
 
-                        <a href="{{ route('social.oauth', 'facebook') }}" class="btn btn-primary btn-block">
+                       {{-- <a href="{{ route('social.oauth', 'facebook') }}" class="btn btn-primary btn-block">
                             Facebook
-                        </a>
+                        </a>--}}
                         <a href="{{ route('social.oauth', 'twitter') }}" class="btn btn-info btn-block">
                             Twitter
                         </a>

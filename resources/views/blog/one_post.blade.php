@@ -28,9 +28,8 @@ $body_class = 'one_blog';
           rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{asset('assets/css/blog/reset.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/blog/header.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/blog/footer.css')}}">
+    {{--    <link rel="stylesheet" href="{{asset('assets/css/blog/footer.css')}}">--}}
     <link rel="stylesheet" href="{{asset('assets/css/blog/base.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/blog/slick.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/blog/blog.css')}}">
@@ -40,6 +39,27 @@ $body_class = 'one_blog';
 @endsection
 
 @section('body')
+    <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.12';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <div class="landscape">
+        <div class="landscape-inner">
+            <div class="landscape-icon">
+                <div class="landscape-icon__condom_fill"></div>
+                <div class="landscape-icon__condom_stroke"></div>
+                <div class="landscape-icon__condom_arrow"></div>
+            </div>
+
+            <h5 class="landscape-title">@lang('site.landscape_title')</h5>
+            <p class="landscape-desc">@lang('site.landscape_desc')</p>
+        </div>
+    </div>
     <div class="preloader">
         <div class="preloader-inner">
             <?php include "assets/img/svg/about/preloader-inner.svg" ?>
@@ -91,7 +111,8 @@ $body_class = 'one_blog';
                                                 <div class="blog-news-content">
                                                     <div class="blog-news">
                                                         <div class="blog-news-category">
-                                                            <span><img src="{{ $model->category->icon }}" alt="{{ $model->category->title }}"></span>
+                                                            <span><img src="{{ $model->category->icon }}"
+                                                                       alt="{{ $model->category->title }}"></span>
                                                         </div>
                                                         <div class="blog-title">
                                                             <h3>{{ $model->category->title }}</h3>
@@ -99,8 +120,20 @@ $body_class = 'one_blog';
                                                         <div class="blog-content">
                                                             {!! $model->{'content_'.app()->getLocale()} !!}
                                                             <div class="share-with">
-                                                                <img src="{{asset('assets/img/blog/icon-filter/fb-square.png')}}">@lang('site.share')
+                                                                <a target="_blank"
+                                                                   href="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}"
+                                                                   class="fb-xfbml-parse-ignore">
+                                                                    <img class="share-with__img share-with__img_hover"
+                                                                         src="{{asset('assets/img/blog/icon-filter/fb-hover.png')}}">
+                                                                    <img class="share-with__img"
+                                                                         src="{{asset('assets/img/blog/icon-filter/fb-square.png')}}">@lang('site.share')
+                                                                </a>
                                                             </div>
+                                                            @if($model->isGG)
+                                                                <div class="bottom-link jivo-btn">
+                                                                    <a href="">@lang('site.get_consult')</a>
+                                                                </div>
+                                                            @endif
                                                         </div>
 
 
@@ -112,7 +145,8 @@ $body_class = 'one_blog';
                                                         <div class="athor-date">
                                                             <div class="flexibal">
                                                                 @if($model->authorImage)
-                                                                    <div class="athor"><img src="{{$model->authorImage}}"></div>
+                                                                    <div class="athor"><img
+                                                                                src="{{$model->authorImage}}"></div>
                                                                 @endif
                                                                 {{$model->author}}
                                                             </div>
@@ -132,21 +166,20 @@ $body_class = 'one_blog';
                                             </figcaption>
                                         </figure>
                                     </div>
-                                </article>
-                                <div class="disqus-thread">
-                                    <div id="disqus_thread">
+                                    <div class="disqus-thread">
+                                        <div id="disqus_thread">
 
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="blog-navi">
-                                    <a href="{{$prev->url}}" class="blog-prev">
+                                    <div class="blog-navi">
+                                        <a href="{{$prev->url}}" class="blog-prev">
                                             <img src="{{$prev->mainImage}}">
                                             <div class="blog-navi-text">
                                                 <img src="{{asset('assets/img/blog/icon-filter/blog-nav-arr-prev.png')}}">
                                                 {!! $prev->mod_title !!}
                                             </div>
-                                    </a>
+                                        </a>
                                         <a href="{{$next->url}}" class="blog-next">
                                             <img src="{{$next->mainImage}}">
                                             <div class="blog-navi-text">
@@ -154,7 +187,9 @@ $body_class = 'one_blog';
                                                 <img src="{{asset('assets/img/blog/icon-filter/blog-nav-arr-next.png')}}">
                                             </div>
                                         </a>
-                                </div>
+                                    </div>
+                                </article>
+
                             </div>
                         </div>
                         <aside class="blog-narrow translate-block">
@@ -164,7 +199,9 @@ $body_class = 'one_blog';
                         </aside>
                         <div class="ajax-blog"></div>
                     </div>
-
+                    {{--<div class="about-description">--}}
+                    {{--</div>--}}
+                    {{--<footer></footer>--}}
                 </div>
             </div>
             <div class="scroll-substitute"></div>
@@ -176,7 +213,7 @@ $body_class = 'one_blog';
                         <span class="navigate-box__line"></span>
                         <span class="navigate-box__line"></span>
                     </div>
-                    <div class="navigate-box__text">к блогу</div>
+                    <div class="navigate-box__text">@lang('site.to_blog')</div>
                 </div>
             </div>
         </a>
@@ -209,20 +246,69 @@ $body_class = 'one_blog';
     <script src="{{asset('assets/js/libs/vibrant.js')}}"></script>
     <script src="{{asset('assets/js/libs/imagesloaded.pkgd.min.js')}}"></script>
     <script src="{{asset('assets/js/libs/anime.min.js')}}"></script>
-    <script async="" src="{{asset('assets/js/blog/animation.js')}}" ></script>
-    <script async="" src="{{asset('assets/js/blog/scroll.js')}}" ></script>
+    <script async="" src="{{asset('assets/js/blog/animation.js')}}"></script>
+    <script src="{{asset('assets/js/blog/scroll.js')}}"></script>
+    <script src="{{asset('assets/js/blog/disqusloader.js')}}"></script>
 
     <script src="{{asset('/assets/js/libs/slick.min.js')}}"></script>
     <script src="{{asset('assets/js/blog-slider.js')}}"></script>
-    <div id="disqus_thread"></div>
     <script>
-            (function() { // DON'T EDIT BELOW THIS LINE
-                var d = document, s = d.createElement('script');
-                s.src = 'https://drugstore-1.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
+      // disqus_config = function() {
+      //   this.callbacks.afterRender.push(function() { console.log(654654);/* your code */ });
+      //   this.callbacks.onNewComment.push(function() { /* your code */ });
+      //   /* Available callbacks are afterRender, onInit, onNewComment, onPaginate, onReady, preData, preInit, preReset */
+      // }
+      // var disqus_config = function () {
+      //   this.callbacks.onInit.push(function() {  console.log(5555555555555);});
+      //   this.callbacks.afterRender = [function(comment) {
+      //   }];
+
+      (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://drugstore-1.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+
+      disqus_config = function() {
+        this.callbacks.afterRender.push(function() { alert(342)/* your code */ });
+        this.callbacks.onReady.push(function() {
+          createObj(this.frame.container.offsetHeight)
+        })
+      }
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+
+
+    @if($model->isGG)
+        <!-- BEGIN JIVOSITE CODE {literal} -->
+        <script type='text/javascript'>
+            (function () {
+                var widget_id = 'UUEQ86LJp1';
+                var d = document;
+                var w = window;
+
+                function l() {
+                    var s = document.createElement('script');
+                    s.type = 'text/javascript';
+                    s.async = true;
+                    s.src = '//code.jivosite.com/script/widget/' + widget_id;
+                    var ss = document.getElementsByTagName('script')[0];
+                    ss.parentNode.insertBefore(s, ss);
+
+                    setTimeout(function () {
+                        jivo_api.open();
+                    }, 1000)
+                }
+
+                document.querySelector('.jivo-btn a').addEventListener('click', function (e) {
+                    e.preventDefault();
+                    l();
+                });
+            })();
+        </script>
+        <!-- {/literal} END JIVOSITE CODE -->
+    @endif
 @endsection

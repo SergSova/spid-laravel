@@ -50,8 +50,8 @@ $body_class = $model->alias ?? '';
                     <?php include 'assets/img/svg/bandit/band-start.svg'?>
                 </div>
             </div>
-            <div class="modal__text">{!! $model->{'modal_text_'.$lang} !!}</div>
-            <button class="modal__btn">{!! $model->{'modal_btn_'.$lang} !!}</button>
+            <div class="modal__text" data-right="{{$model->{'right_'.$lang} }}" data-wrong="{{$model->{'wrong_'.$lang} }}">{!! $model->{'modal_text_'.$lang} !!}</div>
+            <button class="modal__btn" data-after="{{$model->{'after_'.$lang} }}">{!! $model->{'modal_btn_'.$lang} !!}</button>
         </div>
     </div>
 
@@ -63,7 +63,7 @@ $body_class = $model->alias ?? '';
                     <div class="game-wrap full">
                         <h1><span>{!! $model->title_mod !!}</span></h1>
                         <div class="container-game">
-                            <a href="{{route('condoms')}}">
+                            <a href="{{route('condoms-white')}}">
                                 <div class="rocket-btn-wrap">
                                     <div class="door-wrap">
                                         <img src="{{asset('assets/img/bandit/door.png')}}" alt="">

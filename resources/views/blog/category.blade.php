@@ -15,26 +15,15 @@ $allCategory = \App\BlogCategory::all();
         <div class="category-popup__content">
             <button class="category-popup__btn-search js-search-open">@lang('site.search')</button>
             <div class="top-search top-search-blog empty">
-                <form action="/search" class="search-form">
+                <form action="{{route('search-blog')}}" class="search-form">
                     {{ csrf_field() }}
                     <p class="search-form__top">
-                        <input type="text" autocomplete="off" placeholder="Поиск" name="search" class="search-form__q" />
+                        <input type="text" autocomplete="off" placeholder="@lang('site.search')" name="search" class="search-form__q" />
                     </p> 
                     <i class="search-form__clear"></i>
                 </form>
                 <div class="top-search-results">
                     <div class="top-search-results__inner">
-                        <!-- <div class="top-search-result">
-                            <div class="top-search-result__img">
-                                <img src="http://3.j2landing.com/speed/img1.png" alt="">
-                            </div>
-                            <div class="top-search-result__content">
-                                <h5 class="top-search-result__title">Заглавие какой-то статьи</h5>
-                                <div class="top-search-result__desc">
-                                    <p>Краткое описание для ознакомления</p>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>

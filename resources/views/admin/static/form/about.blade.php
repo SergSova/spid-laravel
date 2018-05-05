@@ -14,19 +14,23 @@
              aria-labelledby="nav-{{$lang}}-tab">
             <div class="form-group">
                 {{ Form::label('title_'.$lang, 'Заголовок') }}
-                {{ Form::text('title_'.$lang, NULL ,['class'=>'form-control']) }}
+                {{ Form::text('title_'.$lang, null ,['class'=>'form-control']) }}
             </div>
             <div class="form-group">
                 {{ Form::label('supported_'.$lang, 'Заголовок поддержки') }}
-                {{ Form::text('supported_'.$lang, NULL ,['class'=>'form-control ']) }}
+                {{ Form::text('supported_'.$lang, null ,['class'=>'form-control ']) }}
             </div>
             <div class="form-group">
                 {{ Form::label('desc_title_'.$lang, 'Заголовок контента') }}
-                {{ Form::text('desc_title_'.$lang, NULL ,['class'=>'form-control ']) }}
+                {{ Form::text('desc_title_'.$lang, null ,['class'=>'form-control ']) }}
             </div>
             <div class="form-group">
                 {{ Form::label('description_'.$lang, 'Содержимое') }}
-                {{ Form::textarea('description_'.$lang, NULL ,['class'=>'form-control my-editor']) }}
+                {{ Form::textarea('description_'.$lang, null ,['class'=>'form-control my-editor']) }}
+            </div>
+            <div class="form-group">
+                {{ Form::label('our_friends_'.$lang, 'Заголовок Слайдера') }}
+                {{ Form::text('our_friends_'.$lang, null ,['class'=>'form-control ']) }}
             </div>
         </div>
     @endforeach
@@ -43,12 +47,22 @@
         </div>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
             <div class="card-body">
+
                 @forelse($model->slider as $key=>$photo)
                     <div class="row photo-wrap">
                         <div class="form-group col-lg-1">
                             {{ Form::text("Photo[$key][index]", $key,['class'=>'index-text form-control-plaintext','readonly'=>1]) }}
                         </div>
-
+                        <div class="form-inline">
+                            <div class="form-group">
+                                {{ Form::label("Photo[$key][max-height]", 'max-height') }}
+                                {{ Form::text("Photo[$key][max-height]", $photo->{'max-height'} ,['class'=>'form-control ']) }}
+                            </div>
+                            <div class="form-group">
+                                {{ Form::label("Photo[$key][max-width]", 'max-width') }}
+                                {{ Form::text("Photo[$key][max-width]", $photo->{'max-width'} ,['class'=>'form-control ']) }}
+                            </div>
+                        </div>
                         <div class="col">
                             @include('admin.chanks.img_lfm',[
                             'id'=>'photo'.$key,
@@ -66,7 +80,7 @@
                 @empty
                     <div class="row photo-wrap">
                         <div class="form-group col-lg-1">
-                            {{ Form::text('Photo[0][index]',NULL,['class'=>'index-text form-control-plaintext','readonly'=>1]) }}
+                            {{ Form::text('Photo[0][index]',null,['class'=>'index-text form-control-plaintext','readonly'=>1]) }}
                         </div>
                         <div class="col">
                             @include('admin.chanks.img_lfm',['id'=>'photo0','name'=>"Photo[0][path]",'title'=>'Фото 0'])

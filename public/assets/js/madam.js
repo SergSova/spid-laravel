@@ -64,7 +64,9 @@
   imgs = [], img = [];
   var glob = 0;
   var count = 0;
-  var str = man == 1 ? 'assets/img/girl/1280/' : 'assets/img/man/1280/'
+  var str = man == 1 ? 'assets/img/girl/' : 'assets/img/man/'
+      str += window.matchMedia('(max-width:768px)').matches ? '640/' : '1280/'
+  // console.log(window.matchMedia('(max-width:768px)').matches, str);
   var forw = true;
   var anim = false;
   var waitTime  = false;
@@ -92,7 +94,7 @@
     for (var i = 0; i <= counts.length - 1; i++) {
       imgs[i] = new Image();
       imgs[i].src = counts[i];
-      if (i == counts.length - 1) {
+      if (i == 0) {
         callback(true);
       }
     }

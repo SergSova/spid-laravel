@@ -85,7 +85,12 @@ class BlogController extends Controller
         $model->slug = str_slug($request->get('title_ru'));
 
         if ($model->fill($request->all()) && $model->save()) {
-            $slider = array_filter($request->get('Photo'),function ($el){return $el['path']!='';});
+            $slider = array_filter(
+                $request->get('Photo'),
+                function ($el) {
+                    return $el['path'] != '';
+                }
+            );
             $model->slider = json_encode($slider);
 
             $model->saveSeo($request);
@@ -143,8 +148,28 @@ class BlogController extends Controller
         /** @var Post $model */
         $model = Post::find($id);
         $model->slug = str_slug($request->get('title_ru'));
+
+        if (!$request->get('isBlackTitle')) {
+            $model->isBlackTitle=false;
+        }
+        if (!$request->get('isBig')) {
+            $model->isBig=false;
+        }
+        if (!$request->get('isVioletPostStyle')) {
+            $model->isVioletPostStyle=false;
+        }
+        if (!$request->get('toApi')) {
+            $model->toApi=false;
+        }
+        if (!$request->get('isVideo')) {
+            $model->isVideo=false;
+        }
+        if (!$request->get('isGG')) {
+            $model->isGG=false;
+        }
         if ($model->fill($request->all()) && $model->save()) {
-            $slider = array_filter($request->get('Photo'),function ($el){return $el['path']!='';});
+        	$slid= collect($request->get('Photo'));
+            $slider = $slid->filter(function ($el) {return $el['path'] != '';});
             $model->slider = json_encode($slider);
             $model->saveSeo($request);
             if ($model->save()) {

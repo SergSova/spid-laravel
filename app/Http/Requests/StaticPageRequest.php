@@ -25,13 +25,14 @@ class StaticPageRequest extends FormRequest
     {
         if ($this->isMethod('post')) {
             $rules = [
-                'title_ru' => 'required',
+
             ];
             switch ($this->route()->parameter('name')) {
                 case 'index':
                     $rules = array_merge(
                         $rules,
                         [
+                            'title_ru' => 'required',
                             'description_ru' => 'required',
                             'longtitle_ru'   => 'required',
                         ]
@@ -41,6 +42,7 @@ class StaticPageRequest extends FormRequest
                     $rules = array_merge(
                         $rules,
                         [
+                            'title_ru' => 'required',
                             'longtitle_ru' => 'required',
                         ]
                     );
@@ -51,7 +53,6 @@ class StaticPageRequest extends FormRequest
                         [
                             'modal_text_ru'   => 'required',
                             'modal_btn_ru'    => 'required',
-                            'modal_bottom_ru' => 'required',
                         ]
                     );
                     break;
@@ -59,6 +60,7 @@ class StaticPageRequest extends FormRequest
                     $rules = array_merge(
                         $rules,
                         [
+                            'title_ru' => 'required',
                             'modal_text_ru' => 'required',
                             'modal_btn_ru'  => 'required',
                             'wrong_ru'      => 'required',
@@ -69,6 +71,7 @@ class StaticPageRequest extends FormRequest
                     $rules = array_merge(
                         $rules,
                         [
+                            'title_ru' => 'required',
                             'modal_text_ru'  => 'required',
                             'modal_btn_ru'   => 'required',
                             'text_bottom_ru' => 'required',
@@ -80,6 +83,7 @@ class StaticPageRequest extends FormRequest
                     $rules = array_merge(
                         $rules,
                         [
+                            'title_ru' => 'required',
                             'modal_text_ru' => 'required',
                             'modal_btn_ru'  => 'required',
                             'pop_title_ru'  => 'required',
@@ -89,6 +93,7 @@ class StaticPageRequest extends FormRequest
                             'chk_4_ru'      => 'required',
                             'chk_5_ru'      => 'required',
                             'chk_6_ru'      => 'required',
+                            'modal_bottom_ru' => 'required',
                         ]
                     );
                     break;
@@ -96,6 +101,7 @@ class StaticPageRequest extends FormRequest
                     $rules = array_merge(
                         $rules,
                         [
+                            'title_ru' => 'required',
                             'modal_text_ru'  => 'required',
                             'modal_btn_ru'   => 'required',
                             'tumb_on_off_ru' => 'required',
@@ -111,7 +117,7 @@ class StaticPageRequest extends FormRequest
                     $rules = array_merge(
                         $rules,
                         [
-
+                            'title_ru' => 'required',
                         ]
                     );
                     break;
@@ -119,6 +125,7 @@ class StaticPageRequest extends FormRequest
                     $rules = array_merge(
                         $rules,
                         [
+                            'title_ru' => 'required',
                             'description_ru'  => 'required',
                             'Consultant_ru'   => 'required',
                             'consHeader_1_ru' => 'required',

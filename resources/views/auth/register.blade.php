@@ -9,7 +9,7 @@
 ?>
 @extends('site.layout')
 
-@section('title','Авторизация')
+@section('title','Регистрация')
 
 
 @section('styles')

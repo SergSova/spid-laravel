@@ -11,7 +11,8 @@ $all_count = $model->count;
 ?>
 @foreach($quests as $quest=>$variants)
     @php
-        $if_multi = $variants['multi'] ? $all_count / $variants['models']->count() : 1;
+        if ($variants['models']->count())
+            $if_multi = $variants['multi'] ? $all_count / $variants['models']->count() : 1;
     @endphp
     <div class="card">
         <div class="card-header">

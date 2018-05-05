@@ -27,23 +27,23 @@
     @foreach(\App\Http\Middleware\Locale::$languages as $lang)
         <div class="tab-pane fade {{$loop->first?'show active':''}}" id="nav-{{$lang}}" role="tabpanel"
              aria-labelledby="nav-{{$lang}}-tab">
-			<?php
-			$langi = '';
-			if ( $lang != \App\Http\Middleware\Locale::$mainLanguage )
-				$langi = ' ' . ( $lang == 'uk' ? 'ua' : $lang );
-			?>
+            <?php
+            $langi = '';
+            if ($lang != \App\Http\Middleware\Locale::$mainLanguage)
+                $langi = ' '.($lang == 'uk' ? 'ua' : $lang);
+            ?>
             <div class="form-group col">
                 {{ Form::label('title'.'_'.$lang, 'Заголовок'.$langi) }}
-                {{ Form::text('title'.'_'.$lang, NULL ,['class'=>'form-control']) }}
+                {{ Form::text('title'.'_'.$lang, null ,['class'=>'form-control']) }}
                 <small class="form-text text-muted">~ - символ разделения строк</small>
             </div>
             <div class="form-group ">
                 {{ Form::label('content'.'_'.$lang,'Содержимое'.$langi) }}
-                {{ Form::textarea('content'.'_'.$lang,NULL, ['class'=>'form-control my-editor']) }}
+                {{ Form::textarea('content'.'_'.$lang,null, ['class'=>'form-control my-editor source']) }}
             </div>
             <div class="form-group">
                 {{ Form::label('description'.'_'.$lang,'Краткое описание'.$langi) }}
-                {{ Form::textarea('description'.'_'.$lang,NULL, ['class'=>'form-control']) }}
+                {{ Form::textarea('description'.'_'.$lang,null, ['class'=>'form-control desc']) }}
             </div>
             @include('admin.seo_form',['lang'=>$lang,'index'=>$lang])
         </div>
@@ -58,32 +58,40 @@
 
     <div class="form-check">
         <div class="form-check col">
-            {{ Form::checkbox('isBlackTitle',1,$model->isBlackTitle??FALSE,['class'=>'form-check-input','id'=>'isBlackTitle']) }}
+            {{ Form::checkbox('isBlackTitle',1,null,['class'=>'form-check-input','id'=>'isBlackTitle']) }}
             {{ Form::label('isBlackTitle','Цвет заголовка черный',['class'=>'form-check-label']) }}
         </div>
         <div class="form-check col">
-            {{ Form::checkbox('isBig',1,$model->isBig??FALSE,['class'=>'form-check-input','id'=>'isBig']) }}
+            {{ Form::checkbox('isBig',1,null,['class'=>'form-check-input','id'=>'isBig']) }}
             {{ Form::label('isBig','Важная статья',['class'=>'form-check-label']) }}
         </div>
         <div class="form-check col">
-            {{ Form::checkbox('isVioletPostStyle',1,$model->isVioletPostStyle??FALSE,['class'=>'form-check-input','id'=>'isVioletPostStyle']) }}
+            {{ Form::checkbox('isVioletPostStyle',1,null,['class'=>'form-check-input','id'=>'isVioletPostStyle']) }}
             {{ Form::label('isVioletPostStyle','Фиолетовая статья',['class'=>'form-check-label']) }}
+        </div>
+        <div class="form-check col">
+            {{ Form::checkbox('toApi',1,null,['class'=>'form-check-input','id'=>'toApi']) }}
+            {{ Form::label('toApi','Выгружать в Api',['class'=>'form-check-label']) }}
+        </div>
+        <div class="form-check col">
+            {{ Form::checkbox('isGG',1,null,['class'=>'form-check-input','id'=>'isGG']) }}
+            {{ Form::label('isGG','Открывать живо-чат',['class'=>'form-check-label']) }}
         </div>
 
         <div class="form-check col">
-            {{ Form::checkbox('isVideo',1,$model->isVideo??FALSE,['class'=>'form-check-input','id'=>'isVideo']) }}
+            {{ Form::checkbox('isVideo',1,$model->isVideo??false,['class'=>'form-check-input','id'=>'isVideo']) }}
             {{ Form::label('isVideo','Видео статья',['class'=>'form-check-label']) }}
         </div>
         <div class="form-group">
             {{ Form::label('mainVideo','Youtube код') }}
-            {{ Form::text('mainVideo',NULL, ['class'=>'form-control']) }}
+            {{ Form::text('mainVideo',null, ['class'=>'form-control']) }}
         </div>
     </div>
 </div>
 <div class="form-row">
     <div class="form-group">
         {{ Form::label('author','Автор') }}
-        {{ Form::text('author',NULL, ['class'=>'form-control']) }}
+        {{ Form::text('author',null, ['class'=>'form-control']) }}
     </div>
 
     @include('admin.chanks.img_lfm',['id'=>'authorImage1','name'=>'authorImage','title'=>'Картинка автора','subClass'=>'col'])
@@ -108,7 +116,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    {{ Form::checkbox("Photo[$key][isVideo]",1,$photo->isVideo??FALSE,['class'=>'form-check-input']) }}
+                                    {{ Form::checkbox("Photo[$key][isVideo]",1,$photo->isVideo??false,['class'=>'form-check-input']) }}
                                     {{ Form::label("Photo[$key][isVideo]",'Видео',['class'=>'form-check-label']) }}
                                 </div>
                                 @include('admin.chanks.img_lfm',[
@@ -116,7 +124,7 @@
                                 'name'=>"Photo[$key][path]",
                                 'title'=>'Фото '.$key,
                                 'value'=>$photo->path,
-                                'isVideo'=>$photo->isVideo??FALSE
+                                'isVideo'=>$photo->isVideo??false
                                 ])
                                 <div class="form-row">
                                     <div class="form-group col">
@@ -139,22 +147,22 @@
                 @else
                     <div class="row photo-wrap">
                         <div class="form-group col-lg-1">
-                            {{ Form::text('Photo[0][index]',NULL,['class'=>'index-text form-control-plaintext','readonly'=>1]) }}
+                            {{ Form::text('Photo[0][index]',null,['class'=>'index-text form-control-plaintext','readonly'=>1]) }}
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                {{ Form::checkbox("Photo[0][isVideo]",1,FALSE,['class'=>'form-check-input']) }}
+                                {{ Form::checkbox("Photo[0][isVideo]",1,false,['class'=>'form-check-input']) }}
                                 {{ Form::label("Photo[0][isVideo]",'Видео',['class'=>'form-check-label']) }}
                             </div>
                             @include('admin.chanks.img_lfm',['id'=>'photo0','name'=>"Photo[0][path]",'title'=>'Фото 0'])
                             <div class="form-row">
                                 <div class="form-group col">
                                     {{ Form::label("Photo[0][title]",'Title') }}
-                                    {{ Form::text("Photo[0][title]",NULL,['class'=>'form-control']) }}
+                                    {{ Form::text("Photo[0][title]",null,['class'=>'form-control']) }}
                                 </div>
                                 <div class="form-group col">
                                     {{ Form::label("Photo[0][alt]",'Alt') }}
-                                    {{ Form::text("Photo[0][alt]",NULL,['class'=>'form-control']) }}
+                                    {{ Form::text("Photo[0][alt]",null,['class'=>'form-control']) }}
                                 </div>
                             </div>
                         </div>
@@ -172,7 +180,7 @@
 </div>
 <div class="form-row">
     <div class="form-check col">
-        {{ Form::checkbox('published',1,TRUE,['class'=>'form-check-input']) }}
+        {{ Form::checkbox('published',1,true,['class'=>'form-check-input']) }}
         {{ Form::label('published','Опубликовано',['class'=>'form-check-label']) }}
     </div>
     <div class="form-check col">
@@ -245,47 +253,5 @@
 
         tinymce.init(editor_config);
     </script>
-    <script>
-        $(function () {
-            function changeAttr(_this, count, att) {
-                if (_this.attr(att)) {
-                    var name = _this.attr(att).replace(/\d+/, count);
-                    _this.attr(att, name);
-                }
-            }
-
-            $('.add-photo').on('click', function () {
-                var photo = $('.photo-wrap').first().clone();
-                var count = $('.photo-wrap').length;
-                photo.find('input,img').each(function () {
-                    var _this = $(this);
-                    changeAttr(_this, count, 'name');
-                    changeAttr(_this, count, 'id');
-                    _this.removeAttr('src');
-                    _this.removeAttr('checked');
-                    _this.val(null);
-                });
-                photo.find('a').each(function () {
-                    var _this = $(this);
-                    changeAttr(_this, count, 'id');
-                    changeAttr(_this, count, 'data-input');
-                    changeAttr(_this, count, 'data-preview');
-                    _this.html(_this.html().replace(/\d+/, count));
-
-                });
-                photo.find('.photo-remove').on('click', removePhoto);
-                photo.find('.index-text').val(count);
-                photo.insertBefore($(this));
-                $('#lfmphoto' + count).filemanager('image')
-            });
-
-            function removePhoto() {
-                if (confirm('Удалить фото?'))
-                    $(this).parents('.photo-wrap').remove();
-            }
-
-            $('.photo-remove').on('click', removePhoto);
-        });
-
-    </script>
+    <script src="{{asset('assets/js/blog/admin/post-admin.js')}}"></script>
 @endsection

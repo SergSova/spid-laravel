@@ -34,7 +34,7 @@ $(window).on('load', function() {
                 currentItems;
 
                 // console.log(th);
-            if ($(window).width() < 768) {
+            if ($(window).width() <= 812) {
                 showItems = 1;
             }
 

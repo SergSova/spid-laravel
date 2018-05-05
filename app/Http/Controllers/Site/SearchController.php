@@ -23,10 +23,31 @@ class SearchController extends Controller
         $match = "question_$lang, answer_$lang";
         $faqs = FaqAnswer::whereRaw("match ($match) AGAINST (\"$search*\" IN BOOLEAN MODE)")->get();
         $post_match = "title_$lang, content_$lang";
-        $posts = Post::whereRaw("match ($post_match) AGAINST (\"$search*\" IN BOOLEAN MODE)")->where( 'published', 1 )->get();
+        $posts = Post::whereRaw("match ($post_match) AGAINST (\"$search*\" IN BOOLEAN MODE)")->where('published', 1)->get();
 
-//        dd($faqs, $posts);
+        header('Access-Control-Allow-Origin: *');
 
-        return view('search.result')->with(compact('posts','faqs'));
+        return view('search.result')->with(compact('posts', 'faqs'));
     }
+
+    public function searchFaq($search)
+    {
+        $lang = app()->getLocale();
+        $match = "question_$lang, answer_$lang";
+        $faqs = FaqAnswer::whereRaw("match ($match) AGAINST (\"$search*\" IN BOOLEAN MODE)")->get();
+        $posts = collect();
+
+        return view('search.result')->with(compact('posts', 'faqs'));
+    }
+
+    public function searchBlog($search)
+    {
+        $lang = app()->getLocale();
+        $faqs = collect();
+        $post_match = "title_$lang, content_$lang";
+        $posts = Post::whereRaw("match ($post_match) AGAINST (\"$search*\" IN BOOLEAN MODE)")->where('published', 1)->get();
+        header('Access-Control-Allow-Origin: *');
+        return view('search.result')->with(compact('posts', 'faqs'));
+    }
+
 }

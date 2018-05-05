@@ -96,7 +96,7 @@
                             </div>
                             <div class="blog-social">
                                 <div class="blog-social-comments">
-                                    <span> discus comment </span>
+                                    <span class="disqus-comment-count" data-disqus-url="{{$model->url}}#disqus_thread"></span>
                                 </div>
                                 <div class="blog-social-right">
                                     <span class="eya">{{$model->viewers}}</span>

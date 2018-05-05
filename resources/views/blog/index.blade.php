@@ -12,7 +12,6 @@
     @parent
     <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900&amp;subset=latin-ext"
           rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('assets/css/lib/reset.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/blog/header.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/blog/base.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/blog/blog.css')}}">
@@ -21,7 +20,7 @@
 
 @endsection
 @section('body')
-   {{-- <div class="landscape">
+   <div class="landscape">
         <div class="landscape-inner">
             <div class="landscape-icon">
                 <div class="landscape-icon__condom_fill"></div>
@@ -32,7 +31,7 @@
             <h5 class="landscape-title">@lang('site.landscape_title')</h5>
             <p class="landscape-desc">@lang('site.landscape_desc')</p>
         </div>
-    </div>--}}
+    </div>
     <div class="preloader">
         <div class="preloader-inner">
             <?php include "assets/img/svg/about/preloader-inner.svg" ?>
@@ -136,6 +135,12 @@
                             <div class="ajax-blog"></div>
                         </div>
                         <div class="about-description">
+                            <div class="seo-text">
+                                @isset($model->seo)
+                                {!! $model->seo->seo_text !!}
+                                @endisset
+                            </div>
+                            <p class="seo-text-more">@lang('site.read_more')</p>
                         </div>
                         <footer>
                         </footer>
@@ -161,4 +166,5 @@
     <script src="{{ asset('assets/js/libs/anime.min.js') }}"></script>
     <script src="{{ asset('assets/js/blog/animation.js') }}"></script>
     <script src="{{ asset('assets/js/blog/scroll.js') }}"></script>
+    <script id="dsq-count-scr" src="//drugstore-1.disqus.com/count.js" async></script>
 @endsection

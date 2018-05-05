@@ -20,6 +20,14 @@ class CreateBlogCategoriesTable extends Migration
             $table->string('icon');
             $table->string('slug');
             $table->boolean('isMain');
+
+            $table->unsignedInteger('seo_id_ru')->nullable();
+            $table->foreign('seo_id_ru')->references('id')->on('seos')
+                ->onDelete('set null');
+            $table->unsignedInteger('seo_id_uk')->nullable();
+            $table->foreign('seo_id_uk')->references('id')->on('seos')
+                ->onDelete('set null');
+
             $table->timestamps();
         });
     }

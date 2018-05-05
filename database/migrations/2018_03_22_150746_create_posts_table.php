@@ -38,6 +38,7 @@ class CreatePostsTable extends Migration
                 $table->boolean('isVioletPostStyle')->default(0);
                 $table->boolean('isBig')->default(0);
                 $table->boolean('isVideo')->default(0);
+                $table->boolean('toApi')->default(0);
                 //slider - это JSON объект (path, alt, title)
                 $table->text('slider')->nullable();
                 $table->unsignedInteger('viewers')->default(0);

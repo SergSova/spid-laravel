@@ -28,6 +28,29 @@
         </div>
     @endforeach
 </div>
+<div class="form-row">
+    <div class="form-group col">
+        {{ Form::checkbox('isMusicOn',1,NULL, ['class'=>'form-check-input','id'=>'isMusicOn']) }}
+        {{ Form::label('isMusicOn','Проигрывать мелодию на сайте') }}
+    </div>
 
+    <div class="form-group">
+        <div class="input-group">
+        <span class="input-group-btn">
+          <a id="lfmmainMusic" data-input="thumbmainMusic" data-preview="holdermainMusic" class="btn btn-primary">
+            <i class="fa fa-picture-o"></i> Музыка для сайта
+          </a>
+        </span>
+            <input id="thumbmainMusic" class="form-control" type="text" name="mainMusic" value="{{ $model->mainMusic }}">
+        </div>
+    </div>
 
+</div>
 
+@section('scripts')
+    @parent
+    <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
+    <script>
+        $('#lfmmainMusic').filemanager('music');
+    </script>
+@endsection

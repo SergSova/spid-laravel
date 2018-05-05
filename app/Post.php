@@ -20,32 +20,35 @@ use Illuminate\Support\Facades\Lang;
  * Class Post
  *
  * @package App
- * @property int     $id
- * @property string  $title_ru
- * @property string  $content_ru
- * @property string  $description_ru
- * @property string  $title_uk
- * @property string  $content_uk
- * @property string  $description_uk
- * @property bool    $published
- * @property string  $publishedOn
- * @property string  $mainImage
- * @property string  $mainVideo
- * @property boolean $isVideo
- * @property boolean $isBlackTitle
- * @property boolean $isVioletPostStyle
- * @property boolean $isBig
- * @property string  $slider
- * @property int     $viewers
- * @property int     $followers
- * @property string  $author
- * @property string  $authorImage
- * @property int     $index
- * @property string  $slug
- * @property int     $category_id
- * @property int     $seo_id_ru
- * @property int     $seo_id_uk
- * @property Carbon  $deleted_at
+ * @property int               id
+ * @property string            title_ru          заголовок
+ * @property string            content_ru        содержимое форматированое
+ * @property string            description_ru    краткое описание
+ * @property string            title_uk          заголовок укр
+ * @property string            content_uk        содержимое форматированое укр
+ * @property string            description_uk    краткое описание укр
+ * @property bool              published         опубликовано (0,1)
+ * @property string            publishedOn       дата публикации
+ * @property string            mainImage         ос6новная картинка
+ * @property string            mainVideo         код встроенного видео
+ * @property boolean           toApi
+ * @property boolean           isVideo           видео привью статьи
+ * @property boolean           isBlackTitle      затемненный заголовок
+ * @property boolean           isVioletPostStyle фон статьи
+ * @property boolean           isBig             важность статьи
+ * @property boolean           isGG              Живо чат
+ * @property string            slider            JSON слайдер встроенный в содержимое
+ * @property int               viewers           количество просмотров
+ * @property int               followers
+ * @property string            author            Имя автора
+ * @property string            authorImage       Аватар автора
+ * @property int               index
+ * @property string            slug
+ * @property int               category_id
+ * @property int               seo_id_ru
+ * @property int               seo_id_uk
+ * @property Carbon            deleted_at
+ * @property \App\BlogCategory category
  */
 class Post extends Model
 {
@@ -58,6 +61,8 @@ class Post extends Model
             'isBlackTitle'      => 'boolean',
             'isVioletPostStyle' => 'boolean',
             'isBig'             => 'boolean',
+            'toApi'             => 'boolean',
+            'isGG'              => 'boolean',
         ];
 
     protected $fillable
@@ -68,6 +73,8 @@ class Post extends Model
             'isVioletPostStyle',
             'isBig',
             'isVideo',
+            'toApi',
+            'isGG',
             'mainVideo',
             'content_ru',
             'description_ru',
@@ -93,16 +100,17 @@ class Post extends Model
 
     public function getContentAttribute($key)
     {
-        return $this->{'content_'. \app()->getLocale()};
+        return $this->{'content_'.\app()->getLocale()};
     }
+
     public function getTitleAttribute($key)
     {
-        return $this->{'title_'. \app()->getLocale()};
+        return $this->{'title_'.\app()->getLocale()};
     }
 
     public function getDescriptionAttribute($key)
     {
-        return $this->{'description_'. \app()->getLocale()};
+        return $this->{'description_'.\app()->getLocale()};
     }
 
     public function getSeoAttribute($key)
@@ -135,8 +143,11 @@ class Post extends Model
                 if (!$seo = $this->{'seo'.$lang}) {
                     $seo = new Seo();
                 }
-                $seo->fill($seoReq)->save();
-                $this->{'seo_id'.($lang ? '_'.$lang : '')} = $seo->id;
+                $seoReq = array_diff($seoReq, ['' => '']);
+                if (count($seoReq)) {
+                    $seo->fill($seoReq)->save();
+                    $this->{'seo_id'.($lang ? '_'.$lang : '')} = $seo->id;
+                }
             }
             $this->save();
 
@@ -166,7 +177,8 @@ class Post extends Model
         return $date->diffInHours(Carbon::now()) == 0
             ? $date->diffForHumans()
             :
-            $date->format('d').' '.Lang::get('month.m'.$date->month).' '.$date->format('Y H:i')/*.' '.$date->hour.':'.$date->minute*/;
+            $date->format('d').' '.Lang::get('month.m'.$date->month).' '.$date->format('Y H:i')/*.' '.$date->hour.':'.$date->minute*/
+            ;
     }
 
     public function getFullDataAttribute()

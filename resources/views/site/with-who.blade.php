@@ -14,7 +14,6 @@ $body_class = $model->alias??'';
     <link rel="stylesheet" href="{{asset('assets/css/drug-store/reset.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/drug-store/index.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/with-who.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/resize.css')}}">
 @endsection
 
 @section('body')
@@ -30,7 +29,7 @@ $body_class = $model->alias??'';
             <p class="landscape-desc">@lang('site.landscape_desc')</p>
         </div>
     </div>
-<div class="preloader">
+    <div class="preloader">
         <div class="preloader-inner">
             <?php include "assets/img/svg/about/preloader-inner.svg" ?>
         </div>
@@ -58,9 +57,15 @@ $body_class = $model->alias??'';
             </div>
             <button class="modal__btn">{!! $model->{'modal_btn_'.$lang} !!}</button>
         </div>
+        <div class="modal-bottom">
+            {!! $model->{'modal_bottom_'.$lang} !!}
+            <div class="modal-bottom__arrow">
+                <?php include "assets/img/svg/aids/modal-bottom__arrow.svg"?>
+            </div>
+        </div>
     </div>
 
-    <nav class="game-icons slider-controls slide-4">
+    <nav class="game-icons slider-controls slide-1">
         <a class="str str-prev">
             <?php include "assets/img/svg/with-who/str-prev.svg"?>
         </a>
@@ -68,7 +73,7 @@ $body_class = $model->alias??'';
             <?php include "assets/img/svg/with-who/str-next.svg"?>
         </a>
         <div class="bullets">
-            <?php include "assets/img/svg/with-who/bullets.svg"?>
+            <?php include "assets/img/svg/aids/bullets.svg"?>
         </div>
     </nav>
     <div class="container with-who">

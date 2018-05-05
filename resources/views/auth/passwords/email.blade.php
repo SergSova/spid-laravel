@@ -34,7 +34,7 @@
     </style>
 @endsection
 @section('body')
-    <a href="{{route('social.login')}}">Назад</a>
+    <a href="{{route('social.login')}}">@lang('site.back')</a>
     @if(count($errors->all()))
         <div class="container">
             <div class="alert alert-danger" role="alert">
